@@ -1,0 +1,52 @@
+[core]
+	editor = nvim
+[user]
+	email = cgreen@saguaro.space
+	name = Christopher Green
+[alias]
+	# Fancier git log
+	graph = log --graph --oneline --abbrev-commit --decorate  --all
+	
+	# Show the last ten tags
+	ten = tag --sort version:refname -n10 -n
+	
+	# List all remote branches
+	remotes = ls-remote --heads
+
+    # Jump
+    jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
+
+    # For reviewing Merge/Pull Requests
+	mr = jump diff main..HEAD
+    last = merge-base main HEAD
+
+    # Convenience
+    s = status
+    p = pull --tags
+    u = push --tags
+    a = add .
+    c = commit
+    t = difftool
+    d = diff
+[github]
+	user = c9rgreen
+[pull]
+	# Only update to the new history if there is no divergent local history.
+	ff = only
+[init]
+	# `main` should be the default branch (rather than `master`)
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+    tool = nvimdiff
+[mergetool]
+    prompt = true
+[mergetool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
