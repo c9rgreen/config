@@ -30,15 +30,8 @@ fi
 # Paths
 #
 
-# if [[ "$OSTYPE" == "darwin"* ]]; then
-#     # Editor on macOS
-#     export EDITOR='bbedit --wait'
-# fi
-
-export EDITOR='nvim'
-
-# Location for global node modules. Avoids having to install with sudo.
-export PATH="$HOME/.npm-global/bin:$PATH"
-
-# Ruby Gems
-export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Editor on macOS
+    # export EDITOR='bbedit --wait'
+    export EDITOR='mvim'
+fi

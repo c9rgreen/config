@@ -2,4 +2,4 @@
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# eval "$(/opt/homebrew/bin/brew shellenv)"
