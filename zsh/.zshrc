@@ -91,26 +91,26 @@ export KEYTIMEOUT=1
 #
 # Change cursor shape for different vi modes.
 #
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
-}
-zle -N zle-keymap-select
-zle-line-init() {
-    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-    echo -ne "\e[5 q"
-}
-
-zle -N zle-line-init
-echo -ne '\e[5 q' # Use beam shape cursor on startup.
-preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+#
+# zle -N zle-line-init
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 #
 # Edit command in $EDITOR
@@ -123,7 +123,7 @@ bindkey -M vicmd v edit-command-line
 # Aliases
 #
 
-alias ls="ls -G"
+alias ls="ls -Gh"
 alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.git"
 alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
@@ -143,20 +143,6 @@ secrets() {
     fi
 }
 
-# iTerm integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# Homebrew
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-    autoload -Uz compinit
-    compinit
-
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 # Fastfetch
 if type fastfetch &>/dev/null; then
     fastfetch
@@ -173,4 +159,15 @@ if type starship &>/dev/null; then
 fi
 
 # Use Homebrew Ruby
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+# Location for global node modules. Avoids having to install with sudo.
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Ruby Gems
+# export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # MacVim
+    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+fi
