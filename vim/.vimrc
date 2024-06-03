@@ -44,6 +44,7 @@ set statusline+=\ w%{wordcount().words}
 set spelllang=en_us
 set tags^=./.git/tags
 set laststatus=2
+set showtabline=2
 set foldlevel=5
 set virtualedit=all
 set isfname+=32
@@ -72,7 +73,7 @@ set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set linespace=1
-set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+" set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
 
 " Use <space> instead of <\> as the leader key
 let mapleader = "\<Space>"
@@ -115,13 +116,13 @@ nnoremap ,, :ls<CR>
 
 " CtrlP
 if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_user_command = 'find %s -type f'
   let g:ctrlp_use_caching = 0
 endif
 
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>t :CtrlPTag<CR>
 
 " Editorconfig
 packadd! editorconfig
