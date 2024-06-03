@@ -46,7 +46,7 @@ vim.opt.swapfile = false -- No swap file
 vim.opt.completeopt = 'menuone,noinsert,noselect'
 vim.opt.virtualedit = 'all'
 vim.opt.formatoptions = 'tcroqjn'
-vim.opt.termguicolors = true
+vim.opt.termguicolors = false
 
 -- Status line
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
@@ -75,7 +75,7 @@ vim.api.nvim_create_user_command('Clear', function()
     vim.cmd("bufdo bwipeout")
 end, {})
 
-vim.cmd.colorscheme('default')
+vim.cmd.colorscheme('wildcharm')
 
 -- Mini (colorscheme, picker, pairs, filebrowser)
 local path_package = vim.fn.stdpath('data') .. '/site'
@@ -116,7 +116,7 @@ now(function()
     require('mini.tabline').setup()
 
     require('mini.indentscope').setup({
-        symbol = "│"
+        symbol = "░"
     })
 
     require('mini.files').setup()
@@ -134,6 +134,15 @@ now(function()
         hex_color = hipatterns.gen_highlighter.hex_color(),
       },
     })
+
+    vim.api.nvim_create_autocmd({'Colorscheme'}, {
+        group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
+        callback = function()
+            -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
+            vim.cmd('highlight link MiniIndentscopeSymbol EndofBuffer')
+        end
+    })
+
 end)
 
 -- Treesitter (highlight, edit, navigate code)
