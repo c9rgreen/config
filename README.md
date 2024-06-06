@@ -5,5 +5,3 @@
 - Uses GNU stow to symlink files into $HOME
 
 See `Brewfile` for a list of apps and command-line utilities.
-
-![Neovim screenshot](screenshot.png)
