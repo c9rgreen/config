@@ -121,7 +121,10 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 # export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-#    # MacVim
-#    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
      export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+fi
+
+# Launch fish if it is available
+if type fish &>/dev/null; then
+    fish
 fi
