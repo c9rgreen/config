@@ -18,9 +18,6 @@ export WORDCHARS='*?[]~&;!$%^<>'
 # Always use color when grepping.
 export GREP_OPTIONS='--color=auto'
 
-# Use the login keychain for aws-vault
-export AWS_VAULT_KEYCHAIN_NAME=login
-
 # Env vars which shouldn't be shared publicly
 if [ -f $HOME/.env ]; then
     source $HOME/.env
@@ -30,8 +27,8 @@ fi
 # Paths
 #
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Editor on macOS
-    # export EDITOR='bbedit --wait'
-    export EDITOR='mvim'
-fi
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#    # Editor on macOS
+#    # export EDITOR='bbedit --wait'
+#    # export EDITOR='mvim'
+#fi

@@ -89,30 +89,6 @@ bindkey -v
 export KEYTIMEOUT=1
 
 #
-# Change cursor shape for different vi modes.
-#
-# function zle-keymap-select {
-#   if [[ ${KEYMAP} == vicmd ]] ||
-#      [[ $1 = 'block' ]]; then
-#     echo -ne '\e[1 q'
-#   elif [[ ${KEYMAP} == main ]] ||
-#        [[ ${KEYMAP} == viins ]] ||
-#        [[ ${KEYMAP} = '' ]] ||
-#        [[ $1 = 'beam' ]]; then
-#     echo -ne '\e[5 q'
-#   fi
-# }
-# zle -N zle-keymap-select
-# zle-line-init() {
-#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-#     echo -ne "\e[5 q"
-# }
-#
-# zle -N zle-line-init
-# echo -ne '\e[5 q' # Use beam shape cursor on startup.
-# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
-#
 # Edit command in $EDITOR
 #
 autoload edit-command-line
@@ -135,29 +111,6 @@ alias tree="tree -I node_modules -I venv"
 
 sha256() { echo -n "$*" | shasum -a 256 }
 
-secrets() {
-    # Set environment variables from password store
-    if type pass &>/dev/null; then
-        export GITLAB_TOKEN="$(pass gitlab-i2ns-pat)"
-        export OPENAI_API_KEY="$(pass open-api-Key)"
-    fi
-}
-
-# Fastfetch
-if type fastfetch &>/dev/null; then
-    fastfetch
-fi
-
-# Direnv
-if type direnv &>/dev/null; then
-    eval "$(direnv hook zsh)"
-fi
-
-# Starship
-if type starship &>/dev/null; then
-    eval "$(starship init zsh)"
-fi
-
 # Use Homebrew Ruby
 # export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
@@ -168,6 +121,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 # export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    # MacVim
-    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+#    # MacVim
+#    export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+     export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
 fi
