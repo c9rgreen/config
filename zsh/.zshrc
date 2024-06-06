@@ -82,20 +82,6 @@ autoload bashcompinit
 bashcompinit
 
 #
-# vi mode
-# Credit: https://unix.stackexchange.com/questions/433273/changing-cursor-style-based-on-mode-in-both-zsh-and-vim
-#
-bindkey -v
-export KEYTIMEOUT=1
-
-#
-# Edit command in $EDITOR
-#
-autoload edit-command-line
-zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
-
-#
 # Aliases
 #
 
@@ -104,24 +90,12 @@ alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.gi
 alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
 
-#
-# Functions
-# Source https://stackoverflow.com/questions/3358420/generating-a-sha-256-hash-from-the-linux-command-line
-#
-
-sha256() { echo -n "$*" | shasum -a 256 }
-
-# Use Homebrew Ruby
-# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-
 # Location for global node modules. Avoids having to install with sudo.
 export PATH="$HOME/.npm-global/bin:$PATH"
 
-# Ruby Gems
-# export PATH="$HOME/.local/share/gem/ruby/3.1.0/bin:$PATH"
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
      export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+     export PATH="$HOME/Library/Application Support/multipass/bin:$PATH"
 fi
 
 # Launch fish if it is available

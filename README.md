@@ -1,7 +1,5 @@
-# c9r's dotfiles
+# ⚙️ Workspace Setup
 
-- Supports the needs of a UX Architect, Software Engineer, and Project Manager
-- Run `make install` to get started
-- Uses GNU stow to symlink files into $HOME
+![Architecture diagram](docs/diagram.excalidraw.svg)
 
-See `Brewfile` for a list of apps and command-line utilities.
+Rather than using a package manager like Homebrew, I use a combination of [official installers](https://www.python.org/downloads/) and packages in VMs running via [Multipass](https://multipass.run).

@@ -23,12 +23,4 @@ if [ -f $HOME/.env ]; then
     source $HOME/.env
 fi
 
-#
-# Paths
-#
-
-#if [[ "$OSTYPE" == "darwin"* ]]; then
-#    # Editor on macOS
-#    # export EDITOR='bbedit --wait'
-#    # export EDITOR='mvim'
-#fi
+export EDITOR="vim"
