@@ -91,6 +91,7 @@ alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
 
 # Location for global node modules. Avoids having to install with sudo.
+# https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 export PATH="$HOME/.npm-global/bin:$PATH"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
