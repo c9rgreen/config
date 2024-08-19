@@ -99,7 +99,3 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
      export PATH="$HOME/Library/Application Support/multipass/bin:$PATH"
 fi
 
-# Launch fish if it is available
-if type fish &>/dev/null; then
-    fish
-fi

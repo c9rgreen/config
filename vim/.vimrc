@@ -130,8 +130,20 @@ packadd! editorconfig
 " Variables
 let g:markdown_folding = 1
 
+" Plugins
+" ALE
+" CtrlP
+" vim-commentary
+" vim-flagship
+" vim-fugitive
+" vim-unimpaired
+" vim-vinegar
+
 " Airline
 "let g:airline_theme='wildcharm'
+
+" ALE
+set omnifunc=ale#completion#OmniFunc
 
 " MacVim
 if has('gui_macvim')
@@ -149,7 +161,7 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=MartianMono-StdRg:h12
+    set guifont=SFMono-Regular:h13
 endif
 
 " LilyPond

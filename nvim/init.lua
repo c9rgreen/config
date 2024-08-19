@@ -71,11 +71,12 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
 
+vim.cmd.colorscheme('wildcharm')
+
 vim.api.nvim_create_user_command('Clear', function()
     vim.cmd("bufdo bwipeout")
 end, {})
 
-vim.cmd.colorscheme('wildcharm')
 
 -- Mini (colorscheme, picker, pairs, filebrowser)
 local path_package = vim.fn.stdpath('data') .. '/site'
@@ -140,11 +141,47 @@ now(function()
         callback = function()
             -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
             vim.cmd('highlight link MiniIndentscopeSymbol EndofBuffer')
+            vim.cmd('highlight link MiniCursorword EndofBuffer')
         end
     })
 
+
 end)
 
+
+-- npm install -g
+-- typescript typescript-language-server
+-- @vue/typescript-plugin
+-- @vue/language-server
+
+later(function()
+    add("neovim/nvim-lspconfig")
+
+    -- JavaScript/Typescript language server with Vue plugin
+    require'lspconfig'.tsserver.setup{
+        init_options = {
+            plugins = {
+                {
+                    name = "@vue/typescript-plugin",
+                    location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+                    location = "/home/ubuntu/.npm-global/lib/node_modules/@vue/typescript-plugin",
+                    languages = {"javascript", "typescript", "vue"},
+                },
+            },
+        },
+        filetypes = {
+            "javascript",
+            "typescript",
+            "vue",
+        },
+    }
+
+    -- Vue language server
+    require'lspconfig'.volar.setup{}
+end)
+
+-- npm install -g
+-- Don't forget to install the tree-sitter CLI
 -- Treesitter (highlight, edit, navigate code)
 later(function()
     add({
@@ -153,8 +190,8 @@ later(function()
     })
 
     require('nvim-treesitter.configs').setup({
-        ensure_installed = { "html", "javascript", "python", "lua", "css", "bash", "go", "gomod", "dockerfile",
-            "gitcommit", "json", "latex", "rst", "markdown", "yaml", "vimdoc", "vim", "vue",
+        ensure_installed = { "html", "javascript", "python", "lua", "css", "bash", "dockerfile",
+            "gitcommit", "json", "rst", "markdown", "yaml", "vimdoc", "vim", "vue",
         },
         highlight = { enable = true },
         indent = {
@@ -162,39 +199,4 @@ later(function()
         },
     })
 end)
-
--- LSP
-later(function()
-    add('williamboman/mason.nvim')
-    add('williamboman/mason-lspconfig.nvim')
-    add('neovim/nvim-lspconfig')
-
-    require('mason').setup()
-    require("mason-lspconfig").setup({
-        ensure_installed = {
-            "lua_ls", "tsserver", "volar", "cssls", "html", "jsonls", "gopls", "tailwindcss", "theme_check",
-        },
-    })
-
-    require("mason-lspconfig").setup_handlers {
-        function (server_name)
-            require("lspconfig")[server_name].setup({
-                capabilities = vim.lsp.protocol.make_client_capabilities(),
-            })
-        end,
-
-        ["lua_ls"] = function()
-            require("lspconfig").lua_ls.setup({
-                on_attach = on_attach,
-                setings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { 'vim', 'MiniDeps' }
-                        }
-                    }
-                }
-            })
-        end,
-    }
-end)          
 
