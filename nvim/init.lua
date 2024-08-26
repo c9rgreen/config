@@ -116,6 +116,10 @@ now(function()
     require('mini.surround').setup()
     require('mini.tabline').setup()
 
+    require('mini.icons').setup({
+        style = 'ascii'
+    })
+
     require('mini.indentscope').setup({
         symbol = "░"
     })
@@ -140,12 +144,10 @@ now(function()
         group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
         callback = function()
             -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
+            -- vim.cmd('highlight link MiniCursorword EndofBuffer')
             vim.cmd('highlight link MiniIndentscopeSymbol EndofBuffer')
-            vim.cmd('highlight link MiniCursorword EndofBuffer')
         end
     })
-
-
 end)
 
 
