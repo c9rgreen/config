@@ -115,10 +115,10 @@ nnoremap <leader>h gqip$
 nnoremap ,, :ls<CR>
 
 " CtrlP
-if executable('rg')
-  let g:ctrlp_user_command = 'find %s -type f'
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('find')
+"   let g:ctrlp_user_command = 'find %s -type f'
+"   let g:ctrlp_use_caching = 0
+" endif
 
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -139,11 +139,26 @@ let g:markdown_folding = 1
 " vim-unimpaired
 " vim-vinegar
 
-" Airline
-"let g:airline_theme='wildcharm'
-
 " ALE
 set omnifunc=ale#completion#OmniFunc
+
+let g:ale_completion_enabled = 1
+
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'vue': ['prettier'],
+\   'json': ['prettier'],
+\}
+
+let g:ale_fix_on_save = 1
+
+let g:ale_linters = {
+\   'vue': ['eslint', 'volar'],
+\}
+
+let g:ale_vue_volar_init_options = {'typescript': {'tsdk': '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib/'}}
+let g:ale_javascript_tsserver_options = '-p jsconfig.json'
 
 " MacVim
 if has('gui_macvim')
