@@ -73,7 +73,10 @@ set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set linespace=1
-" set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
+endif
 
 " Use <space> instead of <\> as the leader key
 let mapleader = "\<Space>"
@@ -115,10 +118,12 @@ nnoremap <leader>h gqip$
 nnoremap ,, :ls<CR>
 
 " CtrlP
-" if executable('find')
-"   let g:ctrlp_user_command = 'find %s -type f'
-"   let g:ctrlp_use_caching = 0
-" endif
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
+endif
 
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -138,12 +143,20 @@ let g:markdown_folding = 1
 " vim-fugitive
 " vim-unimpaired
 " vim-vinegar
+" vim-go
+" vim-fern
+" scope.vim
+" emmet-vim
+" vim-gutentags
+" vista.vim
 
 " ALE
 set omnifunc=ale#completion#OmniFunc
 
+" Autocomplete
 let g:ale_completion_enabled = 1
 
+" Use Prettier for code formatting
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'css': ['prettier'],
@@ -176,9 +189,8 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=SFMono-Regular:h13
+    set guifont=BerkeleyMono-Regular:h14
 endif
 
 " LilyPond
 set runtimepath+=/opt/homebrew/share/lilypond/2.24.3/vim
-
