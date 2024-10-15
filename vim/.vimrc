@@ -2,7 +2,7 @@ filetype plugin indent on
 
 syntax enable
 
-colorscheme wildcharm
+colorscheme modus
 
 " Options
 set nocompatible
@@ -46,6 +46,7 @@ set tags^=./.git/tags
 set laststatus=2
 set showtabline=2
 set foldlevel=5
+set foldmethod=indent
 set virtualedit=all
 set isfname+=32
 set belloff+=ctrlg
@@ -73,6 +74,12 @@ set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set linespace=1
+
+" Make solarized work with Terminal.app
+" The active profile in Terminal.app must already be configured to use the
+" Solarized color palette.
+" https://github.com/lifepillar/vim-solarized8#but-my-terminal-has-only-256-colors
+" set t_Co=16
 
 if executable('rg')
     set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
@@ -135,6 +142,7 @@ packadd! editorconfig
 " Variables
 let g:markdown_folding = 1
 
+
 " Plugins
 " ALE
 " CtrlP
@@ -145,7 +153,6 @@ let g:markdown_folding = 1
 " vim-vinegar
 " vim-go
 " vim-fern
-" scope.vim
 " emmet-vim
 " vim-gutentags
 " vista.vim
@@ -167,11 +174,33 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 let g:ale_linters = {
-\   'vue': ['eslint', 'volar'],
+\   'vue': ['eslint', 'typescript', 'volar'],
 \}
 
-let g:ale_vue_volar_init_options = {'typescript': {'tsdk': '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib/'}}
+" let g:ale_vue_volar_init_options = {'typescript': {'tsdk': '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib/'}}
 let g:ale_javascript_tsserver_options = '-p jsconfig.json'
+
+" NERDTree
+let NERDTreeMinimalUI=1
+
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Get highlight group under cursor
+" https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
+function! SynStack ()
+    for i1 in synstack(line("."), col("."))
+        let i2 = synIDtrans(i1)
+        let n1 = synIDattr(i1, "name")
+        let n2 = synIDattr(i2, "name")
+        echo n1 "->" n2
+    endfor
+endfunction
+map gm :call SynStack()<CR>
+
+" Change the cursor shape depending on mode
+" https://stackoverflow.com/questions/12030278/how-to-change-cursor-shape-in-vim-when-entering-insert-mode-with-macos-terminal
+let &t_SI="\033[5 q" " Blinking bar for insert mode
+let &t_EI="\033[2 q" " Steady block for normal mode
 
 " MacVim
 if has('gui_macvim')
@@ -189,8 +218,8 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=BerkeleyMono-Regular:h14
+    set guifont=SFMono-Regular:h13
 endif
 
 " LilyPond
-set runtimepath+=/opt/homebrew/share/lilypond/2.24.3/vim
+" set runtimepath+=/opt/homebrew/share/lilypond/2.24.3/vim

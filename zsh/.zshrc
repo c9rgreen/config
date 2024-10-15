@@ -97,7 +97,6 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 # macOS-only settings
 if [[ "$OSTYPE" == "darwin"* ]]; then
      export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
-     export PATH="$HOME/Library/Application Support/multipass/bin:$PATH"
      export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 fi
 
