@@ -89,6 +89,8 @@ alias ls="ls -Gh"
 alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.git"
 alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
+alias mr="vim -c 'tabdo Gdiff '${1:-main} $(git diff --name-only --diff-filter=AM ${1:-main}) -p"
+
 
 # Location for global node modules. Avoids having to install with sudo.
 # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
@@ -123,3 +125,4 @@ fi
 if [ -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
     source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+

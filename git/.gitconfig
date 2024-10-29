@@ -5,29 +5,29 @@
 	name = Christopher Green
 [alias]
 	# Fancier git log
-	graph = log --graph --oneline --abbrev-commit --decorate  --all
-	
-	# Show the last ten tags
-	ten = tag --sort version:refname -n10 -n
-	
-	# List all remote branches
-	remotes = ls-remote --heads
+  graph = log --graph --oneline --abbrev-commit --decorate  --all
+
+  # Show the last ten tags
+  ten = tag --sort version:refname -n10 -n
+
+  # List all remote branches
+  remotes = ls-remote --heads
 
     # Jump
-    jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
+  jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
 
     # For reviewing Merge/Pull Requests
-	mr = jump diff main..HEAD
-    last = merge-base main HEAD
+  mr = jump diff main..HEAD
+  last = merge-base main HEAD
 
     # Convenience
-    s = status
-    p = pull --tags
-    u = push --tags
-    a = add .
-    c = commit
-    t = difftool
-    d = diff
+  s = status
+  p = pull --tags
+  u = push --tags
+  a = add .
+  c = commit
+  t = difftool
+  d = diff
 [github]
 	user = c9rgreen
 [pull]

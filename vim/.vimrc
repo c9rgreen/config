@@ -1,10 +1,12 @@
+" vim: fdm=marker
+
 filetype plugin indent on
 
 syntax enable
 
-colorscheme modus
+colorscheme retrobox
 
-" Options
+" Options {{
 set nocompatible
 set autoindent
 set smartindent
@@ -31,16 +33,29 @@ set incsearch
 set wildmenu
 set wildignore+=*.git,*venv/*,*node_modules/*,*vendor/*,*__pycache__/*,*.aux,*.cls,*dist/*,*output/*,tags
 set wildignorecase
+
+" Status line {{{
+" Reset status line
 set statusline=
-set statusline+=\[%<%{fnamemodify(getcwd(),':t')}]\ 
-set statusline+=\ %f\ 
+" Working directory
+set statusline+=\[%<%{fnamemodify(getcwd(),':t')}]
+" Filename
+set statusline+=\ %f
+" Modified flag
 set statusline+=%m
+" Everything after this right-aligned
 set statusline+=%=
+" Filetype
 set statusline+=\ %y
+" File encoding
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
+" Percentage through the file
 set statusline+=\ %p%%
+" Location
 set statusline+=\ %l:%c
+" Word count
 set statusline+=\ w%{wordcount().words}
+" }}}
 set spelllang=en_us
 set tags^=./.git/tags
 set laststatus=2
@@ -54,8 +69,11 @@ set mouse=a
 set number
 set ttyfast
 set signcolumn=yes
-set fillchars+=vert:\ 
-set fillchars+=fold:\ 
+set fillchars+=vert:🞄
+set fillchars+=fold:🞄
+set fillchars+=vert:🞄
+set fillchars+=fold:🞄
+set fillchars+=eob:🞄
 set completeopt=menu,menuone,preview,noselect,longest
 set omnifunc=syntaxcomplete#Complete
 set cursorline
@@ -75,11 +93,38 @@ set viewoptions-=options
 set nolangremap
 set linespace=1
 
-" Make solarized work with Terminal.app
+" Make lifepillar/solarized8 work with Terminal.app {{{
 " The active profile in Terminal.app must already be configured to use the
 " Solarized color palette.
 " https://github.com/lifepillar/vim-solarized8#but-my-terminal-has-only-256-colors
 " set t_Co=16
+" }}}                              illchars+=eob:🞄
+set completeopt=menu,menuone,preview,noselect,longest
+set omnifunc=syntaxcomplete#Complete
+set cursorline
+set backspace=indent,eol,start
+set smarttab
+set ttimeout
+set ttimeoutlen=100
+set ruler
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=5
+set display+=lastline
+set display+=truncate
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+set sessionoptions-=options
+set viewoptions-=options
+set nolangremap
+set linespace=1
+" }}}
+
+" Make lifepillar/solarized8 work with Terminal.app {{{
+" The active profile in Terminal.app must already be configured to use the
+" Solarized color palette.
+" https://github.com/lifepillar/vim-solarized8#but-my-terminal-has-only-256-colors
+" set t_Co=16
+" }}}
 
 if executable('rg')
     set grepprg=rg\ --vimgrep\ --smart-case\ --hidden\ --follow
@@ -91,10 +136,11 @@ let mapleader = "\<Space>"
 " Commands
 command! Search :execute 'vimgrep '.expand('<cword>').' **/*' | :copen | :cc
 
-" Abbreviations
+" Abbreviations {{{
 iabbrev <expr> :date: strftime("%Y-%m-%d")
 iabbrev <expr> [[]] strftime("[[%Y%m%d%H%M%S]]")
 iabbrev :qa: (🦺 QA Verify)
+" }}}
 
 " Mappings
 noremap <silent> k gk
@@ -124,7 +170,7 @@ nnoremap <leader>h gqip$
 " List buffers
 nnoremap ,, :ls<CR>
 
-" CtrlP
+" CtrlP {{{
 if executable('rg')
   let g:ctrlp_user_command = 'rg --files %s'
   let g:ctrlp_use_caching = 0
@@ -135,33 +181,23 @@ endif
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>t :CtrlPTag<CR>
+" }}}
 
 " Editorconfig
 packadd! editorconfig
 
-" Variables
+" Mermaid {{{
+" Enable folding in markdown
 let g:markdown_folding = 1
+" Highlight fenced code in markdown
+let g:markdown_fenced_languages = ['html', 'javascript', 'mermaid']
+" }}}
 
-
-" Plugins
-" ALE
-" CtrlP
-" vim-commentary
-" vim-flagship
-" vim-fugitive
-" vim-unimpaired
-" vim-vinegar
-" vim-go
-" vim-fern
-" emmet-vim
-" vim-gutentags
-" vista.vim
-
-" ALE
-set omnifunc=ale#completion#OmniFunc
+" ALE {{{
+" set omnifunc=ale#completion#OmniFunc
 
 " Autocomplete
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 
 " Use Prettier for code formatting
 let g:ale_fixers = {
@@ -180,12 +216,49 @@ let g:ale_linters = {
 " let g:ale_vue_volar_init_options = {'typescript': {'tsdk': '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib/'}}
 let g:ale_javascript_tsserver_options = '-p jsconfig.json'
 
-" NERDTree
-let NERDTreeMinimalUI=1
+" }}}
 
-nnoremap <leader>n :NERDTreeToggle<CR>
+" NetRW
+let g:netrw_liststyle = 3
 
-" Get highlight group under cursor
+" LSP {{{
+if executable('typescript-language-server') && executable('volar-server')
+  let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
+endif
+" }}}
+
+" Async Complete {{{
+" OmniComplete
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+    \ 'name': 'omni',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': ['c', 'cpp', 'html'],
+    \ 'completor': function('asyncomplete#sources#omni#completor'),
+    \ 'config': {
+    \   'show_source_kind': 1,
+    \ },
+    \ }))
+
+" Emmet
+autocmd User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emmet#get_source_options({
+    \ 'name': 'emmet',
+    \ 'whitelist': ['html'],
+    \ 'completor': function('asyncomplete#sources#emmet#completor'),
+    \ }))
+
+" Buffer
+call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+    \ 'name': 'buffer',
+    \ 'allowlist': ['*'],
+    \ 'blocklist': ['go'],
+    \ 'completor': function('asyncomplete#sources#buffer#completor'),
+    \ 'config': {
+    \    'max_buffer_size': 5000000,
+    \  },
+    \ }))
+" }}}
+
+" Get highlight group under cursor {{{
 " https://stackoverflow.com/questions/9464844/how-to-get-group-name-of-highlighting-under-cursor-in-vim
 function! SynStack ()
     for i1 in synstack(line("."), col("."))
@@ -196,13 +269,14 @@ function! SynStack ()
     endfor
 endfunction
 map gm :call SynStack()<CR>
+" }}}
 
 " Change the cursor shape depending on mode
 " https://stackoverflow.com/questions/12030278/how-to-change-cursor-shape-in-vim-when-entering-insert-mode-with-macos-terminal
 let &t_SI="\033[5 q" " Blinking bar for insert mode
 let &t_EI="\033[2 q" " Steady block for normal mode
 
-" MacVim
+" MacVim {{{
 if has('gui_macvim')
     function! MacAppearance()
         if v:os_appearance == 1
@@ -218,8 +292,9 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=SFMono-Regular:h13
+    set guifont=JetBrainsMonoNFM-Regular:h13
 endif
+" }}}
 
 " LilyPond
-" set runtimepath+=/opt/homebrew/share/lilypond/2.24.3/vim
+set runtimepath+=/opt/homebrew/share/lilypond/2.24.3/vim

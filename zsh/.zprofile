@@ -12,7 +12,5 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
-
-# Added by OrbStack: command-line tools and integration
-# This won't be added again if you remove it.
-source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+# Brew package manager
+eval "$(/opt/homebrew/bin/brew shellenv)"

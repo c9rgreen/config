@@ -117,11 +117,11 @@ now(function()
     require('mini.tabline').setup()
 
     require('mini.icons').setup({
-        style = 'ascii'
+        -- style = 'ascii'
     })
 
     require('mini.indentscope').setup({
-        symbol = "░"
+        symbol = "▏"
     })
 
     require('mini.files').setup()
@@ -148,6 +148,11 @@ now(function()
             vim.cmd('highlight link MiniIndentscopeSymbol EndofBuffer')
         end
     })
+end)
+
+later(function()
+  add("c9rgreen/vim-colors-modus")
+  vim.cmd.colorscheme('modus')
 end)
 
 
@@ -201,4 +206,14 @@ later(function()
         },
     })
 end)
+
+-- Biome (for JavaScript formatting)
+vim.api.nvim_create_augroup('biome', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = 'biome',
+  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json' },
+  callback = function()
+    vim.bo.formatprg = 'biome format --stdin-file-path=%'
+  end,
+})
 
