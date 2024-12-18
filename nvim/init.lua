@@ -30,25 +30,9 @@ vim.opt.magic = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wildignorecase = true
-vim.opt.grepprg = 'rg --vimgrep --smart-case --hidden --follow'
-vim.opt.path = '$PWD/**'
-vim.opt.ignorecase = true
-vim.opt.incsearch = true
-vim.opt.infercase = true
-vim.opt.smartcase = true
-vim.opt.smartindent = true
+-- vtermguicolors = false
 
--- Behavior
-vim.opt.foldmethod = 'indent'
-vim.opt.foldlevel = 5
-vim.opt.eb = false -- No error bells
-vim.opt.swapfile = false -- No swap file
-vim.opt.completeopt = 'menuone,noinsert,noselect'
-vim.opt.virtualedit = 'all'
-vim.opt.formatoptions = 'tcroqjn'
-vim.opt.termguicolors = false
-
--- Status line
+-- Status line (overridden by mini.nvim)
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
 
 -- Use space for leader
@@ -71,7 +55,7 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
 
-vim.cmd.colorscheme('wildcharm')
+vim.cmd.colorscheme('retrobox')
 
 vim.api.nvim_create_user_command('Clear', function()
     vim.cmd("bufdo bwipeout")
@@ -112,16 +96,17 @@ now(function()
     require('mini.notify').setup()
     require('mini.pairs').setup()
     require('mini.starter').setup()
-    require('mini.statusline').setup()
     require('mini.surround').setup()
     require('mini.tabline').setup()
 
+    require('mini.statusline').setup({ use_icons = false })
+
     require('mini.icons').setup({
-        -- style = 'ascii'
+        style = 'ascii'
     })
 
     require('mini.indentscope').setup({
-        symbol = "▏"
+        symbol = "🞍"
     })
 
     require('mini.files').setup()
@@ -140,53 +125,60 @@ now(function()
       },
     })
 
+
     vim.api.nvim_create_autocmd({'Colorscheme'}, {
         group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
         callback = function()
             -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
             -- vim.cmd('highlight link MiniCursorword EndofBuffer')
-            vim.cmd('highlight link MiniIndentscopeSymbol EndofBuffer')
+            vim.cmd('highlight link MiniIndentscopeSymbol LineNr')
         end
     })
 end)
 
-later(function()
-  add("c9rgreen/vim-colors-modus")
-  vim.cmd.colorscheme('modus')
-end)
-
-
+--
+-- LSP
+--
 -- npm install -g
 -- typescript typescript-language-server
 -- @vue/typescript-plugin
 -- @vue/language-server
+-- Use absolute paths. Relative paths like "~/" do not work
 
 later(function()
-    add("neovim/nvim-lspconfig")
+  add("neovim/nvim-lspconfig")
 
-    -- JavaScript/Typescript language server with Vue plugin
-    require'lspconfig'.tsserver.setup{
-        init_options = {
-            plugins = {
-                {
-                    name = "@vue/typescript-plugin",
-                    location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-                    location = "/home/ubuntu/.npm-global/lib/node_modules/@vue/typescript-plugin",
-                    languages = {"javascript", "typescript", "vue"},
-                },
-            },
+  -- JavaScript/Typescript language server with Vue plugin
+  require'lspconfig'.ts_ls.setup {
+    init_options = {
+      plugins = {
+        {
+          name = "@vue/typescript-plugin",
+          location = "/Users/cgreen/.npm-global/lib/node_modules/@vue/typescript-plugin",
+          languages = {"javascript", "typescript", "vue"},
         },
-        filetypes = {
-            "javascript",
-            "typescript",
-            "vue",
-        },
+      },
+    },
+    filetypes = {
+      "javascript",
+      "typescript",
+      "vue",
+    },
+  }
+
+  -- Vue language server
+  require'lspconfig'.volar.setup {
+    init_options = {
+      typescript = {
+        tsdk = '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib'
+      }
     }
-
-    -- Vue language server
-    require'lspconfig'.volar.setup{}
+  }
 end)
 
+--
+-- Treesitter
+--
 -- npm install -g
 -- Don't forget to install the tree-sitter CLI
 -- Treesitter (highlight, edit, navigate code)
