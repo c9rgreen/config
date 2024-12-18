@@ -13,14 +13,14 @@
   # List all remote branches
   remotes = ls-remote --heads
 
-    # Jump
+  # Jump
   jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
 
-    # For reviewing Merge/Pull Requests
+  # For reviewing Merge/Pull Requests
   mr = jump diff main..HEAD
   last = merge-base main HEAD
 
-    # Convenience
+  # Convenience
   s = status
   p = pull --tags
   u = push --tags
