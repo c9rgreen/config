@@ -31,7 +31,7 @@ vim.opt.magic = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wildignorecase = true
--- vtermguicolors = false
+vtermguicolors = false
 
 -- Status line (overridden by mini.nvim)
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
@@ -199,3 +199,8 @@ later(function()
     })
 end)
 
+-- Solarized
+later(function()
+  add('maxmx03/solarized.nvim')
+  vim.cmd.colorscheme('solarized')
+end)

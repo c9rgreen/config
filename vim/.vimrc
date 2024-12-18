@@ -1,10 +1,9 @@
-" vim: fdm=marker
+" vim: filetype=vim foldmethod=marker foldlevel=0
 
 filetype plugin indent on
-
 syntax enable
 
-colorscheme retrobox
+colorscheme solarized8
 
 " Options {{
 set nocompatible
@@ -56,6 +55,7 @@ set statusline+=\ %l:%c
 " Word count
 set statusline+=\ w%{wordcount().words}
 " }}}
+
 set spelllang=en_us
 set tags^=./.git/tags
 set laststatus=2
@@ -69,11 +69,7 @@ set mouse=a
 set number
 set ttyfast
 set signcolumn=yes
-set fillchars+=vert:🞄
-set fillchars+=fold:🞄
-set fillchars+=vert:🞄
-set fillchars+=fold:🞄
-set fillchars+=eob:🞄
+set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:\ ,foldsep:\ ,diff:-
 set completeopt=menu,menuone,preview,noselect,longest
 set omnifunc=syntaxcomplete#Complete
 set cursorline
@@ -92,32 +88,7 @@ set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set linespace=1
-
-" Make lifepillar/solarized8 work with Terminal.app {{{
-" The active profile in Terminal.app must already be configured to use the
-" Solarized color palette.
-" https://github.com/lifepillar/vim-solarized8#but-my-terminal-has-only-256-colors
-" set t_Co=16
-" }}}                              illchars+=eob:🞄
-set completeopt=menu,menuone,preview,noselect,longest
-set omnifunc=syntaxcomplete#Complete
-set cursorline
-set backspace=indent,eol,start
-set smarttab
-set ttimeout
-set ttimeoutlen=100
-set ruler
-set scrolloff=5
-set sidescroll=1
-set sidescrolloff=5
-set display+=lastline
-set display+=truncate
-set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-set sessionoptions-=options
-set viewoptions-=options
-set nolangremap
-set linespace=1
-" }}}
+set termguicolors
 
 " Make lifepillar/solarized8 work with Terminal.app {{{
 " The active profile in Terminal.app must already be configured to use the
@@ -170,6 +141,11 @@ nnoremap <leader>h gqip$
 " List buffers
 nnoremap ,, :ls<CR>
 
+" Fugitive {{{
+nnoremap <leader>m :Gdiff main<CR>
+" }}}
+
+
 " CtrlP {{{
 if executable('rg')
   let g:ctrlp_user_command = 'rg --files %s'
@@ -183,10 +159,15 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 nnoremap <leader>t :CtrlPTag<CR>
 " }}}
 
+" Airline {{{
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+" }}}
+
 " Editorconfig
 packadd! editorconfig
 
-" Mermaid {{{
+" Markdown {{{
 " Enable folding in markdown
 let g:markdown_folding = 1
 " Highlight fenced code in markdown
@@ -194,10 +175,6 @@ let g:markdown_fenced_languages = ['html', 'javascript', 'mermaid']
 " }}}
 
 " ALE {{{
-" set omnifunc=ale#completion#OmniFunc
-
-" Autocomplete
-" let g:ale_completion_enabled = 1
 
 " Use Prettier for code formatting
 let g:ale_fixers = {
@@ -214,7 +191,7 @@ let g:ale_linters = {
 \}
 
 " let g:ale_vue_volar_init_options = {'typescript': {'tsdk': '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib/'}}
-let g:ale_javascript_tsserver_options = '-p jsconfig.json'
+" let g:ale_javascript_tsserver_options = '-p jsconfig.json'
 
 " }}}
 
@@ -225,6 +202,9 @@ let g:netrw_liststyle = 3
 if executable('typescript-language-server') && executable('volar-server')
   let g:lsp_settings_filetype_vue = ['typescript-language-server', 'volar-server']
 endif
+
+let g:lsp_diagnostics_virtual_text_align = "right"
+let g:lsp_diagnostics_virtual_text_wrap = "truncate"
 " }}}
 
 " Async Complete {{{
@@ -292,7 +272,7 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=JetBrainsMonoNFM-Regular:h13
+    set guifont=BerkeleyMono-Regular:h14
 endif
 " }}}
 
