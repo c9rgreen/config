@@ -126,3 +126,6 @@ if [ -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
     source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
