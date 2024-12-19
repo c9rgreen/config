@@ -1,5 +1,5 @@
 [core]
-	editor = vim
+	editor = nvim
 [user]
 	email = cgreen@saguaro.space
 	name = Christopher Green
