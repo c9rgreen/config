@@ -91,7 +91,6 @@ alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
 alias mr="vim -c 'tabdo Gdiff '${1:-main} $(git diff --name-only --diff-filter=AM ${1:-main}) -p"
 
-
 # Location for global node modules. Avoids having to install with sudo.
 # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 export PATH="$HOME/.npm-global/bin:$PATH"
@@ -126,6 +125,6 @@ if [ -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
     source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-
+# iTerm integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
