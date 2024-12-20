@@ -31,7 +31,7 @@ vim.opt.magic = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.wildignorecase = true
-vtermguicolors = false
+vim.opt.termguicolors = true
 
 -- Status line (overridden by mini.nvim)
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
@@ -52,20 +52,25 @@ vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')
 vim.keymap.set('n', '<leader>b', ':lua MiniPick.builtin.buffers()<CR>')
 vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
+vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
 
+-- NetRW
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+
 -- Colorscheme
-vim.cmd.colorscheme('retrobox')
+vim.cmd.colorscheme('default')
 
 -- Override highlight groups
 vim.api.nvim_create_autocmd({'Colorscheme'}, {
   group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
   callback = function()
     -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
-    -- vim.cmd('highlight link MiniCursorword EndofBuffer')
-    vim.cmd('highlight link MiniIndentscopeSymbol LineNr')
+    -- vim.cmd('highlight link MiniCursorword Comment')
+    vim.cmd('highlight link MiniIndentscopeSymbol Comment')
   end
 })
 
@@ -139,6 +144,7 @@ end)
 
 --
 -- LSP
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lsp-configs
 --
 -- npm install -g
 -- typescript typescript-language-server
@@ -175,6 +181,59 @@ later(function()
       }
     }
   }
+
+  -- CSS
+  require('lspconfig').cssls.setup{}
+
+  -- HTML
+  require('lspconfig').html.setup{}
+
+  -- Elixir
+  require("lspconfig")["nextls"].setup({
+    cmd = {"nextls", "--stdio"},
+    init_options = {
+      extensions = {
+        credo = { enable = true }
+      },
+      experimental = {
+        completions = { enable = true }
+      }
+    }
+  })
+
+  -- PHP
+  require('lspconfig').intelephense.setup{}
+
+  -- Lua
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
+  require'lspconfig'.lua_ls.setup {
+    on_init = function(client)
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+          return
+        end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        runtime = {
+          -- Tell the language server which version of Lua you're using
+          -- (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT'
+        },
+        -- Make the server aware of Neovim runtime files
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME
+          }
+        }
+      })
+    end,
+    settings = {
+      Lua = {}
+    }
+  }
 end)
 
 --
@@ -183,24 +242,35 @@ end)
 -- Don't forget to install the tree-sitter CLI
 -- Treesitter (highlight, edit, navigate code)
 later(function()
-    add({
-        source = "nvim-treesitter/nvim-treesitter",
-        hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-    })
+  add({
+    source = "nvim-treesitter/nvim-treesitter",
+    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+  })
 
-    require('nvim-treesitter.configs').setup({
-        ensure_installed = { "html", "javascript", "python", "lua", "css", "bash", "dockerfile",
-            "gitcommit", "json", "rst", "markdown", "yaml", "vimdoc", "vim", "vue",
-        },
-        highlight = { enable = true },
-        indent = {
-            enable = true,
-        },
-    })
-end)
-
--- Solarized
-later(function()
-  add('maxmx03/solarized.nvim')
-  vim.cmd.colorscheme('solarized')
+  require('nvim-treesitter.configs').setup({
+    ensure_installed = {
+      "bash",
+      "css",
+      "dockerfile",
+      "eex",
+      "elixir",
+      "gitcommit",
+      "heex",
+      "html",
+      "javascript",
+      "json",
+      "lua",
+      "markdown",
+      "python",
+      "rst",
+      "vim",
+      "vimdoc",
+      "vue",
+      "yaml",
+    },
+    highlight = { enable = true },
+    indent = {
+      enable = true,
+    },
+  })
 end)
