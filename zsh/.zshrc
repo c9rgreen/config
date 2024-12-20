@@ -89,7 +89,6 @@ alias ls="ls -Gh"
 alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.git"
 alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
-alias mr="vim -c 'tabdo Gdiff '${1:-main} $(git diff --name-only --diff-filter=AM ${1:-main}) -p"
 
 # Location for global node modules. Avoids having to install with sudo.
 # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
@@ -97,34 +96,38 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 # macOS-only settings
 if [[ "$OSTYPE" == "darwin"* ]]; then
-     export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+     # export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
      export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 fi
 
 # Autosuggestions (from zsh-users)
-if [ -d "$HOME/.zsh/zsh-autosuggestions" ]; then
-    source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+if type brew &>/dev/null; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # Extra completions (from zsh-users)
-if [ -d "$HOME/.zsh/zsh-completions" ]; then
-    FPATH=$HOME/.zsh/zsh-completions:$FPATH
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-    autoload -Uz compinit
-    compinit
+  autoload -Uz compinit
+  compinit
 fi
 
 # History substring search (from zsh-users)
-if [ -d "$HOME/.zsh/zsh-history-substring-search" ]; then
-    source $HOME/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
+if type brew &>/dev/null; then
+  source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 fi
 
 # Syntax highlighting (from zsh-users)
 # This block belongs at the end of .zshrc, according to the docs
-if [ -d "$HOME/.zsh/zsh-syntax-highlighting" ]; then
-    source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if type brew &>/dev/null; then
+  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # iTerm integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Run fastfetch
+if type fastfetch &>/dev/null; then
+  fastfetch
+fi
