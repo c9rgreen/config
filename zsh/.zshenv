@@ -23,4 +23,4 @@ if [ -f $HOME/.env ]; then
     source $HOME/.env
 fi
 
-export EDITOR="vim"
+export EDITOR="nvim"
