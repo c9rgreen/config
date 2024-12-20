@@ -3,7 +3,7 @@
 filetype plugin indent on
 syntax enable
 
-colorscheme solarized8
+colorscheme wildcharm
 
 " Options {{
 set nocompatible
@@ -145,7 +145,6 @@ nnoremap ,, :ls<CR>
 nnoremap <leader>m :Gdiff main<CR>
 " }}}
 
-
 " CtrlP {{{
 if executable('rg')
   let g:ctrlp_user_command = 'rg --files %s'
@@ -197,6 +196,7 @@ let g:ale_linters = {
 
 " NetRW
 let g:netrw_liststyle = 3
+let g:netrw_banner = 0
 
 " LSP {{{
 if executable('typescript-language-server') && executable('volar-server')
@@ -272,7 +272,7 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=BerkeleyMono-Regular:h14
+    set guifont=InputMono-Regular:h12
 endif
 " }}}
 
