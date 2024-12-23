@@ -90,9 +90,17 @@ alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.gi
 alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
 
-# Location for global node modules. Avoids having to install with sudo.
-# https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
-export PATH="$HOME/.npm-global/bin:$PATH"
+# Node
+if [[ -d "$HOME/.npm-global/bin" ]]; then
+  # Location for global node modules. Avoids having to install with sudo.
+  # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+  export PATH="$HOME/.npm-global/bin:$PATH"
+fi
+
+# Ruby
+if type brew &>/dev/null; then
+  export PATH="$(brew --prefix)/opt/ruby/bin:$PATH"
+fi
 
 # macOS-only settings
 if [[ "$OSTYPE" == "darwin"* ]]; then
