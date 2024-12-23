@@ -100,6 +100,7 @@ fi
 # Ruby
 if type brew &>/dev/null; then
   export PATH="$(brew --prefix)/opt/ruby/bin:$PATH"
+  export PATH="$(brew --prefix)/lib/ruby/gems/3.3.0/bin:$PATH"
 fi
 
 # macOS-only settings
