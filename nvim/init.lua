@@ -24,7 +24,11 @@ vim.opt.number = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.signcolumn = 'yes'
-vim.opt.fillchars = 'eob: '
+vim.opt.foldmethod = 'indent'
+vim.opt.fillchars = {
+    eob = ' ',
+    fold = ' '
+}
 
 -- Search
 vim.opt.magic = true
@@ -68,8 +72,6 @@ vim.cmd.colorscheme('default')
 vim.api.nvim_create_autocmd({'Colorscheme'}, {
   group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
   callback = function()
-    -- vim.cmd('highlight link MiniPickMatchCurrent Cursor')
-    -- vim.cmd('highlight link MiniCursorword Comment')
     vim.cmd('highlight link MiniIndentscopeSymbol Comment')
   end
 })
@@ -79,10 +81,10 @@ vim.api.nvim_create_user_command('Clear', function()
     vim.cmd("bufdo bwipeout")
 end, {})
 
--- Biome (for JavaScript formatting)
-vim.api.nvim_create_augroup('biome', { clear = true })
+-- JavaScript
+vim.api.nvim_create_augroup('js', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'biome',
+  group = 'js',
   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json' },
   callback = function()
     vim.bo.formatprg = 'biome format --stdin-file-path=%'
