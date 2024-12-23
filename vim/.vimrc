@@ -272,7 +272,7 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=InputMono-Regular:h12
+    set guifont=SFMono-Regular:h12
 endif
 " }}}
 
