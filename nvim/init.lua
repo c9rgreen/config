@@ -188,19 +188,6 @@ later(function()
   -- HTML
   require('lspconfig').html.setup{}
 
-  -- Elixir
-  require("lspconfig")["nextls"].setup({
-    cmd = {"nextls", "--stdio"},
-    init_options = {
-      extensions = {
-        credo = { enable = true }
-      },
-      experimental = {
-        completions = { enable = true }
-      }
-    }
-  })
-
   -- PHP
   require('lspconfig').intelephense.setup{}
 
@@ -273,4 +260,14 @@ later(function()
       enable = true,
     },
   })
+end)
+
+-- Elixir
+later(function()
+  add({
+    source = 'elixir-tools/elixir-tools.nvim',
+    depends = { 'nvim-lua/plenary.nvim' },
+  })
+
+  require("elixir").setup()
 end)
