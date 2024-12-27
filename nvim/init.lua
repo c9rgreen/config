@@ -91,6 +91,9 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- Ghostty
+vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
+
 -- Initialize mini.nvim; automatically clone it if necessary...
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
@@ -110,38 +113,39 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 -- ...end. Now we are ready to use use mini.nvim.
 
 now(function()
-    require('mini.basics').setup()
-    require('mini.bracketed').setup()
-    require('mini.bufremove').setup()
-    require('mini.completion').setup()
-    require('mini.cursorword').setup()
-    require('mini.diff').setup()
-    require('mini.extra').setup()
-    require('mini.files').setup()
-    require('mini.fuzzy').setup()
-    require('mini.git').setup()
-    require('mini.hipatterns').setup()
-    require('mini.icons').setup({ style = 'ascii' })
-    require('mini.indentscope').setup({ symbol = "🞍" })
-    require('mini.map').setup()
-    require('mini.notify').setup()
-    require('mini.pairs').setup()
-    require('mini.pick').setup()
-    require('mini.sessions').setup()
-    require('mini.starter').setup()
-    require('mini.statusline').setup({ use_icons = false })
-    require('mini.surround').setup()
-    require('mini.tabline').setup()
-    require('mini.hipatterns').setup({
-      highlighters = {
-        fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-        hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
-        todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
-        note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+  require('mini.basics').setup()
+  require('mini.bracketed').setup()
+  require('mini.bufremove').setup()
+  require('mini.completion').setup()
+  require('mini.cursorword').setup()
+  require('mini.diff').setup()
+  require('mini.extra').setup()
+  require('mini.files').setup()
+  require('mini.fuzzy').setup()
+  require('mini.git').setup()
+  require('mini.hipatterns').setup()
+  require('mini.icons').setup({ style = 'glyphs' })
+  require('mini.indentscope').setup({ symbol = '│' })
+  require('mini.map').setup()
+  require('mini.notify').setup()
+  require('mini.pairs').setup()
+  require('mini.pick').setup()
+  require('mini.sessions').setup()
+  require('mini.starter').setup()
+  require('mini.statusline').setup({ use_icons = false })
+  require('mini.surround').setup()
+  require('mini.tabline').setup()
+  require('mini.hipatterns').setup({
+    highlighters = {
+      fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+      hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+      todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+      note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
 
-        hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
-      },
-    })
+      hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
+    },
+  })
+  require('mini.snippets').setup()
 end)
 
 --
