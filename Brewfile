@@ -1,4 +1,4 @@
-# vim: set ft=ruby
+# vim: set filetype=ruby
 # To install, run `brew bundle`
 
 tap 'elixir-tools/tap'
@@ -7,6 +7,7 @@ tap 'elixir-tools/tap'
 # Packages
 #
 brew 'elixir'
+brew 'eza'
 brew 'fastfetch'
 brew 'fish'
 brew 'git'
@@ -31,9 +32,8 @@ brew 'zsh-syntax-highlighting'
 #
 # Casks
 #
+cask 'ghostty'
 cask 'gitup'
-cask 'iterm2'
-cask 'itermai'
 cask 'macvim'
 cask 'signal'
 
