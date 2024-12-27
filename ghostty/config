@@ -1,0 +1,6 @@
+# vim: set filetype=ghostty
+# Ghostty config (https://ghostty.org)
+
+font-family = "InputMono"
+font-size = "12"
+theme = dark:neovim-dark,light:neovim-light
