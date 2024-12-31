@@ -22,6 +22,7 @@ brew 'ripgrep'
 brew 'ruby'
 brew 'tig'
 brew 'tmux'
+brew 'tpm'
 brew 'tree'
 brew 'universal-ctags'
 brew 'zsh-autosuggestions'
@@ -34,8 +35,7 @@ brew 'zsh-syntax-highlighting'
 #
 cask 'ghostty'
 cask 'gitup'
-cask 'macvim'
-cask 'signal'
+cask 'bbedit'
 
 #
 # Fonts
