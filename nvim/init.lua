@@ -145,7 +145,18 @@ now(function()
       hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
     },
   })
-  require('mini.snippets').setup()
+
+
+  require('mini.snippets').setup({
+    snippets = {
+      -- Load custom file with global snippets first (adjust for Windows)
+      require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+
+      -- Load snippets based on current language by reading files from
+      -- "snippets/" subdirectories from 'runtimepath' directories.
+      require('mini.snippets').gen_loader.from_lang(),
+    },
+  })
 end)
 
 --
@@ -276,4 +287,10 @@ later(function()
   })
 
   require("elixir").setup()
+end)
+
+-- Old but good Vim packages
+later(function()
+  add('mattn/emmet-vim')
+  add('tpope/vim-fugitive')
 end)
