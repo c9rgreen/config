@@ -6,6 +6,7 @@ tap 'elixir-tools/tap'
 #
 # Packages
 #
+brew 'cloc'
 brew 'elixir'
 brew 'eza'
 brew 'fastfetch'
