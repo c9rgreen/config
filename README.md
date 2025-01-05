@@ -4,7 +4,7 @@
 
 * Packages managed by [Homebrew](https://brew.sh)
 * Virtual Machines via [Lima](https://lima-vm.io)
-* Dotfiles managed via [Stow](https://www.gnu.org/software/stow/)
+* Dotfiles managed with [Stow](https://www.gnu.org/software/stow/)
 
 ## Usage
 
