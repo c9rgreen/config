@@ -2,19 +2,21 @@
 vim.cmd('filetype plugin indent on')
 
 -- Options
+vim.opt.backup = false
 vim.opt.clipboard = 'unnamedplus'
+vim.opt.mouse = 'a'
 vim.opt.number = true
 vim.opt.scrolloff = 8
+vim.opt.termguicolors = true
 vim.opt.undofile = true
-vim.opt.backup = false
+vim.opt.virtualedit = 'all'
 vim.opt.writebackup = false
-vim.opt.mouse = 'a'
 
 -- Tabs
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
 
 -- Appearance
 vim.opt.breakindent = true
@@ -32,10 +34,9 @@ vim.opt.fillchars = {
 
 -- Search
 vim.opt.magic = true
+vim.opt.wildignorecase = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
-vim.opt.wildignorecase = true
-vim.opt.termguicolors = true
 
 -- Status line (overridden by mini.nvim)
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
@@ -68,9 +69,18 @@ vim.g.netrw_banner = 0
 -- Colorscheme
 vim.cmd.colorscheme('default')
 
--- Override highlight groups
+-- Terminal
+vim.api.nvim_create_autocmd({'TermOpen'}, {
+  group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+  end
+})
+
+-- Set highlight groups
 vim.api.nvim_create_autocmd({'Colorscheme'}, {
-  group = vim.api.nvim_create_augroup('Mini Fixes', { clear = true }),
+  group = vim.api.nvim_create_augroup('Mini', { clear = true }),
   callback = function()
     vim.cmd('highlight link MiniIndentscopeSymbol Comment')
   end
@@ -94,7 +104,9 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Ghostty
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
 
+--
 -- Initialize mini.nvim; automatically clone it if necessary...
+--
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
@@ -110,8 +122,13 @@ end
 require('mini.deps').setup({ path = { package = path_package } })
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+--
 -- ...end. Now we are ready to use use mini.nvim.
+--
 
+--
+-- Set up Mini
+--
 now(function()
   require('mini.basics').setup()
   require('mini.bracketed').setup()
@@ -161,14 +178,9 @@ end)
 
 --
 -- LSP
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lsp-configs
---
--- npm install -g
--- typescript typescript-language-server
--- @vue/typescript-plugin
--- @vue/language-server
 -- Use absolute paths. Relative paths like "~/" do not work
-
+-- Use :h lspconfig-all to see available configs & how to install language servers
+--
 later(function()
   add("neovim/nvim-lspconfig")
 
@@ -209,7 +221,6 @@ later(function()
   require('lspconfig').intelephense.setup{}
 
   -- Lua
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
   require'lspconfig'.lua_ls.setup {
     on_init = function(client)
       if client.workspace_folders then
@@ -243,8 +254,6 @@ end)
 --
 -- Treesitter
 --
--- Don't forget to install the tree-sitter CLI
--- Treesitter (highlight, edit, navigate code)
 later(function()
   add({
     source = "nvim-treesitter/nvim-treesitter",
