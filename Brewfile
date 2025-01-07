@@ -40,9 +40,10 @@ brew 'zsh-syntax-highlighting'
 #
 # Casks
 #
+cask 'devonthink'
 cask 'ghostty'
 cask 'gitup'
-cask 'devonthink'
+cask 'orbstack'
 
 #
 # Fonts
