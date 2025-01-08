@@ -3,7 +3,7 @@
 ![Workspace](workspace.jpeg)
 
 * Packages managed by [Homebrew](https://brew.sh)
-* Virtual Machines via [Lima](https://lima-vm.io)
+* Virtual Machines via [OrbStack](https://orbstack.dev)
 * Dotfiles managed with [Stow](https://www.gnu.org/software/stow/)
 
 ## Usage
