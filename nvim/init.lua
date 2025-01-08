@@ -190,7 +190,7 @@ later(function()
       plugins = {
         {
           name = "@vue/typescript-plugin",
-          location = "/Users/cgreen/.npm-global/lib/node_modules/@vue/typescript-plugin",
+          location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
           languages = {"javascript", "typescript", "vue"},
         },
       },
@@ -206,7 +206,7 @@ later(function()
   require('lspconfig').volar.setup {
     init_options = {
       typescript = {
-        tsdk = '/Users/cgreen/.npm-global/lib/node_modules/typescript/lib'
+        tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
       }
     }
   }
