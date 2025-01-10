@@ -298,6 +298,14 @@ later(function()
   require("elixir").setup()
 end)
 
+-- Colorschemes
+later(function()
+  add('loctvl842/monokai-pro.nvim')
+  add('maxmx03/solarized.nvim')
+
+  vim.cmd.colorscheme('monokai-pro-machine')
+end)
+
 -- Old but good Vim packages
 later(function()
   add('mattn/emmet-vim')
