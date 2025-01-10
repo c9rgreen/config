@@ -3,4 +3,4 @@
 
 font-family = "Recursive Mono Linear Static"
 font-size = "12"
-theme = dark:neovim-dark,light:neovim-light
+theme = dark:Monokai Pro,light:Monokai Pro Light
