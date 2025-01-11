@@ -303,7 +303,7 @@ later(function()
   add('loctvl842/monokai-pro.nvim')
   add('maxmx03/solarized.nvim')
 
-  vim.cmd.colorscheme('monokai-pro-machine')
+  vim.cmd.colorscheme('monokai-pro-default')
 end)
 
 -- Old but good Vim packages
