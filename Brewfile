@@ -52,3 +52,6 @@ cask 'orbstack'
 # Fonts
 #
 cask 'font-recursive-desktop'
+cask 'font-monaspace'
+cask 'font-mona-sans'
+cask 'font-public-sans'
