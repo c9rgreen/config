@@ -41,12 +41,9 @@ brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
 
 #
-# Casks
+# Apps
 #
-cask 'devonthink'
 cask 'ghostty'
-cask 'gitup'
-cask 'orbstack'
 
 #
 # Fonts
@@ -55,3 +52,4 @@ cask 'font-recursive-desktop'
 cask 'font-monaspace'
 cask 'font-mona-sans'
 cask 'font-public-sans'
+cask 'font-input'
