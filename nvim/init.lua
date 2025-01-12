@@ -306,19 +306,6 @@ later(function()
   vim.cmd.colorscheme('monokai-pro-default')
 end)
 
--- Git
-later(function()
-  add({
-    source = 'NeogitOrg/neogit',
-    depends = {
-      'nvim-lua/plenary.nvim',
-      'sindrets/diffview.nvim',
-    }
-  })
-
-  require("neogit").setup()
-end)
-
 -- Old but good Vim packages
 later(function()
   add('mattn/emmet-vim')
