@@ -6,6 +6,7 @@ tap 'elixir-tools/tap'
 #
 # Packages
 #
+
 brew 'cloc'
 brew 'elixir'
 brew 'eza'
@@ -18,6 +19,7 @@ brew 'hub'
 brew 'imagemagick'
 brew 'just'
 brew 'lilypond'
+brew 'lima'
 brew 'lima'
 brew 'lua-language-server'
 brew 'neovim'
@@ -41,7 +43,6 @@ brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
-
 #
 # Casks
 #
