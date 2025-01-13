@@ -31,6 +31,8 @@ brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
 brew 'stow'
+brew 'task'
+brew 'timewarrior'
 brew 'tmux'
 brew 'tpm'
 brew 'tree'
@@ -41,9 +43,10 @@ brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
 
 #
-# Apps
+# Casks
 #
 cask 'ghostty'
+cask 'orbstack'
 
 #
 # Fonts
