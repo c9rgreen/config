@@ -23,6 +23,7 @@ brew 'lima'
 brew 'lima'
 brew 'lua-language-server'
 brew 'neovim'
+brew 'newsboat'
 brew 'next-ls'
 brew 'nnn'
 brew 'node'
@@ -43,6 +44,7 @@ brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zsh-history-substring-search'
 brew 'zsh-syntax-highlighting'
+
 #
 # Casks
 #
