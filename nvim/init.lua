@@ -299,11 +299,12 @@ later(function()
 end)
 
 -- Colorschemes
-later(function()
-  add('loctvl842/monokai-pro.nvim')
-  add('maxmx03/solarized.nvim')
+vim.g.lumen_light_colorscheme = 'monokai-pro-light'
+vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
 
-  vim.cmd.colorscheme('monokai-pro-default')
+now(function()
+  add('loctvl842/monokai-pro.nvim')
+  add('vimpostor/vim-lumen')
 end)
 
 -- Old but good Vim packages
