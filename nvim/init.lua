@@ -27,6 +27,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.signcolumn = 'yes'
 vim.opt.foldmethod = 'indent'
+vim.opt.foldlevel = 5
 vim.opt.fillchars = {
     eob = ' ',
     fold = ' '
@@ -142,7 +143,6 @@ now(function()
   require('mini.git').setup()
   require('mini.hipatterns').setup()
   require('mini.icons').setup({ style = 'glyphs' })
-  require('mini.indentscope').setup({ symbol = '│' })
   require('mini.map').setup()
   require('mini.notify').setup()
   require('mini.pairs').setup()
