@@ -48,14 +48,17 @@ brew 'zsh-syntax-highlighting'
 #
 # Casks
 #
+cask 'anki'
+cask 'balsamiq-wireframes'
 cask 'ghostty'
 cask 'orbstack'
 
 #
 # Fonts
 #
-cask 'font-recursive-desktop'
-cask 'font-monaspace'
-cask 'font-mona-sans'
-cask 'font-public-sans'
+cask 'font-balsamiq-sans'
 cask 'font-input'
+cask 'font-mona-sans'
+cask 'font-monaspace'
+cask 'font-public-sans'
+cask 'font-recursive-desktop'
