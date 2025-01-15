@@ -3,7 +3,7 @@
 
 # Use Monospace and enable features
 # https://monaspace.githubnext.com
-font-family = "Monaspace Neon Var"
+font-family = "Monaspace Neon"
 font-size = "12"
 font-feature = calt
 font-feature = ss01
