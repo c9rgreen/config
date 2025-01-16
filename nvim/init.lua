@@ -29,8 +29,8 @@ vim.opt.signcolumn = 'yes'
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 5
 vim.opt.fillchars = {
-    eob = ' ',
-    fold = ' '
+   eob = ' ',
+   fold = ' '
 }
 
 -- Search
@@ -72,34 +72,35 @@ vim.cmd.colorscheme('default')
 
 -- Terminal
 vim.api.nvim_create_autocmd({'TermOpen'}, {
-  group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
-  callback = function()
-    vim.opt.number = false
-    vim.opt.relativenumber = false
-  end
+   group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
+   callback = function()
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+   end
 })
 
 -- Set highlight groups
 vim.api.nvim_create_autocmd({'Colorscheme'}, {
-  group = vim.api.nvim_create_augroup('Mini', { clear = true }),
-  callback = function()
-    vim.cmd('highlight link MiniIndentscopeSymbol Comment')
-  end
+   group = vim.api.nvim_create_augroup('Mini', { clear = true }),
+   callback = function()
+      vim.cmd('highlight link MiniIndentscopeSymbol Comment')
+      vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
+   end
 })
 
 -- Delete buffer without closing window
 vim.api.nvim_create_user_command('Clear', function()
-    vim.cmd("bufdo bwipeout")
+   vim.cmd("bufdo bwipeout")
 end, {})
 
 -- JavaScript
 vim.api.nvim_create_augroup('js', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  group = 'js',
-  pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json' },
-  callback = function()
-    vim.bo.formatprg = 'biome format --stdin-file-path=%'
-  end,
+   group = 'js',
+   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'vue' },
+   callback = function()
+      vim.opt_local.formatprg = "prettier --parser " .. vim.bo.filetype .. " --write"
+   end,
 })
 
 -- Ghostty
@@ -111,18 +112,18 @@ vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vim
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-  vim.cmd('echo "Installing `mini.nvim`" | redraw')
-  local clone_cmd = {
-    'git', 'clone', '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim', mini_path
-  }
-  vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
+   vim.cmd('echo "Installing `mini.nvim`" | redraw')
+   local clone_cmd = {
+      'git', 'clone', '--filter=blob:none',
+      'https://github.com/echasnovski/mini.nvim', mini_path
+   }
+   vim.fn.system(clone_cmd)
+   vim.cmd('packadd mini.nvim | helptags ALL')
 end
 
 require('mini.deps').setup({ path = { package = path_package } })
 
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+local add = MiniDeps.add
 --
 -- ...end. Now we are ready to use use mini.nvim.
 --
@@ -130,138 +131,132 @@ local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 --
 -- Set up Mini
 --
-now(function()
-  require('mini.basics').setup()
-  require('mini.bracketed').setup()
-  require('mini.bufremove').setup()
-  require('mini.completion').setup()
-  require('mini.cursorword').setup()
-  require('mini.diff').setup()
-  require('mini.extra').setup()
-  require('mini.files').setup()
-  require('mini.fuzzy').setup()
-  require('mini.git').setup()
-  require('mini.hipatterns').setup()
-  require('mini.icons').setup({ style = 'glyphs' })
-  require('mini.map').setup()
-  require('mini.notify').setup()
-  require('mini.pairs').setup()
-  require('mini.pick').setup()
-  require('mini.sessions').setup()
-  require('mini.starter').setup()
-  require('mini.statusline').setup({ use_icons = false })
-  require('mini.surround').setup()
-  require('mini.tabline').setup()
-  require('mini.hipatterns').setup({
-    highlighters = {
+require('mini.basics').setup()
+require('mini.bracketed').setup()
+require('mini.bufremove').setup()
+require('mini.completion').setup()
+require('mini.cursorword').setup()
+require('mini.diff').setup()
+require('mini.extra').setup()
+require('mini.files').setup()
+require('mini.fuzzy').setup()
+require('mini.git').setup()
+require('mini.hipatterns').setup()
+require('mini.icons').setup({ style = 'glyphs' })
+require('mini.map').setup()
+require('mini.notify').setup()
+require('mini.pairs').setup()
+require('mini.pick').setup()
+require('mini.sessions').setup()
+require('mini.starter').setup()
+require('mini.statusline').setup({ use_icons = false })
+require('mini.surround').setup()
+require('mini.tabline').setup()
+require('mini.hipatterns').setup({
+   highlighters = {
       fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
       hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
       todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
       note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
 
       hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
-    },
-  })
+   },
+})
 
 
-  require('mini.snippets').setup({
-    snippets = {
+require('mini.snippets').setup({
+   snippets = {
       -- Load custom file with global snippets first (adjust for Windows)
       require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
 
       -- Load snippets based on current language by reading files from
       -- "snippets/" subdirectories from 'runtimepath' directories.
       require('mini.snippets').gen_loader.from_lang(),
-    },
-  })
-end)
+   },
+})
 
 --
 -- LSP
--- Use absolute paths. Relative paths like "~/" do not work
 -- Use :h lspconfig-all to see available configs & how to install language servers
 --
-later(function()
-  add("neovim/nvim-lspconfig")
+add("neovim/nvim-lspconfig")
 
-  -- JavaScript/Typescript language server with Vue plugin
-  require('lspconfig').ts_ls.setup {
-    init_options = {
+-- JavaScript/Typescript language server with Vue plugin
+require('lspconfig').ts_ls.setup {
+   init_options = {
       plugins = {
-        {
-          name = "@vue/typescript-plugin",
-          location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
-          languages = {"javascript", "typescript", "vue"},
-        },
+         {
+            name = "@vue/typescript-plugin",
+            location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
+            languages = {"javascript", "typescript", "vue"},
+         },
       },
-    },
-    filetypes = {
+   },
+   filetypes = {
       "javascript",
       "typescript",
       "vue",
-    },
-  }
+   },
+}
 
-  -- Vue language server
-  require('lspconfig').volar.setup {
-    init_options = {
+-- Vue language server
+require('lspconfig').volar.setup {
+   init_options = {
       typescript = {
-        tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
+         tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
       }
-    }
-  }
+   }
+}
 
-  -- CSS
-  require('lspconfig').cssls.setup{}
+-- CSS
+require('lspconfig').cssls.setup{}
 
-  -- HTML
-  require('lspconfig').html.setup{}
+-- HTML
+require('lspconfig').html.setup{}
 
-  -- PHP
-  require('lspconfig').intelephense.setup{}
+-- PHP
+require('lspconfig').intelephense.setup{}
 
-  -- Lua
-  require'lspconfig'.lua_ls.setup {
-    on_init = function(client)
+-- Lua
+require'lspconfig'.lua_ls.setup {
+   on_init = function(client)
       if client.workspace_folders then
-        local path = client.workspace_folders[1].name
-        if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
-          return
-        end
+         local path = client.workspace_folders[1].name
+         if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+            return
+         end
       end
 
       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-        runtime = {
-          -- Tell the language server which version of Lua you're using
-          -- (most likely LuaJIT in the case of Neovim)
-          version = 'LuaJIT'
-        },
-        -- Make the server aware of Neovim runtime files
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME
-          }
-        }
+         runtime = {
+            -- Tell the language server which version of Lua you're using
+            -- (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT'
+         },
+         -- Make the server aware of Neovim runtime files
+         workspace = {
+            checkThirdParty = false,
+            library = {
+               vim.env.VIMRUNTIME
+            }
+         }
       })
-    end,
-    settings = {
+   end,
+   settings = {
       Lua = {}
-    }
-  }
-end)
+   }
+}
 
 --
 -- Treesitter
 --
-later(function()
-  add({
-    source = "nvim-treesitter/nvim-treesitter",
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-  })
+add({
+   source = "nvim-treesitter/nvim-treesitter",
+   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+})
 
-  require('nvim-treesitter.configs').setup({
-    ensure_installed = {
+require('nvim-treesitter.configs').setup({
+   ensure_installed = {
       "bash",
       "css",
       "dockerfile",
@@ -280,37 +275,30 @@ later(function()
       "vimdoc",
       "vue",
       "yaml",
-    },
-    highlight = { enable = true },
-    indent = {
+   },
+   highlight = { enable = true },
+   indent = {
       enable = true,
-    },
-  })
-end)
+   },
+})
 
 -- Elixir
-later(function()
-  add({
-    source = 'elixir-tools/elixir-tools.nvim',
-    depends = { 'nvim-lua/plenary.nvim' },
-  })
+add({
+   source = 'elixir-tools/elixir-tools.nvim',
+   depends = { 'nvim-lua/plenary.nvim' },
+})
 
-  require("elixir").setup()
-end)
+require("elixir").setup()
 
 -- Colorschemes
 vim.g.lumen_light_colorscheme = 'monokai-pro-light'
 vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
 
-now(function()
-  add('loctvl842/monokai-pro.nvim')
-  add('vimpostor/vim-lumen')
-end)
+add('loctvl842/monokai-pro.nvim')
+add('vimpostor/vim-lumen')
 
 -- Old but good Vim packages
-later(function()
-  add('mattn/emmet-vim')
-  add('tpope/vim-projectionist')
-  add('tpope/vim-fugitive')
-  add('rbong/vim-flog')
-end)
+add('mattn/emmet-vim')
+add('tpope/vim-projectionist')
+add('tpope/vim-fugitive')
+add('rbong/vim-flog')

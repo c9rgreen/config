@@ -9,3 +9,8 @@ charset = utf-8
 
 [Makefile]
 indent_style = tab
+
+[*.lua]
+# Following the LuaRocks style guide
+# https://github.com/luarocks/lua-style-guide
+indent_size = 3
