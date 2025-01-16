@@ -62,6 +62,7 @@ vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
+vim.keymap.set('n', '<leader>f', 'ggVGgq') -- Format buffer with formatprg
 
 -- NetRW
 vim.g.netrw_liststyle = 3
@@ -93,13 +94,27 @@ vim.api.nvim_create_user_command('Clear', function()
    vim.cmd("bufdo bwipeout")
 end, {})
 
--- JavaScript
-vim.api.nvim_create_augroup('js', { clear = true })
+-- Prettier
+vim.api.nvim_create_augroup('prettier', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-   group = 'js',
-   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'vue' },
+   group = 'prettier',
+   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
    callback = function()
-      vim.opt_local.formatprg = "prettier --parser " .. vim.bo.filetype .. " --write"
+      vim.opt_local.formatprg = "prettier --parser typescript --write"
+   end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+   group = 'prettier',
+   pattern = { 'vue' },
+   callback = function()
+      vim.opt_local.formatprg = "prettier --parser vue --write"
+   end,
+})
+vim.api.nvim_create_autocmd('FileType', {
+   group = 'prettier',
+   pattern = { 'json' },
+   callback = function()
+      vim.opt_local.formatprg = "prettier --parser json --write"
    end,
 })
 
