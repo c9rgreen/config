@@ -17,4 +17,4 @@ font-feature = ss08
 font-feature = ss09
 font-feature = liga
 
-theme = dark:Monokai Pro,light:Monokai Pro Light
+theme = dark:NeovimDark,light:NeovimLight
