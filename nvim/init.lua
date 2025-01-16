@@ -158,7 +158,6 @@ require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.hipatterns').setup()
 require('mini.icons').setup({ style = 'glyphs' })
-require('mini.map').setup()
 require('mini.notify').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
@@ -306,11 +305,11 @@ add({
 require("elixir").setup()
 
 -- Colorschemes
-vim.g.lumen_light_colorscheme = 'monokai-pro-light'
-vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
-
-add('loctvl842/monokai-pro.nvim')
-add('vimpostor/vim-lumen')
+-- vim.g.lumen_light_colorscheme = 'monokai-pro-light'
+-- vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
+--
+-- add('loctvl842/monokai-pro.nvim')
+-- add('vimpostor/vim-lumen')
 
 -- Old but good Vim packages
 add('mattn/emmet-vim')
