@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd({'Colorscheme'}, {
    group = vim.api.nvim_create_augroup('Mini', { clear = true }),
    callback = function()
       vim.cmd('highlight link MiniIndentscopeSymbol Comment')
-      vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
+      -- vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
    end
 })
 
@@ -304,15 +304,9 @@ add({
 
 require("elixir").setup()
 
--- Colorschemes
--- vim.g.lumen_light_colorscheme = 'monokai-pro-light'
--- vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
---
--- add('loctvl842/monokai-pro.nvim')
--- add('vimpostor/vim-lumen')
-
 -- Old but good Vim packages
 add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
 add('rbong/vim-flog')
+add('vimpostor/vim-lumen')
