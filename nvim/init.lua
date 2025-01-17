@@ -1,4 +1,5 @@
 -- vim: foldmethod=marker foldlevel=0
+
 vim.cmd('filetype plugin indent on')
 vim.cmd.colorscheme('default')
 
@@ -37,11 +38,11 @@ vim.opt.wildignorecase = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
 
--- Status line (overridden by mini.nvim)
-vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
-
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
+
+-- LilyPond
+vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- }}}
 
 -- Variables {{{
