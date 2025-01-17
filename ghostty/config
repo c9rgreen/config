@@ -1,5 +1,4 @@
 # vim: set filetype=ghostty
-# Ghostty config (https://ghostty.org)
 
 font-family = "Berkeley Mono"
 font-size = "13"

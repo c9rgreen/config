@@ -1,4 +1,4 @@
--- vim: foldmethod=marker
+-- vim: foldmethod=marker foldlevel=0
 vim.cmd('filetype plugin indent on')
 vim.cmd.colorscheme('default')
 
