@@ -1,7 +1,8 @@
--- cgreen's Neovim config
+-- vim: foldmethod=marker
 vim.cmd('filetype plugin indent on')
+vim.cmd.colorscheme('default')
 
--- Options
+-- Options {{{
 vim.opt.backup = false
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.mouse = 'a'
@@ -12,13 +13,11 @@ vim.opt.undofile = true
 vim.opt.virtualedit = 'all'
 vim.opt.writebackup = false
 
--- Tabs
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
--- Appearance
 vim.opt.breakindent = true
 vim.opt.cursorline = true
 vim.opt.linebreak = true
@@ -33,7 +32,6 @@ vim.opt.fillchars = {
    fold = ' '
 }
 
--- Search
 vim.opt.magic = true
 vim.opt.wildignorecase = true
 vim.opt.wildmenu = true
@@ -42,10 +40,20 @@ vim.opt.wildmode = 'longest:full,full'
 -- Status line (overridden by mini.nvim)
 vim.opt.statusline = '[%<%{fnamemodify(getcwd(),":t")}] %f %m %= %y %{&fileencoding?&fileencoding:&encoding} %p%% %l:%c w%{wordcount().words}'
 
+-- Ghostty.app
+vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
+-- }}}
+
+-- Variables {{{
 -- Use space for leader
 vim.g.mapleader = ' '
 
--- Mappings
+-- NetRW
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+-- }}}
+
+-- Mappings {{{
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
 vim.keymap.set('n', '<leader>c', ':!cat % | pbcopy<CR>')
 vim.keymap.set('n', '<A-Right>', ':bn<CR>')
@@ -63,14 +71,9 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
 vim.keymap.set('n', '<leader>f', 'ggVGgq') -- Format buffer with formatprg
+-- }}}
 
--- NetRW
-vim.g.netrw_liststyle = 3
-vim.g.netrw_banner = 0
-
--- Colorscheme
-vim.cmd.colorscheme('default')
-
+-- Autocommands {{{
 -- Terminal
 vim.api.nvim_create_autocmd({'TermOpen'}, {
    group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
@@ -79,20 +82,6 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
       vim.opt.relativenumber = false
    end
 })
-
--- Set highlight groups
-vim.api.nvim_create_autocmd({'Colorscheme'}, {
-   group = vim.api.nvim_create_augroup('Mini', { clear = true }),
-   callback = function()
-      vim.cmd('highlight link MiniIndentscopeSymbol Comment')
-      -- vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
-   end
-})
-
--- Delete buffer without closing window
-vim.api.nvim_create_user_command('Clear', function()
-   vim.cmd("bufdo bwipeout")
-end, {})
 
 -- Prettier
 vim.api.nvim_create_augroup('prettier', { clear = true })
@@ -117,13 +106,9 @@ vim.api.nvim_create_autocmd('FileType', {
       vim.opt_local.formatprg = "prettier --parser json --write"
    end,
 })
+-- }}}
 
--- Ghostty
-vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
-
---
--- Initialize mini.nvim; automatically clone it if necessary...
---
+-- Mini {{{
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
@@ -139,13 +124,10 @@ end
 require('mini.deps').setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
---
--- ...end. Now we are ready to use use mini.nvim.
---
+-- }}}
 
---
--- Set up Mini
---
+-- Plugins {{{
+-- Mini
 require('mini.basics').setup()
 require('mini.bracketed').setup()
 require('mini.bufremove').setup()
@@ -177,7 +159,6 @@ require('mini.hipatterns').setup({
    },
 })
 
-
 require('mini.snippets').setup({
    snippets = {
       -- Load custom file with global snippets first (adjust for Windows)
@@ -189,10 +170,7 @@ require('mini.snippets').setup({
    },
 })
 
---
 -- LSP
--- Use :h lspconfig-all to see available configs & how to install language servers
---
 add("neovim/nvim-lspconfig")
 
 -- JavaScript/Typescript language server with Vue plugin
@@ -261,9 +239,7 @@ require'lspconfig'.lua_ls.setup {
    }
 }
 
---
 -- Treesitter
---
 add({
    source = "nvim-treesitter/nvim-treesitter",
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
@@ -304,9 +280,9 @@ add({
 
 require("elixir").setup()
 
--- Old but good Vim packages
 add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
 add('rbong/vim-flog')
 add('vimpostor/vim-lumen')
+-- }}}
