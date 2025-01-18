@@ -10,7 +10,6 @@
 #
 # Source: https://unix.stackexchange.com/questions/71253/what-should-shouldnt-go-in-zshenv-zshrc-zlogin-zprofile-zlogout
 # Source: https://apple.stackexchange.com/questions/388622/zsh-zprofile-zshrc-zlogin-what-goes-where
-# `export` makes the variable visible to programs run from zsh.
 
 # Which characters should be considered as part of a word?
 export WORDCHARS='*?[]~&;!$%^<>'
@@ -20,7 +19,7 @@ export GREP_OPTIONS='--color=auto'
 
 # Env vars which shouldn't be shared publicly
 if [ -f $HOME/.env ]; then
-    source $HOME/.env
+  source $HOME/.env
 fi
 
 export EDITOR="nvim"

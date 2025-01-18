@@ -92,7 +92,7 @@ alias ls="ls -Gh"
 alias lt="eza --tree --git-ignore --icons=always"
 alias ll="eza --all --grid --icons=always"
 
-# Node
+# NPM
 if [[ -d "$HOME/.npm-global/bin" ]]; then
   # Location for global node modules. Avoids having to install with sudo.
   # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
@@ -107,8 +107,7 @@ fi
 
 # macOS-only settings
 if [[ "$OSTYPE" == "darwin"* ]]; then
-     # export PATH="$HOME/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
-     export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
+  export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
 fi
 
 # Autosuggestions (from zsh-users)
@@ -135,7 +134,17 @@ if type brew &>/dev/null; then
   source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# Run fastfetch
+# Direnv
+if type direnv &>/dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
+# Starship (prompt)
+if type starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# Fastfetch
 if type fastfetch &>/dev/null; then
   fastfetch
 fi

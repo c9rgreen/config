@@ -1,5 +1,3 @@
-export PATH="$HOME/.npm-global/bin:$PATH"
-
 # Brew package manager
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
