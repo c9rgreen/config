@@ -1,8 +1,5 @@
 -- vim: foldmethod=marker foldlevel=0
 
-vim.cmd('filetype plugin indent on')
-vim.cmd.colorscheme('default')
-
 -- Options {{{
 vim.opt.backup = false
 vim.opt.clipboard = 'unnamedplus'
@@ -84,28 +81,18 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
    end
 })
 
--- Prettier
-vim.api.nvim_create_augroup('prettier', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-   group = 'prettier',
-   pattern = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
-   callback = function()
-      vim.opt_local.formatprg = "prettier --parser typescript --write"
-   end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-   group = 'prettier',
-   pattern = { 'vue' },
-   callback = function()
-      vim.opt_local.formatprg = "prettier --parser vue --write"
-   end,
-})
-vim.api.nvim_create_autocmd('FileType', {
-   group = 'prettier',
-   pattern = { 'json' },
-   callback = function()
-      vim.opt_local.formatprg = "prettier --parser json --write"
-   end,
+-- Format on save
+-- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+  callback = function(args)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = args.buf,
+      callback = function()
+        vim.lsp.buf.format {async = false, id = args.data.client_id }
+      end,
+    })
+  end
 })
 -- }}}
 
@@ -281,9 +268,14 @@ add({
 
 require("elixir").setup()
 
+-- Solarized
+add('maxmx03/solarized.nvim')
+
 add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
 add('rbong/vim-flog')
 add('vimpostor/vim-lumen')
 -- }}}
+
+vim.cmd.colorscheme('solarized')

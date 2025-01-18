@@ -2,7 +2,7 @@
 
 filetype plugin indent on
 syntax enable
-colorscheme wildcharm
+colorscheme solarized8
 packadd! editorconfig
 
 " Options {{{
