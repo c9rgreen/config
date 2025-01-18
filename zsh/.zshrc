@@ -139,11 +139,6 @@ if type direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-# Starship (prompt)
-if type starship &>/dev/null; then
-  eval "$(starship init zsh)"
-fi
-
 # Fastfetch
 if type fastfetch &>/dev/null; then
   fastfetch

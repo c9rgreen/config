@@ -49,10 +49,6 @@ vim.g.mapleader = ' '
 -- NetRW
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-
--- Lumen
-vim.g.lumen_light_colorscheme = 'monokai-pro-light'
-vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
 -- }}}
 
 -- Mappings {{{
@@ -82,14 +78,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
    callback = function()
       vim.opt.number = false
       vim.opt.relativenumber = false
-   end
-})
-
-vim.api.nvim_create_autocmd({ 'Colorscheme' }, {
-   group = vim.api.nvim_create_augroup('Mini', { clear = true }),
-   callback = function()
-      vim.cmd('highlight link MiniIndentscopeSymbol Comment')
-      vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
    end
 })
 
@@ -281,7 +269,6 @@ add({
 require("elixir").setup()
 
 add('maxmx03/solarized.nvim')
-add('loctvl842/monokai-pro.nvim')
 add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
@@ -289,4 +276,4 @@ add('rbong/vim-flog')
 add('vimpostor/vim-lumen')
 -- }}}
 
-vim.cmd.colorscheme('monokai-pro-default')
+vim.cmd.colorscheme('solarized')
