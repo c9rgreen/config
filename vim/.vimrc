@@ -2,7 +2,7 @@
 
 filetype plugin indent on
 syntax enable
-colorscheme solarized8
+colorscheme monokai
 packadd! editorconfig
 
 " Options {{{

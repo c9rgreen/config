@@ -49,6 +49,10 @@ vim.g.mapleader = ' '
 -- NetRW
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
+
+-- Lumen
+vim.g.lumen_light_colorscheme = 'monokai-pro-light'
+vim.g.lumen_dark_colorscheme = 'monokai-pro-default'
 -- }}}
 
 -- Mappings {{{
@@ -67,13 +71,13 @@ vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
-vim.keymap.set('t', '<C-v><Esc>', '<Esc>') -- Use C-v Esc to send Esc in terminal mode
-vim.keymap.set('n', '<leader>f', 'ggVGgq') -- Format buffer with formatprg
+vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
+vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
 -- }}}
 
 -- Autocommands {{{
 -- Terminal
-vim.api.nvim_create_autocmd({'TermOpen'}, {
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
    group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
    callback = function()
       vim.opt.number = false
@@ -81,18 +85,26 @@ vim.api.nvim_create_autocmd({'TermOpen'}, {
    end
 })
 
+vim.api.nvim_create_autocmd({ 'Colorscheme' }, {
+   group = vim.api.nvim_create_augroup('Mini', { clear = true }),
+   callback = function()
+      vim.cmd('highlight link MiniIndentscopeSymbol Comment')
+      vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
+   end
+})
+
 -- Format on save
 -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-  callback = function(args)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = args.buf,
-      callback = function()
-        vim.lsp.buf.format {async = false, id = args.data.client_id }
-      end,
-    })
-  end
+   group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+   callback = function(args)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = args.buf,
+         callback = function()
+            vim.lsp.buf.format { async = false, id = args.data.client_id }
+         end,
+      })
+   end
 })
 -- }}}
 
@@ -138,10 +150,10 @@ require('mini.surround').setup()
 require('mini.tabline').setup()
 require('mini.hipatterns').setup({
    highlighters = {
-      fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-      hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
-      todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
-      note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+      fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+      hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+      todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+      note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
 
       hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
    },
@@ -168,7 +180,7 @@ require('lspconfig').ts_ls.setup {
          {
             name = "@vue/typescript-plugin",
             location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
-            languages = {"javascript", "typescript", "vue"},
+            languages = { "javascript", "typescript", "vue" },
          },
       },
    },
@@ -189,20 +201,20 @@ require('lspconfig').volar.setup {
 }
 
 -- CSS
-require('lspconfig').cssls.setup{}
+require('lspconfig').cssls.setup {}
 
 -- HTML
-require('lspconfig').html.setup{}
+require('lspconfig').html.setup {}
 
 -- PHP
-require('lspconfig').intelephense.setup{}
+require('lspconfig').intelephense.setup {}
 
 -- Lua
-require'lspconfig'.lua_ls.setup {
+require 'lspconfig'.lua_ls.setup {
    on_init = function(client)
       if client.workspace_folders then
          local path = client.workspace_folders[1].name
-         if vim.loop.fs_stat(path..'/.luarc.json') or vim.loop.fs_stat(path..'/.luarc.jsonc') then
+         if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
             return
          end
       end
@@ -268,9 +280,8 @@ add({
 
 require("elixir").setup()
 
--- Solarized
 add('maxmx03/solarized.nvim')
-
+add('loctvl842/monokai-pro.nvim')
 add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
@@ -278,4 +289,4 @@ add('rbong/vim-flog')
 add('vimpostor/vim-lumen')
 -- }}}
 
-vim.cmd.colorscheme('solarized')
+vim.cmd.colorscheme('monokai-pro-default')
