@@ -85,8 +85,6 @@ bashcompinit
 # Aliases
 #
 
-alias grep="grep --exclude-dir=node_modules --exclude-dir=venv --exclude-dir=.git"
-alias h5bp="npx create-html5-boilerplate ."
 alias tree="tree -I node_modules -I venv"
 alias ls="ls -Gh"
 alias lt="eza --tree --git-ignore --icons=always"
