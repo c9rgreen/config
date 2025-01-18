@@ -14,3 +14,6 @@ indent_style = tab
 # Following the LuaRocks style guide
 # https://github.com/luarocks/lua-style-guide
 indent_size = 3
+
+[{.zshrc,.zprofile,.zshenv}]
+indent_size = 2
