@@ -67,7 +67,7 @@ set mouse=a
 set number
 set ttyfast
 set signcolumn=yes
-set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:\ ,foldsep:\ ,diff:-
+set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:\ ,foldsep:\ ,eob:\ ,diff:-
 set completeopt=menu,menuone,preview,noselect,longest
 set omnifunc=syntaxcomplete#Complete
 set cursorline
