@@ -197,6 +197,9 @@ require('lspconfig').html.setup {}
 -- PHP
 require('lspconfig').intelephense.setup {}
 
+-- Yaml
+require('lspconfig').yamlls.setup {}
+
 -- Lua
 require 'lspconfig'.lua_ls.setup {
    on_init = function(client)
