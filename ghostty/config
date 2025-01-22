@@ -1,5 +1,5 @@
 # vim: set filetype=ghostty
 
-font-family = "Recursive Mono Casual Static"
+font-family = "Recursive Mono Linear Static"
 font-size = "13"
 theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light 
