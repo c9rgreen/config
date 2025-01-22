@@ -276,6 +276,7 @@ add('mattn/emmet-vim')
 add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
 add('rbong/vim-flog')
+add('shumphrey/fugitive-gitlab.vim')
 add('vimpostor/vim-lumen')
 -- }}}
 
