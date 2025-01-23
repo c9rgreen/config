@@ -71,31 +71,6 @@ vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in termin
 vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
 -- }}}
 
--- Autocommands {{{
--- Terminal
-vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-   group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
-   callback = function()
-      vim.opt.number = false
-      vim.opt.relativenumber = false
-   end
-})
-
--- Format on save
--- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
-vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-   callback = function(args)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         buffer = args.buf,
-         callback = function()
-            vim.lsp.buf.format { async = false, id = args.data.client_id }
-         end,
-      })
-   end
-})
--- }}}
-
 -- Mini {{{
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
@@ -277,3 +252,37 @@ add('vimpostor/vim-lumen')
 -- }}}
 
 vim.cmd.colorscheme('solarized')
+
+-- Autocommands {{{
+-- Terminal
+vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+   group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
+   callback = function()
+      vim.opt.number = false
+      vim.opt.relativenumber = false
+   end
+})
+
+-- Highlight groups
+vim.api.nvim_create_autocmd({ 'Colorscheme' }, {
+   group = vim.api.nvim_create_augroup('Mini', { clear = true }),
+   callback = function()
+      vim.cmd('highlight link MiniTablineCurrent Keyword')
+      -- vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
+   end
+})
+
+-- Format on save
+-- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
+vim.api.nvim_create_autocmd("LspAttach", {
+   group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+   callback = function(args)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = args.buf,
+         callback = function()
+            vim.lsp.buf.format { async = false, id = args.data.client_id }
+         end,
+      })
+   end
+})
+-- }}}
