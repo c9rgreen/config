@@ -3,4 +3,4 @@
 command = /opt/homebrew/bin/fish
 font-family = "Recursive Mono Linear Static"
 font-size = "13"
-theme = dark:Builtin Solarized Dark,light:Builtin Solarized Light 
+theme = dark:Monokai Pro,light:Monokai Pro Light 
