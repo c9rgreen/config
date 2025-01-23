@@ -3,9 +3,11 @@
 ![Workspace](workspace.jpeg)
 
 * Packages managed by [Homebrew](https://brew.sh)
-* Terminal app is [Ghostty](https://ghostty.org)
+* Terminal is [Ghostty](https://ghostty.org)
 * Virtual Machines via [OrbStack](https://orbstack.dev)
 * Dotfiles managed with [Stow](https://www.gnu.org/software/stow/)
+* Shell handled by [Fish](https://fishshell.com)
+* Editor, [Neovim](https://neovim.io)
 
 ## Usage
 
