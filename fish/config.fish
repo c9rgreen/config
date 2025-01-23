@@ -4,6 +4,9 @@ eval (/opt/homebrew/bin/brew shellenv)
 # Variables
 set -Ux EDITOR nvim
 
+# Aliases 
+alias ls="eza --icons=always"
+
 if status is-interactive
     set -U fish_greeting # disable fish greeting
     set -U fish_key_bindings fish_vi_key_bindings
