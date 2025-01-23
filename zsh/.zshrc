@@ -81,15 +81,6 @@ compinit
 autoload bashcompinit
 bashcompinit
 
-#
-# Aliases
-#
-
-alias tree="tree -I node_modules -I venv"
-alias ls="ls -Gh"
-alias lt="eza --tree --git-ignore --icons=always"
-alias ll="eza --all --grid --icons=always"
-
 # NPM
 if [[ -d "$HOME/.npm-global/bin" ]]; then
   # Location for global node modules. Avoids having to install with sudo.
@@ -103,41 +94,8 @@ if type brew &>/dev/null; then
   export PATH="$(brew --prefix)/lib/ruby/gems/3.3.0/bin:$PATH"
 fi
 
-# macOS-only settings
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  export PATH="/Applications/MacVim.app/Contents/bin:$PATH"
-fi
-
-# Autosuggestions (from zsh-users)
-if type brew &>/dev/null; then
-  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
-
-# Extra completions (from zsh-users)
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-
-  autoload -Uz compinit
-  compinit
-fi
-
-# History substring search (from zsh-users)
-if type brew &>/dev/null; then
-  source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-fi
-
-# Syntax highlighting (from zsh-users)
-# This block belongs at the end of .zshrc, according to the docs
-if type brew &>/dev/null; then
-  source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
 # Direnv
 if type direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-# Fastfetch
-if type fastfetch &>/dev/null; then
-  fastfetch
-fi
