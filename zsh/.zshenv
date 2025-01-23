@@ -17,9 +17,5 @@ export WORDCHARS='*?[]~&;!$%^<>'
 # Always use color when grepping.
 export GREP_OPTIONS='--color=auto'
 
-# Env vars which shouldn't be shared publicly
-if [ -f $HOME/.env ]; then
-  source $HOME/.env
-fi
-
+# Text editor
 export EDITOR="nvim"
