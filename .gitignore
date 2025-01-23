@@ -1,8 +1,9 @@
 .DS_Store
-iterm2
-nnn
-nvim/bak
 vim/.vim/pack/github
 vim/.vim/spell
 vim/.vim/.netrwhist
 vim/.vim/pack/local
+nvim/spell
+nvim/bak
+jgit
+timewarrior
