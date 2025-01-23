@@ -1,8 +1,12 @@
 # Brew
 eval (/opt/homebrew/bin/brew shellenv)
 
-# Variables
+# Set editor to Neovim
 set -Ux EDITOR nvim
+
+# Save IEx history across sessions
+# https://hexdocs.pm/iex/IEx.html#module-shell-history
+set -Ux ERL_AFLAGS -kernel shell_history enabled
 
 # Aliases 
 alias ls="eza --icons=always"
