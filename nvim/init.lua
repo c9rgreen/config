@@ -66,6 +66,7 @@ vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
+vim.keymap.set('n', '<leader>n', ':NvimTreeToggle<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
 vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
@@ -270,6 +271,11 @@ add({
 })
 
 require("elixir").setup()
+
+-- File tree
+add('nvim-tree/nvim-tree.lua')
+
+require("nvim-tree").setup()
 
 add('maxmx03/solarized.nvim')
 add('mattn/emmet-vim')
