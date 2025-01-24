@@ -4,3 +4,4 @@ command = /opt/homebrew/bin/fish
 font-family = "Recursive Mono Linear Static"
 font-size = "13"
 theme = dark:Monokai Pro,light:Monokai Pro Light 
+mouse-shift-capture = true
