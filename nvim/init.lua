@@ -57,7 +57,7 @@ vim.g.lumen_dark_colorscheme = "monokai-pro-default"
 
 -- Mappings {{{
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
-vim.keymap.set('n', '<leader>c', ':!cat % | pbcopy<CR>')
+vim.keymap.set('n', '<leader>c', ':%y+<CR>')
 vim.keymap.set('n', '<A-Right>', ':bn<CR>')
 vim.keymap.set('n', '<A-Left>', ':bp<CR>')
 vim.keymap.set('n', '<A-Up>', ':tabn<CR>')
