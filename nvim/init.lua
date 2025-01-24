@@ -73,6 +73,8 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
 vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
+vim.keymap.set('v', '<', '<gv') -- Keep selection active after indenting
+vim.keymap.set('v', '>', '>gv') -- Keep selection active after outdenting
 -- }}}
 
 -- Autocommands {{{
@@ -90,20 +92,6 @@ vim.api.nvim_create_autocmd({ 'Colorscheme' }, {
    group = vim.api.nvim_create_augroup('Mini', { clear = true }),
    callback = function()
       vim.cmd('highlight link MiniPickMatchCurrent TabLineSel')
-   end
-})
-
--- Format on save
--- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
-vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-   callback = function(args)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         buffer = args.buf,
-         callback = function()
-            vim.lsp.buf.format { async = false, id = args.data.client_id }
-         end,
-      })
    end
 })
 -- }}}

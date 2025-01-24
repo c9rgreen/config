@@ -1,8 +1,8 @@
 .DS_Store
 vim/.vim/pack/github
-vim/.vim/spell
-vim/.vim/.netrwhist
-vim/.vim/pack/local
+vim/spell
+vim/.netrwhist
+vim/pack/local
 nvim/spell
 nvim/bak
 jgit
