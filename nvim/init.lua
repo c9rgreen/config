@@ -73,8 +73,8 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
 vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
-vim.keymap.set('v', '<', '<gv') -- Keep selection active after indenting
-vim.keymap.set('v', '>', '>gv') -- Keep selection active after outdenting
+vim.keymap.set('v', '<', '<gv')             -- Keep selection active after indenting
+vim.keymap.set('v', '>', '>gv')             -- Keep selection active after outdenting
 -- }}}
 
 -- Autocommands {{{
@@ -130,10 +130,13 @@ local add = MiniDeps.add
 
 -- Plugins {{{
 -- Mini
+require('mini.align').setup()
 require('mini.basics').setup()
 require('mini.bracketed').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
+require('mini.move').setup()
+require('mini.splitjoin').setup()
 require('mini.cursorword').setup()
 require('mini.diff').setup()
 require('mini.extra').setup()
@@ -150,6 +153,7 @@ require('mini.starter').setup()
 require('mini.statusline').setup({ use_icons = false })
 require('mini.surround').setup()
 require('mini.tabline').setup()
+
 require('mini.hipatterns').setup({
    highlighters = {
       fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
@@ -169,6 +173,50 @@ require('mini.snippets').setup({
       -- Load snippets based on current language by reading files from
       -- "snippets/" subdirectories from 'runtimepath' directories.
       require('mini.snippets').gen_loader.from_lang(),
+   },
+})
+
+require('mini.clue').setup({
+   triggers = {
+      -- Leader triggers
+      { mode = 'n', keys = '<Leader>' },
+      { mode = 'x', keys = '<Leader>' },
+
+      -- Built-in completion
+      { mode = 'i', keys = '<C-x>' },
+
+      -- `g` key
+      { mode = 'n', keys = 'g' },
+      { mode = 'x', keys = 'g' },
+
+      -- Marks
+      { mode = 'n', keys = "'" },
+      { mode = 'n', keys = '`' },
+      { mode = 'x', keys = "'" },
+      { mode = 'x', keys = '`' },
+
+      -- Registers
+      { mode = 'n', keys = '"' },
+      { mode = 'x', keys = '"' },
+      { mode = 'i', keys = '<C-r>' },
+      { mode = 'c', keys = '<C-r>' },
+
+      -- Window commands
+      { mode = 'n', keys = '<C-w>' },
+
+      -- `z` key
+      { mode = 'n', keys = 'z' },
+      { mode = 'x', keys = 'z' },
+   },
+
+   clues = {
+      -- Enhance this by adding descriptions for <Leader> mapping groups
+      require('mini.clue').gen_clues.builtin_completion(),
+      require('mini.clue').gen_clues.g(),
+      require('mini.clue').gen_clues.marks(),
+      require('mini.clue').gen_clues.registers(),
+      require('mini.clue').gen_clues.windows(),
+      require('mini.clue').gen_clues.z(),
    },
 })
 
@@ -272,9 +320,8 @@ require('nvim-treesitter.configs').setup({
       "yaml",
    },
    highlight = { enable = true },
-   indent = {
-      enable = true,
-   },
+   indent = { enable = true },
+   incremental_selection = { enable = true }
 })
 
 -- Elixir
@@ -287,7 +334,6 @@ require("elixir").setup()
 
 add('loctvl842/monokai-pro.nvim')
 add('mattn/emmet-vim')
-add('tpope/vim-projectionist')
 add('tpope/vim-fugitive')
 add('rbong/vim-flog')
 add('shumphrey/fugitive-gitlab.vim')
