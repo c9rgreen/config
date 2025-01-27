@@ -36,6 +36,7 @@ brew 'universal-ctags'
 # Casks
 #
 cask 'balsamiq-wireframes'
+cask 'devonthink'
 cask 'ghostty'
 cask 'orbstack'
 
