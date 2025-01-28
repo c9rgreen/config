@@ -6,7 +6,6 @@ tap 'elixir-tools/tap'
 #
 # Packages
 #
-
 brew 'direnv'
 brew 'elixir'
 brew 'eza'
@@ -25,8 +24,6 @@ brew 'pandoc'
 brew 'python3'
 brew 'ruby'
 brew 'stow'
-brew 'task'
-brew 'timewarrior'
 brew 'tmux'
 brew 'tpm'
 brew 'tree'
