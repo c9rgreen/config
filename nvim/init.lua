@@ -1,39 +1,22 @@
 -- vim: foldmethod=marker foldlevel=0
 
 -- Options {{{
-vim.opt.backup = false
 vim.opt.clipboard = 'unnamedplus'
-vim.opt.mouse = 'a'
-vim.opt.number = true
 vim.opt.scrolloff = 8
-vim.opt.termguicolors = true
-vim.opt.undofile = true
 vim.opt.virtualedit = 'all'
-vim.opt.writebackup = false
 
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 
-vim.opt.breakindent = true
-vim.opt.cursorline = true
-vim.opt.linebreak = true
-vim.opt.number = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.signcolumn = 'yes'
-vim.opt.foldmethod = 'indent'
+vim.opt.fillchars = 'fold: '
 vim.opt.foldlevel = 5
-vim.opt.fillchars = {
-   eob = ' ',
-   fold = ' '
-}
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
 
-vim.opt.magic = true
 vim.opt.wildignorecase = true
-vim.opt.wildmenu = true
-vim.opt.wildmode = 'longest:full,full'
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
@@ -43,9 +26,6 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- }}}
 
 -- Variables {{{
--- Use space for leader
-vim.g.mapleader = ' '
-
 -- NetRW
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
@@ -55,23 +35,6 @@ vim.g.lumen_light_colorscheme = "monokai-pro-light"
 vim.g.lumen_dark_colorscheme = "monokai-pro-default"
 -- }}}
 
--- Mappings {{{
-vim.keymap.set('n', '<leader>t', ':tabnew<CR>')
-vim.keymap.set('n', '<leader>c', ':%y+<CR>')
-vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')
-vim.keymap.set('n', '<leader>p', ':lua MiniPick.builtin.files()<CR>')
-vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')
-vim.keymap.set('n', '<leader>b', ':lua MiniPick.builtin.buffers()<CR>')
-vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
-vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
-vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
-vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
-vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
-vim.keymap.set('n', '<leader>f', 'ggVGgq')  -- Format buffer with formatprg
-vim.keymap.set('v', '<', '<gv')             -- Keep selection active after indenting
-vim.keymap.set('v', '>', '>gv')             -- Keep selection active after outdenting
--- }}}
 
 -- Autocommands {{{
 -- Terminal
@@ -131,8 +94,6 @@ require('mini.basics').setup()
 require('mini.bracketed').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
-require('mini.move').setup()
-require('mini.splitjoin').setup()
 require('mini.cursorword').setup()
 require('mini.diff').setup()
 require('mini.extra').setup()
@@ -140,14 +101,30 @@ require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.hipatterns').setup()
-require('mini.icons').setup({ style = 'glyphs' })
+require('mini.icons').setup()
 require('mini.notify').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
+require('mini.splitjoin').setup()
+require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
+
+require('mini.move').setup({
+   mappings = {
+      left  = '<S-left>',
+      right = '<S-right>',
+      down  = '<S-down>',
+      up    = '<S-up>',
+
+      line_left  = '<S-left>',
+      line_right = '<S-right>',
+      line_down  = '<S-down>',
+      line_up    = '<S-up>',
+   }
+}) 
 
 require('mini.hipatterns').setup({
    highlighters = {
@@ -334,3 +311,18 @@ add('rbong/vim-flog')
 add('shumphrey/fugitive-gitlab.vim')
 add('vimpostor/vim-lumen')
 -- }}}
+
+-- Mappings {{{
+vim.keymap.set('n', '<leader>t', ':tabnew<CR>') -- Open new tab
+vim.keymap.set('n', '<leader>c', ':%y+<CR>') -- Copy buffer to clipboard
+vim.keymap.set('n', '<leader>i', ':lua MiniFiles.open()<CR>')
+vim.keymap.set('n', '<leader>p', ':lua MiniPick.builtin.files()<CR>')
+vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')
+vim.keymap.set('n', '<leader>b', ':lua MiniPick.builtin.buffers()<CR>')
+vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
+vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
+vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
+vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
+vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
+-- }}}     
