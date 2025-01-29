@@ -1,7 +1,7 @@
 # vim: set filetype=ghostty
 
 command = /opt/homebrew/bin/fish
-font-family = "Berkeley Mono"
+font-family = "Recursive Mono Linear Static"
 font-size = "14"
 theme = dark:Monokai Pro,light:Monokai Pro Light 
 mouse-shift-capture = true
