@@ -9,7 +9,7 @@ set -Ux EDITOR nvim
 set -Ux ERL_AFLAGS -kernel shell_history enabled
 
 # Aliases 
-alias ls="eza --icons=always"
+alias ls="eza --icons=always --git"
 
 if status is-interactive
     set -U fish_greeting # disable fish greeting
