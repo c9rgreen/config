@@ -5,3 +5,4 @@ font-family = "Recursive Mono Linear Static"
 font-size = "13"
 theme = dark:Monokai Pro,light:Monokai Pro Light 
 mouse-shift-capture = true
+mouse-hide-while-typing = true
