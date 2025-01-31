@@ -44,3 +44,4 @@ cask 'orbstack'
 #
 cask 'font-balsamiq-sans'
 cask 'font-recursive-desktop'
+cask 'font-recursive-code'

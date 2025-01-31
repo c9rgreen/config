@@ -1,9 +1,14 @@
 # vim: set filetype=ghostty
 
 command = /opt/homebrew/bin/fish
-font-family = "Recursive Mono Linear Static"
+font-family = "Rec Mono Duotone"
 font-size = "13"
 theme = dark:Monokai Pro,light:Monokai Pro Light 
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
+macos-option-as-alt = true
+macos-icon = custom-style
+macos-icon-frame = beige
+macos-icon-ghost-color = #9AD863
+macos-icon-screen-color = #19171A
