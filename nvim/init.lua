@@ -33,7 +33,6 @@ vim.g.lumen_light_colorscheme = "monokai-pro-light"
 vim.g.lumen_dark_colorscheme = "monokai-pro-default"
 -- }}}
 
-
 -- Autocommands {{{
 -- Terminal
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
