@@ -4,18 +4,16 @@
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
-
+vim.opt.guicursor:append("a:blinkon1")
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
-
 vim.opt.fillchars = 'fold: '
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
-
 vim.opt.wildignorecase = true
 
 -- Ghostty.app
