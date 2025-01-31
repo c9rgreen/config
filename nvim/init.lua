@@ -114,17 +114,17 @@ require('mini.tabline').setup()
 
 require('mini.move').setup({
    mappings = {
-      left  = '<S-left>',
-      right = '<S-right>',
-      down  = '<S-down>',
-      up    = '<S-up>',
+      left       = '<S-left>',
+      right      = '<S-right>',
+      down       = '<S-down>',
+      up         = '<S-up>',
 
       line_left  = '<S-left>',
       line_right = '<S-right>',
       line_down  = '<S-down>',
       line_up    = '<S-up>',
    }
-}) 
+})
 
 require('mini.hipatterns').setup({
    highlighters = {
@@ -314,7 +314,7 @@ add('vimpostor/vim-lumen')
 
 -- Mappings {{{
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>') -- Open new tab
-vim.keymap.set('n', '<leader>c', ':%y+<CR>') -- Copy buffer to clipboard
+vim.keymap.set('n', '<leader>c', ':%y+<CR>')    -- Copy buffer to clipboard
 vim.keymap.set('n', '<leader>i', ':lua MiniFiles.open()<CR>')
 vim.keymap.set('n', '<leader>p', ':lua MiniPick.builtin.files()<CR>')
 vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')
@@ -325,4 +325,4 @@ vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>') -- In terminal mode, use Esc to go back to normal mode
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>')  -- Use C-v Esc to send Esc in terminal mode
--- }}}     
+-- }}}
