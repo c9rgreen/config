@@ -35,9 +35,15 @@ brew 'universal-ctags'
 # Casks
 #
 cask 'balsamiq-wireframes'
+cask 'dash'
 cask 'devonthink'
 cask 'ghostty'
+cask 'macvim'
+cask 'marked'
+cask 'omnigraffle'
 cask 'orbstack'
+cask 'proxyman'
+cask 'tower'
 
 #
 # Fonts
