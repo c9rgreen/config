@@ -8,6 +8,12 @@ set -Ux EDITOR nvim
 # https://hexdocs.pm/iex/IEx.html#module-shell-history
 set -Ux ERL_AFLAGS -kernel shell_history enabled
 
+# Use NPM config in XDG_CONFIG_HOME
+# https://github.com/npm/npm/issues/6675#issuecomment-251049832
+set -Ux NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
+set -Ux NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+set -Ux NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
+
 # Aliases 
 alias ls="eza --icons=always --git"
 
@@ -36,5 +42,5 @@ end
 # Direnv
 direnv hook fish | source
 
-# Helpful docs
+# Helpful blog post
 # https://www.joshmedeski.com/posts/set-up-fish-the-user-friendly-interactive-shell/
