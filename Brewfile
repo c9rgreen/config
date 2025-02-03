@@ -38,6 +38,7 @@ brew 'universal-ctags'
 cask 'balsamiq-wireframes'
 cask 'ghostty'
 cask 'orbstack'
+cask 'tower'
 
 #
 # Mac App Store
