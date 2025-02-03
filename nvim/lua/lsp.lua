@@ -67,6 +67,8 @@ require 'lspconfig'.lua_ls.setup {
    }
 }
 
+-- Emmet
+require('lspconfig').emmet_language_server.setup({})
 
 -- Elixer
 require("elixir").setup()
