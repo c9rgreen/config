@@ -59,3 +59,4 @@ mas "iMovie", id: 408981434
 cask 'font-balsamiq-sans'
 cask 'font-recursive-desktop'
 cask 'font-recursive-code'
+cask 'font-shantell-sans'
