@@ -27,10 +27,6 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- NetRW
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-
--- Lumen
-vim.g.lumen_light_colorscheme = "monokai-pro-light"
-vim.g.lumen_dark_colorscheme = "monokai-pro-default"
 -- }}}
 
 -- Autocommands {{{
@@ -54,7 +50,7 @@ vim.api.nvim_create_autocmd({ 'Colorscheme' }, {
 -- Format on save
 -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
 vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+   group = vim.api.nvim_create_augroup("LSP", { clear = true }),
    callback = function(args)
       vim.api.nvim_create_autocmd("BufWritePre", {
          buffer = args.buf,
@@ -64,12 +60,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
    end
 })
+
+vim.api.nvim_create_autocmd("OptionSet", {
+   group = vim.api.nvim_create_augroup("LightDark", { clear = true }),
+   pattern = "background",
+   callback = function()
+      if vim.o.background == "dark" then
+         vim.cmd("colorscheme monokai-pro-default")
+      else
+         vim.cmd("colorscheme monokai-pro-light")
+      end
+   end
+})
 -- }}}
 
 -- Plugins {{{
 require("mini")
 require("lsp")
 require("treesitter")
+require("monokai-pro").setup()
 -- }}}
 
 -- Mappings {{{

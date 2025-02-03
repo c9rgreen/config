@@ -118,17 +118,15 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add = MiniDeps.add
 
 add("neovim/nvim-lspconfig")
+
 add({
    source = "nvim-treesitter/nvim-treesitter",
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
+
 add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },
 })
+
 add('loctvl842/monokai-pro.nvim')
-add('mattn/emmet-vim')
-add('tpope/vim-fugitive')
-add('rbong/vim-flog')
-add('shumphrey/fugitive-gitlab.vim')
-add('vimpostor/vim-lumen')
