@@ -1,0 +1,70 @@
+# vim: set filetype=ghostty
+# Neovim Light theme for Ghostty (https://ghostty.org/docs/features/theme)
+# Based on https://github.com/neovim/neovim/pull/26540
+
+#
+# Normal
+#
+
+# Black
+palette = 0=#07080d
+
+# Red
+palette = 1=#590008
+
+# Green
+palette = 2=#005523
+
+# Yellow
+palette = 3=#6b5300
+
+# Blue
+palette = 4=#004c73
+
+# Magenta
+palette = 5=#470045
+
+# Cyan
+palette = 6=#007373
+
+# White
+palette = 7=#eef1f8
+
+#
+# Bright
+#
+
+# Black
+palette = 8=#14161b
+
+# Red
+palette = 1=#590008
+
+# Green
+palette = 2=#005523
+
+# Yellow
+palette = 3=#6b5300
+
+# Blue
+palette = 4=#004c73
+
+# Magenta
+palette = 5=#470045
+
+# Cyan
+palette = 6=#007373
+
+# White
+palette = 15=#fefefe
+
+#
+# Other
+#
+
+background = e0e2ea
+foreground = 07080d
+cursor-color = 14161b
+selection-background = 9b9ea4
+selection-foreground = eef1f8
+
