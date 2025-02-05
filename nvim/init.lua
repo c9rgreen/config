@@ -41,38 +41,23 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 
 -- Format on save
 -- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
-vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("LSP", { clear = true }),
-   callback = function(args)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         buffer = args.buf,
-         callback = function()
-            vim.lsp.buf.format { async = false, id = args.data.client_id }
-         end,
-      })
-   end
-})
-
-vim.api.nvim_create_autocmd("OptionSet", {
-   group = vim.api.nvim_create_augroup("LightDark", { clear = true }),
-   pattern = "background",
-   callback = function()
-      if vim.o.background == "dark" then
-         vim.cmd("colorscheme monokai-pro-default")
-      else
-         vim.cmd("colorscheme monokai-pro-light")
-      end
-   end
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
+--    callback = function(args)
+--       vim.api.nvim_create_autocmd("BufWritePre", {
+--          buffer = args.buf,
+--          callback = function()
+--             vim.lsp.buf.format { async = false, id = args.data.client_id }
+--          end,
+--       })
+--    end
+-- })
 -- }}}
 
 -- Plugins {{{
 require("mini")
 require("lsp")
 require("treesitter")
-require("monokai-pro").setup({
-   background_clear = { "float_win" }
-})
 -- }}}
 
 -- Mappings {{{
