@@ -38,3 +38,7 @@
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
+[diff]
+	tool = nvimdiff
+[merge]
+	tool = nvimdiff
