@@ -58,6 +58,15 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 require("mini")
 require("lsp")
 require("treesitter")
+require("solarized").setup({
+   styles =  {
+      comments = { italic = true },
+      variables = {italic = false }
+   },
+   plugins = {
+      minitabline = false,
+   }
+})
 -- }}}
 
 -- Mappings {{{
@@ -72,3 +81,5 @@ vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 -- }}}
+
+vim.cmd.colorscheme("solarized")
