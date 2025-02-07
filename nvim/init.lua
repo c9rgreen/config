@@ -81,5 +81,3 @@ vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 -- }}}
-
-vim.cmd.colorscheme("solarized")
