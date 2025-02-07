@@ -130,3 +130,7 @@ add({
 })
 
 add("maxmx03/solarized.nvim")
+
+add("vimpostor/vim-lumen")
+
+add("mattn/emmet-vim")
