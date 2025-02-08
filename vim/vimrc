@@ -14,7 +14,7 @@ set nowrap
 set linebreak
 set breakindent
 set hidden
-set guioptions=mc
+set guioptions=mce
 set clipboard^=unnamed,unnamedplus
 set formatoptions=tcroqjn
 set showmatch
@@ -32,6 +32,7 @@ set incsearch
 set wildmenu
 set wildignore+=*.git,*venv/*,*node_modules/*,*vendor/*,*__pycache__/*,*.aux,*.cls,*dist/*,*output/*,tags
 set wildignorecase
+set shell=fish
 
 " Reset status line
 set statusline=
@@ -153,6 +154,6 @@ if has('gui_macvim')
     augroup END
 
     set macligatures
-    set guifont=Menlo-Regular:h13
+    set guifont=RecMonoDuotone-Regular:h13
 endif
 " }}}
