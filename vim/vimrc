@@ -116,10 +116,6 @@ noremap <silent> j gj
 vnoremap < <gv
 vnoremap > >gv
 
-" Terminal mode mappings
-tnoremap <Esc> <C-\><C-n>
-tnoremap <C-v><Esc> <Esc>
-
 " Go to file
 nnoremap <leader>e :edit **/*
 
