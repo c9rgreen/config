@@ -8,3 +8,4 @@ mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
+shell-integration = fish
