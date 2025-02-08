@@ -1,6 +1,3 @@
-# Brew
-eval (/opt/homebrew/bin/brew shellenv)
-
 # Set editor to Neovim
 set -Ux EDITOR nvim
 
