@@ -1,5 +1,7 @@
 # Brew
-eval (/opt/homebrew/bin/brew shellenv)
+if type -q /opt/homebrew/bin/brew shellenv
+    eval (/opt/homebrew/bin/brew shellenv)
+end
 
 if type -q eza
     alias ls="eza --icons=always --git"
