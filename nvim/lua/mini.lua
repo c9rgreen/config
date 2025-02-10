@@ -129,8 +129,9 @@ add({
    depends = { 'nvim-lua/plenary.nvim' },
 })
 
+add("loctvl842/monokai-pro.nvim")
 add("maxmx03/solarized.nvim")
-
 add("vimpostor/vim-lumen")
-
+add("tpope/vim-fugitive")
+add("shumphrey/fugitive-gitlab.vim")
 add("mattn/emmet-vim")

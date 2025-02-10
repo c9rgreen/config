@@ -27,6 +27,8 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
+vim.g.lumen_light_colorscheme = "monokai-pro-light"
+vim.g.lumen_dark_colorscheme = "monokai-pro-default"
 -- }}}
 
 -- Autocommands {{{
@@ -66,6 +68,9 @@ require("solarized").setup({
    plugins = {
       minitabline = false,
    }
+})
+require("monokai-pro").setup({
+   background_clear = { "float_win" }
 })
 -- }}}
 
