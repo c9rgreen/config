@@ -2,7 +2,10 @@
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
 SETUVAR --export ERL_AFLAGS:\x2dkernel\x1eshell_history\x1eenabled
-SETUVAR __fish_initialized:3800
+SETUVAR --export NPM_CONFIG_CACHE:\x1d
+SETUVAR --export NPM_CONFIG_TMP:\x1d
+SETUVAR --export NPM_CONFIG_USERCONFIG:\x1d
+SETUVAR __fish_initialized:3400
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue

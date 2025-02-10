@@ -1,18 +1,9 @@
-# Set editor to Neovim
-set -Ux EDITOR nvim
+# Brew
+eval (/opt/homebrew/bin/brew shellenv)
 
-# Save IEx history across sessions
-# https://hexdocs.pm/iex/IEx.html#module-shell-history
-set -Ux ERL_AFLAGS -kernel shell_history enabled
-
-# Use NPM config in XDG_CONFIG_HOME
-# https://github.com/npm/npm/issues/6675#issuecomment-251049832
-set -Ux NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
-set -Ux NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
-set -Ux NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
-
-# Aliases 
-alias ls="eza --icons=always --git"
+if type -q eza
+    alias ls="eza --icons=always --git"
+end    
 
 if status is-interactive
     set -U fish_greeting # disable fish greeting
@@ -36,8 +27,6 @@ if status is-interactive
     set fish_vi_force_cursor 1
 end
 
-# Direnv
-direnv hook fish | source
-
-# Helpful blog post
-# https://www.joshmedeski.com/posts/set-up-fish-the-user-friendly-interactive-shell/
+if type -q direnv
+    direnv hook fish | source
+end
