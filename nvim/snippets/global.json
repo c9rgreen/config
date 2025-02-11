@@ -1,5 +1,5 @@
 {
-    "Elixir": {
-        "prefix": "<", "body": "<%= $0 %>"
-    }
+    "HEEx tag": { "prefix": "e", "body": "<%= $0 %>" },
+    "Tag": { "prefix": "t", "body": "<$1>$2</$1>" },
+    "Self-clossing tag": { "prefix": "a", "body": "<$1 />" }
 }
