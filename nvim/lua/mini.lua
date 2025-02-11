@@ -128,5 +128,3 @@ add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },
 })
-
-add("maxmx03/solarized.nvim")
