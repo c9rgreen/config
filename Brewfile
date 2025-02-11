@@ -21,6 +21,7 @@ brew 'python3'
 brew 'ruby'
 brew 'stow'
 brew 'universal-ctags'
+brew 'ripgrep'
 
 #
 # Casks
