@@ -117,13 +117,20 @@ require('mini.deps').setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
 
+--
+-- Plugins
+--
+
+-- LSP
 add("neovim/nvim-lspconfig")
 
+-- Treesitter
 add({
    source = "nvim-treesitter/nvim-treesitter",
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 
+-- Elixir
 add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },

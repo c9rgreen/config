@@ -9,7 +9,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
-vim.opt.fillchars = 'fold: '
+vim.opt.fillchars = 'fold:─'
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
@@ -27,31 +27,6 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
--- }}}
-
--- Autocommands {{{
--- Terminal
-vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-   group = vim.api.nvim_create_augroup('Terminal', { clear = true }),
-   callback = function()
-      vim.opt.number = false
-      vim.opt.relativenumber = false
-   end
-})
-
--- Format on save
--- https://www.mitchellhanberg.com/modern-format-on-save-in-neovim/
--- vim.api.nvim_create_autocmd("LspAttach", {
---    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
---    callback = function(args)
---       vim.api.nvim_create_autocmd("BufWritePre", {
---          buffer = args.buf,
---          callback = function()
---             vim.lsp.buf.format { async = false, id = args.data.client_id }
---          end,
---       })
---    end
--- })
 -- }}}
 
 -- Plugins {{{
