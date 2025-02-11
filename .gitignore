@@ -1,5 +1,5 @@
 .DS_Store
-vim/.vim/pack/github
+vim/pack/github
 vim/spell
 vim/.netrwhist
 vim/pack/local
