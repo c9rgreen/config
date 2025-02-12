@@ -29,7 +29,7 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 -- }}}
 
--- Plugins {{{
+-- Packages {{{
 require("mini")
 require("lsp")
 require("treesitter")
@@ -49,4 +49,4 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 -- }}}
 
-vim.cmd.colorscheme "randomhue"
+vim.cmd.colorscheme "default"
