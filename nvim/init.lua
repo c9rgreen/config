@@ -46,4 +46,7 @@ vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
+vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 -- }}}
+
+vim.cmd.colorscheme "randomhue"

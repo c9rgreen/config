@@ -3,7 +3,7 @@
 command = /opt/homebrew/bin/fish
 font-family = "Rec Mono Duotone"
 font-size = "13"
-theme = dark:Neovim Dark,light:Neovim Light
+theme = dark:Apple System Colors,light:Apple System Colors Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
