@@ -50,3 +50,4 @@ vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 -- }}}
 
 vim.cmd.colorscheme "default"
+vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
