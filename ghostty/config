@@ -3,7 +3,7 @@
 command = /opt/homebrew/bin/fish
 font-family = "Rec Mono Duotone"
 font-size = "13"
-theme = dark:Monokai Pro,light:Monokai Pro Light
+theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
