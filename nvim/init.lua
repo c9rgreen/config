@@ -33,6 +33,16 @@ vim.g.netrw_banner = 0
 require("mini")
 require("lsp")
 require("treesitter")
+require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = "anthropic",
+    },
+    inline = {
+      adapter = "anthropic",
+    },
+  },
+})
 -- }}}
 
 -- Mappings {{{

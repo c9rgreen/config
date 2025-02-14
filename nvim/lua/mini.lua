@@ -136,3 +136,12 @@ add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },
 })
+
+-- AI
+add({
+   source = 'olimorris/codecompanion.nvim',
+   depends = {
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+  }
+})

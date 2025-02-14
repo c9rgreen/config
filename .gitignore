@@ -8,3 +8,4 @@ nvim/bak
 jgit
 timewarrior
 tmux/plugins
+.envrc
