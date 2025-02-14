@@ -22,6 +22,8 @@ brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
 brew 'stow'
+brew 'task'
+brew 'timewarrior'
 brew 'universal-ctags'
 
 #
