@@ -12,16 +12,17 @@ brew 'fish'
 brew 'git'
 brew 'glab'
 brew 'hub'
+brew 'hugo'
 brew 'lua-language-server'
 brew 'mas'
 brew 'neovim'
 brew 'node'
 brew 'pandoc'
 brew 'python3'
+brew 'ripgrep'
 brew 'ruby'
 brew 'stow'
 brew 'universal-ctags'
-brew 'ripgrep'
 
 #
 # Casks
