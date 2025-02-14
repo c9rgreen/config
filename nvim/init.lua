@@ -33,6 +33,14 @@ vim.g.netrw_banner = 0
 require("mini")
 require("lsp")
 require("treesitter")
+require("monokai-pro").setup({
+   background_clear = { "float_win" },
+   day_night = {
+      enable = true,
+      day_filter = "light",
+      night_filter = "pro",
+   },
+})
 -- }}}
 
 -- Mappings {{{
@@ -49,5 +57,5 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 -- }}}
 
-vim.cmd.colorscheme "default"
+vim.cmd.colorscheme "monokai-pro"
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
