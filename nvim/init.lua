@@ -59,5 +59,5 @@ vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 -- }}}
 
-vim.cmd.colorscheme "default"
+vim.cmd.colorscheme "melange"
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'

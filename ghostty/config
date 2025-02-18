@@ -3,7 +3,7 @@
 command = /opt/homebrew/bin/fish
 font-family = "Rec Mono Duotone"
 font-size = "13"
-theme = Builtin Pastel Dark
+theme = dark:Melange_dark,light:Melange_light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1

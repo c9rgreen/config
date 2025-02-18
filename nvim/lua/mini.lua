@@ -145,3 +145,6 @@ add({
     "nvim-treesitter/nvim-treesitter",
   }
 })
+
+-- Colorscheme
+add("savq/melange-nvim")
