@@ -29,14 +29,22 @@ brew 'universal-ctags'
 #
 # Casks
 #
+cask 'claude'
 cask 'dash'
 cask 'devonthink'
+cask 'forklift'
 cask 'ghostty'
 cask 'marked'
+cask 'omnifocus'
 cask 'omnigraffle'
+cask 'omnioutliner'
+cask 'omniplan'
 cask 'orbstack'
+cask 'orion'
+cask 'syntax-highlight'
 cask 'tower'
 cask 'xscope'
+cask 'graphicconverter'
 
 #
 # Mac App Store
