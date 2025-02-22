@@ -9,7 +9,10 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
-vim.opt.fillchars = 'fold:─'
+vim.opt.fillchars = {
+   fold = '─',
+   diff = ' '
+}
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
