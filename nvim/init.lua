@@ -11,7 +11,7 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.fillchars = {
    fold = '─',
-   diff = ' '
+   diff = '▒'
 }
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
