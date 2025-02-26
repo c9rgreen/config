@@ -33,12 +33,36 @@
 [pull]
 	# Only update to the new history if there is no divergent local history.
 	ff = only
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 [init]
-	# `main` should be the default branch (rather than `master`)
 	defaultBranch = main
 [push]
 	autoSetupRemote = true
+    default = simple
+    followTags = true
 [diff]
 	tool = nvimdiff
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
 [merge]
 	tool = nvimdiff
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[help]
+    autocorrect = prompt
+[commit]
+    verbose = true
+[rerere]
+    enabled = true
+    autoupdate = true
