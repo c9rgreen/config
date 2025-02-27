@@ -151,3 +151,6 @@ add('sindrets/diffview.nvim')
 
 -- Colorscheme
 add("savq/melange-nvim")
+
+-- Auto light/dark
+add("vimpostor/vim-lumen")
