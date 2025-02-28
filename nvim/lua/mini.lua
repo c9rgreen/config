@@ -169,3 +169,8 @@ add("tpope/vim-vinegar")
 
 -- Git log viewer
 add("rbong/vim-flog")
+
+-- Database
+add("tpope/vim-dadbod")
+add("kristijanhusak/vim-dadbod-ui")
+add("kristijanhusak/vim-dadbod-completion")
