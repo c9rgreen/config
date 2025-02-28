@@ -152,5 +152,17 @@ add('sindrets/diffview.nvim')
 -- Colorscheme
 add("savq/melange-nvim")
 
+-- Org mode
+add("nvim-orgmode/orgmode")
+
 -- Auto light/dark
 add("vimpostor/vim-lumen")
+
+-- Git
+add("tpope/vim-fugitive")
+
+-- Endings
+add("tpope/vim-endwise")
+
+-- Vinegar
+add("tpope/vim-vinegar")
