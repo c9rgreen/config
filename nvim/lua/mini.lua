@@ -137,6 +137,9 @@ add({
    depends = { 'nvim-lua/plenary.nvim' },
 })
 
+-- Ruby
+add("vim-ruby/vim-ruby")
+
 -- AI
 add({
    source = 'olimorris/codecompanion.nvim',
@@ -171,3 +174,7 @@ add("rbong/vim-flog")
 add("tpope/vim-dadbod")
 add("kristijanhusak/vim-dadbod-ui")
 add("kristijanhusak/vim-dadbod-completion")
+
+-- Emmet
+add("mattn/emmet-vim")
+
