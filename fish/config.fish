@@ -1,12 +1,20 @@
+#
 # Homebrew
+#
 if type -q /opt/homebrew/bin/brew shellenv
     eval (/opt/homebrew/bin/brew shellenv)
 end
 
+#
+# Eza
+#
 if type -q eza
     alias ls="eza --icons=always --git"
 end    
 
+#
+# Vim
+#
 if status is-interactive
     set -U fish_greeting # disable fish greeting
     set -U fish_key_bindings fish_vi_key_bindings
@@ -29,6 +37,25 @@ if status is-interactive
     set fish_vi_force_cursor 1
 end
 
+#
+# Direnv
+#
 if type -q direnv
     direnv hook fish | source
 end
+
+#
+# ASDF
+#
+if test -z $ASDF_DATA_DIR
+    set _asdf_shims "$HOME/.asdf/shims"
+else
+    set _asdf_shims "$ASDF_DATA_DIR/shims"
+end
+
+# Do not use fish_add_path (added in Fish 3.2) because it
+# potentially changes the order of items in PATH
+if not contains $_asdf_shims $PATH
+    set -gx --prepend PATH $_asdf_shims
+end
+set --erase _asdf_shims
