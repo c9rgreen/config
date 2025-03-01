@@ -29,6 +29,7 @@ brew 'universal-ctags'
 # Casks
 #
 cask 'ghostty'
+cask 'orbstack'
 
 #
 # Fonts
