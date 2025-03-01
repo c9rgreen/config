@@ -4,6 +4,7 @@
 #
 # Packages
 #
+brew 'asdf'
 brew 'direnv'
 brew 'elixir'
 brew 'eza'
