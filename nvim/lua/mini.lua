@@ -146,9 +146,6 @@ add({
   }
 })
 
--- Review
-add('sindrets/diffview.nvim')
-
 -- Colorscheme
 add("savq/melange-nvim")
 
