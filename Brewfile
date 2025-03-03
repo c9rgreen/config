@@ -4,6 +4,7 @@
 #
 # Packages
 #
+brew 'asdf'
 brew 'direnv'
 brew 'elixir'
 brew 'eza'
@@ -15,15 +16,20 @@ brew 'hugo'
 brew 'lua-language-server'
 brew 'neovim'
 brew 'node'
+brew 'pass'
 brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
+brew 'task'
+brew 'timewarrior'
 brew 'universal-ctags'
+brew 'zellij'
 
 #
 # Casks
 #
 cask 'ghostty'
+cask 'omnigraffle'
 cask 'orbstack'
 
 #
