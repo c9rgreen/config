@@ -137,6 +137,9 @@ add({
    depends = { 'nvim-lua/plenary.nvim' },
 })
 
+-- Ruby
+add("vim-ruby/vim-ruby")
+
 -- AI
 add({
    source = 'olimorris/codecompanion.nvim',
@@ -146,11 +149,32 @@ add({
   }
 })
 
--- Review
-add('sindrets/diffview.nvim')
-
 -- Colorscheme
 add("savq/melange-nvim")
 
+-- Org mode
+add("nvim-orgmode/orgmode")
+
 -- Auto light/dark
 add("vimpostor/vim-lumen")
+
+-- Git
+add("tpope/vim-fugitive")
+
+-- Endings
+add("tpope/vim-endwise")
+
+-- Vinegar
+add("tpope/vim-vinegar")
+
+-- Git log viewer
+add("rbong/vim-flog")
+
+-- Database
+add("tpope/vim-dadbod")
+add("kristijanhusak/vim-dadbod-ui")
+add("kristijanhusak/vim-dadbod-completion")
+
+-- Emmet
+add("mattn/emmet-vim")
+
