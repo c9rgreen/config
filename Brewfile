@@ -5,12 +5,14 @@
 # Packages
 #
 brew 'asdf'
+brew 'chafa'
 brew 'direnv'
 brew 'elixir'
 brew 'eza'
 brew 'fish'
 brew 'git'
 brew 'glab'
+brew 'graphviz'
 brew 'hub'
 brew 'hugo'
 brew 'lima'

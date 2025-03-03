@@ -1,56 +1,67 @@
 [core]
-	editor = nvim
+    editor = nvim
 [user]
-	email = cgreen@saguaro.space
-	name = Christopher Green
+    email = cgreen@saguaro.space
+    name = Christopher Green
 [alias]
-	# Fancier git log
-  graph = log --graph --oneline --abbrev-commit --decorate  --all
+    # Fancier git log
+    graph = log --graph --oneline --abbrev-commit --decorate  --all
 
-  # Show the last ten tags
-  ten = tag --sort version:refname -n10 -n
+    # Show the last ten tags
+    ten = tag --sort version:refname -n10 -n
 
-  # List all remote branches
-  remotes = ls-remote --heads
+    # List all remote branches
+    remotes = ls-remote --heads
 
-  # Jump
-  jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
+    # Jump
+    jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
 
-  # For reviewing Merge/Pull Requests
-  mr = jump diff main..HEAD
-  last = merge-base main HEAD
+    # Populate quickfix list with every changed file
+    mr = !git jump diff "$REVIEW_BASE"..HEAD
 
-  # Convenience
-  s = status
-  p = pull --tags
-  u = push --tags
-  a = add .
-  c = commit
-  t = difftool
-  d = diff
+    # Display a dependency graph of the changed files
+    deps = !"$HOME"/.config/git/mr-deps.sh
+
+    # Open a tab with a diff of every changed file
+    comp = !"$HOME"/.config/git/mr-diff.sh
+
+    # Print the commit SHA of the last common ancestor
+    last = !git merge-base $REVIEW_BASE HEAD
+
+    # List an overview of changed files
+    stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+
+    # Convenience
+    s = status
+    p = pull --tags
+    u = push --tags
+    a = add .
+    c = commit
+    t = difftool
+    d = diff
 [github]
-	user = c9rgreen
+    user = c9rgreen
 [pull]
-	# Only update to the new history if there is no divergent local history.
-	ff = only
+    # Only update to the new history if there is no divergent local history.
+    ff = only
 [fetch]
     prune = true
     pruneTags = true
     all = true
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
     default = simple
     followTags = true
 [diff]
-	tool = nvimdiff
+    tool = nvimdiff
     algorithm = histogram
     colorMoved = plain
     mnemonicPrefix = true
     renames = true
 [merge]
-	tool = nvimdiff
+    tool = nvimdiff
 [rebase]
     autoSquash = true
     autoStash = true
