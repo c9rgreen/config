@@ -33,6 +33,16 @@ vim.g.netrw_banner = 0
 vim.g.db_ui_use_nerd_fonts = 1
 -- }}}
 
+-- Autocommands {{{
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"javascript", "typescript", "vue", "markdown", "html", "yaml", "css"},
+  callback = function()
+    vim.opt_local.formatprg = "prettier --stdin-filepath %"
+  end,
+  desc = "Use Prettier when possible "
+})
+-- }}}
+
 -- Packages {{{
 require("mini")
 require("lsp")
@@ -63,6 +73,7 @@ vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 vim.keymap.set('n', '<CR>', 'za', { noremap = true }) -- Toggle fold under cursor with <ENTER>
+vim.keymap.set('n', '<leader>r', 'gggqG', { noremap = true, silent = true }) -- Invoke formatprg
 -- }}}
 
 vim.cmd.colorscheme "melange"
