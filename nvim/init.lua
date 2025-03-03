@@ -62,6 +62,7 @@ vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
+vim.keymap.set('n', '<CR>', 'za', { noremap = true }) -- Toggle fold under cursor with <ENTER>
 -- }}}
 
 vim.cmd.colorscheme "melange"
