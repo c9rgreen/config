@@ -167,6 +167,9 @@ add("tpope/vim-endwise")
 -- Vinegar
 add("tpope/vim-vinegar")
 
+-- Projectionist
+add("tpope/vim-projectionist")
+
 -- Git log viewer
 add("rbong/vim-flog")
 
