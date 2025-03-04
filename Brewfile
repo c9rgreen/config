@@ -25,17 +25,16 @@ brew 'postgresql@17'
 brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
-brew 'task'
-brew 'timewarrior'
 brew 'universal-ctags'
-brew 'zellij'
 
 #
 # Casks
 #
 cask 'ghostty'
+cask 'omnifocus'
 cask 'omnigraffle'
-cask 'orbstack'
+cask 'omnioutliner'
+cask 'omniplan'
 
 #
 # Fonts
