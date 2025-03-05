@@ -7,7 +7,7 @@
 | Role | Tool |
 |-|-|
 | Terminal | [Ghostty](https://ghostty.org) |
-| Virtual Machines | [OrbStack](https://orbstack.dev) |
+| Virtual Machines | [Lima](https://lima-vm.io) |
 | Dotfiles | [Stow](https://www.gnu.org/software/stow/) |
 | Shell | [Fish](https://fishshell.com) |
 | Editor | [Neovim](https://neovim.io) |
