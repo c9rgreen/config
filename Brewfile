@@ -4,6 +4,7 @@
 #
 # Packages
 #
+brew 'asciinema'
 brew 'asdf'
 brew 'chafa'
 brew 'direnv'
