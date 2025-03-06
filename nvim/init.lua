@@ -19,6 +19,7 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 vim.opt.wildignorecase = true
 vim.opt.shell = "fish"
+vim.opt.diffopt:append("vertical")
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
