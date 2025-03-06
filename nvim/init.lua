@@ -41,7 +41,19 @@ vim.api.nvim_create_autocmd({"FileType"}, {
   end,
   desc = "Use Prettier when possible "
 })
--- }}}
+
+vim.api.nvim_create_autocmd("LspAttach", {
+   group = vim.api.nvim_create_augroup("LSP", { clear = true }),
+   callback = function(args)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = args.buf,
+         callback = function()
+            vim.lsp.buf.format { async = false, id = args.data.client_id }
+         end,
+      })
+   end,
+   desc = "LSP Format on save"
+})
 
 -- Packages {{{
 require("mini")
