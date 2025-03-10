@@ -20,6 +20,8 @@ vim.opt.foldtext = ""
 vim.opt.wildignorecase = true
 vim.opt.shell = "fish"
 vim.opt.diffopt:append("vertical")
+vim.opt.diffopt:append("iwhiteall")
+vim.opt.splitright = true
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
