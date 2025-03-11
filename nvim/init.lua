@@ -37,12 +37,12 @@ vim.g.db_ui_use_nerd_fonts = 1
 -- }}}
 
 -- Autocommands {{{
-vim.api.nvim_create_autocmd({"FileType"}, {
-  pattern = {"javascript", "typescript", "vue", "markdown", "html", "yaml", "css"},
-  callback = function()
-    vim.opt_local.formatprg = "prettier --stdin-filepath %"
-  end,
-  desc = "Use Prettier when possible "
+vim.api.nvim_create_autocmd({ "FileType" }, {
+   pattern = { "javascript", "typescript", "vue", "markdown", "html", "yaml", "css" },
+   callback = function()
+      vim.opt_local.formatprg = "prettier --stdin-filepath %"
+   end,
+   desc = "Use Prettier when possible "
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -50,27 +50,32 @@ vim.api.nvim_create_autocmd("LspAttach", {
    callback = function(args)
       vim.api.nvim_create_autocmd("BufWritePre", {
          buffer = args.buf,
+
          callback = function()
-            vim.lsp.buf.format { async = false, id = args.data.client_id }
+            local lsp_auto_format = vim.g.lsp_auto_format
+            if lsp_auto_format then
+               vim.lsp.buf.format { async = false, id = args.data.client_id }
+            end
          end,
       })
    end,
    desc = "LSP Format on save"
 })
+-- }}}
 
 -- Packages {{{
 require("mini")
 require("lsp")
 require("treesitter")
 require("codecompanion").setup({
-  strategies = {
-    chat = {
-      adapter = "anthropic",
-    },
-    inline = {
-      adapter = "anthropic",
-    },
-  },
+   strategies = {
+      chat = {
+         adapter = "anthropic",
+      },
+      inline = {
+         adapter = "anthropic",
+      },
+   },
 })
 require("orgmode").setup()
 -- }}}
@@ -87,7 +92,7 @@ vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
-vim.keymap.set('n', '<CR>', 'za', { noremap = true }) -- Toggle fold under cursor with <ENTER>
+vim.keymap.set('n', '<CR>', 'za', { noremap = true })                        -- Toggle fold under cursor with <ENTER>
 vim.keymap.set('n', '<leader>r', 'gggqG', { noremap = true, silent = true }) -- Invoke formatprg
 -- }}}
 
