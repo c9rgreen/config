@@ -144,9 +144,9 @@ add("vim-ruby/vim-ruby")
 add({
    source = 'olimorris/codecompanion.nvim',
    depends = {
-    "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
-  }
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+   }
 })
 
 -- Colorscheme
@@ -181,3 +181,5 @@ add("kristijanhusak/vim-dadbod-completion")
 -- Emmet
 add("mattn/emmet-vim")
 
+-- Trees
+add("lambdalisue/vim-fern")
