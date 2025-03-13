@@ -33,10 +33,7 @@ brew 'universal-ctags'
 # Casks
 #
 cask 'ghostty'
-cask 'omnifocus'
-cask 'omnigraffle'
-cask 'omnioutliner'
-cask 'omniplan'
+cask 'devonthink'
 
 #
 # Fonts
