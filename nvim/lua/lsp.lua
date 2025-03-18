@@ -1,5 +1,7 @@
+local lspconfig = require('lspconfig')
+
 -- JavaScript/Typescript language server with Vue plugin
-require('lspconfig').ts_ls.setup {
+lspconfig.ts_ls.setup {
    init_options = {
       plugins = {
          {
@@ -17,7 +19,7 @@ require('lspconfig').ts_ls.setup {
 }
 
 -- Vue language server
-require('lspconfig').volar.setup {
+lspconfig.volar.setup {
    init_options = {
       typescript = {
          tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
@@ -25,20 +27,30 @@ require('lspconfig').volar.setup {
    }
 }
 
+-- ESLint
+lspconfig.eslint.setup({
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
 -- CSS
-require('lspconfig').cssls.setup {}
+lspconfig.cssls.setup {}
 
 -- HTML
-require('lspconfig').html.setup {}
+lspconfig.html.setup {}
 
 -- PHP
-require('lspconfig').intelephense.setup {}
+lspconfig.intelephense.setup {}
 
 -- Yaml
-require('lspconfig').yamlls.setup {}
+lspconfig.yamlls.setup {}
 
 -- Lua
-require 'lspconfig'.lua_ls.setup {
+lspconfig.lua_ls.setup {
    on_init = function(client)
       if client.workspace_folders then
          local path = client.workspace_folders[1].name
