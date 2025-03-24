@@ -32,8 +32,9 @@ brew 'universal-ctags'
 #
 # Casks
 #
-cask 'ghostty'
 cask 'devonthink'
+cask 'ghostty'
+cask 'hammerspoon'
 
 #
 # Fonts
