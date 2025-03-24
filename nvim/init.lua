@@ -34,6 +34,7 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.db_ui_use_nerd_fonts = 1
+vim.g["fern#renderer"] = "nerdfont"
 -- }}}
 
 -- Autocommands {{{
@@ -60,6 +61,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
    end,
    desc = "LSP Format on save"
+})
+
+vim.api.nvim_create_augroup("FernGroup", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = "FernGroup",
+  pattern = "fern",
+  callback = function()
+    vim.opt_local.number = false
+    vim.api.nvim_buf_set_keymap(
+      0,
+      "n",
+      "<2-LeftMouse>",
+      "<Plug>(fern-action-open-or-enter)",
+      { noremap = false, silent = true }
+    )
+  end,
 })
 -- }}}
 

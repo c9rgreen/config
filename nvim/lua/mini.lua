@@ -183,3 +183,5 @@ add("mattn/emmet-vim")
 
 -- Trees
 add("lambdalisue/vim-fern")
+add("lambdalisue/vim-fern-renderer-nerdfont")
+add("lambdalisue/vim-nerdfont")
