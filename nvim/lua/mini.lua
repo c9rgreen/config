@@ -128,6 +128,12 @@ add("tpope/vim-projectionist")
 -- Git log viewer
 add("rbong/vim-flog")
 
+-- GitLab integration
+add("shumphrey/fugitive-gitlab.vim")
+
+-- GitHub integration
+add("tpope/vim-rhubarb")
+
 -- Database
 add("tpope/vim-dadbod")
 add("kristijanhusak/vim-dadbod-ui")
