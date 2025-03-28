@@ -13,6 +13,7 @@ require('nvim-treesitter.configs').setup({
       "liquid",
       "lua",
       "markdown",
+      "mermaid",
       "python",
       "rst",
       "vim",
