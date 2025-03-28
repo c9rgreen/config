@@ -34,6 +34,7 @@ brew 'task'
 brew 'timewarrior'
 brew 'universal-ctags'
 brew 'uv'
+brew 'mas'
 
 #
 # Casks
@@ -43,8 +44,16 @@ cask 'forklift'
 cask 'ghostty'
 cask 'hammerspoon'
 cask 'marked'
+cask 'monodraw'
+cask 'orbstack'
 cask 'tower'
 cask 'xscope'
+
+#
+# Mac App Store
+#
+mas '1545870783' # System Color Picker
+mas '1621370168' # WorldWideWeb
 
 #
 # Fonts
