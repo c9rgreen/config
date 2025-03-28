@@ -12,7 +12,6 @@ end
 
 require('mini.align').setup()
 require('mini.basics').setup()
-require('mini.bracketed').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
