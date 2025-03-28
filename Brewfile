@@ -7,6 +7,7 @@
 brew 'asciinema'
 brew 'asdf'
 brew 'chafa'
+brew 'deno'
 brew 'direnv'
 brew 'elixir'
 brew 'eza'
@@ -28,13 +29,22 @@ brew 'postgresql@17'
 brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
+brew 'ruff'
+brew 'task'
+brew 'timewarrior'
 brew 'universal-ctags'
+brew 'uv'
 
 #
 # Casks
 #
+cask 'dash'
+cask 'forklift'
 cask 'ghostty'
 cask 'hammerspoon'
+cask 'marked'
+cask 'tower'
+cask 'xscope'
 
 #
 # Fonts
