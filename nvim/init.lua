@@ -22,6 +22,7 @@ vim.opt.shell = "fish"
 vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
+vim.diagnostic.config({ virtual_lines = true })
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
