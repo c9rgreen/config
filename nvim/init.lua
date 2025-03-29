@@ -97,6 +97,9 @@ require("codecompanion").setup({
 require("orgmode").setup()
 -- }}}
 
+-- Commands {{{
+-- }}}
+
 -- Mappings {{{
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>') -- Open new tab
 vim.keymap.set('n', '<leader>c', ':%y+<CR>')    -- Copy buffer to clipboard
