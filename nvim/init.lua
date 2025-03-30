@@ -1,6 +1,6 @@
 -- vim: foldmethod=marker foldlevel=0
 
--- Options {{{
+-- Options, Colorschemes, Abbreviations {{{
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
@@ -29,13 +29,16 @@ vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vim
 
 -- LilyPond
 vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
+
+-- Abbreviations
+vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
+vim.cmd.iabbrev ':cg: Christopher Green'
 -- }}}
 
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 vim.g.db_ui_use_nerd_fonts = 1
-vim.g["fern#renderer"] = "nerdfont"
 -- }}}
 
 -- Autocommands {{{
@@ -63,28 +66,138 @@ vim.api.nvim_create_autocmd("LspAttach", {
    end,
    desc = "LSP Format on save"
 })
-
-vim.api.nvim_create_augroup("FernGroup", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  group = "FernGroup",
-  pattern = "fern",
-  callback = function()
-    vim.opt_local.number = false
-    vim.api.nvim_buf_set_keymap(
-      0,
-      "n",
-      "<2-LeftMouse>",
-      "<Plug>(fern-action-open-or-enter)",
-      { noremap = false, silent = true }
-    )
-  end,
-})
 -- }}}
 
 -- Packages {{{
-require("mini")
-require("lsp")
-require("treesitter")
+local path_package = vim.fn.stdpath('data') .. '/site'
+local mini_path = path_package .. '/pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+   vim.cmd('echo "Installing `mini.nvim`" | redraw')
+   local clone_cmd = {
+      'git', 'clone', '--filter=blob:none',
+      'https://github.com/echasnovski/mini.nvim', mini_path
+   }
+   vim.fn.system(clone_cmd)
+   vim.cmd('packadd mini.nvim | helptags ALL')
+end
+
+require('mini.align').setup()
+require('mini.basics').setup()
+require('mini.bufremove').setup()
+require('mini.completion').setup()
+require('mini.cursorword').setup()
+require('mini.diff').setup()
+require('mini.extra').setup()
+require('mini.files').setup()
+require('mini.fuzzy').setup()
+require('mini.git').setup()
+require('mini.hipatterns').setup()
+require('mini.icons').setup()
+require('mini.indentscope').setup({ symbol = '⎸' })
+require('mini.notify').setup()
+require('mini.pairs').setup()
+require('mini.pick').setup()
+require('mini.sessions').setup()
+require('mini.splitjoin').setup()
+require('mini.starter').setup()
+require('mini.statusline').setup()
+require('mini.surround').setup()
+require('mini.tabline').setup()
+
+require('mini.move').setup({
+   mappings = {
+      left       = '<S-left>',
+      right      = '<S-right>',
+      down       = '<S-down>',
+      up         = '<S-up>',
+
+      line_left  = '<S-left>',
+      line_right = '<S-right>',
+      line_down  = '<S-down>',
+      line_up    = '<S-up>',
+   }
+})
+
+require('mini.hipatterns').setup({
+   highlighters = {
+      fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+      hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+      todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+      note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+
+      hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
+   },
+})
+
+require('mini.snippets').setup({
+   snippets = {
+      -- Load custom file with global snippets first (adjust for Windows)
+      require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+
+      -- Load snippets based on current language by reading files from
+      -- "snippets/" subdirectories from 'runtimepath' directories.
+      require('mini.snippets').gen_loader.from_lang(),
+   },
+})
+
+require('mini.deps').setup({ path = { package = path_package } })
+
+local add = MiniDeps.add
+-- LSP
+add("neovim/nvim-lspconfig")
+
+-- Treesitter
+add({
+   source = "nvim-treesitter/nvim-treesitter",
+   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+})
+
+require('nvim-treesitter.configs').setup({
+   ensure_installed = {
+      "bash",
+      "css",
+      "dockerfile",
+      "eex",
+      "elixir",
+      "gitcommit",
+      "heex",
+      "html",
+      "javascript",
+      "json",
+      "liquid",
+      "lua",
+      "markdown",
+      "mermaid",
+      "python",
+      "rst",
+      "vim",
+      "vimdoc",
+      "vue",
+      "yaml",
+   },
+   highlight = { enable = true },
+   indent = { enable = true },
+   incremental_selection = { enable = true }
+})
+
+-- Elixir
+add({
+   source = 'elixir-tools/elixir-tools.nvim',
+   depends = { 'nvim-lua/plenary.nvim' },
+})
+
+-- Ruby
+add("vim-ruby/vim-ruby")
+
+-- AI
+add({
+   source = 'olimorris/codecompanion.nvim',
+   depends = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+   }
+})
+
 require("codecompanion").setup({
    strategies = {
       chat = {
@@ -95,7 +208,38 @@ require("codecompanion").setup({
       },
    },
 })
+
+-- Colorscheme
+add("savq/melange-nvim")
+vim.cmd.colorscheme "melange"
+
+-- Org mode
+add("nvim-orgmode/orgmode")
 require("orgmode").setup()
+
+-- Auto light/dark
+add("vimpostor/vim-lumen")
+
+-- Git
+add("tpope/vim-fugitive")
+
+-- Endings
+add("tpope/vim-endwise")
+
+-- Vinegar
+add("tpope/vim-vinegar")
+
+-- Projectionist
+add("tpope/vim-projectionist")
+
+-- GitLab integration
+add("shumphrey/fugitive-gitlab.vim")
+
+-- GitHub integration
+add("tpope/vim-rhubarb")
+
+-- Database
+add("tpope/vim-dadbod")
 -- }}}
 
 -- Commands {{{
@@ -117,5 +261,89 @@ vim.keymap.set('n', '<CR>', 'za', { noremap = true })                        -- 
 vim.keymap.set('n', '<leader>r', 'gggqG', { noremap = true, silent = true }) -- Invoke formatprg
 -- }}}
 
-vim.cmd.colorscheme "melange"
-vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
+-- LSP {{{
+local lspconfig = require('lspconfig')
+
+-- JavaScript/Typescript language server with Vue plugin
+lspconfig.ts_ls.setup {
+   init_options = {
+      plugins = {
+         {
+            name = "@vue/typescript-plugin",
+            location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
+            languages = { "javascript", "typescript", "vue" },
+         },
+      },
+   },
+   filetypes = {
+      "javascript",
+      "typescript",
+      "vue",
+   },
+}
+
+-- Vue language server
+lspconfig.volar.setup {
+   init_options = {
+      typescript = {
+         tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
+      }
+   }
+}
+
+-- ESLint
+lspconfig.eslint.setup({
+  on_attach = function(_, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })
+  end,
+})
+
+-- CSS
+lspconfig.cssls.setup {}
+
+-- HTML
+lspconfig.html.setup {}
+
+-- PHP
+lspconfig.intelephense.setup {}
+
+-- Yaml
+lspconfig.yamlls.setup {}
+
+-- Lua
+lspconfig.lua_ls.setup {
+   on_init = function(client)
+      if client.workspace_folders then
+         local path = client.workspace_folders[1].name
+         if vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc') then
+            return
+         end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+         runtime = {
+            -- Tell the language server which version of Lua you're using
+            -- (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT'
+         },
+         -- Make the server aware of Neovim runtime files
+         workspace = {
+            checkThirdParty = false,
+            library = {
+               vim.env.VIMRUNTIME
+            }
+         }
+      })
+   end,
+   settings = {
+      Lua = {}
+   }
+}
+
+-- Elixer
+require("elixir").setup()
+
+-- }}}
