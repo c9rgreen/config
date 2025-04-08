@@ -50,6 +50,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
    desc = "Use Prettier when possible "
 })
 
+-- Use the built-in LSP formatter 
+-- Enable via g:lsp_auto_format = 1
 vim.api.nvim_create_autocmd("LspAttach", {
    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
    callback = function(args)
