@@ -186,9 +186,14 @@ add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },
 })
+require("elixir").setup()
+
 
 -- Ruby
 add("vim-ruby/vim-ruby")
+
+-- Julia
+add("JuliaEditorSupport/julia-vim")
 
 -- AI
 add({
@@ -373,8 +378,5 @@ lspconfig.lua_ls.setup {
       Lua = {}
    }
 }
-
--- Elixer
-require("elixir").setup()
 
 -- }}}
