@@ -166,6 +166,7 @@ require('nvim-treesitter.configs').setup({
       "html",
       "javascript",
       "json",
+      "julia",
       "liquid",
       "lua",
       "markdown",
@@ -187,9 +188,14 @@ add({
    source = 'elixir-tools/elixir-tools.nvim',
    depends = { 'nvim-lua/plenary.nvim' },
 })
+require("elixir").setup()
+
 
 -- Ruby
 add("vim-ruby/vim-ruby")
+
+-- Julia
+add("JuliaEditorSupport/julia-vim")
 
 -- AI
 add({
@@ -247,30 +253,30 @@ add("tpope/vim-dadbod")
 -- Commands {{{
 -- Function to open current file in Marked 2
 local function open_in_marked2()
-  -- Check if 'open' command is available (macOS)
-  if vim.fn.executable('open') ~= 1 then
-    vim.notify("The 'open' command is required but not found", vim.log.levels.ERROR)
-    return
-  end
+   -- Check if 'open' command is available (macOS)
+   if vim.fn.executable('open') ~= 1 then
+      vim.notify("The 'open' command is required but not found", vim.log.levels.ERROR)
+      return
+   end
 
-  -- Get the current file path
-  local current_file = vim.fn.expand('%:p')
+   -- Get the current file path
+   local current_file = vim.fn.expand('%:p')
 
-  -- Check if the file exists and is saved
-  if current_file == "" then
-    vim.notify("Current buffer has no associated file", vim.log.levels.ERROR)
-    return
-  end
+   -- Check if the file exists and is saved
+   if current_file == "" then
+      vim.notify("Current buffer has no associated file", vim.log.levels.ERROR)
+      return
+   end
 
-  -- Save the file if it has been modified
-  if vim.bo.modified then
-    vim.cmd('write')
-  end
+   -- Save the file if it has been modified
+   if vim.bo.modified then
+      vim.cmd('write')
+   end
 
-  -- Open the file with Marked 2
-  local cmd = "open -a 'Marked 2' " .. vim.fn.shellescape(current_file)
-  vim.fn.system(cmd)
-  vim.cmd('redraw!')
+   -- Open the file with Marked 2
+   local cmd = "open -a 'Marked 2' " .. vim.fn.shellescape(current_file)
+   vim.fn.system(cmd)
+   vim.cmd('redraw!')
 end
 
 -- :Marked
@@ -325,12 +331,12 @@ lspconfig.volar.setup {
 
 -- ESLint
 lspconfig.eslint.setup({
-  on_attach = function(_, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })
-  end,
+   on_attach = function(_, bufnr)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = bufnr,
+         command = "EslintFixAll",
+      })
+   end,
 })
 
 -- CSS
@@ -374,8 +380,5 @@ lspconfig.lua_ls.setup {
       Lua = {}
    }
 }
-
--- Elixer
-require("elixir").setup()
 
 -- }}}
