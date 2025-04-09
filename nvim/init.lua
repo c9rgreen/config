@@ -23,6 +23,7 @@ vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.diagnostic.config({ virtual_text = true })
+vim.opt.number = false
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
