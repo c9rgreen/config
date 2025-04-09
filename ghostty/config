@@ -1,15 +1,15 @@
 # vim: set filetype=ghostty
 
 command = /opt/homebrew/bin/fish
-font-family = "JuliaMono"
-font-size = "13"
-theme = dark:NvimDark,light:NvimLight
+font-family = "Berkeley Mono"
+font-size = "14"
+theme = dark:Melange_dark,light:Melange_light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
 shell-integration = fish
-# macos-icon = custom-style
-# macos-icon-frame = beige
-# macos-icon-ghost-color = #5b816a
-# macos-icon-screen-color = #414141
+macos-icon = custom-style
+macos-icon-frame = beige
+macos-icon-ghost-color = #5b816a
+macos-icon-screen-color = #414141
