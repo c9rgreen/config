@@ -22,6 +22,7 @@ brew 'hugo'
 brew 'julia'
 brew 'lima'
 brew 'lua-language-server'
+brew 'mas'
 brew 'neovim'
 brew 'node'
 brew 'pandoc'
@@ -37,11 +38,33 @@ brew 'uv'
 #
 # Casks
 #
+cask 'dash'
+cask 'forklift'
 cask 'ghostty'
+cask 'glyphs'
 cask 'hammerspoon'
+cask 'macai'
+cask 'macvim'
 cask 'marked'
+cask 'orbstack'
 cask 'orion'
+cask 'sketch'
 cask 'tower'
+cask 'xscope'
+
+#
+# Mac App Store
+#
+mas "Color Picker", id: 1545870783
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Kagi for Safari", id: 1622835804
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Swift Playground", id: 1496833156
+mas "WorldWideWeb", id: 1621370168
+mas "Xcode", id: 497799835
 
 #
 # Fonts
