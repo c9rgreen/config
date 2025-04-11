@@ -220,7 +220,7 @@ require("codecompanion").setup({
 -- Colorscheme
 add("savq/melange-nvim")
 add("maxmx03/solarized.nvim")
-vim.cmd.colorscheme "solarized"
+vim.cmd.colorscheme "melange"
 
 -- Org mode
 add("nvim-orgmode/orgmode")
