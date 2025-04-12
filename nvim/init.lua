@@ -219,36 +219,11 @@ require("codecompanion").setup({
 
 -- Colorscheme
 add("savq/melange-nvim")
-add("maxmx03/solarized.nvim")
 vim.cmd.colorscheme "melange"
 
 -- Org mode
 add("nvim-orgmode/orgmode")
 require("orgmode").setup()
-
--- Auto light/dark
-add("vimpostor/vim-lumen")
-
--- Git
-add("tpope/vim-fugitive")
-
--- Endings
-add("tpope/vim-endwise")
-
--- Vinegar
-add("tpope/vim-vinegar")
-
--- Projectionist
-add("tpope/vim-projectionist")
-
--- GitLab integration
-add("shumphrey/fugitive-gitlab.vim")
-
--- GitHub integration
-add("tpope/vim-rhubarb")
-
--- Database
-add("tpope/vim-dadbod")
 -- }}}
 
 -- Commands {{{
