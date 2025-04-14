@@ -33,6 +33,7 @@ brew 'python3'
 brew 'ripgrep'
 brew 'ruby'
 brew 'ruff'
+brew 'scc'
 brew 'universal-ctags'
 brew 'uv'
 
