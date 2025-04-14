@@ -190,12 +190,14 @@ add({
 })
 require("elixir").setup()
 
-
 -- Ruby
 add("vim-ruby/vim-ruby")
 
 -- Julia
 add("JuliaEditorSupport/julia-vim")
+
+-- Go
+add("fatih/vim-go")
 
 -- AI
 add({
