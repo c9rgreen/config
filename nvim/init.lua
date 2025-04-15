@@ -84,8 +84,10 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require('mini.align').setup()
+require('mini.animate').setup()
 require('mini.basics').setup()
 require('mini.bufremove').setup()
+require('mini.comment').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.diff').setup()
@@ -96,6 +98,7 @@ require('mini.git').setup()
 require('mini.hipatterns').setup()
 require('mini.icons').setup()
 require('mini.indentscope').setup({ symbol = '⎸' })
+require('mini.map').setup()
 require('mini.notify').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
@@ -272,6 +275,7 @@ vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')
 vim.keymap.set('n', '<leader>o', ':lua MiniDiff.toggle_overlay()<CR>')
 vim.keymap.set('n', 'd<Space>', ':lua MiniBufremove.delete()<CR>')
+vim.keymap.set('n', '<Leader>mt', ':lua MiniMap.toggle()<CR>')
 vim.keymap.set('n', ',,', ':colorscheme randomhue<CR>')
 vim.keymap.set('n', '<CR>', 'za', { noremap = true })                        -- Toggle fold under cursor with <ENTER>
 vim.keymap.set('n', '<leader>r', 'gggqG', { noremap = true, silent = true }) -- Invoke formatprg
