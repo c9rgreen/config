@@ -84,7 +84,6 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require('mini.align').setup()
-require('mini.animate').setup()
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.comment').setup()
@@ -210,7 +209,6 @@ add({
       "nvim-treesitter/nvim-treesitter",
    }
 })
-
 require("codecompanion").setup({
    strategies = {
       chat = {
@@ -229,6 +227,13 @@ vim.cmd.colorscheme "melange"
 -- Org mode
 add("nvim-orgmode/orgmode")
 require("orgmode").setup()
+
+-- Git, DB, Endings, Vinegar, Projectionist
+add("tpope/vim-fugitive")
+add("tpope/vim-dadbod")
+add("tpope/vim-endwise")
+add("tpope/vim-vinegar")
+add("tpope/vim-projectionist")
 -- }}}
 
 -- Commands {{{
