@@ -41,16 +41,8 @@ brew 'uv'
 #
 cask 'bbedit'
 cask 'busycal'
-cask 'fontforge'
-cask 'forklift'
 cask 'ghostty'
-cask 'inkscape'
-cask 'kindavim'
 cask 'marked'
-cask 'orion'
-cask 'proxyman'
-cask 'tableplus'
-cask 'tower'
 
 #
 # Mac App Store
