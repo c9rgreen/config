@@ -40,6 +40,7 @@ brew 'uv'
 #
 cask 'amethyst'
 cask 'bbedit'
+cask 'busycal'
 cask 'dash'
 cask 'forklift'
 cask 'ghostty'
