@@ -4,7 +4,6 @@
 #
 # Packages
 #
-brew 'asciinema'
 brew 'asdf'
 brew 'chafa'
 brew 'deno'
@@ -20,7 +19,6 @@ brew 'graphviz'
 brew 'hub'
 brew 'hugo'
 brew 'julia'
-brew 'lima'
 brew 'lua-language-server'
 brew 'mas'
 brew 'neovim'
