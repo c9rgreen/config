@@ -39,10 +39,12 @@ brew 'uv'
 # Casks
 #
 cask 'amethyst'
+cask 'bbedit'
 cask 'dash'
 cask 'forklift'
 cask 'ghostty'
 cask 'glyphs'
+cask 'graphicconverter'
 cask 'hammerspoon'
 cask 'kindavim'
 cask 'macai'
