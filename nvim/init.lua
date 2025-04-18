@@ -1,6 +1,6 @@
 -- vim: foldmethod=marker foldlevel=0
 
--- Options, Colorschemes, Abbreviations {{{
+-- Options, Abbreviations {{{
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
@@ -222,7 +222,7 @@ require("codecompanion").setup({
 
 -- Colorscheme
 add("savq/melange-nvim")
-vim.cmd.colorscheme "melange"
+-- vim.cmd.colorscheme "melange"
 
 -- Org mode
 add("nvim-orgmode/orgmode")
