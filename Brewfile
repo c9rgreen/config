@@ -42,10 +42,11 @@ brew 'uv'
 cask 'bbedit'
 cask 'busycal'
 cask 'ghostty'
+cask 'inkscape'
 cask 'marked'
+cask 'zed'
 
 #
 # Fonts
 #
-cask 'font-recursive-desktop'
-cask 'font-recursive-code'
+cask 'font-juliamono'

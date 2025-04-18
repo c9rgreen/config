@@ -9,9 +9,9 @@
 {
   "vim_mode": true,
   "ui_font_size": 14,
-  "ui_font_family": "Rec Mono Duotone",
-  "buffer_font_size": 13,
-  "buffer_font_family": "Rec Mono Duotone",
+  "ui_font_family": "SF Pro",
+  "buffer_font_size": 12,
+  "buffer_font_family": "JuliaMono",
   "theme": {
     "mode": "system",
     "light": "One Light",

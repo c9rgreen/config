@@ -71,6 +71,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- }}}
 
 -- Packages {{{
+---@diagnostic disable: undefined-global
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
@@ -124,11 +125,6 @@ require('mini.move').setup({
 
 require('mini.hipatterns').setup({
    highlighters = {
-      fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-      hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-      todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-      note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
-
       hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
    },
 })
@@ -146,7 +142,9 @@ require('mini.snippets').setup({
 
 require('mini.deps').setup({ path = { package = path_package } })
 
+---@diagnostic disable: undefined-global
 local add = MiniDeps.add
+
 -- LSP
 add("neovim/nvim-lspconfig")
 
@@ -219,10 +217,6 @@ require("codecompanion").setup({
       },
    },
 })
-
--- Colorscheme
-add("savq/melange-nvim")
--- vim.cmd.colorscheme "melange"
 
 -- Org mode
 add("nvim-orgmode/orgmode")
