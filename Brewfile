@@ -40,10 +40,5 @@ brew 'uv'
 #
 # Casks
 #
+cask 'devonthink'
 cask 'ghostty'
-cask 'marked'
-
-#
-# Fonts
-#
-cask 'font-juliamono'
