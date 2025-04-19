@@ -4,6 +4,7 @@
 #
 # Packages
 #
+brew 'asciidoctor'
 brew 'asdf'
 brew 'caddy'
 brew 'chafa'
@@ -39,13 +40,10 @@ brew 'uv'
 #
 # Casks
 #
-cask 'bbedit'
-cask 'busycal'
 cask 'ghostty'
 cask 'marked'
 
 #
 # Fonts
 #
-cask 'font-recursive-desktop'
-cask 'font-recursive-code'
+cask 'font-juliamono'
