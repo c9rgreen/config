@@ -40,5 +40,5 @@ brew 'uv'
 #
 # Casks
 #
-cask 'devonthink'
+cask 'chromium'
 cask 'ghostty'
