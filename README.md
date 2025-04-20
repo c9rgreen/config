@@ -4,10 +4,9 @@
 
 ## Highlights
 
-| Role             | Tool                             |
-| ---------------- | -------------------------------- |
-| Terminal         | [Ghostty](https://ghostty.org)   |
-| Virtual Machines | [OrbStack](https://orbstack.dev) |
-| Shell            | [Fish](https://fishshell.com)    |
-| Editor           | [Neovim](https://neovim.io)      |
-
+| Role             | Tool                           |
+| ---------------- | ------------------------------ |
+| Terminal         | [Ghostty](https://ghostty.org) |
+| Virtual Machines | [Lima](https://lima-vm.io)     |
+| Shell            | [Fish](https://fishshell.com)  |
+| Editor           | [Neovim](https://neovim.io)    |
