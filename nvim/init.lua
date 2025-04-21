@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
    desc = "Use Prettier when possible "
 })
 
--- Use the built-in LSP formatter 
+-- Use the built-in LSP formatter
 -- Enable via g:lsp_auto_format = 1
 vim.api.nvim_create_autocmd("LspAttach", {
    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
@@ -220,7 +220,10 @@ require("codecompanion").setup({
 
 -- Org mode
 add("nvim-orgmode/orgmode")
-require("orgmode").setup()
+require("orgmode").setup({
+   org_agenda_files = '~/.orgfiles/**/*',
+   org_default_notes_file = '~/.orgfiles/refile.org',
+})
 
 -- Git, DB, Endings, Vinegar, Projectionist
 add("tpope/vim-fugitive")
