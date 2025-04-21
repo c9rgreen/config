@@ -1,8 +1,10 @@
 # vim: set filetype=ghostty
 
 command = /opt/homebrew/bin/fish
-font-family = "Berkeley Mono"
-font-size = "14"
+font-family = "SF Mono"
+font-size = "13"
+font-thicken = true 
+font-thicken-strength = 5
 theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
 mouse-hide-while-typing = true
