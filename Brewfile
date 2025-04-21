@@ -4,6 +4,7 @@
 #
 # Packages
 #
+brew 'asciidoctor'
 brew 'asdf'
 brew 'caddy'
 brew 'chafa'
@@ -39,14 +40,5 @@ brew 'uv'
 #
 # Casks
 #
-cask 'bbedit'
-cask 'busycal'
+cask 'chromium'
 cask 'ghostty'
-cask 'inkscape'
-cask 'marked'
-cask 'zed'
-
-#
-# Fonts
-#
-cask 'font-juliamono'
