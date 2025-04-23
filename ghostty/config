@@ -1,13 +1,12 @@
 # vim: set filetype=ghostty
 
 command = /opt/homebrew/bin/fish
-font-family = "SF Mono"
+shell-integration = fish
+font-family = "0xProto"
 font-size = "13"
-font-thicken = true 
-font-thicken-strength = 5
-theme = dark:Apple System Colors,light:Apple System Colors Light
+theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
-shell-integration = fish
+macos-icon = xray
