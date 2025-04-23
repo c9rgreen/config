@@ -140,9 +140,6 @@ require('mini.snippets').setup({
    },
 })
 
--- Requires mini.hues
-colorscheme('natural')
-
 require('mini.deps').setup({ path = { package = path_package } })
 
 ---@diagnostic disable: undefined-global
