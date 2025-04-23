@@ -199,25 +199,6 @@ add("JuliaEditorSupport/julia-vim")
 -- Go
 add("fatih/vim-go")
 
--- AI
-add({
-   source = 'olimorris/codecompanion.nvim',
-   depends = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-   }
-})
-require("codecompanion").setup({
-   strategies = {
-      chat = {
-         adapter = "anthropic",
-      },
-      inline = {
-         adapter = "anthropic",
-      },
-   },
-})
-
 -- Org mode
 add("nvim-orgmode/orgmode")
 require("orgmode").setup({
