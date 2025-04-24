@@ -4,8 +4,10 @@
 #
 # Packages
 #
+brew 'aider'
 brew 'asciidoctor'
 brew 'asdf'
+brew 'awscli'
 brew 'caddy'
 brew 'chafa'
 brew 'direnv'
@@ -21,6 +23,7 @@ brew 'graphviz'
 brew 'hub'
 brew 'hugo'
 brew 'julia'
+brew 'lf'
 brew 'lima'
 brew 'lua-language-server'
 brew 'neovim'
