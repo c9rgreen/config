@@ -10,4 +10,4 @@ mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
 macos-icon = xray
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = global:ctrl+space=toggle_quick_terminal
