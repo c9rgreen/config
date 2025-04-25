@@ -1,0 +1,226 @@
+{
+    "Document Header": {
+        "prefix": "header",
+        "body": [
+            "#+TITLE: ${1:Document Title}",
+            "#+AUTHOR: ${2:Author Name}",
+            "#+DATE: ${3:$(new Date().toISOString().split('T')[0])}",
+            "#+OPTIONS: ${4:toc:nil num:nil}",
+            "#+STARTUP: ${5:overview}",
+            "",
+            "* ${6:First Heading}",
+            "${0}"
+        ],
+        "description": "Create a complete Org-mode document header"
+    },
+    "Heading": {
+        "prefix": "h",
+        "body": "* ${1:heading}",
+        "description": "Create a level 1 heading"
+    },
+    "Subheading": {
+        "prefix": "hh",
+        "body": "** ${1:subheading}",
+        "description": "Create a level 2 heading"
+    },
+    "Subsubheading": {
+        "prefix": "hhh",
+        "body": "*** ${1:subsubheading}",
+        "description": "Create a level 3 heading"
+    },
+    "TODO Item": {
+        "prefix": "todo",
+        "body": "* TODO ${1:task}",
+        "description": "Create a TODO item"
+    },
+    "DONE Item": {
+        "prefix": "done",
+        "body": "* DONE ${1:completed task}",
+        "description": "Create a DONE item"
+    },
+    "Checkbox": {
+        "prefix": "cb",
+        "body": "- [ ] ${1:item}",
+        "description": "Create an unchecked checkbox"
+    },
+    "Checked Checkbox": {
+        "prefix": "cbx",
+        "body": "- [X] ${1:completed item}",
+        "description": "Create a checked checkbox"
+    },
+    "Source Block": {
+        "prefix": "src",
+        "body": "#+BEGIN_SRC ${1:language}\n${2:code}\n#+END_SRC",
+        "description": "Create a source code block"
+    },
+    "Quote Block": {
+        "prefix": "quote",
+        "body": "#+BEGIN_QUOTE\n${1:quoted text}\n#+END_QUOTE",
+        "description": "Create a quote block"
+    },
+    "Example Block": {
+        "prefix": "example",
+        "body": "#+BEGIN_EXAMPLE\n${1:example}\n#+END_EXAMPLE",
+        "description": "Create an example block"
+    },
+    "Link": {
+        "prefix": "link",
+        "body": "[[${1:link}][${2:description}]]",
+        "description": "Create a link"
+    },
+    "Table Row": {
+        "prefix": "tr",
+        "body": "| ${1:column1} | ${2:column2} | ${3:column3} |",
+        "description": "Create a table row"
+    },
+    "Table Header Row": {
+        "prefix": "trh",
+        "body": "| ${1:header1} | ${2:header2} | ${3:header3} |\n|----------|----------|----------|",
+        "description": "Create a table header row with separators"
+    },
+    "Table": {
+        "prefix": "table",
+        "body": "| ${1:header1} | ${2:header2} | ${3:header3} |\n|----------|----------|----------|\n| ${4:data1}   | ${5:data2}   | ${6:data3}   |",
+        "description": "Create a simple table with header"
+    },
+    "Date": {
+        "prefix": "date",
+        "body": "<${1:$(new Date().toISOString().split('T')[0]) }>",
+        "description": "Insert today's date"
+    },
+    "Deadline": {
+        "prefix": "deadline",
+        "body": "DEADLINE: <${1:$(new Date().toISOString().split('T')[0])}>",
+        "description": "Insert a deadline with today's date"
+    },
+    "Scheduled": {
+        "prefix": "scheduled",
+        "body": "SCHEDULED: <${1:$(new Date().toISOString().split('T')[0])}>",
+        "description": "Insert a scheduled date with today's date"
+    },
+    "Properties Drawer": {
+        "prefix": "prop",
+        "body": ":PROPERTIES:\n:${1:property}: ${2:value}\n:END:",
+        "description": "Create a properties drawer"
+    },
+    "Tag": {
+        "prefix": "tag",
+        "body": ":${1:tagname}:",
+        "description": "Create a tag"
+    },
+    "Comment Line": {
+        "prefix": "comment",
+        "body": "# ${1:comment}",
+        "description": "Create a comment line"
+    },
+    "Bold": {
+        "prefix": "bold",
+        "body": "*${1:bold text}*",
+        "description": "Make text bold"
+    },
+    "Italic": {
+        "prefix": "italic",
+        "body": "/${1:italic text}/",
+        "description": "Make text italic"
+    },
+    "Underline": {
+        "prefix": "underline",
+        "body": "_${1:underlined text}_",
+        "description": "Make text underlined"
+    },
+    "Strike": {
+        "prefix": "strike",
+        "body": "+${1:strikethrough text}+",
+        "description": "Make text strikethrough"
+    },
+    "Verbatim": {
+        "prefix": "verbatim",
+        "body": "=${1:verbatim text}=",
+        "description": "Make text verbatim"
+    },
+    "Code": {
+        "prefix": "code",
+        "body": "~${1:code text}~",
+        "description": "Make text code"
+    },
+    "Priority": {
+        "prefix": "pri",
+        "body": "[#${1:A}]",
+        "description": "Add a priority"
+    },
+    "Bullet List": {
+        "prefix": "list",
+        "body": "- ${1:item1}\n- ${2:item2}\n- ${3:item3}",
+        "description": "Create a bullet list"
+    },
+    "Numbered List": {
+        "prefix": "nlist",
+        "body": "1. ${1:item1}\n2. ${2:item2}\n3. ${3:item3}",
+        "description": "Create a numbered list"
+    },
+    "Definition List": {
+        "prefix": "dlist",
+        "body": "- ${1:term1} :: ${2:definition1}\n- ${3:term2} :: ${4:definition2}",
+        "description": "Create a definition list"
+    },
+    "Footnote": {
+        "prefix": "fn",
+        "body": "[fn:${1:label}] ${2:text}",
+        "description": "Create a footnote"
+    },
+    "Horizontal Rule": {
+        "prefix": "hr",
+        "body": "-----",
+        "description": "Insert horizontal rule"
+    },
+    "Document Title": {
+        "prefix": "title",
+        "body": "#+TITLE: ${1:document title}",
+        "description": "Add document title"
+    },
+    "Document Author": {
+        "prefix": "author",
+        "body": "#+AUTHOR: ${1:author name}",
+        "description": "Add document author"
+    },
+    "Document Date": {
+        "prefix": "docdate",
+        "body": "#+DATE: ${1:$(new Date().toISOString().split('T')[0])}",
+        "description": "Add document date with today's date"
+    },
+    "Export Options": {
+        "prefix": "options",
+        "body": "#+OPTIONS: ${1:options}",
+        "description": "Add export options"
+    },
+    "LaTeX Header": {
+        "prefix": "latex",
+        "body": "#+LATEX_HEADER: ${1:header}",
+        "description": "Add LaTeX header"
+    },
+    "HTML Header": {
+        "prefix": "html",
+        "body": "#+HTML_HEAD: ${1:header}",
+        "description": "Add HTML header"
+    },
+    "Include File": {
+        "prefix": "include",
+        "body": "#+INCLUDE: \"${1:file}\" ${2:src} ${3:language}",
+        "description": "Include a file"
+    },
+    "Drawer": {
+        "prefix": "drawer",
+        "body": ":${1:DRAWERNAME}:\n${2:content}\n:END:",
+        "description": "Create a drawer"
+    },
+    "LOGBOOK Drawer": {
+        "prefix": "logbook",
+        "body": ":LOGBOOK:\n${1:content}\n:END:",
+        "description": "Create a LOGBOOK drawer"
+    },
+    "Advanced TODO": {
+        "prefix": "atodo",
+        "body": "* TODO [#${1:A}] ${2:task} :${3:tag}:\nDEADLINE: <${4:$(new Date().toISOString().split('T')[0])}>\n${5:description}",
+        "description": "Create a detailed TODO with priority, tag and deadline"
+    }
+}
