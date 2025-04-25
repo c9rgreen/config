@@ -4,7 +4,6 @@
 #
 # Packages
 #
-brew 'aider'
 brew 'asciidoctor'
 brew 'asdf'
 brew 'awscli'
@@ -27,13 +26,11 @@ brew 'hugo'
 brew 'julia'
 brew 'lf'
 brew 'lima'
-brew 'litecli'
 brew 'lua-language-server'
 brew 'neovim'
 brew 'node'
 brew 'pandoc'
 brew 'pdfgrep'
-brew 'pgcli'
 brew 'pnpm'
 brew 'postgresql@17'
 brew 'python3'
