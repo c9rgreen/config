@@ -7,3 +7,4 @@ jgit
 timewarrior
 tmux/plugins
 .envrc
+.aider*
