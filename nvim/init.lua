@@ -212,6 +212,10 @@ add("tpope/vim-dadbod")
 add("tpope/vim-endwise")
 add("tpope/vim-vinegar")
 add("tpope/vim-projectionist")
+
+-- Colorscheme
+add("savq/melange-nvim")
+vim.cmd.colorscheme("melange")
 -- }}}
 
 -- Commands {{{
