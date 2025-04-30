@@ -44,5 +44,5 @@ brew 'uv'
 #
 # Casks
 #
-cask 'chromium'
 cask 'ghostty'
+cask 'orion'
