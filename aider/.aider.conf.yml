@@ -1,5 +1,0 @@
-# https://aider.chat/docs/config/options.html
-
-vim: true # Use VI editing mode in the terminal (default: False)
-light-mode: true # Use colors suitable for a light terminal background (default: False)
-analytics-disable: true # Permanently disable analytics
