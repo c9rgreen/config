@@ -46,3 +46,10 @@ brew 'uv'
 #
 cask 'ghostty'
 cask 'orion'
+cask 'mactex-no-gui'
+
+#
+# Fonts
+#
+font-0xproto
+font-balsamiq-sans
