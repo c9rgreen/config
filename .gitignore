@@ -9,3 +9,4 @@ tmux/plugins
 .envrc
 .aider*
 htop
+.elixir-tools/next-ls.log
