@@ -275,6 +275,7 @@ vim.lsp.enable({
    'intelephense',
    'lua_ls',
    'nextls',
+   'pyright',
    'ts_ls',
    'volar',
    'yamlls',
