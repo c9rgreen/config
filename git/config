@@ -16,20 +16,23 @@
     # Jump
     jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
 
-    # Populate quickfix list with every changed file
-    mr = !git jump diff "$REVIEW_BASE"..HEAD
+    #
+    # For the following aliases, $REVIEW_BASE should usually be set to "main"
+
+    # List an overview of changed files
+    changed = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+
+    # Display changes
+    changes = !git diff $(git merge-base HEAD \"$REVIEW_BASE\") | nvim -
 
     # Display a dependency graph of the changed files
-    deps = !"$HOME"/.config/git/mr-deps.sh
+    deps = !npx depcruise src --affected "$REVIEW_BASE" --output-type dot | dot -T svg | chafa
 
-    # Open a tab with a diff of every changed file
-    comp = !"$HOME"/.config/git/mr-diff.sh
+    # Populate quickfix list with every changed file
+    review = !git jump diff $(git merge-base HEAD \"$REVIEW_BASE\")
 
     # Print the commit SHA of the last common ancestor
     last = !git merge-base $REVIEW_BASE HEAD
-
-    # List an overview of changed files
-    stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
 
     # Convenience
     s = status
