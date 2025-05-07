@@ -16,23 +16,21 @@
     # Jump
     jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
 
-    #
-    # For the following aliases, $REVIEW_BASE should usually be set to "main"
+    # Print the commit SHA of the last common ancestor.
+    # $REVIEW_BASE should usually be set to "main".
+    last = !git merge-base HEAD "$REVIEW_BASE"
 
     # List an overview of changed files
-    changed = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+    changed = !git diff --stat $(git last)
 
-    # Display changes
-    changes = !git diff $(git merge-base HEAD \"$REVIEW_BASE\") | nvim -
+    # Display changes in $EDITOR
+    changes = !git diff $(git last) | "$EDITOR" -
 
     # Display a dependency graph of the changed files
-    deps = !npx depcruise src --affected "$REVIEW_BASE" --output-type dot | dot -T svg | chafa
+    deps = !npx depcruise src --affected $(git last) --output-type dot | dot -T svg | chafa
 
     # Populate quickfix list with every changed file
-    review = !git jump diff $(git merge-base HEAD \"$REVIEW_BASE\")
-
-    # Print the commit SHA of the last common ancestor
-    last = !git merge-base $REVIEW_BASE HEAD
+    review = !git jump diff $(git last)
 
     # Convenience
     s = status
