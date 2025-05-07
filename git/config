@@ -14,7 +14,7 @@
     remotes = ls-remote --heads
 
     # Jump
-    jump = "!$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump"
+    jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
 
     # Print the commit SHA of the last common ancestor.
     # $REVIEW_BASE should usually be set to "main".
