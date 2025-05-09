@@ -46,8 +46,11 @@ brew 'uv'
 # Casks
 #
 cask 'ghostty'
-cask 'orion'
 cask 'mactex-no-gui'
+cask 'omnifocus'
+cask 'omnigraffle'
+cask 'omnioutliner'
+cask 'omniplan'
 
 #
 # Fonts
