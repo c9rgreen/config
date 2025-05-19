@@ -10,3 +10,4 @@ tmux/plugins
 .aider*
 htop
 .elixir-tools/next-ls.log
+glab-cli/config.yml
