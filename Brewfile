@@ -4,7 +4,6 @@
 #
 # Packages
 #
-brew 'asciidoctor'
 brew 'asdf'
 brew 'awscli'
 brew 'caddy'
@@ -24,7 +23,6 @@ brew 'graphviz'
 brew 'htop'
 brew 'hugo'
 brew 'julia'
-brew 'lazygit'
 brew 'lf'
 brew 'lima'
 brew 'lua-language-server'
