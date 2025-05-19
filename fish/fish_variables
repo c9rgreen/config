@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
+SETUVAR --export MANPAGER:'nvim +Man!'
 SETUVAR --export ERL_AFLAGS:\x2dkernel\x1eshell_history\x1eenabled
 SETUVAR --export NPM_CONFIG_CACHE:\x1d
 SETUVAR --export NPM_CONFIG_TMP:\x1d
