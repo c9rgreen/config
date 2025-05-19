@@ -10,8 +10,8 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.fillchars = {
-    fold = '─',
-    diff = '▒'
+   fold = '─',
+   diff = '▒'
 }
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
@@ -44,17 +44,17 @@ vim.g.netrw_banner = 0
 -- Autocommands {{{
 -- Use the built-in LSP formatter
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
-    callback = function(args)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = args.buf,
+   group = vim.api.nvim_create_augroup("LSP", { clear = true }),
+   callback = function(args)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = args.buf,
 
-            callback = function()
-                vim.lsp.buf.format { async = false, id = args.data.client_id }
-            end,
-        })
-    end,
-    desc = "LSP Format on save"
+         callback = function()
+            vim.lsp.buf.format { async = false, id = args.data.client_id }
+         end,
+      })
+   end,
+   desc = "LSP Format on save"
 })
 -- }}}
 
@@ -63,13 +63,13 @@ local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 ---@diagnostic disable: undefined-field
 if not vim.loop.fs_stat(mini_path) then
-    vim.cmd('echo "Installing `mini.nvim`" | redraw')
-    local clone_cmd = {
-        'git', 'clone', '--filter=blob:none',
-        'https://github.com/echasnovski/mini.nvim', mini_path
-    }
-    vim.fn.system(clone_cmd)
-    vim.cmd('packadd mini.nvim | helptags ALL')
+   vim.cmd('echo "Installing `mini.nvim`" | redraw')
+   local clone_cmd = {
+      'git', 'clone', '--filter=blob:none',
+      'https://github.com/echasnovski/mini.nvim', mini_path
+   }
+   vim.fn.system(clone_cmd)
+   vim.cmd('packadd mini.nvim | helptags ALL')
 end
 
 require('mini.deps').setup({ path = { package = path_package } })
@@ -101,65 +101,65 @@ require('mini.surround').setup()
 require('mini.tabline').setup()
 
 require('mini.move').setup({
-    mappings = {
-        left       = '<S-left>',
-        right      = '<S-right>',
-        down       = '<S-down>',
-        up         = '<S-up>',
+   mappings = {
+      left       = '<S-left>',
+      right      = '<S-right>',
+      down       = '<S-down>',
+      up         = '<S-up>',
 
-        line_left  = '<S-left>',
-        line_right = '<S-right>',
-        line_down  = '<S-down>',
-        line_up    = '<S-up>',
-    }
+      line_left  = '<S-left>',
+      line_right = '<S-right>',
+      line_down  = '<S-down>',
+      line_up    = '<S-up>',
+   }
 })
 
 require('mini.hipatterns').setup({
-    highlighters = {
-        hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
-    },
+   highlighters = {
+      hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
+   },
 })
 
 require('mini.snippets').setup({
-    snippets = {
-        require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
-        require('mini.snippets').gen_loader.from_lang(),
-    },
+   snippets = {
+      require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+      require('mini.snippets').gen_loader.from_lang(),
+   },
 })
 
 -- Treesitter
 add({
-    source = "nvim-treesitter/nvim-treesitter",
-    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+   source = "nvim-treesitter/nvim-treesitter",
+   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 
 require('nvim-treesitter.configs').setup({
-    ensure_installed = {
-        "bash",
-        "css",
-        "dockerfile",
-        "eex",
-        "elixir",
-        "gitcommit",
-        "heex",
-        "html",
-        "javascript",
-        "json",
-        "julia",
-        "liquid",
-        "lua",
-        "markdown",
-        "mermaid",
-        "python",
-        "rst",
-        "vim",
-        "vimdoc",
-        "vue",
-        "yaml",
-    },
-    highlight = { enable = true },
-    indent = { enable = true },
-    incremental_selection = { enable = true }
+   ensure_installed = {
+      "bash",
+      "css",
+      "dockerfile",
+      "eex",
+      "elixir",
+      "gitcommit",
+      "heex",
+      "html",
+      "javascript",
+      "json",
+      "julia",
+      "liquid",
+      "lua",
+      "markdown",
+      "mermaid",
+      "python",
+      "rst",
+      "vim",
+      "vimdoc",
+      "vue",
+      "yaml",
+   },
+   highlight = { enable = true },
+   indent = { enable = true },
+   incremental_selection = { enable = true }
 })
 
 -- LSP
@@ -168,8 +168,8 @@ add("neovim/nvim-lspconfig")
 -- Org mode
 add("nvim-orgmode/orgmode")
 require("orgmode").setup({
-    org_agenda_files = '~/.orgfiles/**/*',
-    org_default_notes_file = '~/.orgfiles/refile.org',
+   org_agenda_files = '~/.orgfiles/**/*',
+   org_default_notes_file = '~/.orgfiles/refile.org',
 })
 
 -- Colorscheme
@@ -188,95 +188,96 @@ vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')       
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>') -- Document symbol picker
 vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                    -- Buffer picker
 vim.keymap.set('n', 'K', ':lua MiniPick.builtin.help()<CR>', { noremap = true })                  -- Help picker
+vim.keymap.set('n', '\\', 'za', { noremap = true, silent = true })                                -- Toggle folds with backslash
 -- }}}
 
 -- LSP {{{
 -- See h: lspconfig-all for helpful docs
 vim.lsp.config('ts_ls', {
-    init_options = {
-        plugins = {
-            {
-                name = "@vue/typescript-plugin",
-                location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
-                languages = { "javascript", "typescript", "vue" },
-            },
-        },
-    },
-    filetypes = {
-        "javascript",
-        "typescript",
-        "vue",
-    },
+   init_options = {
+      plugins = {
+         {
+            name = "@vue/typescript-plugin",
+            location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
+            languages = { "javascript", "typescript", "vue" },
+         },
+      },
+   },
+   filetypes = {
+      "javascript",
+      "typescript",
+      "vue",
+   },
 })
 
 vim.lsp.config('volar', {
-    init_options = {
-        typescript = {
-            tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
-        }
-    }
+   init_options = {
+      typescript = {
+         tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
+      }
+   }
 })
 
 vim.lsp.config('eslint', {
-    on_attach = function(_, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "EslintFixAll",
-        })
-    end,
+   on_attach = function(_, bufnr)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         buffer = bufnr,
+         command = "EslintFixAll",
+      })
+   end,
 })
 
 vim.lsp.config('lua_ls', {
-    on_init = function(client)
-        if client.workspace_folders then
-            local path = client.workspace_folders[1].name
-            if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
-                return
-            end
-        end
+   on_init = function(client)
+      if client.workspace_folders then
+         local path = client.workspace_folders[1].name
+         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
+            return
+         end
+      end
 
-        client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-            runtime = {
-                version = 'LuaJIT'
-            },
-            -- Make the server aware of Neovim runtime files
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME
-                }
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+         runtime = {
+            version = 'LuaJIT'
+         },
+         -- Make the server aware of Neovim runtime files
+         workspace = {
+            checkThirdParty = false,
+            library = {
+               vim.env.VIMRUNTIME
             }
-        })
-    end,
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
+         }
+      })
+   end,
+   settings = {
+      Lua = {
+         diagnostics = {
+            globals = { "vim" },
+         },
+         format = {
+            enable = true,
+            defaultConfig = {
+               indent_stle = "space",
             },
-            format = {
-                enable = true,
-                defaultConfig = {
-                    indent_stle = "space",
-                },
-            },
-        }
-    }
+         },
+      }
+   }
 })
 
 vim.lsp.config('nextls', {
-    cmd = { 'nextls', '--stdio' }
+   cmd = { 'nextls', '--stdio' }
 })
 
 vim.lsp.enable({
-    'cssls',
-    'eslint',
-    'html',
-    'intelephense',
-    'lua_ls',
-    'nextls',
-    'pyright',
-    'ts_ls',
-    'volar',
-    'yamlls',
+   'cssls',
+   'eslint',
+   'html',
+   'intelephense',
+   'lua_ls',
+   'nextls',
+   'pyright',
+   'ts_ls',
+   'volar',
+   'yamlls',
 })
 -- }}}
