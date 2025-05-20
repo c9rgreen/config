@@ -9,7 +9,6 @@ brew 'awscli'
 brew 'caddy'
 brew 'chafa'
 brew 'direnv'
-brew 'duckdb'
 brew 'elixir'
 brew 'elixir-tools/tap/next-ls'
 brew 'eza'
@@ -19,9 +18,7 @@ brew 'git'
 brew 'glab'
 brew 'graphviz'
 brew 'hugo'
-brew 'julia'
 brew 'lf'
-brew 'lima'
 brew 'lua-language-server'
 brew 'neovim'
 brew 'node'
@@ -41,10 +38,14 @@ brew 'uv'
 #
 cask 'ghostty'
 cask 'mactex-no-gui'
-cask 'orion'
+cask 'omnifocus'
+cask 'omnigraffle'
+cask 'omnioutliner'
+cask 'omniplan'
+cask 'orbstack'
 
 #
 # Fonts
 #
-font-0xproto
-font-balsamiq-sans
+cask 'font-0xproto'
+cask 'font-balsamiq-sans'
