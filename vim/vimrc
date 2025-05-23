@@ -2,7 +2,7 @@
 
 filetype plugin indent on
 syntax enable
-colorscheme retrobox
+colorscheme xcode
 packadd! editorconfig
 
 " Options {{{
@@ -87,7 +87,7 @@ set sessionoptions-=options
 set viewoptions-=options
 set nolangremap
 set linespace=1
-set termguicolors
+set notermguicolors
 " }}}
 
 " Variables {{{
@@ -134,22 +134,20 @@ nnoremap <leader>h gqip$
 " List buffers
 nnoremap ,, :ls<CR>
 
-" MacVim {{{
-if has('gui_macvim')
-    function! MacAppearance()
-        if v:os_appearance == 1
-            set background=dark
-        else
-            set background=light
-        endif
-    endfunction
+" Set a blinking vertical bar (I-beam) for Insert mode
+let &t_SI = "\e[5 q"
 
-    augroup Appearance
-        autocmd!
-        autocmd OSAppearanceChanged * call MacAppearance()
-    augroup END
+" Set a steady block cursor for Normal mode (when leaving Insert/Replace)
+let &t_EI = "\e[2 q"
 
-    set macligatures
-    set guifont=RecMonoDuotone-Regular:h13
-endif
-" }}}
+" Set a blinking underline cursor for Replace mode
+let &t_SR = "\e[3 q"
+
+" Optional: Set the initial cursor shape when Vim starts
+" This is usually the block cursor for normal mode.
+" The .= appends to any existing t_ti setting.
+let &t_ti .= "\e[2 q"
+
+" Optional: Ensure cursor is reset when Vim exits
+" The .= appends to any existing t_te setting.
+let &t_te .= "\e[2 q"
