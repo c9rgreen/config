@@ -13,7 +13,7 @@ if type -q eza
 end    
 
 #
-# Vim
+# Vim keybindings
 #
 if status is-interactive
     set -U fish_greeting # disable fish greeting
@@ -35,6 +35,16 @@ if status is-interactive
     set fish_cursor_visual block
 
     set fish_vi_force_cursor 1
+end
+
+#
+# Neovim
+#
+if type -q nvim
+    set -gx EDITOR "nvim"
+    set -gx MANPAGER 'nvim +Man!'
+else if type -q vim
+    set -gx EDITOR "vim"
 end
 
 #
