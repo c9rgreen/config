@@ -1,6 +1,6 @@
 # vim: set filetype=ghostty
 
-command = /opt/homebrew/bin/fish
+command = /usr/local/bin/fish
 shell-integration = fish
 font-family = "0xProto"
 font-size = "13"
