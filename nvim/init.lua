@@ -211,7 +211,7 @@ vim.lsp.config('ts_ls', {
    },
 })
 
-vim.lsp.config('volar', {
+vim.lsp.config('vue_ls', {
    init_options = {
       typescript = {
          tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
@@ -278,7 +278,7 @@ vim.lsp.enable({
    'nextls',
    'pyright',
    'ts_ls',
-   'volar',
+   'vue_ls',
    'yamlls',
 })
 -- }}}
