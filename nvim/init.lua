@@ -44,19 +44,19 @@ vim.g.netrw_banner = 0
 
 -- Autocommands {{{
 -- Use the built-in LSP formatter
-vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("LSP", { clear = true }),
-   callback = function(args)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         buffer = args.buf,
-
-         callback = function()
-            vim.lsp.buf.format { async = false, id = args.data.client_id }
-         end,
-      })
-   end,
-   desc = "LSP Format on save"
-})
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
+--    callback = function(args)
+--       vim.api.nvim_create_autocmd("BufWritePre", {
+--          buffer = args.buf,
+--
+--          callback = function()
+--             vim.lsp.buf.format { async = false, id = args.data.client_id }
+--          end,
+--       })
+--    end,
+--    desc = "LSP Format on save"
+-- })
 -- }}}
 
 -- Package Manager {{{
@@ -219,11 +219,15 @@ vim.lsp.config('vue_ls', {
    }
 })
 
-vim.lsp.config('eslint', {
-   on_attach = function(_, bufnr)
+local base_on_attach = vim.lsp.config.eslint.on_attach
+vim.lsp.config("eslint", {
+   on_attach = function(client, bufnr)
+      if not base_on_attach then return end
+
+      base_on_attach(client, bufnr)
       vim.api.nvim_create_autocmd("BufWritePre", {
          buffer = bufnr,
-         command = "EslintFixAll",
+         command = "LspEslintFixAll",
       })
    end,
 })
