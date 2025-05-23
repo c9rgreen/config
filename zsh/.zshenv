@@ -18,4 +18,4 @@ export WORDCHARS='*?[]~&;!$%^<>'
 export GREP_OPTIONS='--color=auto'
 
 # Text editor
-export EDITOR="nvim"
+export EDITOR="vim"
