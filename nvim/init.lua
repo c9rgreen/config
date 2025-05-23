@@ -2,6 +2,7 @@
 
 -- Options, Abbreviations {{{
 vim.opt.clipboard = 'unnamedplus'
+vim.g.clipboard = 'osc52' -- Force OSC 52
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
 vim.opt.guicursor:append("a:blinkon1")
