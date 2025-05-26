@@ -165,17 +165,6 @@ require('nvim-treesitter.configs').setup({
 
 -- LSP
 add("neovim/nvim-lspconfig")
-
--- Org mode
-add("nvim-orgmode/orgmode")
-require("orgmode").setup({
-   org_agenda_files = '~/.orgfiles/**/*',
-   org_default_notes_file = '~/.orgfiles/refile.org',
-})
-
--- Colorscheme
-add("savq/melange-nvim")
-vim.cmd.colorscheme("melange")
 -- }}}
 
 -- Mappings {{{
