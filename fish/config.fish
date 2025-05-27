@@ -54,6 +54,11 @@ if type -q direnv
     direnv hook fish | source
 end
 
+# NPM
+if type -q npm
+    set -gx NPM_CONFIG_USERCONFIG "$HOME/.config/npm/config"
+end
+
 #
 # ASDF
 #
