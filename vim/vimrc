@@ -2,7 +2,13 @@
 
 filetype plugin indent on
 syntax enable
-colorscheme wildcharm
+
+" Colorscheme
+try
+  colorscheme xcode
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme wildcharm
+endtry
 packadd! editorconfig
 
 " Options {{{
