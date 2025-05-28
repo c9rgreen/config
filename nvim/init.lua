@@ -1,7 +1,8 @@
 -- vim: foldmethod=marker foldlevel=0
 
 -- Options, Abbreviations {{{
-vim.opt.clipboard = 'unnamedplus'
+
+vim.opt.clipboard:append('unnamedplus')
 vim.g.clipboard = 'osc52' -- Force OSC 52
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
