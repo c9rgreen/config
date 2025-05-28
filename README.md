@@ -15,3 +15,4 @@
 - On macOS I use Vim. On Arch Linux I use Neovim.
 - [BBEdit](https://www.barebones.com) is a useful multi-purpose text utility.
 - [OmniGroup](https://www.omnigroup.com) apps are essential.
+- [Ghostty's docs](https://ghostty.org/docs/help/terminfo#ssh) are helpful since I use Ghostty to SSH into machines which do not have its `terminfo` entry.
