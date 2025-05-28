@@ -10,7 +10,7 @@ mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
 macos-icon = xray
-keybind = global:ctrl+space=toggle_quick_terminal
+keybind = global:shift+alt+space=toggle_quick_terminal
 clipboard-read = allow
 clipboard-write = allow
 copy-on-select = clipboard
