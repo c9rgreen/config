@@ -1,3 +1,6 @@
 [submodule "vim/pack/github/start/vim-colors-xcode"]
 	path = vim/pack/github/start/vim-colors-xcode
 	url = https://github.com/lunacookies/vim-colors-xcode.git
+[submodule "elixir/lexical"]
+	path = elixir/lexical
+	url = git@github.com:lexical-lsp/lexical.git
