@@ -165,8 +165,8 @@ require('nvim-treesitter.configs').setup({
 })
 
 -- Colorscheme
-add("savq/melange-nvim")
-vim.cmd.colorscheme("melange")
+-- add("savq/melange-nvim")
+-- vim.cmd.colorscheme("melange")
 
 -- LSP
 add("neovim/nvim-lspconfig")
