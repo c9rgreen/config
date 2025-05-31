@@ -164,6 +164,10 @@ require('nvim-treesitter.configs').setup({
    incremental_selection = { enable = true }
 })
 
+-- Colorscheme
+add("savq/melange-nvim")
+vim.cmd.colorscheme("melange")
+
 -- LSP
 add("neovim/nvim-lspconfig")
 -- }}}
