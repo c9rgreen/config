@@ -1,0 +1,26 @@
+# Wayfinder Light
+# Dark: 0 - 7
+# Light: 8 - 15
+
+palette = 0=#040000
+palette = 1=#4b001c
+palette = 2=#044100
+palette = 3=#FC5401
+palette = 4=#0d0044
+palette = 5=#36003e
+palette = 6=#006a63
+palette = 7=#eeeeee
+palette = 8=#bdbdbd
+palette = 9=#ffacbf
+palette = 10=#a6ff9b
+palette = 11=#ffe571
+palette = 12=#aab7ff
+palette = 13=#f9b7ff
+palette = 14=#6ffff2
+palette = 15=#eeeeee
+background = #E6E6E6
+foreground = #050000
+cursor-color = #FC5401
+cursor-text = #E6E6E6
+selection-background = #ffbc91
+selection-foreground = #5f2a00

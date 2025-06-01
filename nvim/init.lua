@@ -36,6 +36,9 @@ vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
 -- Abbreviations
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 vim.cmd.iabbrev ':cg: Christopher Green'
+
+-- Colorscheme
+vim.cmd.colorscheme('wayfinder')
 -- }}}
 
 -- Variables {{{
@@ -163,10 +166,6 @@ require('nvim-treesitter.configs').setup({
    indent = { enable = true },
    incremental_selection = { enable = true }
 })
-
--- Colorscheme
-add("savq/melange-nvim")
-vim.cmd.colorscheme("melange")
 
 -- LSP
 add("neovim/nvim-lspconfig")
