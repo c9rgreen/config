@@ -13,26 +13,26 @@
 # 7       15      White 
 
 palette = 0=#040000
-palette = 1=#4b001c
-palette = 2=#044100
+palette = 1=#23000d
+palette = 2=#0b2100
 palette = 3=#FF3F00
-palette = 4=#0d0044
-palette = 5=#36003e
-palette = 6=#006a63
+palette = 4=#01001e
+palette = 5=#14001c
+palette = 6=#003a32
 palette = 7=#eeeeee
 
 palette = 8=#bdbdbd
-palette = 9=#4b001c
-palette = 10=#044100
+palette = 9=#040000
+palette = 10=#0b2100
 palette = 11=#FF3F00
-palette = 12=#0d0044
-palette = 13=#36003e
-palette = 14=#006a63
+palette = 12=#01001e
+palette = 13=#14001c
+palette = 14=#003a32
 palette = 15=#eeeeee
 
 background = #F2F3F3
 foreground = #050000
 cursor-color = #FF3F00
 cursor-text = #F2F3F3
-selection-background = #ffbc91
-selection-foreground = #5f2a00
+selection-background = #ffd4be
+selection-foreground = #300e00
