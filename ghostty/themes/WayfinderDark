@@ -1,4 +1,4 @@
-# Wayfinder Light
+# Wayfinder Dark
 
 # Key
 # Normal  Bright  Color
@@ -13,26 +13,26 @@
 # 7       15      White 
 
 palette = 0=#040000
-palette = 1=#4b001c
-palette = 2=#044100
-palette = 3=#FF3F00
-palette = 4=#0d0044
-palette = 5=#36003e
-palette = 6=#006a63
+palette = 1=#ffacbf
+palette = 2=#a6ff9b
+palette = 3=#ffe571
+palette = 4=#aab7ff
+palette = 5=#f9b7ff
+palette = 6=#6ffff2
 palette = 7=#eeeeee
 
 palette = 8=#bdbdbd
-palette = 9=#4b001c
-palette = 10=#044100
-palette = 11=#FF3F00
-palette = 12=#0d0044
-palette = 13=#36003e
-palette = 14=#006a63
+palette = 9=#ffacbf
+palette = 10=#a6ff9b
+palette = 11=#ffe571
+palette = 12=#aab7ff
+palette = 13=#f9b7ff
+palette = 14=#6ffff2
 palette = 15=#eeeeee
 
-background = #F2F3F3
-foreground = #050000
+background = #050000
+foreground = #F2F3F3
 cursor-color = #FF3F00
 cursor-text = #F2F3F3
-selection-background = #ffbc91
-selection-foreground = #5f2a00
+selection-background = #5f2a00
+selection-foreground = #ffbc91
