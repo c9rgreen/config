@@ -65,7 +65,6 @@ set virtualedit=all
 set isfname+=32
 set belloff+=ctrlg
 set mouse=a
-set number
 set ttyfast
 set signcolumn=yes
 set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:\ ,foldsep:\ ,eob:\ ,diff:-
