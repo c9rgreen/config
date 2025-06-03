@@ -152,16 +152,15 @@ add("neovim/nvim-lspconfig")
 -- }}}
 
 -- Mappings {{{
-vim.keymap.set('n', '<leader>t', ':tabnew<CR>')                                                   -- Open new tab
-vim.keymap.set('n', '<leader>c', ':%y+<CR>')                                                      -- Copy buffer to clipboard
-vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>', { noremap = true })           -- Show document symbols
-vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                                             -- Open file browser
-vim.keymap.set('n', '<A-CR>', ':lua MiniPick.builtin.files()<CR>')                                -- File picker
-vim.keymap.set('n', '<A-backspace>', ':lua MiniBufremove.delete()<CR>')                           -- Delete file without closing window
-vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')                         -- Live grep
-vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>') -- Document symbol picker
-vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                    -- Buffer picker
-vim.keymap.set('n', 'K', ':lua MiniPick.builtin.help()<CR>', { noremap = true })                  -- Help picker
+vim.keymap.set('n', '<leader>w', ':lua MiniExtra.pickers.lsp({ scope = "workspace_symbol" })<CR>') -- Workspace symbol picker
+vim.keymap.set('n', '<leader>d', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')  -- Document symbol picker
+vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                     -- Buffer picker
+vim.keymap.set('n', '<leader><backspace>', ':lua MiniBufremove.delete()<CR>')                      -- Delete file without closing window
+vim.keymap.set('n', '<CR><CR>', ':lua MiniPick.builtin.files()<CR>')                               -- File picker
+vim.keymap.set('n', '<M-s>', ':lua MiniPick.builtin.grep_live()<CR>')                              -- Live grep
+vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                                              -- Open file browser
+vim.keymap.set('n', 'K', ':lua MiniPick.builtin.help()<CR>')                                       -- Help picker
+vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
 -- }}}
 
 -- LSP {{{
