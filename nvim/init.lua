@@ -1,7 +1,6 @@
 -- vim: foldmethod=marker foldlevel=0
 
 -- Options, Abbreviations {{{
-
 vim.opt.clipboard:append('unnamedplus')
 vim.g.clipboard = 'osc52' -- Force OSC 52
 vim.opt.scrolloff = 8
@@ -30,34 +29,18 @@ vim.opt.number = false
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
 
--- LilyPond
-vim.opt.runtimepath:append("/opt/homebrew/share/lilypond/2.24.3/vim")
-
 -- Abbreviations
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 vim.cmd.iabbrev ':cg: Christopher Green'
+
+-- Use italics for comments
+vim.api.nvim_set_hl(0, 'Comment', { italic = true })
+vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Tree-sitter
 -- }}}
 
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
--- }}}
-
--- Autocommands {{{
--- Use the built-in LSP formatter
--- vim.api.nvim_create_autocmd("LspAttach", {
---    group = vim.api.nvim_create_augroup("LSP", { clear = true }),
---    callback = function(args)
---       vim.api.nvim_create_autocmd("BufWritePre", {
---          buffer = args.buf,
---
---          callback = function()
---             vim.lsp.buf.format { async = false, id = args.data.client_id }
---          end,
---       })
---    end,
---    desc = "LSP Format on save"
--- })
 -- }}}
 
 -- Package Manager {{{
@@ -171,7 +154,7 @@ add("neovim/nvim-lspconfig")
 -- Mappings {{{
 vim.keymap.set('n', '<leader>t', ':tabnew<CR>')                                                   -- Open new tab
 vim.keymap.set('n', '<leader>c', ':%y+<CR>')                                                      -- Copy buffer to clipboard
-vim.keymap.set('n', '<leader>d', ':lua vim.lsp.buf.document_symbol()<CR>')                        -- Show document symbols
+vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>', { noremap = true })           -- Show document symbols
 vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                                             -- Open file browser
 vim.keymap.set('n', '<A-CR>', ':lua MiniPick.builtin.files()<CR>')                                -- File picker
 vim.keymap.set('n', '<A-backspace>', ':lua MiniBufremove.delete()<CR>')                           -- Delete file without closing window
@@ -186,18 +169,18 @@ vim.keymap.set('n', '\\', 'za', { noremap = true, silent = true })              
 local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 local format_on_save = function(client, bufnr)
    vim.notify(vim.inspect(client.supports_method("textDocument/formatting")))
-  -- Only set up format-on-save if the client supports formatting
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = lsp_formatting_augroup, -- Assign to our augroup
-      buffer = bufnr,                 -- Make it buffer-local
-      callback = function()
-        -- Request formatting from this specific client.
-        -- async = false ensures formatting completes before the file is written.
-        vim.lsp.buf.format({ async = false, id = client.id })
-      end,
-    })
-  end
+   -- Only set up format-on-save if the client supports formatting
+   if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+         group = lsp_formatting_augroup, -- Assign to our augroup
+         buffer = bufnr,                 -- Make it buffer-local
+         callback = function()
+            -- Request formatting from this specific client.
+            -- async = false ensures formatting completes before the file is written.
+            vim.lsp.buf.format({ async = false, id = client.id })
+         end,
+      })
+   end
 end
 
 -- See h: lspconfig-all for helpful docs
@@ -273,7 +256,8 @@ vim.lsp.config('lua_ls', {
             },
          },
       }
-   }
+   },
+   on_attach = format_on_save
 })
 
 vim.lsp.config('lexical', {
