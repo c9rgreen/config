@@ -162,7 +162,6 @@ vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')       
 vim.keymap.set('n', '<leader>l', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>') -- Document symbol picker
 vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                    -- Buffer picker
 vim.keymap.set('n', 'K', ':lua MiniPick.builtin.help()<CR>', { noremap = true })                  -- Help picker
-vim.keymap.set('n', '\\', 'za', { noremap = true, silent = true })                                -- Toggle folds with backslash
 -- }}}
 
 -- LSP {{{
