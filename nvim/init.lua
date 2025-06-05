@@ -152,14 +152,20 @@ add("neovim/nvim-lspconfig")
 -- }}}
 
 -- Mappings {{{
-vim.keymap.set('n', '<leader>w', ':lua MiniExtra.pickers.lsp({ scope = "workspace_symbol" })<CR>') -- Workspace symbol picker
-vim.keymap.set('n', '<leader>d', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')  -- Document symbol picker
 vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                     -- Buffer picker
 vim.keymap.set('n', '<leader><backspace>', ':lua MiniBufremove.delete()<CR>')                      -- Delete file without closing window
-vim.keymap.set('n', '<CR><CR>', ':lua MiniPick.builtin.files()<CR>')                               -- File picker
-vim.keymap.set('n', '<M-s>', ':lua MiniPick.builtin.grep_live()<CR>')                              -- Live grep
-vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                                              -- Open file browser
-vim.keymap.set('n', 'K', ':lua MiniPick.builtin.help()<CR>')                                       -- Help picker
+vim.keymap.set('n', '<leader>p', ':lua MiniExtra.pickers.commands()<CR>')                          -- Command picker
+vim.keymap.set('n', '<leader>o', ':lua MiniPick.builtin.files()<CR>')                              -- File picker
+vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')                          -- Live grep
+vim.keymap.set('n', '<leader>w', ':lua MiniExtra.pickers.lsp({ scope = "workspace_symbol" })<CR>') -- Workspace symbol picker
+vim.keymap.set('n', '<leader>d', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')  -- Document symbol picker
+vim.keymap.set('n', '<leader>-', ':lua MiniFiles.open()<CR>')                                      -- Open file browser
+vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')                               -- Help picker
+vim.keymap.set('n', '<leader>i', ':lua MiniExtra.pickers.diagnostic()<CR>')                        -- Diagnostic picker
+vim.keymap.set('n', '<leader>s', ':lua MiniExtra.pickers.git_branches()<CR>')                      -- Git branch picker
+vim.keymap.set('n', '<leader>k', ':lua MiniExtra.pickers.keymaps()<CR>')                           -- Keymap picker
+vim.keymap.set('n', '<leader>q', ':lua MiniExtra.pickers.list({ scope = "quickfix" })<CR>')        -- Quickfix list picker
+vim.keymap.set('n', '<leader>m', ':lua MiniExtra.pickers.marks()<CR>')                             -- Marks picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
 -- }}}
 
@@ -167,7 +173,6 @@ vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')             
 local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 local format_on_save = function(client, bufnr)
    vim.notify(vim.inspect(client.supports_method("textDocument/formatting")))
-   -- Only set up format-on-save if the client supports formatting
    if client.supports_method("textDocument/formatting") then
       vim.api.nvim_create_autocmd("BufWritePre", {
          group = lsp_formatting_augroup, -- Assign to our augroup
