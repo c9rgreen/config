@@ -2,7 +2,7 @@
 
 -- Options, Abbreviations {{{
 vim.opt.clipboard:append('unnamedplus')
-vim.g.clipboard = 'osc52' -- Force OSC 52
+-- vim.g.clipboard = 'osc52' -- Force OSC 52
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
 vim.opt.guicursor:append("a:blinkon1")
@@ -79,7 +79,7 @@ require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.hipatterns').setup()
 require('mini.icons').setup({ style = 'ascii' })
-require('mini.indentscope').setup({ symbol = '⎸' })
+-- require('mini.indentscope').setup({ symbol = '⎸' })
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
