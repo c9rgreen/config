@@ -9,7 +9,7 @@ end
 # Eza
 #
 if type -q eza
-    alias ls="eza --icons=always --git"
+    alias ls="eza --git"
 end    
 
 #

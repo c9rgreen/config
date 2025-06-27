@@ -36,6 +36,9 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 -- Use italics for comments
 vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Tree-sitter
+
+-- Colorscheme
+vim.cmd.colorscheme('retrobox')
 -- }}}
 
 -- Variables {{{
@@ -75,7 +78,7 @@ require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.hipatterns').setup()
-require('mini.icons').setup()
+require('mini.icons').setup({ style = 'ascii' })
 require('mini.indentscope').setup({ symbol = '⎸' })
 require('mini.pairs').setup()
 require('mini.pick').setup()
