@@ -1,6 +1,7 @@
 # vim: ft=ruby
 
 brew "asdf"
+brew "awscli"
 brew "direnv"
 brew "docker"
 brew "elixir"
