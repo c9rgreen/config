@@ -25,6 +25,8 @@ vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.diagnostic.config({ virtual_text = true })
 vim.opt.number = false
+vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
+vim.opt.grepformat = '%f:%l:%c:%m'
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
@@ -76,7 +78,7 @@ require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.hipatterns').setup()
 require('mini.icons').setup({ style = 'glyphs' })
--- require('mini.indentscope').setup({ symbol = '⎸' })
+require('mini.indentscope').setup({ symbol = '⎸' })
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
@@ -149,6 +151,15 @@ require('nvim-treesitter.configs').setup({
 
 -- LSP
 add("neovim/nvim-lspconfig")
+
+-- Orgmode
+add("nvim-orgmode/orgmode")
+
+-- Git, Database, K8S
+add("tpope/vim-fugitive")
+add("tpope/vim-dadbod")
+add("kristijanhusak/vim-dadbod-ui")
+add("Ramilito/kubectl.nvim")
 -- }}}
 
 -- Mappings {{{
