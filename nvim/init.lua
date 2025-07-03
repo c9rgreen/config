@@ -158,8 +158,12 @@ add("nvim-orgmode/orgmode")
 -- Tree viewer
 add("nvim-tree/nvim-tree.lua")
 add("nvim-tree/nvim-web-devicons")
-
 require("nvim-tree").setup()
+
+
+-- Colorscheme
+add("savq/melange-nvim")
+vim.cmd.colorscheme('melange')
 
 -- Other
 add("Ramilito/kubectl.nvim")
@@ -167,6 +171,7 @@ add("kristijanhusak/vim-carbon-now-sh")
 add("kristijanhusak/vim-dadbod-ui")
 add("rbong/vim-flog")
 add("shumphrey/fugitive-gitlab.vim")
+add("sindrets/diffview.nvim")
 add("tpope/vim-dadbod")
 add("tpope/vim-endwise")
 add("tpope/vim-fugitive")
