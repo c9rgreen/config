@@ -163,6 +163,7 @@ require("nvim-tree").setup()
 
 -- Other
 add("Ramilito/kubectl.nvim")
+add("kristijanhusak/vim-carbon-now-sh")
 add("kristijanhusak/vim-dadbod-ui")
 add("rbong/vim-flog")
 add("shumphrey/fugitive-gitlab.vim")
