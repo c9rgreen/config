@@ -155,11 +155,22 @@ add("neovim/nvim-lspconfig")
 -- Orgmode
 add("nvim-orgmode/orgmode")
 
--- Git, Database, K8S
-add("tpope/vim-fugitive")
-add("tpope/vim-dadbod")
-add("kristijanhusak/vim-dadbod-ui")
+-- Tree viewer
+add("nvim-tree/nvim-tree.lua")
+add("nvim-tree/nvim-web-devicons")
+
+require("nvim-tree").setup()
+
+-- Other
 add("Ramilito/kubectl.nvim")
+add("kristijanhusak/vim-dadbod-ui")
+add("rbong/vim-flog")
+add("shumphrey/fugitive-gitlab.vim")
+add("tpope/vim-dadbod")
+add("tpope/vim-endwise")
+add("tpope/vim-fugitive")
+add("tpope/vim-rhubarb")
+add("tpope/vim-vinegar")
 -- }}}
 
 -- Mappings {{{
