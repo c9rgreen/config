@@ -160,11 +160,6 @@ add("nvim-tree/nvim-tree.lua")
 add("nvim-tree/nvim-web-devicons")
 require("nvim-tree").setup()
 
-
--- Colorscheme
-add("savq/melange-nvim")
-vim.cmd.colorscheme('melange')
-
 -- Other
 add("Ramilito/kubectl.nvim")
 add("kristijanhusak/vim-carbon-now-sh")
