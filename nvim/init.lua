@@ -160,6 +160,10 @@ add("nvim-tree/nvim-tree.lua")
 add("nvim-tree/nvim-web-devicons")
 require("nvim-tree").setup()
 
+-- Code outline
+add("stevearc/aerial.nvim")
+require("aerial").setup()
+
 -- Other
 add("Ramilito/kubectl.nvim")
 add("kristijanhusak/vim-carbon-now-sh")
