@@ -11,3 +11,4 @@ tmux/plugins
 htop
 .elixir-tools/next-ls.log
 glab-cli/config.yml
+.env*
