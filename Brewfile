@@ -1,5 +1,6 @@
 # vim: ft=ruby
 
+# Command-line utilities
 brew "asdf"
 brew "awscli"
 brew "chafa"
@@ -17,3 +18,6 @@ brew "lua-language-server"
 brew "neovim"
 brew "node"
 brew "ripgrep"
+
+# Fonts
+brew "font-0xproto-nerd-font"
