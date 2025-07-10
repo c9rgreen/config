@@ -22,4 +22,4 @@ brew "ripgrep"
 brew "universal-ctags"
 
 # Fonts
-brew "font-0xproto-nerd-font"
+cask "font-0xproto-nerd-font"
