@@ -13,11 +13,13 @@ brew "git"
 brew "gpg"
 brew "graphviz"
 brew "hugo"
+brew "julia"
 brew "lf"
 brew "lua-language-server"
 brew "neovim"
 brew "node"
 brew "ripgrep"
+brew "universal-ctags"
 
 # Fonts
 brew "font-0xproto-nerd-font"
