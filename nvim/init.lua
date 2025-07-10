@@ -38,13 +38,6 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 -- Use italics for comments
 vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Tree-sitter
-
--- Colorscheme
-if vim.o.termguicolors then
-   -- Use default colorscheme
-else
-   vim.cmd.colorscheme("retrobox")
-end
 -- }}}
 
 -- Variables {{{
@@ -183,6 +176,15 @@ add("tpope/vim-endwise")
 add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-vinegar")
+
+-- Xcode colorscheme
+add("lunacookies/vim-colors-xcode")
+
+if vim.o.termguicolors then
+   -- Use default colorscheme
+else
+   vim.cmd.colorscheme("xcode")
+end
 -- }}}
 
 -- Mappings {{{
