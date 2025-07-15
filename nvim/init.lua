@@ -176,15 +176,6 @@ add("tpope/vim-endwise")
 add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-vinegar")
-
--- Xcode colorscheme
-add("lunacookies/vim-colors-xcode")
-
-if vim.o.termguicolors then
-   -- Use default colorscheme
-else
-   vim.cmd.colorscheme("xcode")
-end
 -- }}}
 
 -- Mappings {{{

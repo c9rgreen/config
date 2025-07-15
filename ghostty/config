@@ -2,7 +2,7 @@
 
 command = /usr/local/bin/fish
 shell-integration = fish
-font-family = "0xProto"
+font-family = "SF Mono"
 font-size = "13"
 theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
