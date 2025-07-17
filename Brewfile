@@ -21,5 +21,5 @@ brew "node"
 brew "ripgrep"
 brew "universal-ctags"
 
-# Fonts
-cask "font-0xproto-nerd-font"
+# Font
+cask "font-0xproto"

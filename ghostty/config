@@ -2,14 +2,14 @@
 
 command = /usr/local/bin/fish
 shell-integration = fish
-font-family = "SF Mono"
+font-family = "0xProto"
 font-size = "13"
 theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
-macos-icon = xray
+macos-icon = paper
 keybind = global:shift+alt+space=toggle_quick_terminal
 clipboard-read = allow
 clipboard-write = allow
