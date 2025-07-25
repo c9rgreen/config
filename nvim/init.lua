@@ -245,11 +245,22 @@ vim.lsp.config('lua_ls', {
    on_attach = format_on_save
 })
 
+-- As of 2025-07-25T12:34:51, Lexical requires OTP 27
+-- asdf set elixir 1.18.4-otp-27 (project or home)
+-- git clone git@github.com:lexical-lsp/lexical.git $HOME/.lexical
+-- mix deps.get
+-- mix package
+vim.lsp.config('lexical', {
+   cmd = { vim.fn.expand('$HOME/.lexical/_build/dev/package/lexical/bin/start_lexical.sh') },
+   on_attach = format_on_save
+})
+
 vim.lsp.enable({
    'cssls',
    'eslint',
    'html',
    'intelephense',
+   'lexical',
    'lua_ls',
    'pyright',
    'ts_ls',

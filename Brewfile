@@ -1,6 +1,7 @@
 # vim: ft=ruby
 
 # Command-line utilities
+brew "asdf"
 brew "awscli"
 brew "chafa"
 brew "direnv"
