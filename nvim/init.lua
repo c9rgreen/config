@@ -94,7 +94,6 @@ add({
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 add("nvim-treesitter/nvim-treesitter-textobjects")
-add("nvim-treesitter/nvim-treesitter-context")
 
 require('nvim-treesitter.configs').setup({
    ensure_installed = {
@@ -125,6 +124,10 @@ require('nvim-treesitter.configs').setup({
    incremental_selection = { enable = true }
 })
 
+-- Treesitter context
+add('nvim-treesitter/nvim-treesitter-context')
+
+require('treesitter-context').setup()
 
 -- LSP
 add("neovim/nvim-lspconfig")
