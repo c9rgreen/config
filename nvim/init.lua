@@ -66,7 +66,6 @@ local add = MiniDeps.add
 -- }}}
 
 -- Packages {{{
-require('mini.align').setup()
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
@@ -76,36 +75,11 @@ require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
-require('mini.hipatterns').setup()
 require('mini.icons').setup({ style = 'glyphs' })
-require('mini.indentscope').setup({ symbol = '⎸' })
-require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
-require('mini.starter').setup()
 require('mini.statusline').setup()
-require('mini.surround').setup()
 require('mini.tabline').setup()
-
-require('mini.move').setup({
-   mappings = {
-      left       = '<S-left>',
-      right      = '<S-right>',
-      down       = '<S-down>',
-      up         = '<S-up>',
-
-      line_left  = '<S-left>',
-      line_right = '<S-right>',
-      line_down  = '<S-down>',
-      line_up    = '<S-up>',
-   }
-})
-
-require('mini.hipatterns').setup({
-   highlighters = {
-      hex_color = require('mini.hipatterns').gen_highlighter.hex_color(),
-   },
-})
 
 require('mini.snippets').setup({
    snippets = {
@@ -119,6 +93,8 @@ add({
    source = "nvim-treesitter/nvim-treesitter",
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
+add("nvim-treesitter/nvim-treesitter-textobjects")
+add("nvim-treesitter/nvim-treesitter-context")
 
 require('nvim-treesitter.configs').setup({
    ensure_installed = {
@@ -149,33 +125,9 @@ require('nvim-treesitter.configs').setup({
    incremental_selection = { enable = true }
 })
 
+
 -- LSP
 add("neovim/nvim-lspconfig")
-
--- Orgmode
-add("nvim-orgmode/orgmode")
-
--- Tree viewer
-add("nvim-tree/nvim-tree.lua")
-add("nvim-tree/nvim-web-devicons")
-require("nvim-tree").setup()
-
--- Code outline
-add("stevearc/aerial.nvim")
-require("aerial").setup()
-
--- Other
-add("Ramilito/kubectl.nvim")
-add("kristijanhusak/vim-carbon-now-sh")
-add("kristijanhusak/vim-dadbod-ui")
-add("rbong/vim-flog")
-add("shumphrey/fugitive-gitlab.vim")
-add("sindrets/diffview.nvim")
-add("tpope/vim-dadbod")
-add("tpope/vim-endwise")
-add("tpope/vim-fugitive")
-add("tpope/vim-rhubarb")
-add("tpope/vim-vinegar")
 -- }}}
 
 -- Mappings {{{
