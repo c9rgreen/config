@@ -245,8 +245,8 @@ vim.lsp.config('lua_ls', {
    on_attach = format_on_save
 })
 
-vim.lsp.config('lexical', {
-   cmd = { vim.fn.expand('$HOME/.config/elixir/lexical/_build/dev/package/lexical/bin/start_lexical.sh') },
+vim.lsp.config('nextls', {
+   cmd = { 'nextls', '--stdio' },
    on_attach = format_on_save
 })
 
@@ -256,7 +256,7 @@ vim.lsp.enable({
    'html',
    'intelephense',
    'lua_ls',
-   'lexical',
+   'nextls',
    'pyright',
    'ts_ls',
    'vue_ls',

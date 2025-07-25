@@ -1,12 +1,12 @@
 # vim: ft=ruby
 
 # Command-line utilities
-brew "asdf"
 brew "awscli"
 brew "chafa"
 brew "direnv"
 brew "docker"
 brew "elixir"
+brew "elixir-tools/tap/next-ls"
 brew "eza"
 brew "fish"
 brew "git"
