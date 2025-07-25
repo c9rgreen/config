@@ -245,18 +245,12 @@ vim.lsp.config('lua_ls', {
    on_attach = format_on_save
 })
 
-vim.lsp.config('nextls', {
-   cmd = { 'nextls', '--stdio' },
-   on_attach = format_on_save
-})
-
 vim.lsp.enable({
    'cssls',
    'eslint',
    'html',
    'intelephense',
    'lua_ls',
-   'nextls',
    'pyright',
    'ts_ls',
    'vue_ls',
