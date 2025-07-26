@@ -18,5 +18,10 @@ brew "neovim"
 brew "node"
 brew "universal-ctags"
 
-# Font
+# Apps
+cask "claude"
+cask "ghostty"
+cask "orbstack"
+
+# Fonts
 cask "font-0xproto"
