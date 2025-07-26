@@ -45,7 +45,7 @@ vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
 -- }}}
 
--- Package Manager {{{
+-- Plugin Manager {{{
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 ---@diagnostic disable: undefined-field
@@ -65,7 +65,7 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add = MiniDeps.add
 -- }}}
 
--- Packages {{{
+-- Plugins {{{
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
@@ -149,6 +149,8 @@ vim.keymap.set('n', '<leader>k', ':lua MiniExtra.pickers.keymaps()<CR>')        
 vim.keymap.set('n', '<leader>q', ':lua MiniExtra.pickers.list({ scope = "quickfix" })<CR>')        -- Quickfix list picker
 vim.keymap.set('n', '<leader>m', ':lua MiniExtra.pickers.marks()<CR>')                             -- Marks picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')                                                        -- Exit terminal mode
+vim.keymap.set('t', '<C-v><Esc>', '<Esc>')                                                         -- Ctrl-V - Esc sends Esc to the terminal
 -- }}}
 
 -- LSP {{{
