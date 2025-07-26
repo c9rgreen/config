@@ -25,8 +25,8 @@ vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.diagnostic.config({ virtual_text = true })
 vim.opt.number = false
-vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
-vim.opt.grepformat = '%f:%l:%c:%m'
+-- vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
+-- vim.opt.grepformat = '%f:%l:%c:%m'
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
