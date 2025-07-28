@@ -10,7 +10,7 @@ end
 #
 if type -q eza
     alias ls="eza --git --icons"
-end    
+end  
 
 #
 # Vim keybindings
@@ -48,14 +48,10 @@ else if type -q vim
 end
 
 #
-# Direnv
-#
-if type -q direnv
-    direnv hook fish | source
-end
-
 # NPM
+#
 if type -q npm
+    # Look for npm config in ~/.config
     set -gx NPM_CONFIG_USERCONFIG "$HOME/.config/npm/config"
 end
 

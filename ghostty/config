@@ -2,7 +2,6 @@
 
 command = /usr/local/bin/fish
 shell-integration = fish
-font-family = "0xProto"
 font-size = "16"
 theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
@@ -13,4 +12,3 @@ macos-icon = paper
 keybind = global:shift+alt+space=toggle_quick_terminal
 clipboard-read = allow
 clipboard-write = allow
-copy-on-select = clipboard

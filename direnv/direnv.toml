@@ -1,2 +1,0 @@
-[global]
-warn_timeout=0 # Specify how long to wait before warning the user that the command is taking too long to execute. Defaults to "5s".
