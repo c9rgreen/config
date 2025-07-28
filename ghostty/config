@@ -3,6 +3,7 @@
 command = /usr/local/bin/fish
 shell-integration = fish
 font-size = "16"
+font-family = "0xProto"
 theme = dark:NvimDark,light:NvimLight
 mouse-shift-capture = true
 mouse-hide-while-typing = true

@@ -25,8 +25,8 @@ vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.diagnostic.config({ virtual_text = true })
 vim.opt.number = false
--- vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
--- vim.opt.grepformat = '%f:%l:%c:%m'
+vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
+vim.opt.grepformat = '%f:%l:%c:%m'
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
@@ -155,8 +155,6 @@ vim.keymap.set('n', '<leader>k', ':lua MiniExtra.pickers.keymaps()<CR>')        
 vim.keymap.set('n', '<leader>q', ':lua MiniExtra.pickers.list({ scope = "quickfix" })<CR>')        -- Quickfix list picker
 vim.keymap.set('n', '<leader>m', ':lua MiniExtra.pickers.marks()<CR>')                             -- Marks picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')                                                        -- Exit terminal mode
-vim.keymap.set('t', '<C-v><Esc>', '<Esc>')                                                         -- Ctrl-V - Esc sends Esc to the terminal
 -- }}}
 
 -- LSP {{{
