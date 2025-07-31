@@ -94,8 +94,8 @@ if type brew &>/dev/null; then
   export PATH="$(brew --prefix)/lib/ruby/gems/3.3.0/bin:$PATH"
 fi
 
-# Direnv
-if type direnv &>/dev/null; then
-  eval "$(direnv hook zsh)"
+# Source extra environment variables
+if [ -f "$HOME/.config/.env" ]; then
+  source "$HOME/.config/.env"
 fi
 
