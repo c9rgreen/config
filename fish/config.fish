@@ -1,3 +1,7 @@
+# Change the default shell to fish, either via
+# (1) Terminal - https://support.apple.com/guide/terminal/change-the-default-shell-trml113/mac
+# (2) System Settings > Users and Groups > Advanced Options - https://support.apple.com/en-us/102547
+
 #
 # Homebrew
 #
@@ -42,7 +46,8 @@ end
 #
 if type -q nvim
     set -gx EDITOR "nvim"
-    set -gx MANPAGER 'nvim +Man!'
+    set -gx MANPAGER "nvim +Man!"
+    set -gx PAGER "nvim -R"
 else if type -q vim
     set -gx EDITOR "vim"
 end
@@ -79,5 +84,6 @@ set --erase _asdf_shims
 #
 # Orbstack
 # Command line tools and shell integration
+# https://orbstack.dev/
 #
 source ~/.orbstack/shell/init2.fish 2>/dev/null || :
