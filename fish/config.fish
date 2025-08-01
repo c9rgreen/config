@@ -47,7 +47,6 @@ end
 if type -q nvim
     set -gx EDITOR "nvim"
     set -gx MANPAGER "nvim +Man!"
-    set -gx PAGER "nvim -R"
 else if type -q vim
     set -gx EDITOR "vim"
 end
