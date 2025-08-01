@@ -16,5 +16,6 @@ glab-cli/config.yml
 # Lexical LSP server logs
 .lexical
 
-# Fish variables
+# Fish shell
 fish/fish_variables
+fish/completions
