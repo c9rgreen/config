@@ -4,7 +4,7 @@
 # ↓ 1. .zshenv    - set environment variables here
 # ↓ 2. .zprofile  - Set the environment for login shells "for ksh fans";
 # ↓ 3. .zshrc     - Set the environment for interactive shells
-# ↓ 			    - Set $PATH in .zshrc to get into the habit of making shell scripts portable.
+# ↓ 			        - Set $PATH in .zshrc to get into the habit of making shell scripts portable.
 # ↓ 4. .zlogin    - Set the environment for login shells
 # ↓ 5. .zlogout   - Read when logging out of a session
 #

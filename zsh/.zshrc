@@ -81,21 +81,3 @@ compinit
 autoload bashcompinit
 bashcompinit
 
-# NPM
-if [[ -d "$HOME/.npm-global/bin" ]]; then
-  # Location for global node modules. Avoids having to install with sudo.
-  # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
-  export PATH="$HOME/.npm-global/bin:$PATH"
-fi
-
-# Ruby
-if type brew &>/dev/null; then
-  export PATH="$(brew --prefix)/opt/ruby/bin:$PATH"
-  export PATH="$(brew --prefix)/lib/ruby/gems/3.3.0/bin:$PATH"
-fi
-
-# Source extra environment variables
-if [ -f "$HOME/.config/.env" ]; then
-  source "$HOME/.config/.env"
-fi
-

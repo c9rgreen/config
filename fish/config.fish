@@ -53,6 +53,10 @@ end
 if type -q npm
     # Look for npm config in ~/.config
     set -gx NPM_CONFIG_USERCONFIG "$HOME/.config/npm/config"
+
+    # Location for global node modules. Avoids having to install with sudo.
+    # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+    set -a PATH "$HOME/.npm-global/bin"
 end
 
 #
@@ -70,3 +74,10 @@ if not contains $_asdf_shims $PATH
     set -gx --prepend PATH $_asdf_shims
 end
 set --erase _asdf_shims
+
+
+#
+# Orbstack
+# Command line tools and shell integration
+#
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :
