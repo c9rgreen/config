@@ -5,9 +5,6 @@
     # Fancier git log
     graph = log --graph --oneline --abbrev-commit --decorate  --all
 
-    # Show the last ten tags
-    ten = tag --sort version:refname -n10 -n
-
     # List all remote branches
     remotes = ls-remote --heads
 
@@ -30,10 +27,8 @@
     # Populate quickfix list with every changed file
     review = !git jump diff $(git last)
 
-    # Convenience
+    # Shortcuts
     s = status
-    p = pull --tags
-    u = push --tags
     a = add .
     c = commit
     t = difftool
@@ -41,38 +36,77 @@
 [github]
     user = c9rgreen
 [pull]
-    # Only update to the new history if there is no divergent local history.
+    # Fast-forward in Git moves the branch pointer forward to point directly at
+    # the incoming commits without creating a merge commit. It maintains
+    # a clean, linear history and is possible when your local branch hasn't
+    # diverged from the upstream branch. It's essentially just advancing your
+    # branch reference to match the latest commit.
     ff = only
 [fetch]
+    # Remove remote-tracking branches that no longer exist on the remote
     prune = true
+
+    # Remove local tags which have been deleted on the remote
     pruneTags = true
+
+    # Fetch all remotes, update remote-tracking branches, and more
     all = true
 [init]
+    # The default branch name for new repositories should be main
     defaultBranch = main
 [push]
+    # When pushing a new local branch, automatically set the upstream
     autoSetupRemote = true
-    default = simple
+
+    # Automatically push tags (annotated only; not lightweight tags) 
     followTags = true
 [diff]
+    # Use Neovim as the difftool
     tool = nvimdiff
+
+    # Easier to read diffs (myers is the default)
     algorithm = histogram
+
+    # Highlight every line detected as moved
     colorMoved = plain
+
+    # Use prefixes like i/ or w/ instead of a/ and /b
     mnemonicPrefix = true
+
+    # Detect file renames (true by default in Git 2.9 and later)
     renames = true
 [merge]
+    # Use Neovim as the mergetool
     tool = nvimdiff
 [rebase]
+    # Add fixup! to the commit messages to discard and use older one
+    # Add squash! to the commit messages
+    # Place fixup/squash commits directly after their target commits
+    # Change pick action to fixup/squash
     autoSquash = true
+
+    # Automatically stash changes when starting a rebase
+    # Pops stash after successfully completing a rebase
     autoStash = true
+
+    # When a branch, also rebase the branches that depend on it
     updateRefs = true
 [column]
+    # Some commands output their lists in columns
+    # Display output in columns only if the output is directed to a terminal
     ui = auto
 [branch]
+    # Sort branches by their last commit date
     sort = -committerdate
 [help]
+    # Prompt for confirmation when attempting to autocorrect
     autocorrect = prompt
 [commit]
+    # Display a diff when prompting for a commit message
     verbose = true
 [rerere]
+    # Enable Reuse Recorded Resolution (rerere) for merge conflicts
     enabled = true
+
+    # Automatically apply recorded resolutions for merge conflicts
     autoupdate = true
