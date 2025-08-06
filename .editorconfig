@@ -7,13 +7,8 @@ indent_style = space
 indent_size = 4
 charset = utf-8
 
-[Makefile]
-indent_style = tab
-
 [*.lua]
 # Following the LuaRocks style guide
 # https://github.com/luarocks/lua-style-guide
 indent_size = 3
 
-[{.zshrc,.zprofile,.zshenv}]
-indent_size = 2
