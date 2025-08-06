@@ -2,7 +2,6 @@
 
 # Command-line utilities
 brew "awscli"
-brew "eza"
 brew "fish"
 brew "gh"
 brew "glab"
@@ -14,6 +13,7 @@ brew "lua-language-server"
 brew "neovim"
 brew "postgresql@17"
 brew "ripgrep"
+brew "tree"
 
 # Apps
 cask "claude"
