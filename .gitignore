@@ -19,3 +19,10 @@ glab-cli/config.yml
 # Fish shell
 fish/fish_variables
 fish/completions
+
+# systemd
+systemd
+
+# containerd
+containerd
+containerd-stargz-grpc
