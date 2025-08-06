@@ -5,15 +5,15 @@ palette = 3=#804e00
 palette = 4=#004d84
 palette = 5=#370674
 palette = 6=#006f44
-palette = 7=#a5adce
-palette = 8=#f2eae6
-palette = 9=#ffb2ee
-palette = 10=#e3ee65
-palette = 11=#ffc888
-palette = 12=#91caff
-palette = 13=#c5b3ff
-palette = 14=#7fffbd
-palette = 15=#fcf4f0
+palette = 7=#f2eae6
+palette = 8=#1d1e23
+palette = 9=#61004f
+palette = 10=#636900
+palette = 11=#804e00
+palette = 12=#004d84
+palette = 13=#370674
+palette = 14=#006f44
+palette = 15=#f2eae6
 
 background = #e9e1dd
 foreground = #2c2e33
