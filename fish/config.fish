@@ -27,11 +27,6 @@ if status is-interactive
     # Set the external cursor to a line. The external cursor appears when a command is started.
     # The cursor shape takes the value of fish_cursor_default when fish_cursor_external is not specified.
     set fish_cursor_external line
-    # The following variable can be used to configure cursor shape in
-    # visual mode, but due to fish_cursor_default, is redundant here
-    set fish_cursor_visual block
-
-    set fish_vi_force_cursor 1
 end
 
 #
@@ -48,11 +43,9 @@ end
 # NPM
 #
 if type -q npm
-    # Look for npm config in ~/.config
-    set -gx NPM_CONFIG_USERCONFIG "$HOME/.config/npm/config"
-
     # Location for global node modules. Avoids having to install with sudo.
     # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+    set -gx NPM_CONFIG_PREFIX "$HOME/.npm-global"
     set -a PATH "$HOME/.npm-global/bin"
 end
 
