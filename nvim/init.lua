@@ -145,6 +145,10 @@ require('treesitter-context').setup()
 
 -- LSP
 add("neovim/nvim-lspconfig")
+
+-- Git and DB
+add("tpope/vim-dadbod")
+add("tpope/vim-fugitive")
 -- }}}
 
 -- Mappings {{{
