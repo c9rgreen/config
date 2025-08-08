@@ -16,5 +16,8 @@ brew "ripgrep"
 brew "tree"
 
 # Apps
-cask "claude"
 cask "ghostty"
+cask "marked-app"
+
+# Font
+cask "font-0xproto"
