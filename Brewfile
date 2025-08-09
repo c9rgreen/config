@@ -18,6 +18,3 @@ brew "tree"
 # Apps
 cask "ghostty"
 cask "marked-app"
-
-# Font
-cask "font-0xproto"
