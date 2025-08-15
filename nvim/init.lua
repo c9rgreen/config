@@ -166,6 +166,7 @@ vim.keymap.set('n', '<leader>k', ':lua MiniExtra.pickers.keymaps()<CR>')        
 vim.keymap.set('n', '<leader>q', ':lua MiniExtra.pickers.list({ scope = "quickfix" })<CR>')        -- Quickfix list picker
 vim.keymap.set('n', '<leader>m', ':lua MiniExtra.pickers.marks()<CR>')                             -- Marks picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
+vim.keymap.set('t', '<C-CR>', '<C-\\><C-n>')                                                       -- Exit terminal mode with Ctrl+Enter
 -- }}}
 
 -- LSP {{{
