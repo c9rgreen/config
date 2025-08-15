@@ -100,8 +100,6 @@ hipatterns.setup({
    }
 })
 
-vim.cmd.colorscheme("minisummer")
-
 -- Treesitter
 add({
    source = "nvim-treesitter/nvim-treesitter",
