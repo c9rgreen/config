@@ -100,8 +100,6 @@ hipatterns.setup({
    }
 })
 
-vim.cmd.colorscheme("minisummer")
-
 -- Treesitter
 add({
    source = "nvim-treesitter/nvim-treesitter",
@@ -120,6 +118,7 @@ require('nvim-treesitter.configs').setup({
       "heex",
       "html",
       "javascript",
+      "jinja",
       "json",
       "julia",
       "liquid",

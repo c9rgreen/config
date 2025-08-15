@@ -1,5 +1,25 @@
 {
     "HEEx tag": { "prefix": "e", "body": "<%= $0 %>" },
     "Tag": { "prefix": "t", "body": "<$1>$2</$1>" },
-    "Self-clossing tag": { "prefix": "a", "body": "<$1 />" }
+    "Self-clossing tag": { "prefix": "a", "body": "<$1 />" },
+    "changelog": {
+        "prefix": "changelog",
+        "body": [
+            "## Added",
+            "",
+            "## Changed",
+            "",
+            "## Deprecated",
+            "",
+            "## Removed",
+            "",
+            "## Fixed",
+            "",
+            "## Security",
+            "",
+            "## Related issues or tasks",
+            "",
+            "## Testing"
+        ]
+    }
 }
