@@ -120,6 +120,7 @@ require('nvim-treesitter.configs').setup({
       "heex",
       "html",
       "javascript",
+      "jinja",
       "json",
       "julia",
       "liquid",
