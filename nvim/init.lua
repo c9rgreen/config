@@ -2,7 +2,6 @@
 
 -- Options, Abbreviations {{{
 vim.opt.clipboard:append('unnamedplus')
-vim.g.clipboard = 'osc52' -- Force OSC 52
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
 vim.opt.guicursor:append("a:blinkon1")
@@ -23,10 +22,11 @@ vim.opt.shell = "fish"
 vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
-vim.diagnostic.config({ virtual_text = true })
 vim.opt.number = false
 vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
 vim.opt.grepformat = '%f:%l:%c:%m'
+
+vim.diagnostic.config({ virtual_text = true })
 
 -- Ghostty.app
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
@@ -34,6 +34,7 @@ vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vim
 -- Contextual menu
 vim.cmd.amenu([[PopUp.Code\ action <Cmd>lua vim.lsp.buf.code_action()<CR>]])
 vim.cmd.amenu([[PopUp.LSP\ Hover <Cmd>lua vim.lsp.buf.hover()<CR>]])
+vim.cmd.amenu([[PopUp.References <Cmd>lua vim.lsp.buf.references()<CR>]])
 
 -- Abbreviations
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
@@ -41,12 +42,13 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 
 -- Use italics for comments
 vim.api.nvim_set_hl(0, 'Comment', { italic = true })
-vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Tree-sitter
+vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Treesitter
 -- }}}
 
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
+vim.g.clipboard = 'osc52' -- Force OSC 52
 -- }}}
 
 -- Plugin Manager {{{
