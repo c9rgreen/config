@@ -2,6 +2,7 @@
 
 # Command-line utilities
 brew "awscli"
+brew "d2"
 brew "fish"
 brew "gh"
 brew "glab"
