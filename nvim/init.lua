@@ -148,8 +148,26 @@ require('treesitter-context').setup()
 add("neovim/nvim-lspconfig")
 
 -- Git and DB
+add("rbong/vim-flog")
+add("shumphrey/fugitive-gitlab.vim")
 add("tpope/vim-dadbod")
 add("tpope/vim-fugitive")
+add("tpope/vim-rhubarb")
+add("sindrets/diffview.nvim")
+
+-- D2
+add("terrastruct/d2-vim")
+
+-- Orgmode
+add("nvim-orgmode/orgmode")
+
+require('orgmode').setup()
+
+-- Tree
+add("nvim-tree/nvim-tree.lua")
+add("nvim-tree/nvim-web-devicons")
+
+require("nvim-tree").setup()
 -- }}}
 
 -- Mappings {{{
