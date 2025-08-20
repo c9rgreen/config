@@ -174,7 +174,7 @@ require("nvim-tree").setup()
 vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                     -- Buffer picker
 vim.keymap.set('n', '<leader><backspace>', ':lua MiniBufremove.delete()<CR>')                      -- Delete file without closing window
 vim.keymap.set('n', '<leader>p', ':lua MiniExtra.pickers.commands()<CR>')                          -- Command picker
-vim.keymap.set('n', '<leader>o', ':lua MiniPick.builtin.files()<CR>')                              -- File picker
+vim.keymap.set('n', '<leader><CR>', ':lua MiniPick.builtin.files()<CR>')                           -- File picker
 vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')                          -- Live grep
 vim.keymap.set('n', '<leader>w', ':lua MiniExtra.pickers.lsp({ scope = "workspace_symbol" })<CR>') -- Workspace symbol picker
 vim.keymap.set('n', '<leader>d', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')  -- Document symbol picker
