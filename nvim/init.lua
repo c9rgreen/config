@@ -112,6 +112,7 @@ add("nvim-treesitter/nvim-treesitter-textobjects")
 require('nvim-treesitter.configs').setup({
    ensure_installed = {
       "bash",
+      "caddy",
       "css",
       "dockerfile",
       "eex",
