@@ -162,22 +162,27 @@ require('gitlab').setup({
 -- }}}
 
 -- Mappings {{{
-vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                     -- Buffer picker
-vim.keymap.set('n', '<leader><backspace>', ':lua MiniBufremove.delete()<CR>')                      -- Delete file without closing window
-vim.keymap.set('n', '<leader>p', ':lua MiniExtra.pickers.commands()<CR>')                          -- Command picker
+vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                                      -- File browser
+vim.keymap.set('n', '<leader>/', ':lua MiniPick.builtin.grep_live()<CR>')                          -- Live grep
 vim.keymap.set('n', '<leader><CR>', ':lua MiniPick.builtin.files()<CR>')                           -- File picker
-vim.keymap.set('n', '<leader>g', ':lua MiniPick.builtin.grep_live()<CR>')                          -- Live grep
-vim.keymap.set('n', '<leader>w', ':lua MiniExtra.pickers.lsp({ scope = "workspace_symbol" })<CR>') -- Workspace symbol picker
-vim.keymap.set('n', '<leader>d', ':lua MiniExtra.pickers.lsp({ scope = "document_symbol" })<CR>')  -- Document symbol picker
-vim.keymap.set('n', '<leader>-', ':lua MiniFiles.open()<CR>')                                      -- Open file browser
-vim.keymap.set('n', '<leader>h', ':lua MiniPick.builtin.help()<CR>')                               -- Help picker
-vim.keymap.set('n', '<leader>i', ':lua MiniExtra.pickers.diagnostic()<CR>')                        -- Diagnostic picker
-vim.keymap.set('n', '<leader>s', ':lua MiniExtra.pickers.git_branches()<CR>')                      -- Git branch picker
-vim.keymap.set('n', '<leader>k', ':lua MiniExtra.pickers.keymaps()<CR>')                           -- Keymap picker
-vim.keymap.set('n', '<leader>q', ':lua MiniExtra.pickers.list({ scope = "quickfix" })<CR>')        -- Quickfix list picker
-vim.keymap.set('n', '<leader>m', ':lua MiniExtra.pickers.marks()<CR>')                             -- Marks picker
+vim.keymap.set('n', '<leader><backspace>', ':lua MiniBufremove.delete()<CR>')                      -- Delete file without closing window
+vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>')                     -- Buffer picker
+vim.keymap.set('n', '<leader>p', ':lua MiniExtra.pickers.commands()<CR>')                          -- Command picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')                                -- Show document symbols
 vim.keymap.set('t', '<C-CR>', '<C-\\><C-n>')                                                       -- Exit terminal mode with Ctrl+Enter
+-- }}}
+
+-- Commands {{{
+vim.api.nvim_create_user_command('Branches', function() MiniExtra.pickers.git_branches() end, {})
+vim.api.nvim_create_user_command('Diagnostic', function() MiniExtra.pickers.diagnostic() end, {})
+vim.api.nvim_create_user_command('DocumentSymbol', function() MiniExtra.pickers.lsp({ scope = "document_symbol" }) end, {})
+vim.api.nvim_create_user_command('Files', function() MiniPick.builtin.files() end, {})
+vim.api.nvim_create_user_command('Grep', function() MiniPick.builtin.grep_live() end, {})
+vim.api.nvim_create_user_command('Help', function() MiniPick.builtin.help() end, {})
+vim.api.nvim_create_user_command('Keymaps', function() MiniExtra.pickers.keymaps() end, {})
+vim.api.nvim_create_user_command('Marks', function() MiniExtra.pickers.marks() end, {})
+vim.api.nvim_create_user_command('Quickfix', function() MiniExtra.pickers.list({ scope = "quickfix" }) end, {})
+vim.api.nvim_create_user_command('WorkspaceSymbol', function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }) end, {})
 -- }}}
 
 -- LSP {{{
