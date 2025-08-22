@@ -150,6 +150,15 @@ add("neovim/nvim-lspconfig")
 
 -- D2
 add("terrastruct/d2-vim")
+
+-- GitLab
+add("https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git")
+
+require('gitlab').setup({
+   statusline = {
+      enabled = false
+   }
+})
 -- }}}
 
 -- Mappings {{{
