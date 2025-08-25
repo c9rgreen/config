@@ -22,5 +22,6 @@ brew "ripgrep"
 brew "tree"
 
 # Apps
+cask "excalidrawz"
 cask "ghostty"
 cask "mactex-no-gui"
