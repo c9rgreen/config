@@ -22,6 +22,9 @@ brew "ripgrep"
 brew "tree"
 
 # Apps
-cask "excalidrawz"
+cask "claude"
 cask "ghostty"
+cask "livebook"
 cask "mactex-no-gui"
+cask "orbstack"
+cask "quarto"
