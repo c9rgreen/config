@@ -28,7 +28,7 @@ vim.opt.grepformat = '%f:%l:%c:%m'
 
 vim.diagnostic.config({ virtual_text = true })
 
--- Ghostty.app
+-- Support for the Ghostty terminal configuration files
 vim.opt.runtimepath:append("/Applications/Ghostty.app/Contents/Resources/vim/vimfiles")
 
 -- Contextual menu
@@ -73,6 +73,8 @@ local add = MiniDeps.add
 -- }}}
 
 -- Plugins {{{
+
+-- Mini - a collection of minimal utility plugins (such as pickers, icons)
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
@@ -103,7 +105,7 @@ hipatterns.setup({
    }
 })
 
--- Treesitter
+-- Treesitter - syntax highlighting, among other things
 add({
    source = "nvim-treesitter/nvim-treesitter",
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
@@ -141,18 +143,18 @@ require('nvim-treesitter.configs').setup({
    incremental_selection = { enable = true }
 })
 
--- Treesitter context
+-- Treesitter context - display the context of the cursor in a sticky header
 add('nvim-treesitter/nvim-treesitter-context')
 
 require('treesitter-context').setup()
 
--- LSP
+-- LSP - Language Server Protocol configurations
 add("neovim/nvim-lspconfig")
 
--- D2
+-- D2 - D2 diagram helpers, including preview
 add("terrastruct/d2-vim")
 
--- GitLab
+-- GitLab - GitLab Duo autocomplete
 add("https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git")
 
 require('gitlab').setup({
@@ -305,7 +307,7 @@ vim.lsp.enable({
    'eslint',
    'html',
    'intelephense',
-   'lexical',
+   'expert',
    'lua_ls',
    'pyright',
    'ts_ls',

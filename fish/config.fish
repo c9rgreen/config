@@ -2,6 +2,9 @@
 # (1) Terminal - https://support.apple.com/guide/terminal/change-the-default-shell-trml113/mac
 # (2) System Settings > Users and Groups > Advanced Options - https://support.apple.com/en-us/102547
 
+# Binaries not managed by a package manager
+set -a PATH "$HOME/.local/bin"
+
 #
 # Homebrew
 #
