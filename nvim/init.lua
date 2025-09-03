@@ -169,7 +169,10 @@ add("quarto-dev/quarto-nvim")
 -- Org Mode
 add("nvim-orgmode/orgmode")
 
-require('orgmode').setup()
+require('orgmode').setup({
+   org_agenda_files = { '~/Documents/Org/*' },
+   org_default_notes_file = '~/Documents/Org/refile.org',
+})
 -- }}}
 
 -- Mappings {{{
@@ -305,10 +308,11 @@ vim.lsp.config('lexical', {
 vim.lsp.enable({
    'cssls',
    'eslint',
+   'expert',
    'html',
    'intelephense',
-   'expert',
    'lua_ls',
+   'marksman',
    'pyright',
    'ts_ls',
    'vue_ls',
