@@ -199,6 +199,7 @@ vim.api.nvim_create_user_command('Quickfix', function() MiniExtra.pickers.list({
 vim.api.nvim_create_user_command('WorkspaceSymbol', function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }) end,
    {})
 vim.api.nvim_create_user_command('Delete', function() MiniBufremove.delete() end, {})
+vim.api.nvim_create_user_command('Diff', function() MiniDiff.toggle_overlay() end, {})
 -- }}}
 
 -- LSP {{{
