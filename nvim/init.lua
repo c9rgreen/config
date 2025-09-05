@@ -182,7 +182,7 @@ vim.keymap.set('n', '<leader>/', ':lua MiniPick.builtin.grep_live()<CR>')      -
 vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>') -- Buffer picker
 vim.keymap.set('n', '<Esc><Esc>', ':lua MiniExtra.pickers.commands()<CR>')     -- Command picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')            -- Show document symbols
-vim.keymap.set('t', '<C-CR>', '<C-\\><C-n>')                                   -- Exit terminal mode with Ctrl+Enter
+vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')                                  -- Exit terminal mode with Ctrl+Enter
 -- }}}
 
 -- Commands {{{
