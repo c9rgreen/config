@@ -21,6 +21,7 @@ brew "pandoc"
 brew "ripgrep"
 
 # Apps
+cask "amethyst"
 cask "base"
 cask "claude"
 cask "dash"
