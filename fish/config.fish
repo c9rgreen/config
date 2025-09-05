@@ -52,6 +52,13 @@ if type -q npm
     set -a PATH "$HOME/.npm-global/bin"
 end
 
+#
+# Aliases
+#
+if type -q eza
+    alias ls "eza --icons"
+end
+
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
