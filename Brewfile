@@ -35,3 +35,6 @@ cask "orbstack"
 cask "postgres-unofficial"
 cask "postico"
 cask "tower"
+
+# Fonts
+cask "font-recursive-code"
