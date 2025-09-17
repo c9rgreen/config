@@ -183,6 +183,15 @@ add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-endwise")
 
+-- File tree
+add("nvim-tree/nvim-tree.lua")
+add("nvim-tree/nvim-web-devicons")
+
+require("nvim-tree").setup()
+
+-- Diff viewer
+add("sindrets/diffview.nvim")
+
 -- Colorscheme
 add("savq/melange-nvim")
 
