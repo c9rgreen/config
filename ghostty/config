@@ -1,14 +1,13 @@
 # vim: set filetype=ghostty
 
 shell-integration = fish
-font-size = "16"
+font-size = "14"
 font-family = "Berkeley Mono"
-theme = dark:NvimDark,light:NvimLight
+theme = dark:Nvim Dark,light:Nvim Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
-macos-icon = xray
 keybind = global:shift+alt+space=toggle_quick_terminal
 clipboard-read = allow
 clipboard-write = allow
