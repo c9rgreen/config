@@ -182,6 +182,11 @@ add("tpope/vim-dadbod")
 add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-endwise")
+
+-- Colorscheme
+add("savq/melange-nvim")
+
+vim.cmd.colorscheme("melange")
 -- }}}
 
 -- Mappings {{{

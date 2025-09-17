@@ -3,7 +3,7 @@
 shell-integration = fish
 font-size = "14"
 font-family = "Berkeley Mono"
-theme = dark:Nvim Dark,light:Nvim Light
+theme = dark:Melange Dark,light:Melange Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
