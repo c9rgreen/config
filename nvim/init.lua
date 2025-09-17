@@ -173,6 +173,14 @@ require('orgmode').setup({
    org_agenda_files = { '~/Documents/Org/*' },
    org_default_notes_file = '~/Documents/Org/refile.org',
 })
+
+-- Git & DB
+add("rbong/vim-flog")
+add("shumphrey/fugitive-gitlab.vim")
+add("tpope/vim-dadbod")
+add("tpope/vim-fugitive")
+add("tpope/vim-rhubarb")
+add("tpope/vim-endwise")
 -- }}}
 
 -- Mappings {{{
