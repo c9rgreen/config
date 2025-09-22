@@ -23,8 +23,6 @@ vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.opt.number = false
-vim.opt.grepprg = 'rg --vimgrep --no-heading --line-number --column'
-vim.opt.grepformat = '%f:%l:%c:%m'
 
 vim.diagnostic.config({ virtual_text = true })
 
