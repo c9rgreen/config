@@ -38,3 +38,4 @@ cask "tower"
 
 # Fonts
 cask "font-recursive-code"
+cask "font-recursive-mono-nerd-font"
