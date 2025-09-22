@@ -50,7 +50,7 @@ vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Treesitter
 -- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
-vim.g.clipboard = 'osc52' -- Force OSC 52
+-- vim.g.clipboard = 'osc52' -- Force OSC 52
 -- }}}
 
 -- Plugin Manager {{{
@@ -195,7 +195,9 @@ add("sindrets/diffview.nvim")
 -- Colorscheme
 add("savq/melange-nvim")
 
-vim.cmd.colorscheme("melange")
+add("miikanissi/modus-themes.nvim")
+
+vim.cmd.colorscheme("modus")
 -- }}}
 
 -- Mappings {{{
