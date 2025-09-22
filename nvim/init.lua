@@ -11,7 +11,7 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.fillchars = {
    fold = '─',
-   diff = '▒'
+   diff = ' '
 }
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
@@ -80,7 +80,6 @@ require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
-require('mini.diff').setup()
 require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
@@ -103,6 +102,15 @@ local hipatterns = require('mini.hipatterns')
 hipatterns.setup({
    highlighters = {
       hex_color = hipatterns.gen_highlighter.hex_color(),
+   }
+})
+
+
+local diff = require('mini.diff')
+diff.setup({
+   view = {
+      style = 'sign',
+      signs = { add = ' ', change = ' ', delete = ' ' },
    }
 })
 
@@ -194,8 +202,15 @@ add("sindrets/diffview.nvim")
 
 -- Colorscheme
 add("savq/melange-nvim")
-
 add("miikanissi/modus-themes.nvim")
+
+require("modus-themes").setup({
+   -- variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+   end,
+})
 
 vim.cmd.colorscheme("modus")
 -- }}}
