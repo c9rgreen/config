@@ -23,6 +23,7 @@ brew "ripgrep"
 
 # Apps
 cask "claude"
+cask "ghostty"
 cask "livebook"
 cask "mactex-no-gui"
 cask "omnifocus"
