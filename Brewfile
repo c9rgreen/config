@@ -29,6 +29,7 @@ cask "omnifocus"
 cask "omnigraffle"
 cask "omnioutliner"
 cask "omniplan"
+cask "ungoogled-chromium"
 
 # Fonts
 cask "font-recursive-code"
