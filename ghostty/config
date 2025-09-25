@@ -3,11 +3,12 @@
 shell-integration = fish
 font-size = "14"
 font-family = "Rec Mono Duotone"
-theme = dark:Melange Dark,light:Melange Light
+theme = dark:modus_vivendi,light:modus_operandi
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
+macos-icon = xray
 keybind = global:shift+alt+space=toggle_quick_terminal
 clipboard-read = allow
 clipboard-write = allow
