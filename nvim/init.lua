@@ -198,6 +198,12 @@ require("nvim-tree").setup()
 -- Diff viewer
 add("sindrets/diffview.nvim")
 
+-- Golang
+add("fatih/vim-go")
+
+-- Zig
+add("ziglang/zig.vim")
+
 -- Colorscheme
 add("savq/melange-nvim")
 add("miikanissi/modus-themes.nvim")
