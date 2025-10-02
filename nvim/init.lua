@@ -204,6 +204,12 @@ add("fatih/vim-go")
 -- Zig
 add("ziglang/zig.vim")
 
+-- Diagrams and images
+add({
+   source = "3rd/diagram.nvim",
+   depends = { "3rd/image.nvim" }
+})
+
 -- Colorscheme
 add("savq/melange-nvim")
 add("miikanissi/modus-themes.nvim")
