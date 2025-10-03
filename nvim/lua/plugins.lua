@@ -45,13 +45,14 @@ add("quarto-dev/quarto-nvim")
 -- Org Mode
 add("nvim-orgmode/orgmode")
 
--- Git & DB
-add("rbong/vim-flog")
-add("shumphrey/fugitive-gitlab.vim")
-add("tpope/vim-dadbod")
-add("tpope/vim-fugitive")
-add("tpope/vim-rhubarb")
-add("tpope/vim-endwise")
+-- Git
+add({
+   source = "NeogitOrg/neogit",
+   depends = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim"
+   }
+})
 
 -- File tree
 add("nvim-tree/nvim-tree.lua")
@@ -98,8 +99,8 @@ require('mini.cursorword').setup()
 require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
--- require('mini.git').setup()
-require('mini.icons').setup({ style = 'glyphs' })
+require('mini.git').setup()
+require('mini.icons').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.statusline').setup()

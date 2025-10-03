@@ -20,6 +20,7 @@ vim.lsp.config('ts_ls', {
    init_options = {
       plugins = {
          {
+            -- This requires npm install -g @vue/typescript-plugin
             name = "@vue/typescript-plugin",
             location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
             languages = { "javascript", "typescript", "vue" },
