@@ -28,7 +28,7 @@
     review = !git jump diff $(git last)
 
     # Shortcuts
-    s = status -v -v # The -v -v shows the diff with the status
+    s = status
     a = add
     c = commit
     t = difftool
