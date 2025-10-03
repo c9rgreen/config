@@ -1,6 +1,4 @@
--- vim: foldmethod=marker foldlevel=0
-
--- Options, Abbreviations {{{
+-- Options
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
@@ -43,189 +41,20 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 -- Use italics for comments
 vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 vim.api.nvim_set_hl(0, '@comment', { italic = true }) -- For Treesitter
--- }}}
 
--- Variables {{{
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0
--- vim.g.clipboard = 'osc52' -- Force OSC 52
--- }}}
 
--- Plugin Manager {{{
-local path_package = vim.fn.stdpath('data') .. '/site'
-local mini_path = path_package .. '/pack/deps/start/mini.nvim'
----@diagnostic disable: undefined-field
-if not vim.loop.fs_stat(mini_path) then
-   vim.cmd('echo "Installing `mini.nvim`" | redraw')
-   local clone_cmd = {
-      'git', 'clone', '--filter=blob:none',
-      'https://github.com/nvim-mini/mini.nvim', mini_path
-   }
-   vim.fn.system(clone_cmd)
-   vim.cmd('packadd mini.nvim | helptags ALL')
-end
+-- Set up language servers
+require("lsp")
 
-require('mini.deps').setup({ path = { package = path_package } })
+-- Set up plugins
+require("plugins")
 
----@diagnostic disable: undefined-global
-local add = MiniDeps.add
--- }}}
-
--- Plugins {{{
-
--- Mini - a collection of minimal utility plugins (such as pickers, icons)
-require('mini.basics').setup()
-require('mini.bufremove').setup()
-require('mini.completion').setup()
-require('mini.cursorword').setup()
-require('mini.extra').setup()
-require('mini.files').setup()
-require('mini.fuzzy').setup()
-require('mini.git').setup()
-require('mini.icons').setup({ style = 'glyphs' })
-require('mini.pick').setup()
-require('mini.sessions').setup()
-require('mini.statusline').setup()
-require('mini.tabline').setup()
-
-require('mini.snippets').setup({
-   snippets = {
-      require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
-      require('mini.snippets').gen_loader.from_lang(),
-   },
-})
-
-
-local hipatterns = require('mini.hipatterns')
-hipatterns.setup({
-   highlighters = {
-      hex_color = hipatterns.gen_highlighter.hex_color(),
-   }
-})
-
-
-local diff = require('mini.diff')
-diff.setup({
-   view = {
-      style = 'sign',
-      signs = { add = '╱', change = '╱', delete = '╱' },
-   }
-})
-
--- Treesitter - syntax highlighting, among other things
-add({
-   source = "nvim-treesitter/nvim-treesitter",
-   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-})
-add("nvim-treesitter/nvim-treesitter-textobjects")
-
-require('nvim-treesitter.configs').setup({
-   ensure_installed = {
-      "bash",
-      "caddy",
-      "css",
-      "dockerfile",
-      "eex",
-      "elixir",
-      "gitcommit",
-      "heex",
-      "html",
-      "javascript",
-      "jinja",
-      "json",
-      "julia",
-      "liquid",
-      "lua",
-      "markdown",
-      "mermaid",
-      "python",
-      "rst",
-      "vim",
-      "vimdoc",
-      "vue",
-      "yaml",
-   },
-   highlight = { enable = true },
-   indent = { enable = true },
-   incremental_selection = { enable = true }
-})
-
--- Treesitter context - display the context of the cursor in a sticky header
-add('nvim-treesitter/nvim-treesitter-context')
-
-require('treesitter-context').setup()
-
--- LSP - Language Server Protocol configurations
-add("neovim/nvim-lspconfig")
-
--- D2 - D2 diagram helpers, including preview
-add("terrastruct/d2-vim")
-
--- GitLab - GitLab Duo autocomplete
-add("https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git")
-
-require('gitlab').setup({
-   statusline = {
-      enabled = false
-   }
-})
-
--- Quarto
-add("quarto-dev/quarto-nvim")
-
--- Org Mode
-add("nvim-orgmode/orgmode")
-
-require('orgmode').setup({
-   org_agenda_files = { '~/Documents/Org/*' },
-   org_default_notes_file = '~/Documents/Org/refile.org',
-})
-
--- Git & DB
-add("rbong/vim-flog")
-add("shumphrey/fugitive-gitlab.vim")
-add("tpope/vim-dadbod")
-add("tpope/vim-fugitive")
-add("tpope/vim-rhubarb")
-add("tpope/vim-endwise")
-
--- File tree
-add("nvim-tree/nvim-tree.lua")
-add("nvim-tree/nvim-web-devicons")
-
-require("nvim-tree").setup()
-
--- Diff viewer
-add("sindrets/diffview.nvim")
-
--- Golang
-add("fatih/vim-go")
-
--- Zig
-add("ziglang/zig.vim")
-
--- Diagrams and images
-add({
-   source = "3rd/diagram.nvim",
-   depends = { "3rd/image.nvim" }
-})
-
--- Colorscheme
-add("savq/melange-nvim")
-add("miikanissi/modus-themes.nvim")
-
-require("modus-themes").setup({
-   -- variant = "tinted",
-   on_highlights = function(highlight, color)
-      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
-      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
-   end,
-})
-
+-- Set colorscheme
 vim.cmd.colorscheme("modus")
--- }}}
 
--- Mappings {{{
+-- Mappings
 vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                          -- File browser
 vim.keymap.set('n', '<leader>-', ':lua MiniPick.builtin.files()<CR>')          -- File picker
 vim.keymap.set('n', '<leader>/', ':lua MiniPick.builtin.grep_live()<CR>')      -- Live grep
@@ -233,9 +62,8 @@ vim.keymap.set('n', '<leader><leader>', ':lua MiniPick.builtin.buffers()<CR>') -
 vim.keymap.set('n', '<Esc><Esc>', ':lua MiniExtra.pickers.commands()<CR>')     -- Command picker
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')            -- Show document symbols
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')                                  -- Exit terminal mode with Ctrl+Enter
--- }}}
 
--- Commands {{{
+-- Commands
 vim.api.nvim_create_user_command('Branches', function() MiniExtra.pickers.git_branches() end, {})
 vim.api.nvim_create_user_command('Diagnostic', function() MiniExtra.pickers.diagnostic() end, {})
 vim.api.nvim_create_user_command('DocumentSymbol', function() MiniExtra.pickers.lsp({ scope = "document_symbol" }) end,
@@ -250,123 +78,3 @@ vim.api.nvim_create_user_command('WorkspaceSymbol', function() MiniExtra.pickers
    {})
 vim.api.nvim_create_user_command('Delete', function() MiniBufremove.delete() end, {})
 vim.api.nvim_create_user_command('Diff', function() MiniDiff.toggle_overlay() end, {})
--- }}}
-
--- LSP {{{
-local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-local format_on_save = function(client, bufnr)
-   vim.notify(vim.inspect(client.supports_method("textDocument/formatting")))
-   if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         group = lsp_formatting_augroup, -- Assign to our augroup
-         buffer = bufnr,                 -- Make it buffer-local
-         callback = function()
-            -- Request formatting from this specific client.
-            -- async = false ensures formatting completes before the file is written.
-            vim.lsp.buf.format({ async = false, id = client.id })
-         end,
-      })
-   end
-end
-
--- See h: lspconfig-all for helpful docs
-vim.lsp.config('ts_ls', {
-   init_options = {
-      plugins = {
-         {
-            name = "@vue/typescript-plugin",
-            location = vim.fn.expand('$HOME/.npm-global/lib/node_modules/@vue/typescript-plugin'),
-            languages = { "javascript", "typescript", "vue" },
-         },
-      },
-   },
-   filetypes = {
-      "javascript",
-      "typescript",
-      "vue",
-   },
-})
-
-vim.lsp.config('vue_ls', {
-   init_options = {
-      typescript = {
-         tsdk = vim.fn.expand('$HOME/.npm-global/lib/node_modules/typescript/lib')
-      }
-   }
-})
-
-local base_on_attach = vim.lsp.config.eslint.on_attach
-vim.lsp.config("eslint", {
-   on_attach = function(client, bufnr)
-      if not base_on_attach then return end
-
-      base_on_attach(client, bufnr)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         buffer = bufnr,
-         command = "LspEslintFixAll",
-      })
-   end,
-})
-
-vim.lsp.config('lua_ls', {
-   on_init = function(client)
-      if client.workspace_folders then
-         local path = client.workspace_folders[1].name
-         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
-            return
-         end
-      end
-
-      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-         runtime = {
-            version = 'LuaJIT'
-         },
-         -- Make the server aware of Neovim runtime files
-         workspace = {
-            checkThirdParty = false,
-            library = {
-               vim.env.VIMRUNTIME
-            }
-         }
-      })
-   end,
-   settings = {
-      Lua = {
-         diagnostics = {
-            globals = { "vim" },
-         },
-         format = {
-            enable = true,
-            defaultConfig = {
-               indent_stle = "space",
-            },
-         },
-      }
-   },
-   on_attach = format_on_save
-})
-
--- As of 2025-07-25T12:34:51, Lexical requires OTP 27
--- asdf set elixir 1.18.4-otp-27 (project or home)
--- git clone git@github.com:lexical-lsp/lexical.git $HOME/.lexical
--- mix deps.get
--- mix package
-vim.lsp.config('lexical', {
-   cmd = { vim.fn.expand('$HOME/.lexical/_build/dev/package/lexical/bin/start_lexical.sh') },
-   on_attach = format_on_save
-})
-
-vim.lsp.enable({
-   'cssls',
-   'eslint',
-   'expert',
-   'html',
-   'intelephense',
-   'lua_ls',
-   'marksman',
-   'pyright',
-   'ts_ls',
-   'vue_ls',
-   'yamlls',
-})
--- }}}
