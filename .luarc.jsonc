@@ -1,0 +1,10 @@
+// https://luals.github.io/wiki/configuration/
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "Lua.diagnostics.globals": [
+    // Suppress the "undefined global `vim` warning
+    "vim",
+    // Suppress the "undefined global 'MiniDeps" warning
+    "MiniDeps"
+  ]
+}
