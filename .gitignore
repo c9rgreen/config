@@ -26,3 +26,6 @@ systemd
 # containerd
 containerd
 containerd-stargz-grpc
+
+# glab (GitLab CLI)
+glab-cli
