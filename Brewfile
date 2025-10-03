@@ -24,6 +24,7 @@ brew "ripgrep"
 brew "sonar-scanner"
 brew "task"
 brew "timewarrior"
+brew "universal-ctags"
 brew "weechat"
 
 # Apps
