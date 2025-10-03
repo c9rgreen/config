@@ -2,9 +2,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
   "Lua.diagnostics.globals": [
-    // Suppress the "undefined global warnings
+    // Suppress "undefined global warnings
     "vim",
     "MiniDeps",
-    "MiniExtra"
+    "MiniExtra",
+    "MiniPick",
+    "MiniBufremove",
+    "MiniDiff"
   ]
 }
