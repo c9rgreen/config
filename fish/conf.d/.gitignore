@@ -1,4 +1,5 @@
 # https://adamj.eu/tech/2023/09/18/git-dont-create-gitkeep/
 *
 !.gitignore
-!asdf.fish
+!0-homebrew.fish
+!1-asdf.fish
