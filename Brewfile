@@ -26,17 +26,11 @@ brew "sonar-scanner"
 brew "task"
 brew "timewarrior"
 brew "universal-ctags"
-brew "weechat"
 
 # Apps
-cask "claude"
 cask "ghostty"
 cask "livebook"
-# cask "mactex-no-gui"
-cask "omnifocus"
-cask "omnigraffle"
-cask "omnioutliner"
-cask "omniplan"
+cask "mactex-no-gui"
 cask "ungoogled-chromium"
 
 # Fonts
