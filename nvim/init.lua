@@ -78,3 +78,4 @@ vim.api.nvim_create_user_command('WorkspaceSymbol', function() MiniExtra.pickers
    {})
 vim.api.nvim_create_user_command('Delete', function() MiniBufremove.delete() end, {})
 vim.api.nvim_create_user_command('Diff', function() MiniDiff.toggle_overlay() end, {})
+vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format() end, {})
