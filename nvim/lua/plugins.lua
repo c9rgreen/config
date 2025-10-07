@@ -75,6 +75,9 @@ add({
    depends = { "3rd/image.nvim" }
 })
 
+-- Markdown preview
+add("OXY2DEV/markview.nvim")
+
 -- Mason (LSP)
 add({
    source = "mason-org/mason-lspconfig.nvim",
