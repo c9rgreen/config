@@ -185,3 +185,27 @@ require("mason-lspconfig").setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
+
+require("image").setup()
+
+-- npm install -g @mermaid-js/mermaid-cli
+require("diagram").setup({
+   integrations = {
+      require("diagram.integrations.markdown"),
+   },
+   renderer_options = {
+      mermaid = {
+         theme = "forest",
+      },
+      plantuml = {
+         charset = "utf-8",
+      },
+      d2 = {
+         theme_id = 1,
+      },
+      gnuplot = {
+         theme = "dark",
+         size = "800,600",
+      },
+   },
+})
