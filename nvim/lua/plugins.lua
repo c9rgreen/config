@@ -189,7 +189,16 @@ require("mason-lspconfig").setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
-require("image").setup()
+require("image").setup({
+   integrations = {
+      markdown = {
+         enabled = true
+      },
+      org = {
+         enabled = true
+      }
+   }
+})
 
 -- npm install -g @mermaid-js/mermaid-cli
 require("diagram").setup({
