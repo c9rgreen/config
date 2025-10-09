@@ -37,5 +37,6 @@ cask "ungoogled-chromium"
 
 # Fonts
 cask "font-recursive-code"
+cask "font-recursive-desktop"
 cask "font-recursive-mono-nerd-font"
 cask "font-shantell-sans"
