@@ -36,6 +36,7 @@ brew "universal-ctags"
 cask "ghostty"
 cask "livebook"
 cask "mactex-no-gui"
+cask "quarto"
 cask "ungoogled-chromium"
 
 # Fonts
