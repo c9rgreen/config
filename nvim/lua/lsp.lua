@@ -1,20 +1,3 @@
--- LSP format on save
-local lsp_formatting_augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
-local format_on_save = function(client, bufnr)
-   vim.notify(vim.inspect(client.supports_method("textDocument/formatting")))
-   if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-         group = lsp_formatting_augroup, -- Assign to our augroup
-         buffer = bufnr,                 -- Make it buffer-local
-         callback = function()
-            -- Request formatting from this specific client.
-            -- async = false ensures formatting completes before the file is written.
-            vim.lsp.buf.format({ async = false, id = client.id })
-         end,
-      })
-   end
-end
-
 -- See h: lspconfig-all for helpful docs
 vim.lsp.config('ts_ls', {
    init_options = {
@@ -27,11 +10,7 @@ vim.lsp.config('ts_ls', {
          },
       },
    },
-   filetypes = {
-      "javascript",
-      "typescript",
-      "vue",
-   },
+   filetypes = { "javascript", "typescript", "vue" },
 })
 
 vim.lsp.config('vue_ls', {
@@ -66,9 +45,6 @@ vim.lsp.config('lua_ls', {
    end,
    settings = {
       Lua = {
-         diagnostics = {
-            globals = { "vim" },
-         },
          format = {
             enable = true,
             defaultConfig = {
@@ -77,7 +53,6 @@ vim.lsp.config('lua_ls', {
          },
       }
    },
-   on_attach = format_on_save
 })
 
 vim.lsp.enable({
