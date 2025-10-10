@@ -63,9 +63,6 @@ require("nvim-tree").setup()
 -- Diff viewer
 add("sindrets/diffview.nvim")
 
--- Golang
-add("fatih/vim-go")
-
 -- Zig
 add("ziglang/zig.vim")
 
@@ -124,7 +121,7 @@ local diff = require('mini.diff')
 diff.setup({
    view = {
       style = 'sign',
-      signs = { add = '╱', change = '╱', delete = '╱' },
+      signs = { add = '+', change = '•', delete = '-' },
    }
 })
 
@@ -188,12 +185,8 @@ require("mason-lspconfig").setup({
 
 require("image").setup({
    integrations = {
-      markdown = {
-         enabled = true
-      },
-      org = {
-         enabled = true
-      }
+      markdown = { enabled = true },
+      org = { enabled = true }
    }
 })
 
@@ -201,20 +194,5 @@ require("image").setup({
 require("diagram").setup({
    integrations = {
       require("diagram.integrations.markdown"),
-   },
-   renderer_options = {
-      mermaid = {
-         theme = "forest",
-      },
-      plantuml = {
-         charset = "utf-8",
-      },
-      d2 = {
-         theme_id = 1,
-      },
-      gnuplot = {
-         theme = "dark",
-         size = "800,600",
-      },
    },
 })
