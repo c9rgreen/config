@@ -31,6 +31,7 @@ brew "sonar-scanner"
 brew "task"
 brew "timewarrior"
 brew "universal-ctags"
+brew "wget"
 
 # Apps
 cask "ghostty"
