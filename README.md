@@ -4,10 +4,10 @@
 
 ## Highlights
 
-| Role             | Tool                            |
-| ---------------- | ------------------------------- |
-| Terminal         | [Ghostty](https://ghostty.org/) |
-| Package Manager  | [Homebrew](https://brew.sh)     |
-| Shell            | [Fish](https://fishshell.com)   |
-| Editor           | [Neovim](https://neovim.io)     |
-| Virtual Machines | [Lima](https://lima-vm.io)      |
+| Tool                            | Role             |
+| ------------------------------- | ---------------- |
+| [Ghostty](https://ghostty.org/) | Terminal         |
+| [Homebrew](https://brew.sh)     | Package Manager  |
+| [Fish](https://fishshell.com)   | Shell            |
+| [Neovim](https://neovim.io)     | Text Editor      |
+| [Lima](https://lima-vm.io)      | Virtual Machines |
