@@ -36,9 +36,6 @@ add('nvim-treesitter/nvim-treesitter-context')
 -- D2 - D2 diagram helpers, including preview
 add("terrastruct/d2-vim")
 
--- GitLab - GitLab Duo autocomplete
-add("https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git")
-
 -- Quarto
 add("quarto-dev/quarto-nvim")
 
@@ -54,17 +51,8 @@ add({
    }
 })
 
--- File tree
-add("nvim-tree/nvim-tree.lua")
-add("nvim-tree/nvim-web-devicons")
-
-require("nvim-tree").setup()
-
 -- Diff viewer
 add("sindrets/diffview.nvim")
-
--- Zig
-add("ziglang/zig.vim")
 
 -- Diagrams and images
 add({
@@ -157,12 +145,6 @@ require('nvim-treesitter.configs').setup({
 })
 
 require('treesitter-context').setup()
-
-require('gitlab').setup({
-   statusline = {
-      enabled = false
-   }
-})
 
 require('orgmode').setup({
    org_agenda_files = { '~/Documents/Org/*' },
