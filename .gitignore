@@ -29,3 +29,6 @@ containerd-stargz-grpc
 
 # glab (GitLab CLI)
 glab-cli
+
+# gh (GitHub CLI)
+gh
