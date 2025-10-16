@@ -2,7 +2,9 @@
 
 shell-integration = fish
 font-size = "14"
-font-family = "Rec Mono Duotone"
+font-family = "Berkeley Mono"
+font-thicken = true
+font-thicken-strength = 5
 theme = dark:modus_vivendi,light:modus_operandi
 mouse-shift-capture = true
 mouse-hide-while-typing = true
