@@ -39,7 +39,3 @@ cask "mactex-no-gui"
 cask "quarto"
 cask "ungoogled-chromium"
 
-# Fonts
-cask "font-recursive-code"
-cask "font-recursive-desktop"
-cask "font-recursive-mono-nerd-font"
