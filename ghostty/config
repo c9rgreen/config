@@ -9,5 +9,6 @@ mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
 keybind = global:shift+alt+space=toggle_quick_terminal
+keybind = super+e=text:nvim\n
 clipboard-read = allow
 clipboard-write = allow
