@@ -29,6 +29,7 @@ brew "sonar-scanner"
 brew "task"
 brew "timewarrior"
 brew "universal-ctags"
+brew "vale"
 brew "wget"
 
 # Apps
