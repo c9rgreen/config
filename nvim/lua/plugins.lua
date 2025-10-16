@@ -37,7 +37,13 @@ add('nvim-treesitter/nvim-treesitter-context')
 add("terrastruct/d2-vim")
 
 -- Quarto
-add("quarto-dev/quarto-nvim")
+add({
+   source = "quarto-dev/quarto-nvim",
+   depends = {
+      "jmbuhr/otter.nvim",
+      "nvim-treesitter/nvim-treesitter"
+   }
+})
 
 -- Org Mode
 add("nvim-orgmode/orgmode")
@@ -90,6 +96,7 @@ require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.statusline').setup()
 require('mini.tabline').setup()
+require('mini.align').setup()
 
 require('mini.snippets').setup({
    snippets = {
@@ -167,7 +174,10 @@ require("mason-lspconfig").setup({
 
 require("image").setup({
    integrations = {
-      markdown = { enabled = true },
+      markdown = {
+         enabled = true,
+         filetypes = { "markdown", "quarto" }
+      },
       org = { enabled = true }
    }
 })
