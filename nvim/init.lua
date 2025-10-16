@@ -8,8 +8,8 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.fillchars = {
-    fold = '─',
-    diff = '╱'
+   fold = '─',
+   diff = '╱'
 }
 vim.opt.foldlevel = 5
 vim.opt.foldmethod = "expr"
@@ -58,6 +58,7 @@ vim.cmd.colorscheme("modus")
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')   -- Show document symbols
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')                         -- Exit terminal mode with meta-escape
 vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')                 -- File browser
+vim.keymap.set('n', '<D-s>', ':write<CR>')                            -- Save
 vim.keymap.set('n', '<D-o>', ':lua MiniPick.builtin.files()<CR>')     -- File picker
 vim.keymap.set('n', '<D-g>', ':lua MiniPick.builtin.grep_live()<CR>') -- Live grep
 vim.keymap.set('n', '<S-D-a>', ':lua MiniPick.builtin.buffers()<CR>') -- Buffer picker
@@ -67,7 +68,7 @@ vim.keymap.set('n', '<D-p>', ':lua MiniExtra.pickers.commands()<CR>') -- Command
 vim.api.nvim_create_user_command('Branches', function() MiniExtra.pickers.git_branches() end, {})
 vim.api.nvim_create_user_command('Diagnostic', function() MiniExtra.pickers.diagnostic() end, {})
 vim.api.nvim_create_user_command('DocumentSymbol', function() MiniExtra.pickers.lsp({ scope = "document_symbol" }) end,
-    {})
+   {})
 vim.api.nvim_create_user_command('Files', function() MiniPick.builtin.files() end, {})
 vim.api.nvim_create_user_command('Grep', function() MiniPick.builtin.grep_live() end, {})
 vim.api.nvim_create_user_command('Help', function() MiniPick.builtin.help() end, {})
@@ -75,7 +76,7 @@ vim.api.nvim_create_user_command('Keymaps', function() MiniExtra.pickers.keymaps
 vim.api.nvim_create_user_command('Marks', function() MiniExtra.pickers.marks() end, {})
 vim.api.nvim_create_user_command('Quickfix', function() MiniExtra.pickers.list({ scope = "quickfix" }) end, {})
 vim.api.nvim_create_user_command('WorkspaceSymbol', function() MiniExtra.pickers.lsp({ scope = "workspace_symbol" }) end,
-    {})
+   {})
 vim.api.nvim_create_user_command('Delete', function() MiniBufremove.delete() end, {})
 vim.api.nvim_create_user_command('Diff', function() MiniDiff.toggle_overlay() end, {})
 vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format() end, {})
