@@ -36,29 +36,8 @@ add('nvim-treesitter/nvim-treesitter-context')
 -- D2 - D2 diagram helpers, including preview
 add("terrastruct/d2-vim")
 
--- Quarto
-add({
-   source = "quarto-dev/quarto-nvim",
-   depends = {
-      "jmbuhr/otter.nvim",
-      "nvim-treesitter/nvim-treesitter"
-   }
-})
-
 -- Org Mode
 add("nvim-orgmode/orgmode")
-
--- Git
-add({
-   source = "NeogitOrg/neogit",
-   depends = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim"
-   }
-})
-
--- Diff viewer
-add("sindrets/diffview.nvim")
 
 -- Diagrams and images
 add({
@@ -74,9 +53,6 @@ add({
       "mason-org/mason.nvim",
    }
 })
-
--- Modus colorscheme
-add("miikanissi/modus-themes.nvim")
 
 --
 -- Set up plugins
