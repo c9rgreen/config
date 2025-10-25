@@ -134,14 +134,6 @@ require('orgmode').setup({
    org_default_notes_file = '~/Documents/Org/refile.org',
 })
 
-require("modus-themes").setup({
-   -- variant = "tinted",
-   on_highlights = function(highlight, color)
-      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
-      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
-   end,
-})
-
 require("mason").setup()
 require("mason-lspconfig").setup({
    -- Automatically install the language servers configured by vim.lsp.enable
