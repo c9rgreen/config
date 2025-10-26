@@ -54,6 +54,9 @@ add({
    }
 })
 
+-- Modus colorscheme
+add("miikanissi/modus-themes.nvim")
+
 --
 -- Set up plugins
 --
@@ -138,6 +141,14 @@ require("mason").setup()
 require("mason-lspconfig").setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
+})
+
+require("modus-themes").setup({
+   -- variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+   end,
 })
 
 require("image").setup({

@@ -52,7 +52,7 @@ require("lsp")
 require("plugins")
 
 -- Set colorscheme
-vim.cmd.colorscheme("miniautumn")
+vim.cmd.colorscheme("modus")
 
 -- Mappings
 vim.keymap.set('n', 'gO', ':lua vim.lsp.buf.document_symbol()<CR>')   -- Show document symbols
