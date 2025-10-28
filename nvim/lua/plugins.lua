@@ -1,8 +1,9 @@
--- Initialize plugin manager
--- https://github.com/nvim-mini/mini.nvim
+--
+-- Mini.nvim
+-- https://nvim-mini.org/mini.nvim/
+--
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
----@diagnostic disable: undefined-field
 if not vim.loop.fs_stat(mini_path) then
    vim.cmd('echo "Installing `mini.nvim`" | redraw')
    local clone_cmd = {
@@ -17,51 +18,6 @@ require('mini.deps').setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
 
---
--- Install plugins
---
-
--- Treesitter - syntax highlighting, among other things
-add({
-   source = "nvim-treesitter/nvim-treesitter",
-   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
-})
-
--- Treesitter - text objects
-add("nvim-treesitter/nvim-treesitter-textobjects")
-
--- Treesitter context - display the context of the cursor in a sticky header
-add('nvim-treesitter/nvim-treesitter-context')
-
--- D2 - D2 diagram helpers, including preview
-add("terrastruct/d2-vim")
-
--- Org Mode
-add("nvim-orgmode/orgmode")
-
--- Diagrams and images
-add({
-   source = "3rd/diagram.nvim",
-   depends = { "3rd/image.nvim" }
-})
-
--- Mason (LSP)
-add({
-   source = "mason-org/mason-lspconfig.nvim",
-   depends = {
-      "neovim/nvim-lspconfig",
-      "mason-org/mason.nvim",
-   }
-})
-
--- Modus colorscheme
-add("miikanissi/modus-themes.nvim")
-
---
--- Set up plugins
---
-
--- Mini - a collection of minimal utility plugins (such as pickers, icons)
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.completion').setup()
@@ -91,50 +47,95 @@ hipatterns.setup({
    }
 })
 
-local diff = require('mini.diff')
-diff.setup({
+local mini_diff = require('mini.diff')
+mini_diff.setup({
    view = {
       style = 'sign',
       signs = { add = '+', change = '•', delete = '-' },
    }
 })
 
+-- Commands
+local mini_extra = require('mini.extra')
+local mini_pick = require('mini.pick')
+local commands = {
+   -- MiniExtra Pickers
+   Branches = function() mini_extra.pickers.git_branches() end,
+   Diagnostic = function() mini_extra.pickers.diagnostic() end,
+   DocumentSymbol = function() mini_extra.pickers.lsp({ scope = "document_symbol" }) end,
+   Keymaps = function() mini_extra.pickers.keymaps() end,
+   Marks = function() mini_extra.pickers.marks() end,
+   Quickfix = function() mini_extra.pickers.list({ scope = "quickfix" }) end,
+   WorkspaceSymbol = function() mini_extra.pickers.lsp({ scope = "workspace_symbol" }) end,
+
+   -- MiniPick Builtin Pickers
+   Files = function() mini_pick.builtin.files() end,
+   Buffers = function() mini_pick.builtin.buffers() end,
+   Grep = function() mini_pick.builtin.grep_live() end,
+   Help = function() mini_pick.builtin.help() end,
+
+   -- Other Commands
+   Delete = function() require('mini.bufremove').delete() end,
+   Diff = function() mini_diff.toggle_overlay() end,
+}
+
+for name, func in pairs(commands) do
+   vim.api.nvim_create_user_command(name, func, {})
+end
+
+--
+-- Treesitter - syntax highlighting, among other things
+--
+add({
+   source = "nvim-treesitter/nvim-treesitter",
+   hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+})
+
+-- Treesitter - text objects
+add("nvim-treesitter/nvim-treesitter-textobjects")
+
 require('nvim-treesitter.configs').setup({
    ensure_installed = {
-      "bash",
-      "caddy",
-      "css",
-      "dockerfile",
-      "eex",
-      "elixir",
-      "gitcommit",
-      "heex",
-      "html",
-      "javascript",
-      "jinja",
-      "json",
-      "julia",
-      "liquid",
-      "lua",
-      "markdown",
-      "mermaid",
-      "python",
-      "rst",
-      "vim",
-      "vimdoc",
-      "vue",
-      "yaml",
+      "bash", "caddy", "css", "dockerfile",
+      "eex", "elixir", "gitcommit", "heex", "html",
+      "javascript", "jinja", "json", "julia", "liquid",
+      "lua", "markdown", "mermaid", "python", "rst",
+      "vim", "vimdoc", "vue", "yaml",
    },
    highlight = { enable = true },
    indent = { enable = true },
    incremental_selection = { enable = true }
 })
 
+-- Treesitter context - display the context of the cursor in a sticky header
+add('nvim-treesitter/nvim-treesitter-context')
+
 require('treesitter-context').setup()
+
+--
+-- D2 - D2 diagram helpers, including preview
+--
+add("terrastruct/d2-vim")
+
+--
+-- Org Mode
+--
+add("nvim-orgmode/orgmode")
 
 require('orgmode').setup({
    org_agenda_files = { '~/Documents/Org/*' },
    org_default_notes_file = '~/Documents/Org/refile.org',
+})
+
+--
+-- Mason (LSP)
+--
+add({
+   source = "mason-org/mason-lspconfig.nvim",
+   depends = {
+      "neovim/nvim-lspconfig",
+      "mason-org/mason.nvim",
+   }
 })
 
 require("mason").setup()
@@ -143,12 +144,25 @@ require("mason-lspconfig").setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
+--
+-- Modus colorscheme
+--
+add("miikanissi/modus-themes.nvim")
+
 require("modus-themes").setup({
    -- variant = "tinted",
    on_highlights = function(highlight, color)
       highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
       highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
    end,
+})
+
+--
+-- Diagrams and images
+--
+add({
+   source = "3rd/diagram.nvim",
+   depends = { "3rd/image.nvim" }
 })
 
 require("image").setup({

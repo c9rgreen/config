@@ -1,4 +1,7 @@
+--
+-- LSP
 -- See h: lspconfig-all for helpful docs
+--
 vim.lsp.config('ts_ls', {
    init_options = {
       plugins = {
