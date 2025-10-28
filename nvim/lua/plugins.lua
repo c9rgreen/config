@@ -55,6 +55,9 @@ mini_diff.setup({
    }
 })
 
+-- Add MiniBufremove to the contextual menu
+vim.cmd.amenu([[PopUp.Delete\ Buffer <Cmd>lua MiniBufremove.delete()<CR>]])
+
 -- Commands
 local mini_extra = require('mini.extra')
 local mini_pick = require('mini.pick')
@@ -82,6 +85,13 @@ local commands = {
 for name, func in pairs(commands) do
    vim.api.nvim_create_user_command(name, func, {})
 end
+
+-- Mappings for Mini.Pick
+vim.keymap.set('n', '<M-p>', ':Pick commands<CR>')           -- Command picker
+vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')        -- File browser
+vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>') -- Buffer picker
+vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
+vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
 --
 -- Treesitter - syntax highlighting, among other things
@@ -156,6 +166,8 @@ require("modus-themes").setup({
       highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
    end,
 })
+
+vim.cmd.colorscheme("modus")
 
 --
 -- Diagrams and images

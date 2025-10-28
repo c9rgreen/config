@@ -1,6 +1,4 @@
---
 -- Options
---
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
@@ -24,34 +22,23 @@ vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.opt.number = false
 
-vim.diagnostic.config({ virtual_text = true })
+-- Display diagnostics on virtual lines, but only for the current line
+vim.diagnostic.config({ virtual_lines = { current_line = true } })
 
 -- Contextual menu
-vim.cmd.amenu([[PopUp.Code\ action <Cmd>lua vim.lsp.buf.code_action()<CR>]])
 vim.cmd.amenu([[PopUp.LSP\ Hover <Cmd>lua vim.lsp.buf.hover()<CR>]])
 vim.cmd.amenu([[PopUp.References <Cmd>lua vim.lsp.buf.references()<CR>]])
-vim.cmd.amenu([[PopUp.Delete\ Buffer <Cmd>lua MiniBufremove.delete()<CR>]])
 vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
 
 -- Abbreviations
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 vim.cmd.iabbrev ':cg: Christopher Green'
 
+-- Exit terminal
+vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
+
 -- Set up language servers
 require("lsp")
 
 -- Set up plugins
 require("plugins")
-
--- Set colorscheme
-vim.cmd.colorscheme("modus")
-
---
--- Mappings
---
-vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')        -- File browser
-vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')                -- Exit terminal mode with meta-escape
-vim.keymap.set('n', '<M-p>', ':Pick commands<CR>')           -- Command picker
-vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>') -- Buffer picker
-vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
-vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
