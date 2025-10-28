@@ -1,10 +1,10 @@
 # vim: set filetype=ghostty
 
 shell-integration = fish
-font-size = "14"
+font-size = "15"
 font-family = "Berkeley Mono"
 font-thicken = true
-font-thicken-strength = 5
+font-thicken-strength = 1
 theme = dark:modus_vivendi,light:modus_operandi
 mouse-shift-capture = true
 mouse-hide-while-typing = true
