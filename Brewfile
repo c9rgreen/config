@@ -23,6 +23,7 @@ brew "julia"
 brew "just"
 brew "lf"
 brew "neovim"
+brew "newsboat"
 brew "node"
 brew "pandoc"
 brew "postgresql@18"
@@ -44,3 +45,5 @@ cask "mactex-no-gui"
 cask "quarto"
 cask "ungoogled-chromium"
 
+# Fonts
+cask "font-annotation-mono"
