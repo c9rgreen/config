@@ -37,8 +37,11 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 -- Exit terminal
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
 
+-- Save (macOS)
+vim.keymap.set('n', '<D-s>', ':write<CR>')
+
 -- Set up language servers
-require("lsp")
+require('lsp')
 
 -- Set up plugins
-require("plugins")
+require('plugins')

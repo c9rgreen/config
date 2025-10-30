@@ -88,9 +88,11 @@ end
 
 -- Mappings for Mini.Pick
 vim.keymap.set('n', '<M-p>', ':Pick commands<CR>')           -- Command picker
+vim.keymap.set('n', '<D-p>', ':Pick commands<CR>')           -- Command picker (macOS)
 vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')        -- File browser
 vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>') -- Buffer picker
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
+vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
 --
