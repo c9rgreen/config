@@ -1,0 +1,8 @@
+data.location=~/.local/share/task
+hooks.location=~/.config/task/hooks
+
+# https://unix.stackexchange.com/questions/367151/how-to-override-warning-in-taskwarrior
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
+
+# Use light colors
+include light-256.theme

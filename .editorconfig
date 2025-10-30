@@ -11,4 +11,5 @@ charset = utf-8
 # Following the LuaRocks style guide
 # https://github.com/luarocks/lua-style-guide
 indent_size = 3
+quote_style = none
 
