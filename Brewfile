@@ -46,4 +46,6 @@ cask "quarto"
 cask "ungoogled-chromium"
 
 # Fonts
-cask "font-annotation-mono"
+cask "font-recursive-code"
+cask "font-recursive-desktop"
+cask "font-recursive-mono-nerd-font"
