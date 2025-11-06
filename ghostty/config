@@ -3,7 +3,7 @@
 shell-integration = fish
 font-size = "15"
 font-family = "Rec Mono Duotone"
-theme = dark:modus_vivendi,light:modus_operandi
+theme = dark:Melange Dark,light:Melange Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
