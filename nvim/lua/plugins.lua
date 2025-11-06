@@ -169,7 +169,12 @@ require("modus-themes").setup({
    end,
 })
 
-vim.cmd.colorscheme("modus")
+--
+-- Melange colorscheme
+--
+add("savq/melange-nvim")
+
+vim.cmd.colorscheme("melange")
 
 --
 -- Diagrams and images
