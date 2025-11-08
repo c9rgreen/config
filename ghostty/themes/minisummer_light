@@ -1,0 +1,65 @@
+# Mini Summer Light
+# Colors from https://nvim-mini.org/
+
+# Black (fg)
+palette = 0=#2c2e33
+
+# Red (red)
+palette = 1=#61004f
+
+# Green (green)
+palette = 2=#636900
+
+# Yellow (yellow)
+palette = 3=#804e00
+
+# Blue (blue)
+palette = 4=#004d84
+
+# Magenta (purple)
+palette = 5=#370674
+
+# Cyan (cyan)
+palette = 6=#006f44
+
+# White (bg)
+palette = 7=#e9e1dd
+
+# Bright Black (fg_edge)
+palette = 8=#1d1e23
+
+# Bright Red (orange)
+palette = 9=#700011
+
+# Bright Green (green)
+palette = 10=#636900
+
+# Bright Yellow (yellow)
+palette = 11=#804e00
+
+# Bright Blue (azure)
+palette = 12=#007e87
+
+# Bright Magenta (purple)
+palette = 13=#c5b3ff
+
+# Bright Cyan (cyan)
+palette = 14=#006f44
+
+# Bright White (bg_edge)
+palette = 15=#f2eae6
+
+# Background (bg)
+background = #e9e1dd
+
+# Text (fg)
+foreground = #2c2e33
+
+# Cursor (fg_edge2)
+cursor-color = #0b0d11
+
+# Selection Background (bg_mid2)
+selection-background = #a8a19d
+
+# Selection Foreground (fg_mid2)
+selection-foreground = #64666c

@@ -1,0 +1,65 @@
+# Mini Autumn Light
+# Colors from https://nvim-mini.org/
+
+# Black (fg)
+palette = 0=#2f2e29
+
+# Red (red)
+palette = 1=#52073f
+
+# Green (green)
+palette = 2=#4b5400
+
+# Yellow (yellow)
+palette = 3=#6c4300
+
+# Blue (blue)
+palette = 4=#003b6d
+
+# Magenta (purple)
+palette = 5=#351962
+
+# Cyan (cyan)
+palette = 6=#005e3d
+
+# White (bg)
+palette = 7=#e5e1e7
+
+# Bright Black (fg_edge)
+palette = 8=#1f1f1a
+
+# Bright Red (orange)
+palette = 9=#5c0207
+
+# Bright Green (green)
+palette = 10=#4b5400
+
+# Bright Yellow (yellow)
+palette = 11=#6c4300
+
+# Bright Blue (azure)
+palette = 12=#006a74
+
+# Bright Magenta (purple)
+palette = 13=#351962
+
+# Bright Cyan (cyan)
+palette = 14=#005e3d
+
+# Bright White (bg_edge)
+palette = 15=#eeeaf0
+
+# Background (bg)
+background = #e5e1e7
+
+# Text (fg)
+foreground = #2f2e29
+
+# Cursor (fg_edge2)
+cursor-color = #0e0d09
+
+# Selection Background (bg_mid2)
+selection-background = #a4a0a6
+
+# Selection Foreground (fg_mid2)
+selection-foreground = #686661
