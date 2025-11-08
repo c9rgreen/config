@@ -1,0 +1,65 @@
+# Mini Winter Dark
+# Colors from https://nvim-mini.org/
+
+# Black (fg)
+palette = 0=#d8d4cd
+
+# Red (red)
+palette = 1=#fac5c7
+
+# Green (green)
+palette = 2=#b8e1c1
+
+# Yellow (yellow)
+palette = 3=#d9d8aa
+
+# Blue (blue)
+palette = 4=#d1cffb
+
+# Magenta (purple)
+palette = 5=#edc7e7
+
+# Cyan (cyan)
+palette = 6=#a6e1e2
+
+# White (bg)
+palette = 7=#11262d
+
+# Bright Black (fg_edge)
+palette = 8=#e6e2db
+
+# Bright Red (orange)
+palette = 9=#f2ccad
+
+# Bright Green (green)
+palette = 10=#b8e1c1
+
+# Bright Yellow (yellow)
+palette = 11=#d9d8aa
+
+# Bright Blue (azure)
+palette = 12=#b3daf9
+
+# Bright Magenta (purple)
+palette = 13=#edc7e7
+
+# Bright Cyan (cyan)
+palette = 14=#a6e1e2
+
+# Bright White (bg_edge)
+palette = 15=#051a20
+
+# Background (bg)
+background = #11262d
+
+# Text (fg)
+foreground = #d8d4cd
+
+# Cursor (fg_edge2)
+cursor-color = #f4f0e9
+
+# Selection Background (bg_mid2)
+selection-background = #485f67
+
+# Selection Foreground (fg_mid2)
+selection-foreground = #98948e

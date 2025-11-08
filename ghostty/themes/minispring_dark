@@ -1,0 +1,65 @@
+# Mini Spring Dark
+# Colors from https://nvim-mini.org/
+
+# Black (fg)
+palette = 0=#d2d5db
+
+# Red (red)
+palette = 1=#ffc1bf
+
+# Green (green)
+palette = 2=#abe5be
+
+# Yellow (yellow)
+palette = 3=#d8da9d
+
+# Blue (blue)
+palette = 4=#d3ccff
+
+# Magenta (purple)
+palette = 5=#f7c2ea
+
+# Cyan (cyan)
+palette = 6=#94e5ea
+
+# White (bg)
+palette = 7=#1c2617
+
+# Bright Black (fg_edge)
+palette = 8=#e0e3e9
+
+# Bright Red (orange)
+palette = 9=#facb9e
+
+# Bright Green (green)
+palette = 10=#abe5be
+
+# Bright Yellow (yellow)
+palette = 11=#d8da9d
+
+# Bright Blue (azure)
+palette = 12=#a9d8ff
+
+# Bright Magenta (purple)
+palette = 13=#f7c2ea
+
+# Bright Cyan (cyan)
+palette = 14=#94e5ea
+
+# Bright White (bg_edge)
+palette = 15=#101a0b
+
+# Background (bg)
+background = #1c2617
+
+# Text (fg)
+foreground = #d2d5db
+
+# Cursor (fg_edge2)
+cursor-color = #eef1f7
+
+# Selection Background (bg_mid2)
+selection-background = #535f4d
+
+# Selection Foreground (fg_mid2)
+selection-foreground = #92959b
