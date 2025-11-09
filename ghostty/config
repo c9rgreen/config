@@ -1,8 +1,9 @@
 # vim: set filetype=ghostty
 
 shell-integration = fish
-font-size = "15"
-font-family = "Rec Mono Duotone"
+font-size = "16"
+font-family = "Iosevka Term"
+font-feature = -calt, +dlig, +ss08
 theme = dark:minisummer_dark,light:minisummer_light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
