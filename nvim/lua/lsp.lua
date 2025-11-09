@@ -67,6 +67,7 @@ vim.lsp.enable({
    'lua_ls',
    'marksman',
    'pyright',
+   'shopify_theme_ls',
    'ts_ls',
    'vue_ls',
    'yamlls',
