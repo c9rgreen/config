@@ -4,12 +4,12 @@ shell-integration = fish
 font-size = "16"
 font-family = "Iosevka Term"
 font-feature = -calt, +dlig, +ss08
-theme = dark:minisummer_dark,light:minisummer_light
+theme = dark:modus_vivendi,light:modus_operandi
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
 macos-option-as-alt = true
-keybind = global:shift+alt+space=toggle_quick_terminal
+keybind = global:alt+space=toggle_quick_terminal
 keybind = super+e=text:nvim\n
 clipboard-read = allow
 clipboard-write = allow

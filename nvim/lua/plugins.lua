@@ -95,9 +95,6 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
 vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
--- Colorscheme
-vim.cmd.colorscheme("minisummer")
-
 --
 -- Treesitter - syntax highlighting, among other things
 --
@@ -160,26 +157,17 @@ require("mason-lspconfig").setup({
 })
 
 --
--- Diagrams and images
+-- Modus theme
 --
-add({
-   source = "3rd/diagram.nvim",
-   depends = { "3rd/image.nvim" }
+add("miikanissi/modus-themes.nvim")
+
+require("modus-themes").setup({
+   -- variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+   end,
 })
 
-require("image").setup({
-   integrations = {
-      markdown = {
-         enabled = true,
-         filetypes = { "markdown", "quarto" }
-      },
-      org = { enabled = true }
-   }
-})
+vim.cmd.colorscheme("modus")
 
--- npm install -g @mermaid-js/mermaid-cli
-require("diagram").setup({
-   integrations = {
-      require("diagram.integrations.markdown"),
-   },
-})
