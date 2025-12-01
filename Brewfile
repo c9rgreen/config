@@ -51,9 +51,3 @@ cask "livebook"
 cask "mactex-no-gui"
 cask "orbstack"
 cask "quarto"
-cask "ungoogled-chromium"
-
-# Fonts
-cask "font-iosevka"
-cask "font-iosevka-aile"
-cask "font-iosevka-etoile"

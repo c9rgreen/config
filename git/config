@@ -23,6 +23,7 @@
 
     # Display a dependency graph of the changed files
     deps = !npx depcruise src --affected $(git last) --output-type dot | dot -T svg | chafa
+    dep2 = !npx depcruise src --affected $(git last) --output-type d2 | d2 --layout elk --scale 1 - > deps.svg
 
     # Populate quickfix list with every changed file
     review = !git jump diff $(git last)
