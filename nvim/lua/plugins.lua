@@ -95,9 +95,6 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
 vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
--- Colorscheme
-vim.cmd.colorscheme("minisummer")
-
 --
 -- Treesitter - syntax highlighting, among other things
 --
