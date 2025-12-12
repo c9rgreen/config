@@ -2,10 +2,10 @@
 
 shell-integration = fish
 font-size = "14"
-font-family = "Annotation Mono"
+font-family = "Berkeley Mono"
 font-thicken = true
 font-thicken-strength = 1
-theme = dark:miniautumn_dark,light:miniautumn_light
+theme = dark:Nvim Dark,light:Nvim Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
