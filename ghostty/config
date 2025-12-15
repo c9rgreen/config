@@ -2,10 +2,12 @@
 
 shell-integration = fish
 font-size = "14"
-font-family = "Berkeley Mono"
+font-family = "Monaspace Neon"
+font-family-italic = "Monaspace Radon"
 font-thicken = true
 font-thicken-strength = 1
-theme = dark:Nvim Dark,light:Nvim Light
+font-feature = +ss01, +ss02, +ss03, +ss04, +ss05, +ss06, +ss07, +ss08, +ss09, +ss10, +liga, +calt
+theme = dark:miniautumn_dark,light:miniautumn_light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1

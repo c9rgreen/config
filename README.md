@@ -4,10 +4,11 @@
 
 ## Highlights
 
-| Tool                             | Role             |
-| -------------------------------  | ---------------- |
-| [Ghostty](https://ghostty.org/)  | Terminal         |
-| [Homebrew](https://brew.sh)      | Package Manager  |
-| [Fish](https://fishshell.com)    | Shell            |
-| [Neovim](https://neovim.io)      | Text Editor      |
-| [OrbStack](https://orbstack.dev) | Virtual Machines |
+| Tool                                      | Role             |
+| ----------------------------------------- | ---------------- |
+| [Ghostty](https://ghostty.org/)           | Terminal         |
+| [Homebrew](https://brew.sh)               | Package Manager  |
+| [Fish](https://fishshell.com)             | Shell            |
+| [Neovim](https://neovim.io)               | Text Editor      |
+| [OrbStack](https://orbstack.dev)          | Virtual Machines |
+| [Font](https://monaspace.githubnext.com/) | Monaspace        |

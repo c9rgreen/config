@@ -95,6 +95,15 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
 vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
+-- Colors
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Comment", { italic = true })
+  end,
+})
+
+vim.cmd.colorscheme("miniautumn")
+
 --
 -- Treesitter - syntax highlighting, among other things
 --
