@@ -23,7 +23,7 @@ vim.opt.splitright = true
 vim.opt.number = false
 
 -- Display diagnostics on virtual lines, but only for the current line
-vim.diagnostic.config({ virtual_lines = { current_line = true } })
+vim.diagnostic.config({ virtual_text = true })
 
 -- Contextual menu
 vim.cmd.amenu([[PopUp.LSP\ Hover <Cmd>lua vim.lsp.buf.hover()<CR>]])

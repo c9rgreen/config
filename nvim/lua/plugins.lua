@@ -102,8 +102,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
-vim.cmd.colorscheme("miniautumn")
-
 --
 -- Treesitter - syntax highlighting, among other things
 --
