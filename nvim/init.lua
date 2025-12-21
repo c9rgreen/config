@@ -16,11 +16,13 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldtext = ""
 vim.opt.wildignorecase = true
+vim.opt.wildignore:append { "*/node_modules/**", "*.tmp", "*.swp" }
 vim.opt.shell = "fish"
 vim.opt.diffopt:append("vertical")
 vim.opt.diffopt:append("iwhiteall")
 vim.opt.splitright = true
 vim.opt.number = false
+vim.opt.path:append { "**" }
 
 -- Display diagnostics on virtual lines, but only for the current line
 vim.diagnostic.config({ virtual_text = true })
