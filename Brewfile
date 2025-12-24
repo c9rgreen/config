@@ -37,10 +37,13 @@ brew "python"
 brew "ripgrep"
 brew "scc"
 brew "sonar-scanner"
+brew "task"
+brew "timewarrior"
 brew "typst"
 brew "universal-ctags"
 brew "vale"
 brew "wget"
+brew "zk"
 
 # Apps
 cask "ghostty"
