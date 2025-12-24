@@ -163,3 +163,12 @@ require("mason-lspconfig").setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
+
+--
+-- Zettelkasten
+--
+add("zk-org/zk-nvim")
+
+require("zk").setup({
+   picker = "minipick"
+})
