@@ -66,6 +66,7 @@ vim.lsp.enable({
    'intelephense',
    'lua_ls',
    'marksman',
+   'ruff',
    'shopify_theme_ls',
    'ts_ls',
    'ty',
