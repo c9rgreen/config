@@ -1,5 +1,6 @@
 # vim: ft=ruby
 tap "ddev/ddev"
+tap "d12frosted/emacs-plus"
 
 # Command-line utilities
 brew "asdf"
@@ -13,6 +14,7 @@ brew "ddev"
 brew "doctl"
 brew "duckdb"
 brew "elixir"
+brew "emacs-plus"
 brew "entr"
 brew "eza"
 brew "ffmpeg"
@@ -46,6 +48,14 @@ brew "wget"
 brew "zk"
 
 # Apps
+cask "claude"
+cask "claude-code"
 cask "ghostty"
 cask "orbstack"
+cask "orion"
 cask "quarto"
+
+# Fonts
+cask "font-monaspace"
+cask "font-asap"
+cask "font-asap-condensed"
