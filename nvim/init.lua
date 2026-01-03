@@ -47,3 +47,6 @@ require('lsp')
 
 -- Set up plugins
 require('plugins')
+
+-- Colorscheme
+vim.api.nvim_set_hl(0, 'Comment', { italic = true })
