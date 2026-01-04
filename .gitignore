@@ -32,3 +32,11 @@ glab-cli
 
 # gh (GitHub CLI)
 gh
+
+# Emacs
+emacs/auto-save-list
+emacs/eln-cache
+emacs/elpa
+
+# Emacs backup files
+*~
