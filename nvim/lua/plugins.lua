@@ -172,3 +172,18 @@ add("zk-org/zk-nvim")
 require("zk").setup({
    picker = "minipick"
 })
+
+--
+-- Modus colorscheme
+-- 
+add("miikanissi/modus-themes.nvim")
+
+require("modus-themes").setup({
+   -- variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+   end,
+})
+
+vim.cmd.colorscheme("modus")
