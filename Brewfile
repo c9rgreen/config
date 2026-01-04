@@ -54,6 +54,7 @@ cask "ghostty"
 cask "orbstack"
 cask "orion"
 cask "quarto"
+cask "emacs-plus"
 
 # Fonts
 cask "font-monaspace"
