@@ -42,11 +42,6 @@ vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
 -- Save (macOS)
 vim.keymap.set('n', '<D-s>', ':write<CR>')
 
--- Set up language servers
-require('lsp')
-
 -- Set up plugins
 require('plugins')
 
--- Colorscheme
-vim.api.nvim_set_hl(0, 'Comment', { italic = true })

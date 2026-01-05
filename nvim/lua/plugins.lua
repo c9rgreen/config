@@ -96,6 +96,12 @@ vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (mac
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
 -- Colors
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    vim.api.nvim_set_hl(0, "Comment", { italic = true })
+  end,
+})
+
 vim.cmd.colorscheme("minisummer")
 
 --
