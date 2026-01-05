@@ -96,11 +96,7 @@ vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (mac
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
 -- Colors
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    vim.api.nvim_set_hl(0, "Comment", { italic = true })
-  end,
-})
+vim.cmd.colorscheme("minisummer")
 
 --
 -- Treesitter - syntax highlighting, among other things
@@ -147,7 +143,8 @@ require('orgmode').setup({
 })
 
 --
--- Mason (LSP)
+-- Mason & LSP
+-- See h: lspconfig-all for helpful docs
 --
 add({
    source = "mason-org/mason-lspconfig.nvim",
@@ -158,11 +155,76 @@ add({
 })
 
 require("mason").setup()
+
+-- LSP config for Lua
+vim.lsp.config('lua_ls', {
+   on_init = function(client)
+      -- Load .luarc.json[c]
+      if client.workspace_folders then
+         local path = client.workspace_folders[1].name
+         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
+            return
+         end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+         runtime = {
+            version = 'LuaJIT'
+         },
+         -- Make the server aware of Neovim runtime files
+         workspace = {
+            checkThirdParty = false,
+            library = {
+               vim.env.VIMRUNTIME
+            }
+         }
+      })
+   end,
+})
+
+-- LSP config for Vue
+local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+local vue_plugin = {
+   name = '@vue/typescript-plugin',
+   location = vue_language_server_path,
+   languages = { 'vue' },
+   configNamespace = 'typescript',
+}
+
+vim.lsp.config("vtsls", {
+   settings = {
+      vtsls = {
+         tsserver = {
+            globalPlugins = {
+               vue_plugin,
+            },
+         },
+      },
+   },
+   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+})
+
+vim.lsp.enable({
+   'cssls',
+   'eslint',
+   'expert',
+   'html',
+   'intelephense',
+   'lua_ls',
+   'marksman',
+   'ruff',
+   'shopify_theme_ls',
+   'ts_ls',
+   'ty',
+   'vue_ls',
+   'yamlls',
+   'vtsls',
+})
+
 require("mason-lspconfig").setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
-
 
 --
 -- Zettelkasten
@@ -172,18 +234,3 @@ add("zk-org/zk-nvim")
 require("zk").setup({
    picker = "minipick"
 })
-
---
--- Modus colorscheme
--- 
-add("miikanissi/modus-themes.nvim")
-
-require("modus-themes").setup({
-   -- variant = "tinted",
-   on_highlights = function(highlight, color)
-      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
-      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
-   end,
-})
-
-vim.cmd.colorscheme("modus")
