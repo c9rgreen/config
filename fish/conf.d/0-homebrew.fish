@@ -1,0 +1,3 @@
+# Homebrew
+# https://docs.brew.sh/Installation
+eval (/opt/homebrew/bin/brew shellenv)
