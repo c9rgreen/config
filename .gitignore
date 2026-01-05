@@ -37,6 +37,8 @@ gh
 emacs/auto-save-list
 emacs/eln-cache
 emacs/elpa
+emacs/eshell
+emacs/transient
 
 # Emacs backup files
 *~

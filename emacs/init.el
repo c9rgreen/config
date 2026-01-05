@@ -24,6 +24,29 @@
   (package-refresh-contents)
   (package-install 'markdown-mode))
 
+;; Magit configuration
+(require 'magit)
+
+;; Enable automatic refresh of magit buffers when files change
+(add-hook 'after-save-hook 'magit-after-save-refresh-status t)
+
+;; Automatically refresh magit status buffer when Emacs gains focus
+(add-hook 'focus-in-hook 'magit-refresh-all)
+
+;; Enable file watching for automatic magit updates
+;; This makes magit automatically update when files change outside Emacs
+(setq magit-auto-revert-mode t)
+
+;; Refresh magit buffers when files change on disk
+(setq magit-refresh-status-buffer t)
+
+;; Optional: Set the interval for checking file changes (in seconds)
+;; Default is 4 seconds, you can adjust as needed
+(setq auto-revert-interval 2)
+
+;; Optional: Refresh magit buffers quietly without messages
+(setq magit-refresh-verbose nil)
+
 ;; Enable Evil mode (vi keybindings)
 (require 'evil)
 (evil-mode 1)
