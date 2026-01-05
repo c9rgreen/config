@@ -1,6 +1,4 @@
 # vim: ft=ruby
-tap "ddev/ddev"
-tap "d12frosted/emacs-plus"
 
 # Command-line utilities
 brew "asdf"
@@ -9,12 +7,12 @@ brew "caddy"
 brew "chafa"
 brew "composer"
 brew "container"
+brew "d12frosted/emacs-plus/emacs-plus"
 brew "d2"
-brew "ddev"
+brew "ddev/ddev/ddev"
 brew "doctl"
 brew "duckdb"
 brew "elixir"
-brew "emacs-plus"
 brew "entr"
 brew "eza"
 brew "ffmpeg"
