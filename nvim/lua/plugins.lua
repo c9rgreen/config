@@ -139,16 +139,6 @@ require('treesitter-context').setup()
 add("terrastruct/d2-vim")
 
 --
--- Org Mode
---
-add("nvim-orgmode/orgmode")
-
-require('orgmode').setup({
-   org_agenda_files = { '~/Documents/Org/*' },
-   org_default_notes_file = '~/Documents/Org/refile.org',
-})
-
---
 -- Mason & LSP
 -- See h: lspconfig-all for helpful docs
 --
