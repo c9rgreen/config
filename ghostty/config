@@ -3,9 +3,7 @@
 shell-integration = fish
 font-size = "13"
 font-family = "0xProto"
-font-thicken = true
-font-thicken-strength = 1
-theme = dark:minisummer_dark,light:minisummer_light
+theme = dark:Nvim Dark,light:Nvim Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1

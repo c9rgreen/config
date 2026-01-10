@@ -42,6 +42,9 @@ vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
 -- Save (macOS)
 vim.keymap.set('n', '<D-s>', ':write<CR>')
 
+-- Italics
+vim.api.nvim_set_hl(0, "Comment", { italic = true })
+
 -- Set up plugins
 require('plugins')
 
