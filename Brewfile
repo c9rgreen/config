@@ -35,6 +35,7 @@ brew "universal-ctags"
 brew "uv"
 brew "vale"
 brew "wget"
+brew "zk"
 
 # Apps
 cask "claude"
