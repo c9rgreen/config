@@ -194,6 +194,13 @@ vim.lsp.config("vtsls", {
    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 })
 
+-- LSP config for Elixir
+vim.lsp.config('expert', {
+  cmd = { 'expert', '--stdio' },
+  root_markers = { 'mix.exs', '.git' },
+  filetypes = { 'elixir', 'eelixir', 'heex' },
+})
+
 vim.lsp.enable({
    'cssls',
    'eslint',
