@@ -89,7 +89,7 @@ end
 -- Mappings for Mini.Pick
 vim.keymap.set('n', '<M-p>', ':Pick commands<CR>')           -- Command picker
 vim.keymap.set('n', '<D-p>', ':Pick commands<CR>')           -- Command picker (macOS)
-vim.keymap.set('n', '-', ':lua MiniFiles.open()<CR>')        -- File browser
+vim.keymap.set('n', '\\\\', ':lua MiniFiles.open()<CR>')     -- File browser
 vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>') -- Buffer picker
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
 vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
@@ -231,3 +231,15 @@ add("zk-org/zk-nvim")
 require("zk").setup({
    picker = "minipick"
 })
+
+--
+-- Git, database, utilities
+--
+add("rbong/vim-flog")
+add("shumphrey/fugitive-gitlab.vim")
+add("tpope/vim-dadbod")
+add("tpope/vim-endwise")
+add("tpope/vim-eunuch")
+add("tpope/vim-fugitive")
+add("tpope/vim-rhubarb")
+add("tpope/vim-vinegar")
