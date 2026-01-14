@@ -42,3 +42,6 @@ emacs/transient
 
 # Emacs backup files
 *~
+
+# Simplex
+simplex
