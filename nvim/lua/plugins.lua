@@ -243,3 +243,8 @@ add("tpope/vim-eunuch")
 add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-vinegar")
+
+---
+--- Diff viewer
+---
+add('sindrets/diffview.nvim')
