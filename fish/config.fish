@@ -49,3 +49,11 @@ end
 if type -q eza
     alias ls "eza --icons"
 end
+
+#
+# Use Lima as the Docker runtime
+# limactl start template://docker
+#
+if type -q limactl
+    set -gx DOCKER_HOST (limactl list docker --format 'unix://{{.Dir}}/sock/docker.sock')
+end
