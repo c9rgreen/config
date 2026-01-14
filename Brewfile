@@ -43,8 +43,8 @@ cask "claude"
 cask "claude-code"
 cask "ghostty"
 cask "orbstack"
+cask "postico"
 cask "quarto"
-cask "emacs-plus-app"
 
 # Fonts
 cask "font-0xproto"
