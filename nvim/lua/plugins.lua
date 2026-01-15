@@ -95,9 +95,6 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
 vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
 
--- Colors
--- vim.cmd.colorscheme("minisummer")
-
 --
 -- Treesitter - syntax highlighting, among other things
 --
@@ -244,7 +241,14 @@ add("tpope/vim-fugitive")
 add("tpope/vim-rhubarb")
 add("tpope/vim-vinegar")
 
----
---- Diff viewer
----
+--
+-- Diff viewer
+--
 add('sindrets/diffview.nvim')
+
+--
+-- Colorscheme
+--
+add('savq/melange-nvim')
+
+vim.cmd.colorscheme('melange')
