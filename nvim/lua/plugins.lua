@@ -246,9 +246,3 @@ add("tpope/vim-vinegar")
 --
 add('sindrets/diffview.nvim')
 
---
--- Colorscheme
---
-add('savq/melange-nvim')
-
-vim.cmd.colorscheme('melange')
