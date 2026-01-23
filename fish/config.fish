@@ -49,3 +49,8 @@ end
 if type -q eza
     alias ls "eza --icons"
 end
+
+#
+# Postgres
+#
+set -a PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"
