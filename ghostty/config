@@ -3,6 +3,8 @@
 shell-integration = fish
 font-size = "13"
 font-family = "0xProto"
+font-thicken = true
+font-thicken-strength = 1
 theme = dark:miniwinter_dark,light:miniwinter_light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
