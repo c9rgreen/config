@@ -201,6 +201,7 @@ vim.lsp.config('expert', {
   filetypes = { 'elixir', 'eelixir', 'heex' },
 })
 
+-- Enable LSP servers
 vim.lsp.enable({
    'cssls',
    'eslint',
@@ -217,6 +218,9 @@ vim.lsp.enable({
    'yamlls',
    'vtsls',
 })
+
+-- Run :Format to apply LSP formatting
+vim.api.nvim_create_user_command("Format", function() vim.lsp.buf.format() end, {})
 
 require("mason-lspconfig").setup({
    -- Automatically install the language servers configured by vim.lsp.enable
