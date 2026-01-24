@@ -239,13 +239,10 @@ require("zk").setup({
 --
 -- Git, database, utilities
 --
-add("rbong/vim-flog")
-add("shumphrey/fugitive-gitlab.vim")
 add("tpope/vim-dadbod")
 add("tpope/vim-endwise")
 add("tpope/vim-eunuch")
 add("tpope/vim-fugitive")
-add("tpope/vim-rhubarb")
 add("tpope/vim-vinegar")
 
 --
