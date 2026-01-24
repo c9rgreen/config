@@ -40,10 +40,13 @@ brew "zk"
 cask "claude"
 cask "claude-code"
 cask "ghostty"
+cask "marked-2"
+cask "netnewswire"
 cask "orbstack"
 cask "postgres-unofficial"
 cask "postico"
 cask "quarto"
+cask "tower"
 
 # Fonts
 cask "font-0xproto"
