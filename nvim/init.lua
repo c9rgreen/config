@@ -39,7 +39,11 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 -- Exit terminal
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
 
--- Save (macOS)
+-- Stay in visual mode after indenting
+vim.keymap.set("x", ">", ">gv")
+vim.keymap.set("x", "<", "<gv")
+
+-- macOS-style key mappings
 vim.keymap.set('n', '<D-s>', ':write<CR>')
 
 -- Italics
