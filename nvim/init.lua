@@ -2,7 +2,7 @@
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.scrolloff = 8
 vim.opt.virtualedit = 'all'
-vim.opt.guicursor:append("a:blinkon1")
+vim.opt.guicursor:append('a:blinkon1')
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
@@ -12,17 +12,17 @@ vim.opt.fillchars = {
    diff = ' '
 }
 vim.opt.foldlevel = 5
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = ""
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = ''
 vim.opt.wildignorecase = true
-vim.opt.wildignore:append { "*/node_modules/**", "*.tmp", "*.swp" }
-vim.opt.shell = "fish"
-vim.opt.diffopt:append("vertical")
-vim.opt.diffopt:append("iwhiteall")
+vim.opt.wildignore:append { '*/node_modules/**', '*.tmp', '*.swp' }
+vim.opt.shell = 'fish'
+vim.opt.diffopt:append('vertical')
+vim.opt.diffopt:append('iwhiteall')
 vim.opt.splitright = true
 vim.opt.number = false
-vim.opt.path:append { "**" }
+vim.opt.path:append { '**' }
 
 -- Display diagnostics on virtual lines, but only for the current line
 vim.diagnostic.config({ virtual_text = true })
@@ -36,19 +36,14 @@ vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 vim.cmd.iabbrev ':cg: Christopher Green'
 
--- Exit terminal
-vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>')
-
--- Stay in visual mode after indenting
-vim.keymap.set("x", ">", ">gv")
-vim.keymap.set("x", "<", "<gv")
-
--- macOS-style key mappings
-vim.keymap.set('n', '<D-s>', ':write<CR>')
+-- Keymaps
+vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
+vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
+vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
+vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'Save (macOS)' })
 
 -- Italics
-vim.api.nvim_set_hl(0, "Comment", { italic = true })
+vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 
 -- Set up plugins
 require('plugins')
-
