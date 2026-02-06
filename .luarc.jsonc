@@ -1,17 +1,21 @@
 // https://luals.github.io/wiki/configuration/
 {
-  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
-  "Lua.diagnostics.globals": [
-    // Suppress "undefined global warnings
-    "vim",
-    "MiniDeps",
-    "MiniExtra",
-    "MiniPick",
-    "MiniBufremove",
-    "MiniDiff"
-  ],
-  "Lua.format.defaultConfig": {
-      "indent_style": "space",
-      "indent_size": "3"
-  }
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "Lua.diagnostics.globals": [
+        // Suppress "undefined global warnings
+        "vim",
+        "MiniDeps",
+        "MiniExtra",
+        "MiniPick",
+        "MiniBufremove",
+        "MiniDiff"
+    ],
+    "Lua.format": {
+        "enable": true,
+        "defaultConfig": {
+            "indent_style": "space",
+            "indent_size": "3",
+            "quote_style": "single"
+        }
+    }
 }
