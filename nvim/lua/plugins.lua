@@ -96,9 +96,6 @@ vim.keymap.set('n', '<D-o>', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<D-k>', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
--- Colorscheme
-vim.cmd.colorscheme('minisummer')
-
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -260,3 +257,19 @@ add('tpope/vim-vinegar')
 -- Diff viewer
 --
 add('sindrets/diffview.nvim')
+
+--
+-- Modus
+--
+add('miikanissi/modus-themes.nvim')
+
+require("modus-themes").setup({
+   -- variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+      highlight.Visual = { bg = color.bg_yellow_nuanced }
+   end,
+})
+
+vim.cmd.colorscheme('modus')
