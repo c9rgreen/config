@@ -101,19 +101,32 @@ vim.cmd.colorscheme('minisummer')
 
 --
 -- Treesitter - syntax highlighting, among other things
+-- Requires tree-sitter-cli
 --
 add({
    source = 'nvim-treesitter/nvim-treesitter',
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 
-require('nvim-treesitter').install {
+local languages = {
    'bash', 'caddy', 'css', 'dockerfile',
    'eex', 'elixir', 'gitcommit', 'heex', 'html',
    'javascript', 'jinja', 'json', 'julia', 'liquid',
    'lua', 'markdown', 'mermaid', 'python', 'rst',
    'vim', 'vimdoc', 'vue', 'yaml',
 }
+
+require('nvim-treesitter').install(languages)
+
+vim.api.nvim_create_autocmd('FileType', {
+   pattern = languages,
+   callback = function()
+      vim.treesitter.start()
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo.foldmethod = 'expr'
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+   end,
+})
 
 -- Treesitter - text objects
 add('nvim-treesitter/nvim-treesitter-textobjects')
