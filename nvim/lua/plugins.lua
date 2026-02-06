@@ -5,7 +5,7 @@
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-   vim.cmd('echo "Installing `mini.nvim`" | redraw')
+   vim.cmd("echo 'Installing `mini.nvim`' | redraw")
    local clone_cmd = {
       'git', 'clone', '--filter=blob:none',
       'https://github.com/nvim-mini/mini.nvim', mini_path
@@ -65,11 +65,11 @@ local commands = {
    -- MiniExtra Pickers
    Branches = function() mini_extra.pickers.git_branches() end,
    Diagnostic = function() mini_extra.pickers.diagnostic() end,
-   DocumentSymbol = function() mini_extra.pickers.lsp({ scope = "document_symbol" }) end,
+   DocumentSymbol = function() mini_extra.pickers.lsp({ scope = 'document_symbol' }) end,
    Keymaps = function() mini_extra.pickers.keymaps() end,
    Marks = function() mini_extra.pickers.marks() end,
-   Quickfix = function() mini_extra.pickers.list({ scope = "quickfix" }) end,
-   WorkspaceSymbol = function() mini_extra.pickers.lsp({ scope = "workspace_symbol" }) end,
+   Quickfix = function() mini_extra.pickers.list({ scope = 'quickfix' }) end,
+   WorkspaceSymbol = function() mini_extra.pickers.lsp({ scope = 'workspace_symbol' }) end,
 
    -- MiniPick Builtin Pickers
    Files = function() mini_pick.builtin.files() end,
@@ -87,37 +87,36 @@ for name, func in pairs(commands) do
 end
 
 -- Mappings for Mini.Pick
-vim.keymap.set('n', '<M-p>', ':Pick commands<CR>')           -- Command picker
-vim.keymap.set('n', '<D-p>', ':Pick commands<CR>')           -- Command picker (macOS)
-vim.keymap.set('n', '\\\\', ':lua MiniFiles.open()<CR>')     -- File browser
-vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>') -- Buffer picker
-vim.keymap.set('n', '<leader>-', ':Pick files<CR>')          -- File picker
-vim.keymap.set('n', '<D-o>', ':Pick files<CR>')              -- File picker (macOS)
-vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>')      -- Live grep
+vim.keymap.set('n', '<M-p>', ':Pick commands<CR>', { desc = 'Command picker' })
+vim.keymap.set('n', '<D-p>', ':Pick commands<CR>', { desc = 'Command picker' })
+vim.keymap.set('n', '\\\\', ':lua MiniFiles.open()<CR>', { desc = 'File browser' })
+vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = 'Buffer picker' })
+vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
+vim.keymap.set('n', '<D-o>', ':Pick files<CR>', { desc = 'File picker' })
+vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
+vim.keymap.set('n', '<D-k>', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
+
+-- Colorscheme
+vim.cmd.colorscheme('minisummer')
 
 --
 -- Treesitter - syntax highlighting, among other things
 --
 add({
-   source = "nvim-treesitter/nvim-treesitter",
+   source = 'nvim-treesitter/nvim-treesitter',
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 
--- Treesitter - text objects
-add("nvim-treesitter/nvim-treesitter-textobjects")
+require('nvim-treesitter').install {
+   'bash', 'caddy', 'css', 'dockerfile',
+   'eex', 'elixir', 'gitcommit', 'heex', 'html',
+   'javascript', 'jinja', 'json', 'julia', 'liquid',
+   'lua', 'markdown', 'mermaid', 'python', 'rst',
+   'vim', 'vimdoc', 'vue', 'yaml',
+}
 
-require('nvim-treesitter.configs').setup({
-   ensure_installed = {
-      "bash", "caddy", "css", "dockerfile",
-      "eex", "elixir", "gitcommit", "heex", "html",
-      "javascript", "jinja", "json", "julia", "liquid",
-      "lua", "markdown", "mermaid", "python", "rst",
-      "vim", "vimdoc", "vue", "yaml",
-   },
-   highlight = { enable = true },
-   indent = { enable = true },
-   incremental_selection = { enable = true }
-})
+-- Treesitter - text objects
+add('nvim-treesitter/nvim-treesitter-textobjects')
 
 -- Treesitter context - display the context of the cursor in a sticky header
 add('nvim-treesitter/nvim-treesitter-context')
@@ -127,21 +126,21 @@ require('treesitter-context').setup()
 --
 -- D2 - D2 diagram helpers, including preview
 --
-add("terrastruct/d2-vim")
+add('terrastruct/d2-vim')
 
 --
 -- Mason & LSP
 -- See h: lspconfig-all for helpful docs
 --
 add({
-   source = "mason-org/mason-lspconfig.nvim",
+   source = 'mason-org/mason-lspconfig.nvim',
    depends = {
-      "neovim/nvim-lspconfig",
-      "mason-org/mason.nvim",
+      'neovim/nvim-lspconfig',
+      'mason-org/mason.nvim',
    }
 })
 
-require("mason").setup()
+require('mason').setup()
 
 -- LSP config for Lua
 vim.lsp.config('lua_ls', {
@@ -170,7 +169,8 @@ vim.lsp.config('lua_ls', {
 })
 
 -- LSP config for Vue
-local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
+    '/vue-language-server' .. '/node_modules/@vue/language-server'
 local vue_plugin = {
    name = '@vue/typescript-plugin',
    location = vue_language_server_path,
@@ -178,7 +178,7 @@ local vue_plugin = {
    configNamespace = 'typescript',
 }
 
-vim.lsp.config("vtsls", {
+vim.lsp.config('vtsls', {
    settings = {
       vtsls = {
          tsserver = {
@@ -193,9 +193,9 @@ vim.lsp.config("vtsls", {
 
 -- LSP config for Elixir
 vim.lsp.config('expert', {
-  cmd = { 'expert', '--stdio' },
-  root_markers = { 'mix.exs', '.git' },
-  filetypes = { 'elixir', 'eelixir', 'heex' },
+   cmd = { 'expert', '--stdio' },
+   root_markers = { 'mix.exs', '.git' },
+   filetypes = { 'elixir', 'eelixir', 'heex' },
 })
 
 -- Enable LSP servers
@@ -205,21 +205,22 @@ vim.lsp.enable({
    'expert',
    'html',
    'intelephense',
+   'jsonls',
    'lua_ls',
    'marksman',
    'ruff',
    'shopify_theme_ls',
    'ts_ls',
    'ty',
-   'vue_ls',
-   'yamlls',
    'vtsls',
+   'vue_ls',
+   'yamlls'
 })
 
 -- Run :Format to apply LSP formatting
-vim.api.nvim_create_user_command("Format", function() vim.lsp.buf.format() end, {})
+vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format() end, {})
 
-require("mason-lspconfig").setup({
+require('mason-lspconfig').setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
@@ -227,31 +228,22 @@ require("mason-lspconfig").setup({
 --
 -- Zettelkasten
 --
-add("zk-org/zk-nvim")
+add('zk-org/zk-nvim')
 
-require("zk").setup({
-   picker = "minipick"
+require('zk').setup({
+   picker = 'minipick'
 })
 
 --
 -- Git, database, utilities
 --
-add("tpope/vim-dadbod")
-add("tpope/vim-endwise")
-add("tpope/vim-eunuch")
-add("tpope/vim-fugitive")
-add("tpope/vim-vinegar")
+add('tpope/vim-dadbod')
+add('tpope/vim-endwise')
+add('tpope/vim-eunuch')
+add('tpope/vim-fugitive')
+add('tpope/vim-vinegar')
 
 --
 -- Diff viewer
 --
 add('sindrets/diffview.nvim')
-
---
--- Monokai Pro
---
-add('loctvl842/monokai-pro.nvim')
-
-require("monokai-pro").setup()
-
-vim.cmd.colorscheme("monokai-pro")
