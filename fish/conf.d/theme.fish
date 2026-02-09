@@ -6,9 +6,9 @@ function set_fish_theme
     set appearance (defaults read -g AppleInterfaceStyle 2>/dev/null)
     
     if test "$appearance" = "Dark"
-        set theme_to_use "$HOME/.config/fish/themes/modus_operandi.fish"
-    else
         set theme_to_use "$HOME/.config/fish/themes/modus_vivendi.fish"
+    else
+        set theme_to_use "$HOME/.config/fish/themes/modus_operandi.fish"
     end
     
     # Apply the theme by sourcing the custom theme file

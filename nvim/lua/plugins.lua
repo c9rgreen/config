@@ -236,29 +236,6 @@ require('mason-lspconfig').setup({
 })
 
 --
--- Zettelkasten
---
-add('zk-org/zk-nvim')
-
-require('zk').setup({
-   picker = 'minipick'
-})
-
---
--- Git, database, utilities
---
-add('tpope/vim-dadbod')
-add('tpope/vim-endwise')
-add('tpope/vim-eunuch')
-add('tpope/vim-fugitive')
-add('tpope/vim-vinegar')
-
---
--- Diff viewer
---
-add('sindrets/diffview.nvim')
-
---
 -- Modus (Colorscheme)
 --
 add('miikanissi/modus-themes.nvim')
@@ -271,11 +248,6 @@ require("modus-themes").setup({
    end,
 })
 
---
--- Monokai Pro
---
-add('loctvl842/monokai-pro.nvim')
 
-require("monokai-pro").setup()
+vim.cmd.colorscheme('modus')
 
-vim.cmd.colorscheme('monokai-pro')
