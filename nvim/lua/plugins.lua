@@ -259,7 +259,7 @@ add('tpope/vim-vinegar')
 add('sindrets/diffview.nvim')
 
 --
--- Modus
+-- Modus (Colorscheme)
 --
 add('miikanissi/modus-themes.nvim')
 
@@ -271,4 +271,11 @@ require("modus-themes").setup({
    end,
 })
 
-vim.cmd.colorscheme('modus')
+--
+-- Monokai Pro
+--
+add('loctvl842/monokai-pro.nvim')
+
+require("monokai-pro").setup()
+
+vim.cmd.colorscheme('monokai-pro')

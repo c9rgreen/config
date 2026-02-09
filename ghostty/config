@@ -1,11 +1,11 @@
 # vim: set filetype=ghostty
 
 shell-integration = fish
-font-size = "15"
+font-size = "13"
 font-family = "0xProto"
 font-thicken = true
 font-thicken-strength = 1
-theme = dark:modus_vivendi,light:modus_operandi
+theme = dark:Monokai Pro,light:Monokai Pro
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1
