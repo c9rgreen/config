@@ -18,8 +18,12 @@ require('mini.deps').setup({ path = { package = path_package } })
 
 local add = MiniDeps.add
 
+require('mini.align').setup()
 require('mini.basics').setup()
+require('mini.bracketed').setup()
 require('mini.bufremove').setup()
+require('mini.clue').setup()
+require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.extra').setup()
@@ -27,11 +31,15 @@ require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup()
+require('mini.indentscope').setup()
+require('mini.move').setup()
+require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.statusline').setup()
+require('mini.surround').setup()
+require('mini.surround').setup()
 require('mini.tabline').setup()
-require('mini.align').setup()
 
 require('mini.snippets').setup({
    snippets = {
