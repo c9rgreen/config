@@ -36,7 +36,6 @@ brew "uv"
 brew "vale"
 brew "wget"
 brew "zig"
-brew "zk"
 
 # Apps
 cask "claude"
@@ -44,7 +43,6 @@ cask "claude-code"
 cask "ghostty"
 cask "livebook"
 cask "orbstack"
-cask "postgres-unofficial"
 cask "quarto"
 
 # Fonts
