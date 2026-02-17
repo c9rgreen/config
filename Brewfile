@@ -46,6 +46,6 @@ cask "orbstack"
 cask "quarto"
 
 # Fonts
-cask "font-0xproto"
+cask "font-aporetic"
 cask "font-asap"
 cask "font-asap-condensed"
