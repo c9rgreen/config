@@ -41,6 +41,7 @@ brew "zig"
 # Apps
 cask "claude"
 cask "claude-code"
+cask "emacs-plus"
 cask "ghostty"
 cask "livebook"
 cask "orbstack"
