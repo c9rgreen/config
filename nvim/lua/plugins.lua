@@ -244,17 +244,22 @@ require('mason-lspconfig').setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
--- 
+--
 -- Diff viewer
 --
 add('sindrets/diffview.nvim')
+
+require('diffview').setup({
+   enhanced_diff_hl = true,
+   use_icons = false
+})
 
 --
 -- Modus (Colorscheme)
 --
 add('miikanissi/modus-themes.nvim')
 
-require("modus-themes").setup({
+require('modus-themes').setup({
    -- variant = "tinted",
    on_highlights = function(highlight, color)
       highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
@@ -263,4 +268,3 @@ require("modus-themes").setup({
 })
 
 vim.cmd.colorscheme('modus')
-

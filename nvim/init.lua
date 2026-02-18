@@ -17,8 +17,7 @@ vim.opt.foldtext = ''
 vim.opt.wildignorecase = true
 vim.opt.wildignore:append { '*/node_modules/**', '*.tmp', '*.swp', 'deps' }
 vim.opt.shell = 'fish'
-vim.opt.diffopt:append('vertical')
-vim.opt.diffopt:append('iwhiteall')
+vim.opt.diffopt:append('internal,vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
 vim.opt.path:append { '**' }
