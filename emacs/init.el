@@ -57,6 +57,9 @@
 
 ;; Auto-revert - reload files when changed on disk
 (global-auto-revert-mode 1)
+
+;; Auto-refresh magit status buffer after saving
+(add-hook 'after-save-hook 'magit-after-save-refresh-status)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
