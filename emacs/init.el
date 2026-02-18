@@ -7,8 +7,19 @@
 ;; Font
 (set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 140)
 
-;; Theme
-(load-theme 'modus-operandi t)
+;; Theme - follow macOS dark mode
+(defun cg/apply-theme ()
+  (mapc #'disable-theme custom-enabled-themes)
+  (if (string-match-p "Dark"
+        (shell-command-to-string "defaults read -g AppleInterfaceStyle 2>/dev/null"))
+      (load-theme 'modus-vivendi t)
+    (load-theme 'modus-operandi t)))
+
+(cg/apply-theme)
+
+(when (boundp 'ns-system-appearance-change-functions)
+  (add-hook 'ns-system-appearance-change-functions
+            (lambda (_) (cg/apply-theme))))
 
 ;; Package setup
 (require 'package)
