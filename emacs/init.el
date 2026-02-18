@@ -4,6 +4,9 @@
 ;; Right-click context menu
 (context-menu-mode 1)
 
+;; Font
+(set-face-attribute 'default nil :family "Aporetic Sans Mono" :height 140)
+
 ;; Theme
 (load-theme 'modus-operandi t)
 
