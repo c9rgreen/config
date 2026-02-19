@@ -49,8 +49,12 @@
 (global-set-key (kbd "C-x b") #'consult-buffer)
 (global-set-key (kbd "C-x C-r") #'consult-recent-file)
 
-;; Markdown
-(setq markdown-header-scaling t)
+;; Markdown - scale header sizes
+(custom-set-faces
+ '(markdown-header-face-1 ((t (:height 1.6))))
+ '(markdown-header-face-2 ((t (:height 1.4))))
+ '(markdown-header-face-3 ((t (:height 1.2))))
+ '(markdown-header-face-4 ((t (:height 1.1)))))
 
 ;; Marginalia - annotations in the minibuffer
 (marginalia-mode)
@@ -66,9 +70,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
