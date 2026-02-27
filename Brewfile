@@ -2,6 +2,7 @@
 
 # Command-line utilities
 brew "awscli"
+brew "bat"
 brew "caddy"
 brew "composer"
 brew "container"
@@ -10,6 +11,7 @@ brew "ddev/ddev/ddev"
 brew "doctl"
 brew "duckdb"
 brew "elixir"
+brew "fd"
 brew "ffmpeg"
 brew "fish"
 brew "flyctl"
@@ -40,14 +42,13 @@ brew "zig"
 
 # Apps
 cask "claude"
-cask "claude-code"
-cask "emacs-plus"
 cask "ghostty"
 cask "livebook"
 cask "orbstack"
 cask "quarto"
 
 # Fonts
-cask "font-aporetic"
+cask "font-0xproto"
+cask "font-annotation-mono"
 cask "font-asap"
 cask "font-asap-condensed"
