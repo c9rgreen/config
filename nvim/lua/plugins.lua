@@ -245,6 +245,33 @@ require('mason-lspconfig').setup({
 })
 
 --
+-- Modus colorscheme
+--
+add('miikanissi/modus-themes.nvim')
+
+require('modus-themes').setup({
+   variant = "tinted",
+   on_highlights = function(highlight, color)
+      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
+      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
+   end,
+})
+
+vim.cmd.colorscheme('modus')
+
+--
+-- Monokai Pro
+--
+add('loctvl842/monokai-pro.nvim')
+
+require("monokai-pro").setup()
+
+--
+-- Solarized
+--
+add('maxmx03/solarized.nvim')
+
+--
 -- Diff viewer
 --
 add('sindrets/diffview.nvim')
@@ -255,16 +282,32 @@ require('diffview').setup({
 })
 
 --
--- Modus (Colorscheme)
+-- Images, Mermaid Diagrams
 --
-add('miikanissi/modus-themes.nvim')
-
-require('modus-themes').setup({
-   -- variant = "tinted",
-   on_highlights = function(highlight, color)
-      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
-      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
-   end,
+add({
+   source = '3rd/diagram.nvim',
+   depends = { '3rd/image.nvim' }
 })
 
-vim.cmd.colorscheme('modus')
+require("diagram").setup({
+   integrations = {
+      require("diagram.integrations.markdown"),
+   },
+   renderer_options = {
+      mermaid = {
+         scale = 3,
+      },
+   },
+})
+
+require('image').setup()
+
+--
+-- Git, Database
+--
+add('rbong/vim-flog')
+add('shumphrey/fugitive-gitlab.vim')
+add('tpope/vim-dadbod')
+add('tpope/vim-endwise')
+add('tpope/vim-fugitive')
+add('tpope/vim-rhubarb')
