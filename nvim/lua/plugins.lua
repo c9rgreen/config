@@ -267,11 +267,6 @@ add('loctvl842/monokai-pro.nvim')
 require("monokai-pro").setup()
 
 --
--- Solarized
---
-add('maxmx03/solarized.nvim')
-
---
 -- Diff viewer
 --
 add('sindrets/diffview.nvim')
