@@ -43,5 +43,18 @@ vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'Save (macOS)' })
 -- Italics
 vim.api.nvim_set_hl(0, 'Comment', { italic = true })
 
+-- Use fd for :find
+if vim.fn.executable('fd') == 1 then
+   function _G.FindFunc(arg_lead)
+      local output = vim.fn.systemlist({ 'fd', '--type', 'file', '--follow' })
+      if arg_lead ~= '' then
+         return vim.fn.matchfuzzy(output, arg_lead)
+      end
+      return output
+   end
+
+   vim.o.findfunc = 'v:lua.FindFunc'
+end
+
 -- Set up plugins
 require('plugins')
