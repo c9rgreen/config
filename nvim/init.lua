@@ -38,6 +38,7 @@ vim.cmd.iabbrev ':cg: Christopher Green'
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
 vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
+vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS native save'} )
 vim.keymap.set("n", "<leader>cr", function()
   local path = vim.fn.expand("%")
   vim.fn.setreg("+", path)
