@@ -45,3 +45,6 @@ emacs/transient
 
 # Simplex
 simplex
+
+# Expert LSP
+.expert
