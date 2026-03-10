@@ -30,14 +30,13 @@ require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
-require('mini.icons').setup()
-require('mini.indentscope').setup()
+require('mini.icons').setup({ style = "ascii" })
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.starter').setup()
-require('mini.statusline').setup()
+require('mini.statusline').setup({ use_icons = false })
 require('mini.surround').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
@@ -115,7 +114,7 @@ add({
 })
 
 local languages = {
-   'bash', 'caddy', 'css', 'dockerfile',
+   'bash', 'caddy', 'css',
    'eex', 'elixir', 'gitcommit', 'heex', 'html',
    'javascript', 'jinja', 'json', 'julia', 'liquid',
    'lua', 'markdown', 'mermaid', 'python', 'rst',
@@ -250,7 +249,7 @@ require('mason-lspconfig').setup({
 add('miikanissi/modus-themes.nvim')
 
 require('modus-themes').setup({
-   variant = "tinted",
+   -- variant = "tinted",
    on_highlights = function(highlight, color)
       highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
       highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
@@ -275,27 +274,6 @@ require('diffview').setup({
    enhanced_diff_hl = true,
    use_icons = false
 })
-
---
--- Images, Mermaid Diagrams
---
-add({
-   source = '3rd/diagram.nvim',
-   depends = { '3rd/image.nvim' }
-})
-
-require("diagram").setup({
-   integrations = {
-      require("diagram.integrations.markdown"),
-   },
-   renderer_options = {
-      mermaid = {
-         scale = 3,
-      },
-   },
-})
-
-require('image').setup()
 
 --
 -- Git, Database
