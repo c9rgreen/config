@@ -30,13 +30,13 @@ require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
-require('mini.icons').setup({ style = "ascii" })
+require('mini.icons').setup()
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.starter').setup()
-require('mini.statusline').setup({ use_icons = false })
+require('mini.statusline').setup()
 require('mini.surround').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
@@ -249,7 +249,7 @@ require('mason-lspconfig').setup({
 add('miikanissi/modus-themes.nvim')
 
 require('modus-themes').setup({
-   -- variant = "tinted",
+   variant = "tinted",
    on_highlights = function(highlight, color)
       highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
       highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
@@ -272,7 +272,7 @@ add('sindrets/diffview.nvim')
 
 require('diffview').setup({
    enhanced_diff_hl = true,
-   use_icons = false
+   -- use_icons = false
 })
 
 --
