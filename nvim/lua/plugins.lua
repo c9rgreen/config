@@ -250,7 +250,7 @@ require('mason-lspconfig').setup({
 add('miikanissi/modus-themes.nvim')
 
 require('modus-themes').setup({
-   variant = "tinted",
+   -- variant = "tinted",
    on_highlights = function(highlight, color)
       highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
       highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
@@ -277,11 +277,31 @@ require('diffview').setup({
 })
 
 --
--- Git, Database
+-- Git
 --
-add('rbong/vim-flog')
-add('shumphrey/fugitive-gitlab.vim')
-add('tpope/vim-dadbod')
-add('tpope/vim-endwise')
-add('tpope/vim-fugitive')
-add('tpope/vim-rhubarb')
+add({
+   source = 'NeogitOrg/neogit',
+   depends = { 'nvim-lua/plenary.nvim' }
+})
+
+--
+-- Database
+--
+add('xemptuous/sqlua.nvim')
+
+--
+-- References, diagnostics
+--
+add('folke/trouble.nvim')
+
+require('trouble').setup()
+
+--
+-- Claude Code
+--
+add({
+   source = 'coder/claudecode.nvim',
+   depends = { 'folke/snacks.nvim' }
+})
+
+require('claudecode').setup()
