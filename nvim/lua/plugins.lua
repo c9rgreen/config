@@ -16,6 +16,7 @@ end
 
 require('mini.deps').setup({ path = { package = path_package } })
 
+local use_icons = vim.env.TERM_PROGRAM == 'ghostty'
 local add = MiniDeps.add
 
 require('mini.align').setup()
@@ -30,13 +31,13 @@ require('mini.extra').setup()
 require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
-require('mini.icons').setup()
+require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
 require('mini.move').setup()
 require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.starter').setup()
-require('mini.statusline').setup()
+require('mini.statusline').setup({ use_icons = use_icons })
 require('mini.surround').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
@@ -272,7 +273,7 @@ add('sindrets/diffview.nvim')
 
 require('diffview').setup({
    enhanced_diff_hl = true,
-   -- use_icons = false
+   use_icons = use_icons
 })
 
 --

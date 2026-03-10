@@ -47,7 +47,11 @@ end
 # Eza
 #
 if type -q eza
-    alias ls "eza --icons"
+    if test "$TERM_PROGRAM" = ghostty
+        alias ls "eza --icons"
+    else
+        alias ls "eza"
+    end
 end
 
 #
