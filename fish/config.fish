@@ -47,7 +47,7 @@ end
 # Eza
 #
 if type -q eza
-    alias ls "eza --icons"
+    alias ls "eza"
 end
 
 #
