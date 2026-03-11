@@ -323,6 +323,7 @@ local snacks_commands = {
    Browse = function() Snacks.gitbrowse() end,
    Term = function() Snacks.terminal() end,
    Scratch = function() Snacks.scratch() end,
+   Lgit = function() Snacks.lazygit() end
 }
 
 for name, func in pairs(snacks_commands) do
