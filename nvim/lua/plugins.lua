@@ -346,7 +346,7 @@ require('snacks').setup({
 local snacks_commands = {
    -- MiniExtra Pickers
    Tree = function() Snacks.explorer() end,
-   Browse = function() Snacks.gitbrowse() end,
+   GBrowse = function() Snacks.gitbrowse() end,
    Term = function() Snacks.terminal() end,
    Scratch = function() Snacks.scratch() end,
    Lgit = function() Snacks.lazygit() end
