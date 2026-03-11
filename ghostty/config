@@ -2,10 +2,9 @@
 
 shell-integration = fish
 font-size = "13"
-font-family = "SF Mono"
+font-family = "0xProto"
 font-thicken = true
 font-thicken-strength = 1
-font-feature = +ss01, +ss02, +ss03, +ss04, +ss05, +cv03, +cv05
 theme = dark:TokyoNight,light:TokyoNight Day
 mouse-shift-capture = true
 mouse-hide-while-typing = true

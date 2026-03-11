@@ -50,6 +50,7 @@ cask "orbstack"
 cask "quarto"
 
 # Fonts
+cask "font-0xproto"
 cask "font-commit-mono"
 cask "font-annotation-mono"
 cask "font-asap"
