@@ -266,6 +266,12 @@ add('loctvl842/monokai-pro.nvim')
 
 require("monokai-pro").setup()
 
+
+--
+-- Tokyo Night
+--
+add('folke/tokyonight.nvim')
+
 --
 -- Diff viewer
 --
