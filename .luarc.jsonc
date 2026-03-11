@@ -8,7 +8,8 @@
         "MiniExtra",
         "MiniPick",
         "MiniBufremove",
-        "MiniDiff"
+        "MiniDiff",
+        "Snacks"
     ],
     "Lua.format": {
         "enable": true,

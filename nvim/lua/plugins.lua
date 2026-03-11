@@ -70,7 +70,7 @@ vim.cmd.amenu([[PopUp.Delete\ Buffer <Cmd>lua MiniBufremove.delete()<CR>]])
 -- Commands
 local mini_extra = require('mini.extra')
 local mini_pick = require('mini.pick')
-local commands = {
+local mini_commands = {
    -- MiniExtra Pickers
    Branches = function() mini_extra.pickers.git_branches() end,
    Diagnostic = function() mini_extra.pickers.diagnostic() end,
@@ -91,7 +91,7 @@ local commands = {
    Diff = function() mini_diff.toggle_overlay() end,
 }
 
-for name, func in pairs(commands) do
+for name, func in pairs(mini_commands) do
    vim.api.nvim_create_user_command(name, func, {})
 end
 
@@ -118,7 +118,7 @@ local languages = {
    'bash', 'caddy', 'css',
    'eex', 'elixir', 'gitcommit', 'heex', 'html',
    'javascript', 'jinja', 'json', 'julia', 'liquid',
-   'lua', 'markdown', 'mermaid', 'python', 'rst',
+   'lua', 'markdown', 'mermaid', 'python', 'rst', 'sql',
    'vim', 'vimdoc', 'vue', 'yaml',
 }
 
@@ -269,7 +269,10 @@ require("monokai-pro").setup()
 --
 -- Diff viewer
 --
-add('sindrets/diffview.nvim')
+add({
+   source = 'sindrets/diffview.nvim',
+   depends = { 'nvim-tree/nvim-web-devicons' }
+})
 
 require('diffview').setup({
    enhanced_diff_hl = true,
@@ -287,7 +290,12 @@ add({
 --
 -- Database
 --
-add('xemptuous/sqlua.nvim')
+add({
+   source = 'kndndrj/nvim-dbee',
+   depends = { 'MunifTanjim/nui.nvim' }
+})
+
+require("dbee").setup()
 
 --
 -- References, diagnostics
@@ -295,6 +303,25 @@ add('xemptuous/sqlua.nvim')
 add('folke/trouble.nvim')
 
 require('trouble').setup()
+
+--
+-- Files, Zen, Scratch, Git
+--
+add('folke/snacks.nvim')
+
+require('snacks').setup()
+
+local snacks_commands = {
+   -- MiniExtra Pickers
+   Tree = function() Snacks.explorer() end,
+   Browse = function() Snacks.gitbrowse() end,
+   Term = function() Snacks.terminal() end,
+   Scratch = function() Snacks.scratch() end,
+}
+
+for name, func in pairs(snacks_commands) do
+   vim.api.nvim_create_user_command(name, func, {})
+end
 
 --
 -- Claude Code
@@ -305,3 +332,10 @@ add({
 })
 
 require('claudecode').setup()
+
+--
+-- Docker, K8S
+--
+add('jrop/tuis.nvim')
+
+vim.api.nvim_create_user_command('TUI', function() require('tuis').choose() end, {})
