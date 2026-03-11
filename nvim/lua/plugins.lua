@@ -115,11 +115,30 @@ add({
 })
 
 local languages = {
-   'bash', 'caddy', 'css',
-   'eex', 'elixir', 'gitcommit', 'heex', 'html',
-   'javascript', 'jinja', 'json', 'julia', 'liquid',
-   'lua', 'markdown', 'mermaid', 'python', 'rst', 'sql',
-   'vim', 'vimdoc', 'vue', 'yaml',
+   'bash',
+   'caddy',
+   'css',
+   'eex',
+   'elixir',
+   'gitcommit',
+   'heex',
+   'html',
+   'javascript',
+   'jinja',
+   'json',
+   'julia',
+   'liquid',
+   'lua',
+   'markdown',
+   'markdown_inline',
+   'mermaid',
+   'python',
+   'rst',
+   'sql',
+   'vim',
+   'vimdoc',
+   'vue',
+   'yaml',
 }
 
 require('nvim-treesitter').install(languages)
@@ -257,8 +276,6 @@ require('modus-themes').setup({
    end,
 })
 
-vim.cmd.colorscheme('modus')
-
 --
 -- Monokai Pro
 --
@@ -271,6 +288,8 @@ require("monokai-pro").setup()
 -- Tokyo Night
 --
 add('folke/tokyonight.nvim')
+
+vim.cmd.colorscheme('tokyonight')
 
 --
 -- Diff viewer
@@ -315,7 +334,14 @@ require('trouble').setup()
 --
 add('folke/snacks.nvim')
 
-require('snacks').setup()
+require('snacks').setup({
+   image = {
+      enabled = true,
+      doc = {
+         inline = true
+      }
+   }
+})
 
 local snacks_commands = {
    -- MiniExtra Pickers
