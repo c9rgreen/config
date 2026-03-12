@@ -55,6 +55,13 @@ if type -q eza
 end
 
 #
+# Lazygit
+#
+if type -q eza
+    alias lgit "lazygit"
+end
+
+#
 # Postgres
 #
 set -a PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"
