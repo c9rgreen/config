@@ -105,6 +105,9 @@ vim.keymap.set('n', '<D-o>', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<D-k>', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
+-- Colorscheme
+vim.cmd.colorscheme('minispring')
+
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -280,8 +283,6 @@ require('modus-themes').setup({
 -- Tokyo Night
 --
 add('folke/tokyonight.nvim')
-
-vim.cmd.colorscheme('tokyonight')
 
 --
 -- Diff viewer
