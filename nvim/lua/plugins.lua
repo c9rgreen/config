@@ -347,7 +347,7 @@ for name, func in pairs(snacks_commands) do
 end
 
 vim.keymap.set('n', '<D-b>', function() Snacks.explorer() end, { desc = 'Toggle File Explorer' })
-vim.keymap.set({'n', 't'}, '<D-M-t>', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
+vim.keymap.set({ 'n', 't' }, '<D-M-t>', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
 
 --
 -- Claude Code
