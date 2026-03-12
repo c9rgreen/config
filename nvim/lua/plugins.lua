@@ -105,9 +105,6 @@ vim.keymap.set('n', '<D-o>', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<D-k>', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
--- Colorscheme
-vim.cmd.colorscheme('minispring')
-
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -349,8 +346,8 @@ for name, func in pairs(snacks_commands) do
    vim.api.nvim_create_user_command(name, func, {})
 end
 
-vim.keymap.set('n', '<leader>0', function() Snacks.explorer() end, { desc = 'Toggle File Explorer' })
-vim.keymap.set('n', '<leader>1', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
+vim.keymap.set('n', '<D-b>', function() Snacks.explorer() end, { desc = 'Toggle File Explorer' })
+vim.keymap.set({'n', 't'}, '<D-M-t>', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
 
 --
 -- Claude Code
