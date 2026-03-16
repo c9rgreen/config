@@ -315,10 +315,12 @@ add({
 add({
    source = 'kndndrj/nvim-dbee',
    depends = { 'MunifTanjim/nui.nvim' },
-   hooks = { post_checkout = function () require('dbee').install() end}
+   hooks = { post_checkout = function() require('dbee').install() end }
 })
 
-require('dbee').setup()
+if not package.loaded['dbee'] then
+   require('dbee').setup()
+end
 
 --
 -- References, diagnostics
@@ -332,14 +334,16 @@ require('trouble').setup()
 --
 add('folke/snacks.nvim')
 
-require('snacks').setup({
-   image = {
-      enabled = true,
-      doc = {
-         inline = true
+if not package.loaded['snacks'] then
+   require('snacks').setup({
+      image = {
+         enabled = true,
+         doc = {
+            inline = true
+         }
       }
-   }
-})
+   })
+end
 
 local snacks_commands = {
    -- MiniExtra Pickers
@@ -347,7 +351,8 @@ local snacks_commands = {
    GBrowse = function() Snacks.gitbrowse() end,
    Term = function() Snacks.terminal() end,
    Scratch = function() Snacks.scratch() end,
-   Lgit = function() Snacks.lazygit() end
+   Lgit = function() Snacks.lazygit() end,
+   Zen = function() Snacks.zen() end
 }
 
 for name, func in pairs(snacks_commands) do
