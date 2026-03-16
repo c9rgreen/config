@@ -277,9 +277,16 @@ require('modus-themes').setup({
 })
 
 --
--- Tokyo Night
+-- Tokyo Night colorscheme
 --
 add('folke/tokyonight.nvim')
+
+--
+-- Melange colorscheme
+--
+add('savq/melange-nvim')
+
+vim.cmd.colorscheme('melange')
 
 --
 -- Diff viewer
