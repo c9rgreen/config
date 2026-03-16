@@ -307,10 +307,11 @@ add({
 --
 add({
    source = 'kndndrj/nvim-dbee',
-   depends = { 'MunifTanjim/nui.nvim' }
+   depends = { 'MunifTanjim/nui.nvim' },
+   hooks = { post_checkout = function () require('dbee').install() end}
 })
 
-require("dbee").setup()
+require('dbee').setup()
 
 --
 -- References, diagnostics
