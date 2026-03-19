@@ -318,9 +318,7 @@ add({
    hooks = { post_checkout = function() require('dbee').install() end }
 })
 
-if not package.loaded['dbee'] then
-   require('dbee').setup()
-end
+require('dbee').setup()
 
 --
 -- References, diagnostics
