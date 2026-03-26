@@ -264,38 +264,16 @@ require('mason-lspconfig').setup({
 })
 
 --
--- Modus colorscheme
---
-add('miikanissi/modus-themes.nvim')
-
-require('modus-themes').setup({
-   -- variant = "tinted",
-   on_highlights = function(highlight, color)
-      highlight.MiniCursorword = { bg = color.bg_yellow_subtle, fg = color.fg_alt }
-      highlight.MiniCursorwordCurrent = { bg = color.bg_yellow_nuanced }
-   end,
-})
-
---
 -- Tokyo Night colorscheme
 --
 add('folke/tokyonight.nvim')
 
 --
--- Melange colorscheme
+-- Adwaita colorscheme
 --
-add('savq/melange-nvim')
+add('Mofiqul/adwaita.nvim')
 
---
--- Zenbones colorscheme
---
-add({
-   source = 'zenbones-theme/zenbones.nvim',
-   depends = { 'rktjmp/lush.nvim' }
-})
-
-vim.g.zenbones = { italic_strings = false }
-vim.cmd.colorscheme('zenbones')
+vim.cmd.colorscheme('adwaita')
 
 --
 -- Diff viewer
