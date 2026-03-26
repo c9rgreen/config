@@ -45,9 +45,6 @@ vim.keymap.set("n", "<leader>cr", function()
   vim.notify("Copied: " .. path)
 end, { desc = "Copy relative file path" })
 
--- Italics
-vim.api.nvim_set_hl(0, 'Comment', { italic = true })
-
 -- Use fd for :find
 if vim.fn.executable('fd') == 1 then
    function _G.FindFunc(arg_lead)

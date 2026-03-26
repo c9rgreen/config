@@ -286,7 +286,16 @@ add('folke/tokyonight.nvim')
 --
 add('savq/melange-nvim')
 
-vim.cmd.colorscheme('melange')
+--
+-- Zenbones colorscheme
+--
+add({
+   source = 'zenbones-theme/zenbones.nvim',
+   depends = { 'rktjmp/lush.nvim' }
+})
+
+vim.g.zenbones = { italic_strings = false }
+vim.cmd.colorscheme('zenbones')
 
 --
 -- Diff viewer
@@ -332,16 +341,14 @@ require('trouble').setup()
 --
 add('folke/snacks.nvim')
 
-if not package.loaded['snacks'] then
-   require('snacks').setup({
-      image = {
-         enabled = true,
-         doc = {
-            inline = true
-         }
+require('snacks').setup({
+   image = {
+      enabled = true,
+      doc = {
+         inline = true
       }
-   })
-end
+   }
+})
 
 local snacks_commands = {
    -- MiniExtra Pickers
