@@ -32,8 +32,9 @@
     s = status
     a = add
     c = commit
-    t = difftool
     d = diff
+    dt = difftool
+    dd = difftool --dir-diff
 [github]
     user = c9rgreen
 [pull]
