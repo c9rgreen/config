@@ -2,10 +2,10 @@
 
 shell-integration = fish
 font-size = "13"
-font-family = "Adwaita Mono"
+font-family = "SF Mono"
 font-thicken = true
 font-thicken-strength = 1
-theme = dark:Adwaita Dark,light:Adwaita
+theme = dark:Nvim Dark,light:Nvim Light
 mouse-shift-capture = true
 mouse-hide-while-typing = true
 unfocused-split-opacity = 1

@@ -21,24 +21,19 @@ local add = MiniDeps.add
 
 require('mini.align').setup()
 require('mini.basics').setup()
-require('mini.bracketed').setup()
 require('mini.bufremove').setup()
-require('mini.clue').setup()
 require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.extra').setup()
-require('mini.files').setup()
+-- require('mini.files').setup()
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
 require('mini.move').setup()
-require('mini.pairs').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
-require('mini.starter').setup()
 require('mini.statusline').setup({ use_icons = use_icons })
-require('mini.surround').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
 
@@ -264,50 +259,6 @@ require('mason-lspconfig').setup({
 })
 
 --
--- Tokyo Night colorscheme
---
-add('folke/tokyonight.nvim')
-
---
--- Adwaita colorscheme
---
-add('Mofiqul/adwaita.nvim')
-
-vim.cmd.colorscheme('adwaita')
-
---
--- Diff viewer
---
-add({
-   source = 'sindrets/diffview.nvim',
-   depends = { 'nvim-tree/nvim-web-devicons' }
-})
-
-require('diffview').setup({
-   enhanced_diff_hl = true,
-   use_icons = use_icons
-})
-
---
--- Git
---
-add({
-   source = 'NeogitOrg/neogit',
-   depends = { 'nvim-lua/plenary.nvim' }
-})
-
---
--- Database
---
-add({
-   source = 'kndndrj/nvim-dbee',
-   depends = { 'MunifTanjim/nui.nvim' },
-   hooks = { post_checkout = function() require('dbee').install() end }
-})
-
-require('dbee').setup()
-
---
 -- References, diagnostics
 --
 add('folke/trouble.nvim')
@@ -346,18 +297,28 @@ vim.keymap.set('n', '<D-b>', function() Snacks.explorer() end, { desc = 'Toggle 
 vim.keymap.set({ 'n', 't' }, '<D-M-t>', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
 
 --
--- Claude Code
+-- Sidekick - AI assistant integration
 --
-add({
-   source = 'coder/claudecode.nvim',
-   depends = { 'folke/snacks.nvim' }
+add('folke/sidekick.nvim')
+
+require('sidekick').setup({
+   nes = { enabled = false },
 })
 
-require('claudecode').setup()
+--
+-- Database
+--
+add({
+   source = 'kndndrj/nvim-dbee',
+   depends = { 'MunifTanjim/nui.nvim' },
+   hooks = { post_checkout = function() require('dbee').install() end }
+})
+
+require('dbee').setup()
 
 --
 -- Docker, K8S
 --
 add('jrop/tuis.nvim')
 
-vim.api.nvim_create_user_command('TUI', function() require('tuis').choose() end, {})
+vim.api.nvim_create_user_command('Util', function() require('tuis').choose() end, {})

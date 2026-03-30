@@ -61,9 +61,14 @@
 
     # Automatically push tags (annotated only; not lightweight tags) 
     followTags = true
+
+[difftool "nvim_difftool"]
+    # https://neovim.io/doc/user/plugins/#_builtin-plugin:-difftool
+    cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+
 [diff]
     # Use Neovim as the difftool
-    tool = nvimdiff
+    tool = nvim_difftool
 
     # Easier to read diffs (myers is the default)
     algorithm = histogram

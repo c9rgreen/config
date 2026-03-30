@@ -58,5 +58,9 @@ if vim.fn.executable('fd') == 1 then
    vim.o.findfunc = 'v:lua.FindFunc'
 end
 
--- Set up plugins
+-- Built-in plugins
+vim.cmd.packadd('nvim.difftool')
+vim.cmd.packadd('nvim.undotree')
+
+-- External plugins
 require('plugins')
