@@ -62,5 +62,12 @@ end
 vim.cmd.packadd('nvim.difftool')
 vim.cmd.packadd('nvim.undotree')
 
+-- Hide banner
+vim.g.netrw_banner = 0
+-- Use tree style by default
+vim.g.netrw_liststyle = 3
+-- Open in previous window
+vim.g.netrw_browse_split = 4
+
 -- External plugins
 require('plugins')
