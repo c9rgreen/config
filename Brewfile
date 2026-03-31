@@ -54,6 +54,5 @@ cask "orbstack"
 cask "quarto"
 
 # Fonts
-cask "font-adwaita"
 cask "font-asap"
 cask "font-asap-condensed"
