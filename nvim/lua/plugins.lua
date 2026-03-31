@@ -91,8 +91,6 @@ for name, func in pairs(mini_commands) do
 end
 
 -- Mappings for Mini.Pick
-vim.keymap.set('n', '<M-p>', ':Pick commands<CR>', { desc = 'Command picker' })
-vim.keymap.set('n', '<D-p>', ':Pick commands<CR>', { desc = 'Command picker' })
 vim.keymap.set('n', '\\\\', ':lua MiniFiles.open()<CR>', { desc = 'File browser' })
 vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = 'Buffer picker' })
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
@@ -305,20 +303,3 @@ require('sidekick').setup({
    nes = { enabled = false },
 })
 
---
--- Database
---
-add({
-   source = 'kndndrj/nvim-dbee',
-   depends = { 'MunifTanjim/nui.nvim' },
-   hooks = { post_checkout = function() require('dbee').install() end }
-})
-
-require('dbee').setup()
-
---
--- Docker, K8S
---
-add('jrop/tuis.nvim')
-
-vim.api.nvim_create_user_command('Util', function() require('tuis').choose() end, {})
