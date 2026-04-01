@@ -134,7 +134,7 @@ local languages = {
    'yaml',
 }
 
-require('nvim-treesitter').install(languages)
+require('nvim-treesitter').setup({ ensure_installed = languages })
 
 vim.api.nvim_create_autocmd('FileType', {
    pattern = languages,
