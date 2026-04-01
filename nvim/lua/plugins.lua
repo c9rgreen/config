@@ -303,3 +303,10 @@ require('sidekick').setup({
    nes = { enabled = false },
 })
 
+
+--
+-- Colorscheme
+--
+add('savq/melange-nvim')
+
+vim.cmd.colorscheme('melange')
