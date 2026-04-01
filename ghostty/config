@@ -2,7 +2,7 @@
 
 shell-integration = fish
 font-size = "13"
-font-family = "Berkeley Mono"
+font-family = "SF Mono"
 font-thicken = true
 font-thicken-strength = 1
 theme = dark:Melange Dark,light:Melange Light
