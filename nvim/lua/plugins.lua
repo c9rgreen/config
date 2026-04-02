@@ -26,7 +26,7 @@ require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.extra').setup()
--- require('mini.files').setup()
+require('mini.files').setup({ options = { use_as_default_explorer = false }})
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
@@ -94,9 +94,8 @@ end
 vim.keymap.set('n', '\\\\', ':lua MiniFiles.open()<CR>', { desc = 'File browser' })
 vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = 'Buffer picker' })
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
-vim.keymap.set('n', '<D-o>', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
-vim.keymap.set('n', '<D-k>', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
+vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
 --
 -- Treesitter - syntax highlighting, among other things
