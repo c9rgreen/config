@@ -23,6 +23,22 @@ if status is-interactive
     # Set the external cursor to a line. The external cursor appears when a command is started.
     # The cursor shape takes the value of fish_cursor_default when fish_cursor_external is not specified.
     set fish_cursor_external line
+
+    # Syntax highlighting colors
+    set fish_color_command blue
+    set fish_color_keyword blue --bold
+    set fish_color_param cyan
+    set fish_color_option cyan
+    set fish_color_quote yellow
+    set fish_color_error red --bold
+    set fish_color_comment brblack --italics
+    set fish_color_autosuggestion brblack
+    set fish_color_valid_path --underline
+    set fish_color_operator green
+    set fish_color_redirection magenta
+    set fish_color_end green
+    set fish_color_escape magenta
+    set fish_color_search_match --background=brblack
 end
 
 #
