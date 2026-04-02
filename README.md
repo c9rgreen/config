@@ -4,12 +4,12 @@
 
 ## Highlights
 
-| Tool                                      | Role             |
-|-------------------------------------------|------------------|
-| [Ghostty](https://ghostty.org/)           | Terminal         |
-| [Homebrew](https://brew.sh)               | Package Manager  |
-| [Fish](https://fishshell.com)             | Shell            |
-| [Neovim](https://neovim.io)               | Text Editor      |
-| [OrbStack](https://orbstack.dev)          | Virtual Machines |
-| [Font](https://github.com/0xType/0xProto) | 0xProto          |
+| Tool                                          | Role               |
+| --------------------------------------------- | ------------------ |
+| [Ghostty](https://ghostty.org/)               | Terminal           |
+| [Homebrew](https://brew.sh)                   | Package Manager    |
+| [Fish](https://fishshell.com)                 | Shell              |
+| [Neovim](https://neovim.io)                   | Text Editor        |
+| [OrbStack](https://orbstack.dev)              | Virtual Machines   |
+| [SF Mono](https://developer.apple.com/fonts/) | SF Mono            |
 

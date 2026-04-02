@@ -50,10 +50,10 @@ brew "zig"
 # Apps
 cask "claude"
 cask "ghostty"
-cask "livebook"
 cask "orbstack"
 cask "quarto"
 
 # Fonts
+cask "font-sf-mono"
 cask "font-asap"
 cask "font-asap-condensed"
