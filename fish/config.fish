@@ -62,6 +62,13 @@ if type -q eza
 end
 
 #
+# Bat
+#
+if type -q bat
+    alias cat "bat"
+end
+
+#
 # Postgres
 #
 set -a PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"

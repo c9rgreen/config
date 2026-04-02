@@ -3,7 +3,7 @@
     name = Christopher Green
 [alias]
     # Fancier git log
-    graph = log --graph --oneline --abbrev-commit --decorate  --all
+    graph = !git log --graph --oneline --abbrev-commit --decorate  --all | bat -l gitlog
 
     # List all remote branches
     remotes = ls-remote --heads
