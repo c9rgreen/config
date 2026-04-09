@@ -97,6 +97,8 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
+vim.cmd.colorscheme('minisummer')
+
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -302,10 +304,3 @@ require('sidekick').setup({
    nes = { enabled = false },
 })
 
-
---
--- Colorscheme
---
-add('savq/melange-nvim')
-
-vim.cmd.colorscheme('melange')
