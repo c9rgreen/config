@@ -117,6 +117,7 @@ local languages = {
    'gitcommit',
    'heex',
    'html',
+   'hurl',
    'javascript',
    'jinja',
    'json',
