@@ -26,7 +26,7 @@ require('mini.cmdline').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.extra').setup()
-require('mini.files').setup({ options = { use_as_default_explorer = false }})
+require('mini.files').setup({ options = { use_as_default_explorer = false } })
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
@@ -97,8 +97,6 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
-vim.cmd.colorscheme('minisummer')
-
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -142,8 +140,8 @@ vim.api.nvim_create_autocmd('FileType', {
    pattern = languages,
    callback = function()
       vim.treesitter.start()
-      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
       vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
    end,
 })
@@ -305,3 +303,11 @@ require('sidekick').setup({
    nes = { enabled = false },
 })
 
+vim.keymap.set('n', '<leader>cc', function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+   { desc = 'Sidekick Toggle Claude' })
+
+--
+--
+--
+add('ThorstenRhau/token')
+vim.cmd.colorscheme('token')
