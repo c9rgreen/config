@@ -8,7 +8,6 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
 vim.opt.fillchars = {
-   fold = '─',
    diff = '╱'
 }
 vim.opt.foldlevel = 5
@@ -32,17 +31,16 @@ vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
 
 -- Abbreviations
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
-vim.cmd.iabbrev ':cg: Christopher Green'
 
 -- Keymaps
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
 vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
-vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS native save'} )
+vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS native save' })
 vim.keymap.set("n", "<leader>cr", function()
-  local path = vim.fn.expand("%")
-  vim.fn.setreg("+", path)
-  vim.notify("Copied: " .. path)
+   local path = vim.fn.expand("%")
+   vim.fn.setreg("+", path)
+   vim.notify("Copied: " .. path)
 end, { desc = "Copy relative file path" })
 
 -- Use fd for :find
@@ -58,10 +56,11 @@ if vim.fn.executable('fd') == 1 then
    vim.o.findfunc = 'v:lua.FindFunc'
 end
 
--- Built-in plugins
+-- Enable built-in plugins
 vim.cmd.packadd('nvim.difftool')
 vim.cmd.packadd('nvim.undotree')
 
+-- Netrw variables
 -- Hide banner
 vim.g.netrw_banner = 0
 -- Use tree style by default
