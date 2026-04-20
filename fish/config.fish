@@ -60,37 +60,8 @@ if type -q npm
 end
 
 #
-# Eza
-#
-if type -q eza
-    if test "$TERM_PROGRAM" = ghostty
-        alias ls "eza --icons"
-    else
-        alias ls "eza"
-    end
-end
-
-#
-# Lazygit
-#
-if type -q eza
-    alias lgit "lazygit"
-end
-
-#
-# Bat
-#
-if type -q bat
-    alias cat "bat"
-end
-
-#
 # Launch Google Chrome with remote debug enabled
 # https://github.com/ChromeDevTools/chrome-devtools-mcp
 #
 alias chrome "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-profile-stable"
 
-#
-# Postgres
-#
-set -a PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"
