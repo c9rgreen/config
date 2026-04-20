@@ -30,7 +30,6 @@ require('mini.files').setup({ options = { use_as_default_explorer = false } })
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
-require('mini.move').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
 require('mini.statusline').setup({ use_icons = use_icons })
@@ -52,12 +51,7 @@ hipatterns.setup({
 })
 
 local mini_diff = require('mini.diff')
-mini_diff.setup({
-   view = {
-      style = 'sign',
-      signs = { add = '+', change = '•', delete = '-' },
-   }
-})
+mini_diff.setup()
 
 -- Add MiniBufremove to the contextual menu
 vim.cmd.amenu([[PopUp.Delete\ Buffer <Cmd>lua MiniBufremove.delete()<CR>]])
@@ -96,6 +90,9 @@ vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = 'Buffer pi
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
+
+-- Colorscheme
+vim.cmd.colorscheme('minispring')
 
 --
 -- Treesitter - syntax highlighting, among other things
@@ -146,18 +143,10 @@ vim.api.nvim_create_autocmd('FileType', {
    end,
 })
 
--- Treesitter - text objects
-add('nvim-treesitter/nvim-treesitter-textobjects')
-
 -- Treesitter context - display the context of the cursor in a sticky header
 add('nvim-treesitter/nvim-treesitter-context')
 
 require('treesitter-context').setup()
-
---
--- D2 - D2 diagram helpers, including preview
---
-add('terrastruct/d2-vim')
 
 --
 -- Mason & LSP
@@ -199,29 +188,6 @@ vim.lsp.config('lua_ls', {
    end,
 })
 
--- LSP config for Vue
-local vue_language_server_path = vim.fn.expand '$MASON/packages' ..
-    '/vue-language-server' .. '/node_modules/@vue/language-server'
-local vue_plugin = {
-   name = '@vue/typescript-plugin',
-   location = vue_language_server_path,
-   languages = { 'vue' },
-   configNamespace = 'typescript',
-}
-
-vim.lsp.config('vtsls', {
-   settings = {
-      vtsls = {
-         tsserver = {
-            globalPlugins = {
-               vue_plugin,
-            },
-         },
-      },
-   },
-   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-})
-
 -- LSP config for Elixir
 vim.lsp.config('expert', {
    cmd = { 'expert', '--stdio' },
@@ -243,8 +209,6 @@ vim.lsp.enable({
    'shopify_theme_ls',
    'ts_ls',
    'ty',
-   'vtsls',
-   'vue_ls',
    'yamlls'
 })
 
@@ -291,9 +255,6 @@ for name, func in pairs(snacks_commands) do
    vim.api.nvim_create_user_command(name, func, {})
 end
 
-vim.keymap.set('n', '<D-b>', function() Snacks.explorer() end, { desc = 'Toggle File Explorer' })
-vim.keymap.set({ 'n', 't' }, '<D-M-t>', function() Snacks.terminal() end, { desc = 'Toggle terminal' })
-
 --
 -- Sidekick - AI assistant integration
 --
@@ -303,11 +264,6 @@ require('sidekick').setup({
    nes = { enabled = false },
 })
 
-vim.keymap.set('n', '<leader>cc', function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
-   { desc = 'Sidekick Toggle Claude' })
-
---
---
---
-add('ThorstenRhau/token')
-vim.cmd.colorscheme('token')
+vim.api.nvim_create_user_command('Claude',
+   function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
+   {})
