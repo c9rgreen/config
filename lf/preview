@@ -1,3 +1,0 @@
-#!/bin/sh
-
-bat --color=always --style=plain --paging=never --terminal-width="$2" "$1"
