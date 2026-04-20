@@ -3,10 +3,7 @@
     name = Christopher Green
 [alias]
     # Fancier git log
-    graph = !git log --graph --oneline --abbrev-commit --decorate  --all | bat -l gitlog
-
-    # List all remote branches
-    remotes = ls-remote --heads
+    graph = !git log --graph --oneline --abbrev-commit --decorate  --all
 
     # Jump
     jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
@@ -17,13 +14,6 @@
 
     # List an overview of changed files
     changed = !git diff --stat $(git last)
-
-    # Display changes in $EDITOR
-    changes = !git diff $(git last) | "$EDITOR" -
-
-    # Display a dependency graph of the changed files
-    deps = !npx depcruise src --affected $(git last) --output-type dot | dot -T svg | chafa
-    dep2 = !npx depcruise src --affected $(git last) --output-type d2 | d2 --layout elk --scale 1 - > deps.svg
 
     # Populate quickfix list with every changed file
     review = !git jump diff $(git last)
