@@ -37,16 +37,11 @@ vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
 vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
 vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS native save' })
-vim.keymap.set("n", "<leader>cr", function()
-   local path = vim.fn.expand("%")
-   vim.fn.setreg("+", path)
-   vim.notify("Copied: " .. path)
-end, { desc = "Copy relative file path" })
 
--- Use fd for :find
-if vim.fn.executable('fd') == 1 then
+-- Use rg for :find
+if vim.fn.executable('rg') == 1 then
    function _G.FindFunc(arg_lead)
-      local output = vim.fn.systemlist({ 'fd', '--type', 'file', '--follow' })
+      local output = vim.fn.systemlist({ 'rg', '--files', '--follow' })
       if arg_lead ~= '' then
          return vim.fn.matchfuzzy(output, arg_lead)
       end
