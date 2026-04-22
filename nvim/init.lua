@@ -157,7 +157,7 @@ vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
 -- Colorscheme
-vim.cmd.colorscheme('minispring')
+vim.cmd.colorscheme('minisummer')
 
 --
 -- Treesitter - syntax highlighting, among other things
