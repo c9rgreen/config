@@ -14,7 +14,6 @@ brew "hugo"
 brew "hurl"
 brew "just"
 brew "kubectl"
-brew "lazygit"
 brew "lefthook"
 brew "neovim"
 brew "node"
@@ -24,14 +23,3 @@ brew "skopeo"
 brew "tmux"
 brew "tree-sitter-cli"
 brew "universal-ctags"
-
-# Apps
-cask "claude"
-cask "ghostty"
-cask "orbstack"
-cask "quarto"
-
-# Fonts
-cask "font-sf-mono"
-cask "font-asap"
-cask "font-asap-condensed"
