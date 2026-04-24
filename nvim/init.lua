@@ -1,4 +1,6 @@
+--
 -- Options
+--
 vim.g.clipboard = {
   name = "OSC 52",
   copy = {
@@ -40,10 +42,14 @@ vim.cmd.amenu([[PopUp.LSP\ Hover <Cmd>lua vim.lsp.buf.hover()<CR>]])
 vim.cmd.amenu([[PopUp.References <Cmd>lua vim.lsp.buf.references()<CR>]])
 vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
 
+--
 -- Abbreviations
+--
 vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 
+--
 -- Keymaps
+--
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
 vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
@@ -66,7 +72,10 @@ end
 vim.cmd.packadd('nvim.difftool')
 vim.cmd.packadd('nvim.undotree')
 
--- Netrw variables
+--
+-- Netrw
+--
+
 -- Hide banner
 vim.g.netrw_banner = 0
 -- Use tree style by default
@@ -295,51 +304,3 @@ require('mason-lspconfig').setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
-
---
--- References, diagnostics
---
-add('folke/trouble.nvim')
-
-require('trouble').setup()
-
---
--- Files, Zen, Scratch, Git
---
-add('folke/snacks.nvim')
-
-require('snacks').setup({
-   image = {
-      enabled = true,
-      doc = {
-         inline = true
-      }
-   }
-})
-
-local snacks_commands = {
-   -- MiniExtra Pickers
-   Tree = function() Snacks.explorer() end,
-   GBrowse = function() Snacks.gitbrowse() end,
-   Term = function() Snacks.terminal() end,
-   Scratch = function() Snacks.scratch() end,
-   Lgit = function() Snacks.lazygit() end,
-   Zen = function() Snacks.zen() end
-}
-
-for name, func in pairs(snacks_commands) do
-   vim.api.nvim_create_user_command(name, func, {})
-end
-
---
--- Sidekick - AI assistant integration
---
-add('folke/sidekick.nvim')
-
-require('sidekick').setup({
-   nes = { enabled = false },
-})
-
-vim.api.nvim_create_user_command('Claude',
-   function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
-   {})
