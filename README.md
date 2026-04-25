@@ -11,5 +11,5 @@
 | [Fish](https://fishshell.com)                 | Shell              |
 | [Neovim](https://neovim.io)                   | Text Editor        |
 | [OrbStack](https://orbstack.dev)              | Virtual Machines   |
-| [SF Mono](https://developer.apple.com/fonts/) | SF Mono            |
+| [SF Mono](https://developer.apple.com/fonts/) | Font               |
 
