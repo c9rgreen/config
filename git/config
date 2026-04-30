@@ -1,6 +1,8 @@
 [user]
-    email = cgreen@saguaro.space
+    # Git identity for commits
     name = Christopher Green
+    # Prevent commits using a guessed email; must be set explicitly per-repo or globally
+    useConfigOnly = true
 [alias]
     # Fancier git log
     graph = !git log --graph --oneline --abbrev-commit --decorate  --all
@@ -26,13 +28,10 @@
     dt = difftool
     dd = difftool --dir-diff
 [github]
+    # GitHub username used by the gh CLI
     user = c9rgreen
 [pull]
-    # Fast-forward in Git moves the branch pointer forward to point directly at
-    # the incoming commits without creating a merge commit. It maintains
-    # a clean, linear history and is possible when your local branch hasn't
-    # diverged from the upstream branch. It's essentially just advancing your
-    # branch reference to match the latest commit.
+    # Refuse to pull if the result would require a merge commit; rebase manually instead
     ff = only
 [fetch]
     # Remove remote-tracking branches that no longer exist on the remote
@@ -41,16 +40,16 @@
     # Remove local tags which have been deleted on the remote
     pruneTags = true
 
-    # Fetch all remotes, update remote-tracking branches, and more
+    # Fetch all remotes by default
     all = true
 [init]
-    # The default branch name for new repositories should be main
+    # Default branch name for new repositories
     defaultBranch = main
 [push]
-    # When pushing a new local branch, automatically set the upstream
+    # Automatically set the upstream when pushing a new local branch
     autoSetupRemote = true
 
-    # Automatically push tags (annotated only; not lightweight tags) 
+    # Push annotated tags alongside commits (lightweight tags are excluded)
     followTags = true
 
 [difftool "nvim_difftool"]
@@ -61,49 +60,44 @@
     # Use Neovim as the difftool
     tool = nvim_difftool
 
-    # Easier to read diffs (myers is the default)
+    # Histogram produces cleaner diffs than the default Myers algorithm
     algorithm = histogram
 
-    # Highlight every line detected as moved
+    # Highlight lines that were moved rather than changed
     colorMoved = plain
 
-    # Use prefixes like i/ or w/ instead of a/ and /b
+    # Use i/ (index) and w/ (worktree) prefixes instead of a/ and b/
     mnemonicPrefix = true
 
-    # Detect file renames (true by default in Git 2.9 and later)
+    # Detect file renames
     renames = true
 [merge]
     # Use Neovim as the mergetool
     tool = nvimdiff
 [rebase]
-    # Add fixup! to the commit messages to discard and use older one
-    # Add squash! to the commit messages
-    # Place fixup/squash commits directly after their target commits
-    # Change pick action to fixup/squash
+    # Automatically squash fixup! and squash! commits onto their targets
     autoSquash = true
 
-    # Automatically stash changes when starting a rebase
-    # Pops stash after successfully completing a rebase
+    # Stash uncommitted changes before rebasing and reapply them after
     autoStash = true
 
-    # When a branch, also rebase the branches that depend on it
+    # Also rebase any branches that depend on the rebased branch
     updateRefs = true
 [column]
-    # Some commands output their lists in columns
-    # Display output in columns only if the output is directed to a terminal
+    # Show columnar output only when writing to a terminal
     ui = auto
 [branch]
-    # Sort branches by their last commit date
+    # Sort branches by most recently committed
     sort = -committerdate
 [help]
-    # Prompt for confirmation when attempting to autocorrect
+    # Prompt for confirmation before applying an autocorrected command
     autocorrect = prompt
 [commit]
-    # Display a diff when prompting for a commit message
+    # Show a diff of staged changes when composing a commit message
     verbose = true
 [rerere]
-    # Enable Reuse Recorded Resolution (rerere) for merge conflicts
+    # Remember how merge conflicts were resolved and reuse those resolutions
     enabled = true
 
-    # Automatically apply recorded resolutions for merge conflicts
+    # Automatically stage rerere-resolved files
     autoupdate = true
