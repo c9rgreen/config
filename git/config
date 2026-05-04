@@ -1,6 +1,5 @@
 [user]
-    email = cgreen@saguaro.space
-    name = Christopher Green
+	useConfigOnly = true
 [alias]
     # Fancier git log
     graph = !git log --graph --oneline --abbrev-commit --decorate  --all
