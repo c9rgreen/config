@@ -2,15 +2,15 @@
 -- Options
 --
 vim.g.clipboard = {
-  name = "OSC 52",
-  copy = {
-    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-  },
-  paste = {
-    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-  },
+   name = "OSC 52",
+   copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+   },
+   paste = {
+      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+   },
 }
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.scrolloff = 8
@@ -176,9 +176,6 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
--- Colorscheme
-vim.cmd.colorscheme('minisummer')
-
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -304,3 +301,10 @@ require('mason-lspconfig').setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
+
+--
+-- Token colorscheme
+--
+add('ThorstenRhau/token')
+
+vim.cmd.colorscheme('token')
