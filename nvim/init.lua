@@ -176,6 +176,9 @@ vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
 
+-- Colorscheme
+vim.cmd.colorscheme('minisummer')
+
 --
 -- Treesitter - syntax highlighting, among other things
 -- Requires tree-sitter-cli
@@ -302,9 +305,3 @@ require('mason-lspconfig').setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
---
--- Token colorscheme
---
-add('ThorstenRhau/token')
-
-vim.cmd.colorscheme('token')
