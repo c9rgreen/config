@@ -1,35 +1,14 @@
 --
 -- Options
 --
-vim.g.clipboard = {
-   name = "OSC 52",
-   copy = {
-      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
-   },
-   paste = {
-      ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
-      ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
-   },
-}
-vim.opt.clipboard:append('unnamedplus')
-vim.opt.scrolloff = 8
+vim.g.clipboard = 'osc52'
 vim.opt.virtualedit = 'all'
-vim.opt.guicursor:append('a:blinkon1')
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
-vim.opt.fillchars = {
-   diff = ' '
-}
-vim.opt.foldlevel = 5
+vim.opt.fillchars = { diff = '╱' }
 vim.opt.foldmethod = 'indent'
-vim.opt.foldtext = ''
 vim.opt.wildignorecase = true
 vim.opt.wildignore:append { '*/node_modules/**', '*.tmp', '*.swp', 'deps' }
 vim.opt.shell = 'fish'
-vim.opt.diffopt:append('internal,vertical,iwhiteall,algorithm:histogram')
+vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
 vim.opt.path:append { '**' }
@@ -38,22 +17,16 @@ vim.opt.path:append { '**' }
 vim.diagnostic.config({ virtual_text = true })
 
 -- Contextual menu
-vim.cmd.amenu([[PopUp.LSP\ Hover <Cmd>lua vim.lsp.buf.hover()<CR>]])
 vim.cmd.amenu([[PopUp.References <Cmd>lua vim.lsp.buf.references()<CR>]])
 vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
-
---
--- Abbreviations
---
-vim.cmd.iabbrev ':date: <C-r>=strftime("%Y-%m-%dT%H:%M:%S")<CR>'
 
 --
 -- Keymaps
 --
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
-vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after indenting' })
-vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS native save' })
+vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after outdenting' })
+vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS style save' })
 
 -- Use rg for :find
 if vim.fn.executable('rg') == 1 then
@@ -75,12 +48,8 @@ vim.cmd.packadd('nvim.undotree')
 --
 -- Netrw
 --
-
--- Hide banner
 vim.g.netrw_banner = 0
--- Use tree style by default
 vim.g.netrw_liststyle = 3
--- Open in previous window
 vim.g.netrw_browse_split = 4
 
 --
@@ -101,7 +70,6 @@ end
 
 require('mini.deps').setup({ path = { package = path_package } })
 
-local use_icons = vim.env.TERM_PROGRAM == 'ghostty'
 local add = MiniDeps.add
 
 require('mini.align').setup()
@@ -114,10 +82,10 @@ require('mini.extra').setup()
 require('mini.files').setup({ options = { use_as_default_explorer = false } })
 require('mini.fuzzy').setup()
 require('mini.git').setup()
-require('mini.icons').setup({ style = use_icons and 'glyph' or 'ascii' })
+require('mini.icons').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
-require('mini.statusline').setup({ use_icons = use_icons })
+require('mini.statusline').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
 
@@ -297,11 +265,10 @@ vim.lsp.enable({
    'yamlls'
 })
 
--- Run :Format to apply LSP formatting
+-- :Format to applies LSP formatting
 vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format() end, {})
 
 require('mason-lspconfig').setup({
    -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
-
