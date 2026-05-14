@@ -1,53 +1,38 @@
---
 -- Options
---
-vim.g.clipboard = 'osc52'
+vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
 vim.opt.fillchars = { diff = '╱' }
-vim.opt.foldmethod = 'indent'
 vim.opt.wildignorecase = true
-vim.opt.wildignore:append { '*/node_modules/**', '*.tmp', '*.swp', 'deps' }
 vim.opt.shell = 'fish'
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
 vim.opt.path:append { '**' }
 
--- Display diagnostics on virtual lines, but only for the current line
+-- Use virtual text for diagnostics
 vim.diagnostic.config({ virtual_text = true })
 
--- Contextual menu
-vim.cmd.amenu([[PopUp.References <Cmd>lua vim.lsp.buf.references()<CR>]])
-vim.cmd.amenu([[PopUp.Close\ Window <Cmd>close<CR>]])
-
---
 -- Keymaps
---
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
-vim.keymap.set('x', '>', '>gv', { desc = 'Keep visual mode after indenting' })
-vim.keymap.set('x', '<', '<gv', { desc = 'Keep visual mode after outdenting' })
-vim.keymap.set('n', '<D-s>', ':write<CR>', { desc = 'macOS style save' })
 
--- Use rg for :find
+-- Use ripgrep for :find
 if vim.fn.executable('rg') == 1 then
-   function _G.FindFunc(arg_lead)
-      local output = vim.fn.systemlist({ 'rg', '--files', '--follow' })
-      if arg_lead ~= '' then
-         return vim.fn.matchfuzzy(output, arg_lead)
+   function _G.ripgrep(cmdarg)
+      local fnames = vim.fn.systemlist({ 'rg', '--files', '--follow' })
+      if cmdarg ~= '' then
+         return vim.fn.matchfuzzy(fnames, cmdarg)
       end
-      return output
+      return fnames
    end
 
-   vim.o.findfunc = 'v:lua.FindFunc'
+   vim.opt.findfunc = 'v:lua.ripgrep'
 end
 
 -- Enable built-in plugins
 vim.cmd.packadd('nvim.difftool')
 vim.cmd.packadd('nvim.undotree')
 
---
 -- Netrw
---
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
@@ -73,9 +58,12 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add = MiniDeps.add
 
 require('mini.align').setup()
+require('mini.animate').setup()
 require('mini.basics').setup()
 require('mini.bufremove').setup()
+require('mini.clue').setup()
 require('mini.cmdline').setup()
+require('mini.comment').setup()
 require('mini.completion').setup()
 require('mini.cursorword').setup()
 require('mini.extra').setup()
@@ -83,11 +71,20 @@ require('mini.files').setup({ options = { use_as_default_explorer = false } })
 require('mini.fuzzy').setup()
 require('mini.git').setup()
 require('mini.icons').setup()
+require('mini.indentscope').setup()
+require('mini.keymap').setup()
+require('mini.map').setup()
+require('mini.move').setup()
+require('mini.notify').setup()
 require('mini.pick').setup()
 require('mini.sessions').setup()
+require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
 require('mini.tabline').setup()
+require('mini.trailspace').setup()
+require('mini.visits').setup()
+
 
 require('mini.snippets').setup({
    snippets = {
@@ -105,9 +102,6 @@ hipatterns.setup({
 
 local mini_diff = require('mini.diff')
 mini_diff.setup()
-
--- Add MiniBufremove to the contextual menu
-vim.cmd.amenu([[PopUp.Delete\ Buffer <Cmd>lua MiniBufremove.delete()<CR>]])
 
 -- Commands
 local mini_extra = require('mini.extra')
@@ -147,10 +141,7 @@ vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbo
 -- Colorscheme
 vim.cmd.colorscheme('minisummer')
 
---
 -- Treesitter - syntax highlighting, among other things
--- Requires tree-sitter-cli
---
 add({
    source = 'nvim-treesitter/nvim-treesitter',
    hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
@@ -196,15 +187,12 @@ vim.api.nvim_create_autocmd('FileType', {
    end,
 })
 
--- Treesitter context - display the context of the cursor in a sticky header
+-- Display the context of the cursor in a sticky header
 add('nvim-treesitter/nvim-treesitter-context')
 
 require('treesitter-context').setup()
 
---
--- Mason & LSP
--- See h: lspconfig-all for helpful docs
---
+-- LSP servers
 add({
    source = 'mason-org/mason-lspconfig.nvim',
    depends = {
@@ -215,40 +203,6 @@ add({
 
 require('mason').setup()
 
--- LSP config for Lua
-vim.lsp.config('lua_ls', {
-   on_init = function(client)
-      -- Load .luarc.json[c]
-      if client.workspace_folders then
-         local path = client.workspace_folders[1].name
-         if path ~= vim.fn.stdpath('config') and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then
-            return
-         end
-      end
-
-      client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-         runtime = {
-            version = 'LuaJIT'
-         },
-         -- Make the server aware of Neovim runtime files
-         workspace = {
-            checkThirdParty = false,
-            library = {
-               vim.env.VIMRUNTIME
-            }
-         }
-      })
-   end,
-})
-
--- LSP config for Elixir
-vim.lsp.config('expert', {
-   cmd = { 'expert', '--stdio' },
-   root_markers = { 'mix.exs', '.git' },
-   filetypes = { 'elixir', 'eelixir', 'heex' },
-})
-
--- Enable LSP servers
 vim.lsp.enable({
    'cssls',
    'eslint',
@@ -265,10 +219,7 @@ vim.lsp.enable({
    'yamlls'
 })
 
--- :Format to applies LSP formatting
-vim.api.nvim_create_user_command('Format', function() vim.lsp.buf.format() end, {})
-
+-- Automatically install LSP servers
 require('mason-lspconfig').setup({
-   -- Automatically install the language servers configured by vim.lsp.enable
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
