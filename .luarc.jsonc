@@ -9,6 +9,7 @@
         "MiniPick",
         "MiniBufremove",
         "MiniDiff",
+        "MiniMap",
         "Snacks"
     ],
     "Lua.format": {

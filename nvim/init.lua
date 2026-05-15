@@ -58,7 +58,7 @@ require('mini.deps').setup({ path = { package = path_package } })
 local add = MiniDeps.add
 
 require('mini.align').setup()
-require('mini.animate').setup()
+require('mini.pairs').setup()
 require('mini.basics').setup()
 require('mini.bufremove').setup()
 require('mini.clue').setup()
@@ -123,8 +123,8 @@ local mini_commands = {
    Help = function() mini_pick.builtin.help() end,
 
    -- Other Commands
-   Delete = function() require('mini.bufremove').delete() end,
    Diff = function() mini_diff.toggle_overlay() end,
+   Map = function() MiniMap.toggle() end,
 }
 
 for name, func in pairs(mini_commands) do
@@ -137,6 +137,10 @@ vim.keymap.set('n', '<leader><leader>', ':Pick buffers<CR>', { desc = 'Buffer pi
 vim.keymap.set('n', '<leader>-', ':Pick files<CR>', { desc = 'File picker' })
 vim.keymap.set('n', '<leader>/', ':Pick grep_live<CR>', { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>k', ':DocumentSymbol<CR>', { desc = 'Document symbols' })
+vim.keymap.set('n', '<leader>d', function() mini_extra.pickers.diagnostic() end, { desc = 'Diagnostics' })
+vim.keymap.set('n', '<leader>h', function() mini_pick.builtin.help() end, { desc = 'Help' })
+vim.keymap.set('n', '<leader><BS>', function() require('mini.bufremove').delete() end, { desc = 'Delete' })
+
 
 -- Colorscheme
 vim.cmd.colorscheme('minisummer')
