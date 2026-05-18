@@ -60,6 +60,13 @@ if type -q npm
 end
 
 #
+# Eza
+#
+if type -q eza
+    alias ls "eza --icons --git --git-repos"
+end
+
+#
 # Launch Google Chrome with remote debug enabled
 # https://github.com/ChromeDevTools/chrome-devtools-mcp
 #
