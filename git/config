@@ -4,26 +4,10 @@
     # Fancier git log
     graph = !git log --graph --oneline --abbrev-commit --decorate  --all
 
-    # Jump
-    jump = !$(brew --prefix git)/share/git-core/contrib/git-jump/git-jump
-
     # Print the commit SHA of the last common ancestor.
     # $REVIEW_BASE should usually be set to "main".
     last = !git merge-base HEAD "$REVIEW_BASE"
 
-    # List an overview of changed files
-    changed = !git diff --stat $(git last)
-
-    # Populate quickfix list with every changed file
-    review = !git jump diff $(git last)
-
-    # Shortcuts
-    s = status
-    a = add
-    c = commit
-    d = diff
-    dt = difftool
-    dd = difftool --dir-diff
 [github]
     # GitHub username used by the gh CLI
     user = c9rgreen
