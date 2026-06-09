@@ -8,6 +8,8 @@
     # $REVIEW_BASE should usually be set to "main".
     last = !git merge-base HEAD "$REVIEW_BASE"
 
+    # Review with BBEdit
+    bbr = !git difftool --dir-diff --tool=bbdiff $(git last) 
 [github]
     # GitHub username used by the gh CLI
     user = c9rgreen
@@ -32,11 +34,11 @@
 
     # Push annotated tags alongside commits (lightweight tags are excluded)
     followTags = true
-
 [difftool "nvim_difftool"]
     # https://neovim.io/doc/user/plugins/#_builtin-plugin:-difftool
     cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
-
+[difftool "bbdiff"]
+    cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [diff]
     # Use Neovim as the difftool
     tool = nvim_difftool
