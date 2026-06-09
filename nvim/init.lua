@@ -9,28 +9,6 @@ vim.opt.splitright = true
 vim.opt.number = false
 vim.opt.path:append { '**' }
 vim.opt.wildoptions:append('fuzzy')
-vim.opt.completeopt = 'menu,menuone,noselect,popup'
-vim.opt.autocomplete = true
-vim.opt.signcolumn = 'yes'
-
--- LSP completion
-vim.api.nvim_create_autocmd("LspAttach", {
-   group = vim.api.nvim_create_augroup("lsp_completion", { clear = true }),
-   callback = function(args)
-      local client_id = args.data.client_id
-      if not client_id then
-         return
-      end
-
-      local client = vim.lsp.get_client_by_id(client_id)
-      if client and client:supports_method("textDocument/completion") then
-         -- Enable native LSP completion for this client + buffer
-         vim.lsp.completion.enable(true, client_id, args.buf, {
-            autotrigger = true, -- auto-show menu
-         })
-      end
-   end,
-})
 
 -- Use virtual text for diagnostics
 vim.diagnostic.config({ virtual_text = true })
@@ -65,7 +43,23 @@ vim.pack.add({
    'https://github.com/nvim-treesitter/nvim-treesitter',
    'https://github.com/nvim-treesitter/nvim-treesitter-context',
    'https://github.com/neovim/nvim-lspconfig',
+   'https://github.com/nvim-mini/mini.nvim',
 })
+
+-- Mini
+require('mini.basics').setup()
+require('mini.completion').setup()
+require('mini.cmdline').setup()
+require('mini.files').setup()
+require('mini.diff').setup()
+require('mini.git').setup()
+require('mini.extra').setup()
+require('mini.pick').setup()
+require('mini.statusline').setup()
+require('mini.icons').setup()
+require('mini.tabline').setup()
+
+vim.cmd.colorscheme('minisummer')
 
 local languages = {
    'bash',
