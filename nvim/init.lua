@@ -43,9 +43,8 @@ vim.pack.add({
    'https://github.com/nvim-treesitter/nvim-treesitter',
    'https://github.com/nvim-treesitter/nvim-treesitter-context',
    'https://github.com/neovim/nvim-lspconfig',
-   'https://github.com/mason-org/mason.nvim',
-   'https://github.com/mason-org/mason-lspconfig.nvim',
    'https://github.com/nvim-mini/mini.nvim',
+   'https://github.com/miikanissi/modus-themes.nvim',
 })
 
 -- Mini
@@ -55,15 +54,10 @@ require('mini.cmdline').setup()
 require('mini.files').setup()
 require('mini.diff').setup()
 require('mini.git').setup()
-require('mini.extra').setup()
-require('mini.pick').setup()
 require('mini.statusline').setup()
 require('mini.icons').setup()
 require('mini.tabline').setup()
 require('mini.snippets').setup()
-require('mini.cursorword').setup()
-
-vim.cmd.colorscheme('minisummer')
 
 -- Install treesitter parsers on demand, driven by the buffer's filetype
 local ts = require('nvim-treesitter')
@@ -97,6 +91,10 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Display the context of the cursor in a sticky header
 require('treesitter-context').setup()
 
+-- Modus colorscheme
+vim.cmd.colorscheme('modus')
+
+-- LSP config
 vim.lsp.enable({
    'cssls',
    'eslint',
@@ -113,14 +111,5 @@ vim.lsp.enable({
    'yamlls'
 })
 
--- Mason installs LSP servers
-require('mason').setup()
-
--- Automatically install the language servers configured by vim.lsp.enable
-require('mason-lspconfig').setup({
-   ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
-})
-
 -- New UI
 require('vim._core.ui2').enable({})
-
