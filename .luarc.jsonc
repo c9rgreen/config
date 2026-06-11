@@ -10,6 +10,7 @@
         "MiniBufremove",
         "MiniDiff",
         "MiniMap",
+        "MiniFiles",
         "Snacks"
     ],
     "Lua.format": {

@@ -40,24 +40,39 @@ vim.g.netrw_browse_split = 4
 
 -- Packages
 vim.pack.add({
+   'https://github.com/nvim-mini/mini.nvim',
    'https://github.com/nvim-treesitter/nvim-treesitter',
    'https://github.com/nvim-treesitter/nvim-treesitter-context',
    'https://github.com/neovim/nvim-lspconfig',
-   'https://github.com/nvim-mini/mini.nvim',
-   'https://github.com/miikanissi/modus-themes.nvim',
+   'https://github.com/mason-org/mason.nvim',
+   'https://github.com/mason-org/mason-lspconfig.nvim',
 })
 
 -- Mini
 require('mini.basics').setup()
 require('mini.completion').setup()
 require('mini.cmdline').setup()
-require('mini.files').setup()
+require('mini.files').setup({ options = { use_as_default_explorer = false }})
 require('mini.diff').setup()
 require('mini.git').setup()
 require('mini.statusline').setup()
 require('mini.icons').setup()
 require('mini.tabline').setup()
 require('mini.snippets').setup()
+require('mini.pick').setup()
+require('mini.extra').setup()
+require('mini.align').setup()
+
+vim.keymap.set("n", "<leader>g", function() MiniPick.builtin.grep() end, { desc = "Live grep" })
+vim.keymap.set("n", "<leader>h", function() MiniPick.builtin.help() end, { desc = "Live help" })
+vim.keymap.set("n", "<leader>o", function() MiniPick.builtin.files() end, { desc = "File picker" })
+vim.keymap.set("n", "<leader>k", function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = "Document symbols" })
+vim.keymap.set("n", "<leader>p", function() MiniExtra.pickers.commands() end, { desc = "Command browser" })
+vim.keymap.set("n", "<leader>b", function() MiniExtra.pickers.explorer() end, { desc = "File exlporer" })
+vim.keymap.set("n", "<leader><leader>", function() MiniPick.builtin.buffers() end, { desc = "Buffer picker" })
+vim.keymap.set("n", "-", function() MiniFiles.open() end, { desc = "File browser" })
+
+vim.cmd.colorscheme('minisummer')
 
 -- Install treesitter parsers on demand, driven by the buffer's filetype
 local ts = require('nvim-treesitter')
@@ -91,9 +106,6 @@ vim.api.nvim_create_autocmd('FileType', {
 -- Display the context of the cursor in a sticky header
 require('treesitter-context').setup()
 
--- Modus colorscheme
-vim.cmd.colorscheme('modus')
-
 -- LSP config
 vim.lsp.enable({
    'cssls',
@@ -109,6 +121,11 @@ vim.lsp.enable({
    'ts_ls',
    'ty',
    'yamlls'
+})
+
+require('mason').setup()
+require('mason-lspconfig').setup({
+   ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
 -- New UI
