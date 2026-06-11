@@ -1,5 +1,13 @@
 {
   "plugins": {
+    "arete.nvim": {
+      "rev": "f2162e49b527213d2e1cfc16e4e189ca8fc918e8",
+      "src": "https://github.com/szymonwilczek/arete.nvim"
+    },
+    "mac-clear": {
+      "rev": "f7aac8f8e1decfbe1bdb607e542c5ef78f004e39",
+      "src": "https://github.com/boningmaple/mac-clear"
+    },
     "mason-lspconfig.nvim": {
       "rev": "0a695750d747db1e7e70bcf0267ef8951c95fc83",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
@@ -11,6 +19,14 @@
     "mini.nvim": {
       "rev": "ff8b3580935818ef2f21bdd651f057a2ae071eab",
       "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "modus-themes.nvim": {
+      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
+      "src": "https://github.com/miikanissi/modus-themes.nvim"
+    },
+    "nvim": {
+      "rev": "7365b8dede43a82ed1df741275b75333422e5402",
+      "src": "https://github.com/ember-theme/nvim"
     },
     "nvim-lspconfig": {
       "rev": "ed19590a3a9792901553c388d1aadafce012f80d",
