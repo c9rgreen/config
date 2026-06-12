@@ -64,7 +64,7 @@ require('mini.extra').setup()
 require('mini.align').setup()
 require('mini.sessions').setup()
 
-vim.keymap.set('n', '<leader>g', function() MiniPick.builtin.grep() end, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>g', function() MiniPick.builtin.grep_live() end, { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>h', function() MiniPick.builtin.help() end, { desc = 'Live help' })
 vim.keymap.set('n', '<leader>o', function() MiniPick.builtin.files() end, { desc = 'File picker' })
 vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = 'Document symbols' })
