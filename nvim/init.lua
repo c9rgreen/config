@@ -9,6 +9,7 @@ vim.opt.splitright = true
 vim.opt.number = false
 vim.opt.path:append { '**' }
 vim.opt.wildoptions:append('fuzzy')
+vim.opt.foldlevel = 5
 
 -- Use virtual text for diagnostics
 vim.diagnostic.config({ virtual_text = true })
