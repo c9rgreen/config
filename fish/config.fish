@@ -67,6 +67,13 @@ if type -q eza
 end
 
 #
+# Lazygit
+#
+if type -q lazygit
+    alias lgit "lazygit"
+end
+
+#
 # Launch Google Chrome with remote debug enabled
 # https://github.com/ChromeDevTools/chrome-devtools-mcp
 #

@@ -47,6 +47,10 @@ vim.pack.add({
    'https://github.com/neovim/nvim-lspconfig',
    'https://github.com/mason-org/mason.nvim',
    'https://github.com/mason-org/mason-lspconfig.nvim',
+   'https://github.com/zk-org/zk-nvim',
+   'https://github.com/folke/snacks.nvim',
+   'https://github.com/folke/trouble.nvim',
+   'https://github.com/folke/sidekick.nvim',
 })
 
 -- Mini
@@ -64,6 +68,45 @@ require('mini.pick').setup()
 require('mini.extra').setup()
 require('mini.align').setup()
 require('mini.sessions').setup()
+
+local miniclue = require('mini.clue')
+miniclue.setup({
+   triggers = {
+      { mode = 'n', keys = '<Leader>' },
+      { mode = 'x', keys = '<Leader>' },
+      { mode = 'n', keys = [[\]] },
+      { mode = 'n', keys = '[' },
+      { mode = 'n', keys = ']' },
+      { mode = 'i', keys = '<C-x>' },
+      { mode = 'n', keys = 'g' },
+      { mode = 'x', keys = 'g' },
+      { mode = 'n', keys = "'" },
+      { mode = 'n', keys = '`' },
+      { mode = 'x', keys = "'" },
+      { mode = 'x', keys = '`' },
+      { mode = 'n', keys = '"' },
+      { mode = 'x', keys = '"' },
+      { mode = 'i', keys = '<C-r>' },
+      { mode = 'c', keys = '<C-r>' },
+      { mode = 'n', keys = '<C-w>' },
+      { mode = 'n', keys = 'z' },
+      { mode = 'x', keys = 'z' },
+   },
+   clues = {
+      { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
+      { mode = 'n', keys = '<Leader>a', desc = 'AI' },
+      { mode = 'x', keys = '<Leader>a', desc = 'AI' },
+      { mode = 'n', keys = '<Leader>g', desc = 'Git' },
+      { mode = 'n', keys = '<Leader>c', desc = 'Code' },
+      miniclue.gen_clues.builtin_completion(),
+      miniclue.gen_clues.g(),
+      miniclue.gen_clues.square_brackets(),
+      miniclue.gen_clues.marks(),
+      miniclue.gen_clues.registers(),
+      miniclue.gen_clues.windows(),
+      miniclue.gen_clues.z(),
+   },
+})
 
 vim.keymap.set('n', '<leader>/', function() MiniPick.builtin.grep_live() end, { desc = 'Live grep' })
 vim.keymap.set('n', '<leader>?', function() MiniPick.builtin.help() end, { desc = 'Live help' })
@@ -129,6 +172,47 @@ require('mason').setup()
 require('mason-lspconfig').setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
+
+-- Spell checking and line wrapping for prose
+vim.api.nvim_create_autocmd('FileType', {
+   pattern = 'markdown',
+   callback = function()
+      vim.opt_local.spell = true
+      vim.opt_local.wrap = true
+   end,
+})
+
+-- zk (Zettelkasten notebook)
+require('zk').setup({ picker = 'minipick' })
+
+vim.keymap.set('n', '<leader>nn', function() vim.cmd('ZkNew { title = vim.fn.input("Title: ") }') end, { desc = 'New note' })
+vim.keymap.set('n', '<leader>no', function() vim.cmd('ZkNotes { sort = { "modified" } }') end, { desc = 'Open note' })
+vim.keymap.set('n', '<leader>nt', function() vim.cmd('ZkTags') end, { desc = 'Browse tags' })
+vim.keymap.set('n', '<leader>nf', function() vim.cmd('ZkNotes { sort = { "modified" }, match = { vim.fn.input("Search: ") } }') end, { desc = 'Find notes' })
+
+-- Snacks
+require('snacks').setup({
+   explorer = { enabled = true, replace_netrw = false },
+   gitbrowse = { enabled = true },
+   image = { enabled = true },
+   lazygit = { enabled = true },
+})
+
+vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File explorer' })
+vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git blame line' })
+vim.keymap.set({ 'n', 'x' }, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git browse' })
+vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Toggle lazygit' })
+
+-- Trouble
+require('trouble').setup()
+
+vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = 'Symbols overview' })
+
+-- Sidekick (AI CLI)
+require('sidekick').setup()
+
+vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
+vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
 
 -- New UI
 require('vim._core.ui2').enable({})
