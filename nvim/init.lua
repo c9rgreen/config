@@ -60,7 +60,78 @@ require('mini.cmdline').setup()
 require('mini.files').setup({ options = { use_as_default_explorer = false }})
 require('mini.diff').setup()
 require('mini.git').setup()
-require('mini.statusline').setup()
+-- Time tracked today (timewarrior), refreshed asynchronously so the
+-- statusline redraw never blocks on the shell. A filled green dot shows while
+-- an interval is running, a dim hollow dot when stopped.
+local timew_tracked = ''
+if vim.fn.executable('timew') == 1 then
+   local function refresh_timew()
+      -- `timew get dom.active` is 1 while tracking; then read today's total.
+      vim.system({ 'timew', 'get', 'dom.active' }, { text = true }, function(a)
+         local active = vim.trim(a.stdout or '') == '1'
+         vim.system({ 'timew', 'day' }, { text = true }, function(out)
+            -- `timew day` footer: "Tracked   8:24:08" (includes running interval)
+            local h, m = (out.stdout or ''):match('Tracked%s+(%d+):(%d+)')
+            h, m = tonumber(h) or 0, tonumber(m) or 0
+            local dot_hl = active and 'TimewActive' or 'TimewInactive'
+            local dot = active and '●' or '○'
+            local result = string.format(
+               '%%#%s#%s%%#MiniStatuslineFileinfo# %dh%02dm', dot_hl, dot, h, m)
+            vim.schedule(function()
+               if result ~= timew_tracked then
+                  timew_tracked = result
+                  vim.cmd('redrawstatus')
+               end
+            end)
+         end)
+      end)
+   end
+   refresh_timew()
+   vim.fn.timer_start(60000, refresh_timew, { ['repeat'] = -1 })
+end
+
+require('mini.statusline').setup({
+   content = {
+      active = function()
+         local MiniStatusline = require('mini.statusline')
+         local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+         local git           = MiniStatusline.section_git({ trunc_width = 40 })
+         local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
+         local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+         local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
+         local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+         local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+         local location      = MiniStatusline.section_location({ trunc_width = 75 })
+         local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+         return MiniStatusline.combine_groups({
+            { hl = mode_hl,                  strings = { mode } },
+            { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
+            '%<',
+            { hl = 'MiniStatuslineFilename', strings = { filename } },
+            '%=',
+            { hl = 'MiniStatuslineFileinfo', strings = { timew_tracked, fileinfo } },
+            { hl = mode_hl,                  strings = { search, location } },
+         })
+      end,
+   },
+})
+
+-- Dot colors for the timewarrior segment. They take the fileinfo segment's
+-- background so the indicator only changes the dot's foreground, never the
+-- statusline background. Re-derived on colorscheme changes (deferred so it
+-- runs after mini re-creates its own highlights).
+local function set_timew_hl()
+   local info = vim.api.nvim_get_hl(0, { name = 'MiniStatuslineFileinfo', link = false })
+   local ok   = vim.api.nvim_get_hl(0, { name = 'DiagnosticOk', link = false })
+   local cmt  = vim.api.nvim_get_hl(0, { name = 'Comment', link = false })
+   vim.api.nvim_set_hl(0, 'TimewActive',   { fg = ok.fg,  bg = info.bg })
+   vim.api.nvim_set_hl(0, 'TimewInactive', { fg = cmt.fg, bg = info.bg })
+end
+-- Deferred so it runs after the colorscheme is applied later in init.
+vim.schedule(set_timew_hl)
+vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(set_timew_hl) end })
+
 require('mini.icons').setup()
 require('mini.tabline').setup()
 require('mini.snippets').setup()
