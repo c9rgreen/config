@@ -10,8 +10,9 @@ function fish_right_prompt --description 'Time tracked today (timewarrior)'
     set -l m 0
     if test -n "$tracked"
         set -l parts (string split ':' -- $tracked)
-        set h $parts[1]
-        set m $parts[2]
+        # math strips leading zeros so printf doesn't read e.g. "08" as octal
+        set h (math $parts[1])
+        set m (math $parts[2])
     end
 
     # Filled green dot while tracking, dim hollow dot when stopped
