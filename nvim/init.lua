@@ -48,6 +48,7 @@ vim.pack.add({
    'https://github.com/mason-org/mason.nvim',
    'https://github.com/mason-org/mason-lspconfig.nvim',
    'https://github.com/zk-org/zk-nvim',
+   'https://github.com/ThorstenRhau/token',
    'https://github.com/folke/snacks.nvim',
    'https://github.com/folke/trouble.nvim',
    'https://github.com/folke/sidekick.nvim',
@@ -188,8 +189,6 @@ vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() e
 vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
 
-vim.cmd.colorscheme('minisummer')
-
 -- Install treesitter parsers on demand, driven by the buffer's filetype
 local ts = require('nvim-treesitter')
 local available = ts.get_available()
@@ -287,3 +286,6 @@ vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg 
 
 -- New UI
 require('vim._core.ui2').enable({})
+
+-- Colorscheme
+vim.cmd.colorscheme('token')
