@@ -24,6 +24,8 @@ brew "ripgrep"
 brew "skopeo"
 brew "taskwarrior"
 brew "timewarrior"
+# bugwarrior (GitLab → taskwarrior sync) is not in Homebrew; install with:
+#   uv tool install --python 3.11 bugwarrior   (3.11 needed: taskw still imports distutils)
 brew "tmux"
 brew "tree-sitter-cli"
 brew "universal-ctags"

@@ -1,0 +1,10 @@
+# Minimal taskrc used only by bugwarrior (see fish/functions/bugwarrior.fish).
+# bugwarrior's config parser (taskw) opens `include` paths directly in Python and
+# can't resolve taskwarrior's built-in theme includes, so this file deliberately omits
+# any theme. It shares the same data.location as the interactive taskrc variants, so
+# synced tasks land in the same database.
+data.location=~/.local/share/task
+hooks.location=~/.config/task/hooks
+
+# GitLab UDAs synced by bugwarrior (regenerate with `bugwarrior uda`)
+include /Users/cgreen/.config/task/bugwarrior-udas.rc
