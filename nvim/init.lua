@@ -52,6 +52,7 @@ vim.pack.add({
    'https://github.com/folke/snacks.nvim',
    'https://github.com/folke/trouble.nvim',
    'https://github.com/folke/sidekick.nvim',
+   'https://github.com/terrastruct/d2-vim',
 })
 
 -- Mini

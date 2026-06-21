@@ -4,6 +4,10 @@
       "rev": "f2162e49b527213d2e1cfc16e4e189ca8fc918e8",
       "src": "https://github.com/szymonwilczek/arete.nvim"
     },
+    "d2-vim": {
+      "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
+      "src": "https://github.com/terrastruct/d2-vim"
+    },
     "mac-clear": {
       "rev": "f7aac8f8e1decfbe1bdb607e542c5ef78f004e39",
       "src": "https://github.com/boningmaple/mac-clear"
