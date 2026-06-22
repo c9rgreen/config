@@ -236,6 +236,7 @@ vim.lsp.enable({
    'marksman',
    'ruff',
    'shopify_theme_ls',
+   'tinymist',
    'ts_ls',
    'ty',
    'yamlls'
