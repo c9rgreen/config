@@ -1,0 +1,6 @@
+# bat configuration
+# https://github.com/sharkdp/bat#configuration-file
+
+# Use the terminal's own 16-color ANSI palette instead of a built-in
+# truecolor theme, so bat matches the active terminal/colorscheme.
+--theme="ansi"

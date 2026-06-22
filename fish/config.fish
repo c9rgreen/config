@@ -84,3 +84,29 @@ alias chrome "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --r
 # https://github.com/zk-org/zk-nvim
 #
 set -gx ZK_NOTEBOOK_DIR "$HOME/ZK"
+
+#
+# fzf shell integration
+# https://github.com/junegunn/fzf#fish
+#
+# Sourced from config.fish (not conf.d) so it loads after vi key bindings.
+# Provides Ctrl-T (paste paths), Ctrl-R (history), Alt-C (cd into subdir).
+#
+if type -q fzf
+    # Use fd for file listing: fast, gitignore-aware, includes dotfiles.
+    if type -q fd
+        set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
+        set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+        set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude .git'
+    end
+
+    # Syntax-highlighted preview for Ctrl-T; directory tree for Alt-C.
+    if type -q bat
+        set -gx FZF_CTRL_T_OPTS "--preview 'bat --color=always --style=numbers {}'"
+    end
+    if type -q eza
+        set -gx FZF_ALT_C_OPTS "--preview 'eza --tree --icons --color=always {}'"
+    end
+
+    fzf --fish | source
+end
