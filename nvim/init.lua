@@ -188,6 +188,7 @@ vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { 
 vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File exlporer' })
 vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
+vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 
 vim.cmd.colorscheme('minisummer')
 
