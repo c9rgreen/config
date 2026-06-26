@@ -1,16 +1,8 @@
 {
   "plugins": {
-    "arete.nvim": {
-      "rev": "f2162e49b527213d2e1cfc16e4e189ca8fc918e8",
-      "src": "https://github.com/szymonwilczek/arete.nvim"
-    },
     "d2-vim": {
       "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
       "src": "https://github.com/terrastruct/d2-vim"
-    },
-    "mac-clear": {
-      "rev": "5068767863a8d11f91e956827c43118c189e639d",
-      "src": "https://github.com/boningmaple/mac-clear"
     },
     "mason-lspconfig.nvim": {
       "rev": "21c5b3ebeaa0412e28096bb0701434c51c1fbf76",
@@ -24,14 +16,6 @@
       "rev": "1345d191bb3da9c7b0e977f4387c5761f9bff68d",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "modus-themes.nvim": {
-      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
-      "src": "https://github.com/miikanissi/modus-themes.nvim"
-    },
-    "nvim": {
-      "rev": "7365b8dede43a82ed1df741275b75333422e5402",
-      "src": "https://github.com/ember-theme/nvim"
-    },
     "nvim-lspconfig": {
       "rev": "bfcc0171a43f22afa61d927ffe9fcb6cb85dc99e",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -44,10 +28,6 @@
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
-    "orgmode": {
-      "rev": "f5485be9a4301ab535f99f2dc30601c47305dde7",
-      "src": "https://github.com/nvim-orgmode/orgmode"
-    },
     "sidekick.nvim": {
       "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
       "src": "https://github.com/folke/sidekick.nvim"
@@ -56,13 +36,21 @@
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
     },
-    "token": {
-      "rev": "b2a009c35cb5d992495ce4818439d19964385f96",
-      "src": "https://github.com/ThorstenRhau/token"
-    },
     "trouble.nvim": {
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
       "src": "https://github.com/folke/trouble.nvim"
+    },
+    "vim-dadbod": {
+      "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",
+      "src": "https://github.com/tpope/vim-dadbod"
+    },
+    "vim-dispatch": {
+      "rev": "a2ff28abdb2d89725192db5b8562977d392a4d3f",
+      "src": "https://github.com/tpope/vim-dispatch"
+    },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "https://github.com/tpope/vim-fugitive"
     },
     "zk-nvim": {
       "rev": "bc3b39374b25fad977cecc936588cb060f15a773",

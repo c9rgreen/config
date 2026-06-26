@@ -39,22 +39,9 @@ vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
 
--- Packages
-vim.pack.add({
-   'https://github.com/nvim-mini/mini.nvim',
-   'https://github.com/nvim-treesitter/nvim-treesitter',
-   'https://github.com/nvim-treesitter/nvim-treesitter-context',
-   'https://github.com/neovim/nvim-lspconfig',
-   'https://github.com/mason-org/mason.nvim',
-   'https://github.com/mason-org/mason-lspconfig.nvim',
-   'https://github.com/zk-org/zk-nvim',
-   'https://github.com/folke/snacks.nvim',
-   'https://github.com/folke/trouble.nvim',
-   'https://github.com/folke/sidekick.nvim',
-   'https://github.com/terrastruct/d2-vim',
-})
-
 -- Mini
+vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
+
 require('mini.basics').setup()
 require('mini.completion').setup()
 require('mini.cmdline').setup()
@@ -192,6 +179,12 @@ vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { de
 
 vim.cmd.colorscheme('minisummer')
 
+-- Treesitter
+vim.pack.add({
+   'https://github.com/nvim-treesitter/nvim-treesitter',
+   'https://github.com/nvim-treesitter/nvim-treesitter-context',
+})
+
 -- Install treesitter parsers on demand, driven by the buffer's filetype
 local ts = require('nvim-treesitter')
 local available = ts.get_available()
@@ -225,6 +218,12 @@ vim.api.nvim_create_autocmd('FileType', {
 require('treesitter-context').setup()
 
 -- LSP config
+vim.pack.add({
+   'https://github.com/neovim/nvim-lspconfig',
+   'https://github.com/mason-org/mason.nvim',
+   'https://github.com/mason-org/mason-lspconfig.nvim',
+})
+
 vim.lsp.enable({
    'cssls',
    'eslint',
@@ -257,6 +256,8 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- zk (Zettelkasten notebook)
+vim.pack.add({'https://github.com/zk-org/zk-nvim'})
+
 require('zk').setup({ picker = 'minipick' })
 
 vim.keymap.set('n', '<leader>nn', function() vim.cmd('ZkNew { title = vim.fn.input("Title: ") }') end, { desc = 'New note' })
@@ -265,6 +266,8 @@ vim.keymap.set('n', '<leader>nt', function() vim.cmd('ZkTags') end, { desc = 'Br
 vim.keymap.set('n', '<leader>nf', function() vim.cmd('ZkNotes { sort = { "modified" }, match = { vim.fn.input("Search: ") } }') end, { desc = 'Find notes' })
 
 -- Snacks
+vim.pack.add({'https://github.com/folke/snacks.nvim'})
+
 require('snacks').setup({
    explorer = { enabled = true, replace_netrw = false },
    gitbrowse = { enabled = true },
@@ -277,12 +280,16 @@ vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc
 vim.keymap.set({ 'n', 'x' }, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git browse' })
 vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Toggle lazygit' })
 
--- Trouble
+-- Trouble (Visualize structure)
+vim.pack.add({'https://github.com/folke/trouble.nvim'})
+
 require('trouble').setup()
 
 vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = 'Symbols overview' })
 
--- Sidekick (AI CLI)
+-- Sidekick (Displays agent on the side)
+vim.pack.add({'https://github.com/folke/sidekick.nvim'})
+
 require('sidekick').setup()
 
 vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
@@ -290,3 +297,14 @@ vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg 
 
 -- New UI
 require('vim._core.ui2').enable({})
+
+-- D2 (Digarams)
+vim.pack.add({'https://github.com/terrastruct/d2-vim'})
+
+-- Old but good
+-- Fugitive's :Git command overrides Mini's :Git
+vim.pack.add({
+   'https://github.com/tpope/vim-fugitive',
+   'https://github.com/tpope/vim-dadbod',
+   'https://github.com/tpope/vim-dispatch',
+})
