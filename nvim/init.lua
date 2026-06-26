@@ -153,10 +153,10 @@ miniclue.setup({
    },
    clues = {
       { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
-      { mode = 'n', keys = '<Leader>a', desc = 'AI' },
-      { mode = 'x', keys = '<Leader>a', desc = 'AI' },
       { mode = 'n', keys = '<Leader>g', desc = 'Git' },
+      { mode = 'x', keys = '<Leader>g', desc = 'Git' },
       { mode = 'n', keys = '<Leader>c', desc = 'Code' },
+      { mode = 'x', keys = '<Leader>c', desc = 'Code' },
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
       miniclue.gen_clues.square_brackets(),
@@ -293,6 +293,7 @@ vim.pack.add({'https://github.com/folke/sidekick.nvim'})
 require('sidekick').setup()
 
 vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
+vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle Pi' })
 vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
 
 -- New UI
