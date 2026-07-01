@@ -1,7 +1,7 @@
 -- Options
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
-vim.opt.fillchars = { diff = ' ' }
+vim.opt.fillchars = { diff = '╱' }
 vim.opt.wildignorecase = true
 vim.opt.shell = 'fish'
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
@@ -38,6 +38,9 @@ vim.cmd.packadd('nvim.undotree')
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 4
+
+-- New UI
+require('vim._core.ui2').enable({})
 
 -- Mini
 vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
@@ -127,6 +130,8 @@ require('mini.pick').setup()
 require('mini.extra').setup()
 require('mini.align').setup()
 require('mini.sessions').setup()
+require('mini.bufremove').setup()
+require('mini.trailspace').setup()
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -152,11 +157,11 @@ miniclue.setup({
       { mode = 'x', keys = 'z' },
    },
    clues = {
-      { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
-      { mode = 'n', keys = '<Leader>g', desc = 'Git' },
-      { mode = 'x', keys = '<Leader>g', desc = 'Git' },
+      { mode = 'n', keys = '<Leader>b', desc = 'Buffer' },
       { mode = 'n', keys = '<Leader>c', desc = 'Code' },
       { mode = 'x', keys = '<Leader>c', desc = 'Code' },
+      { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
+      { mode = 'n', keys = '<Leader>g', desc = 'Git' },
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
       miniclue.gen_clues.square_brackets(),
@@ -174,10 +179,13 @@ vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'doc
 vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
 vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File exlporer' })
 vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
+vim.keymap.set('n', '<leader>bd', function() MiniBufremove.delete() end, { desc = 'Delete buffer' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 
-vim.cmd.colorscheme('minisummer')
+-- Modus
+vim.pack.add({'https://github.com/miikanissi/modus-themes.nvim'})
+vim.cmd.colorscheme('modus')
 
 -- Treesitter
 vim.pack.add({
@@ -265,6 +273,16 @@ vim.keymap.set('n', '<leader>no', function() vim.cmd('ZkNotes { sort = { "modifi
 vim.keymap.set('n', '<leader>nt', function() vim.cmd('ZkTags') end, { desc = 'Browse tags' })
 vim.keymap.set('n', '<leader>nf', function() vim.cmd('ZkNotes { sort = { "modified" }, match = { vim.fn.input("Search: ") } }') end, { desc = 'Find notes' })
 
+-- Diffview (git diff and file history views)
+vim.pack.add({'https://github.com/sindrets/diffview.nvim'})
+
+require('diffview').setup()
+
+vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<cr>', { desc = 'Diffview open' })
+vim.keymap.set('n', '<leader>gV', '<cmd>DiffviewClose<cr>', { desc = 'Diffview close' })
+vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<cr>', { desc = 'File history (repo)' })
+vim.keymap.set('n', '<leader>gH', '<cmd>DiffviewFileHistory %<cr>', { desc = 'File history (current)' })
+
 -- Snacks
 vim.pack.add({'https://github.com/folke/snacks.nvim'})
 
@@ -280,32 +298,18 @@ vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc
 vim.keymap.set({ 'n', 'x' }, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git browse' })
 vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Toggle lazygit' })
 
--- Trouble (Visualize structure)
+-- Trouble
 vim.pack.add({'https://github.com/folke/trouble.nvim'})
 
 require('trouble').setup()
 
 vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = 'Symbols overview' })
 
--- Sidekick (Displays agent on the side)
+-- Sidekick (AI CLI)
 vim.pack.add({'https://github.com/folke/sidekick.nvim'})
 
 require('sidekick').setup()
 
 vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
-vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle Pi' })
+vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle pi' })
 vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
-
--- New UI
-require('vim._core.ui2').enable({})
-
--- D2 (Digarams)
-vim.pack.add({'https://github.com/terrastruct/d2-vim'})
-
--- Old but good
--- Fugitive's :Git command overrides Mini's :Git
-vim.pack.add({
-   'https://github.com/tpope/vim-fugitive',
-   'https://github.com/tpope/vim-dadbod',
-   'https://github.com/tpope/vim-dispatch',
-})

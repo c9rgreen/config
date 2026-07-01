@@ -1,8 +1,36 @@
 {
   "plugins": {
+    "arete.nvim": {
+      "rev": "f2162e49b527213d2e1cfc16e4e189ca8fc918e8",
+      "src": "https://github.com/szymonwilczek/arete.nvim"
+    },
+    "blink.download": {
+      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "src": "https://github.com/saghen/blink.download"
+    },
     "d2-vim": {
       "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
       "src": "https://github.com/terrastruct/d2-vim"
+    },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
+    "kubectl.nvim": {
+      "rev": "442aab0f28aa1860ab58925fd72d2b27e771fc2e",
+      "src": "https://github.com/Ramilito/kubectl.nvim"
+    },
+    "live-server.nvim": {
+      "rev": "85915d0e7dd926a54b0082aaeafc10a82bfe8288",
+      "src": "https://github.com/selimacerbas/live-server.nvim"
+    },
+    "mac-clear": {
+      "rev": "1bfd1c798233f5e4d29a1d104e2c419682679e32",
+      "src": "https://github.com/boningmaple/mac-clear"
+    },
+    "markdown-preview.nvim": {
+      "rev": "545cf3bc6c6425b33a9b25acef54f66e4035ca0f",
+      "src": "https://github.com/selimacerbas/markdown-preview.nvim"
     },
     "mason-lspconfig.nvim": {
       "rev": "50bf3871b539896bd0650b882f6e6b467cc1c1eb",
@@ -16,6 +44,22 @@
       "rev": "c248713d3530710f67ec804cfbdfcd5b02b19dee",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "modus-themes.nvim": {
+      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
+      "src": "https://github.com/miikanissi/modus-themes.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim": {
+      "rev": "7365b8dede43a82ed1df741275b75333422e5402",
+      "src": "https://github.com/ember-theme/nvim"
+    },
+    "nvim-dbee": {
+      "rev": "dda517694889a5d238d7aa407403984da9f80cc0",
+      "src": "https://github.com/kndndrj/nvim-dbee"
+    },
     "nvim-lspconfig": {
       "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -28,6 +72,10 @@
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
+    "orgmode": {
+      "rev": "4f99b3780950370e49d6ab88d041b2afe4da2566",
+      "src": "https://github.com/nvim-orgmode/orgmode"
+    },
     "sidekick.nvim": {
       "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
       "src": "https://github.com/folke/sidekick.nvim"
@@ -35,6 +83,14 @@
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "solarized.nvim": {
+      "rev": "a8085e29883ddcfb39bd46197eb32ef00df05368",
+      "src": "https://github.com/maxmx03/solarized.nvim"
+    },
+    "token": {
+      "rev": "b2a009c35cb5d992495ce4818439d19964385f96",
+      "src": "https://github.com/ThorstenRhau/token"
     },
     "trouble.nvim": {
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
@@ -47,6 +103,10 @@
     "vim-dispatch": {
       "rev": "a2ff28abdb2d89725192db5b8562977d392a4d3f",
       "src": "https://github.com/tpope/vim-dispatch"
+    },
+    "vim-flog": {
+      "rev": "665b16ac8915f746bc43c9572b4581a5e9047216",
+      "src": "https://github.com/rbong/vim-flog"
     },
     "vim-fugitive": {
       "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
