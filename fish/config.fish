@@ -39,6 +39,15 @@ if status is-interactive
     set fish_color_end green
     set fish_color_escape magenta
     set fish_color_search_match --background=brblack
+
+    # Completion pager: the selected row defaults to reverse-video (-r), which
+    # leaves the prefix/completion foregrounds dark on a dark reversed background
+    # (worsened by the Ghostty 0/7 palette swap). Set explicit high-contrast
+    # colors instead — bright white on blue (palette 15 on 4, neither swapped).
+    set fish_pager_color_selected_background --background=blue
+    set fish_pager_color_selected_completion brwhite
+    set fish_pager_color_selected_prefix brwhite --bold --underline
+    set fish_pager_color_selected_description brwhite --italics
 end
 
 #
