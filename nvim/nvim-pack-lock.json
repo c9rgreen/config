@@ -8,13 +8,13 @@
       "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
       "src": "https://github.com/saghen/blink.download"
     },
-    "d2-vim": {
-      "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
-      "src": "https://github.com/terrastruct/d2-vim"
+    "claudecode.nvim": {
+      "rev": "2390c6e45c4789072c293ac69de051d169668b29",
+      "src": "https://github.com/coder/claudecode.nvim"
     },
-    "diffview.nvim": {
-      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
-      "src": "https://github.com/sindrets/diffview.nvim"
+    "diffview-plus.nvim": {
+      "rev": "8cc426835d88238cf59a6812b7ae1b1dc8d33efd",
+      "src": "https://github.com/dlyongemallo/diffview-plus.nvim"
     },
     "kubectl.nvim": {
       "rev": "442aab0f28aa1860ab58925fd72d2b27e771fc2e",
@@ -40,13 +40,13 @@
       "rev": "2a6940af80375532e5e9e7c1f2fc6319a1b7a69d",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "melange-nvim": {
+      "rev": "ce42f6b629beeaa00591ba73a77d3eeac4cf28ce",
+      "src": "https://github.com/savq/melange-nvim"
+    },
     "mini.nvim": {
       "rev": "c248713d3530710f67ec804cfbdfcd5b02b19dee",
       "src": "https://github.com/nvim-mini/mini.nvim"
-    },
-    "modus-themes.nvim": {
-      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
-      "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
@@ -72,6 +72,10 @@
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
+    "oil.nvim": {
+      "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
+      "src": "https://github.com/stevearc/oil.nvim"
+    },
     "orgmode": {
       "rev": "4f99b3780950370e49d6ab88d041b2afe4da2566",
       "src": "https://github.com/nvim-orgmode/orgmode"
@@ -87,6 +91,10 @@
     "solarized.nvim": {
       "rev": "a8085e29883ddcfb39bd46197eb32ef00df05368",
       "src": "https://github.com/maxmx03/solarized.nvim"
+    },
+    "taskwarrior.nvim": {
+      "rev": "81e93d7ca72e859e54c11f6b292bc89a27f9b4c8",
+      "src": "https://github.com/MattHandzel/taskwarrior.nvim"
     },
     "token": {
       "rev": "b2a009c35cb5d992495ce4818439d19964385f96",

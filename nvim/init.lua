@@ -1,18 +1,65 @@
 -- Options
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
-vim.opt.fillchars = { diff = '╱' }
+vim.opt.fillchars = { diff = '╱', fold = '─' }
 vim.opt.wildignorecase = true
 vim.opt.shell = 'fish'
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
+vim.opt.numberwidth = 4 -- reserve a stable gutter so statuscolumn's %=%l right-aligns
 vim.opt.path:append { '**' }
 vim.opt.wildoptions:append('fuzzy')
 vim.opt.foldlevel = 5
 
--- Use virtual text for diagnostics
-vim.diagnostic.config({ virtual_text = true })
+-- Fold column: down triangle at open-fold starts, right triangle at closed-fold
+-- starts, blank otherwise. Rendered via statuscolumn so the native foldcolumn's
+-- depth digits are never shown.
+function _G.fold_column()
+   local lnum = vim.v.lnum
+   if vim.fn.foldclosed(lnum) == lnum then
+      return '▶'
+   elseif vim.fn.foldlevel(lnum) > vim.fn.foldlevel(lnum - 1) then
+      return '▼'
+   end
+   return ' '
+end
+-- Click handler: toggle the fold that starts on the clicked line.
+function _G.fold_click()
+   local lnum = vim.fn.getmousepos().line
+   if lnum <= 0 or vim.fn.foldlevel(lnum) == 0 then
+      return
+   end
+   if vim.fn.foldclosed(lnum) == -1 then
+      vim.cmd(lnum .. 'foldclose')
+   else
+      vim.cmd(lnum .. 'foldopen')
+   end
+end
+vim.opt.foldcolumn = '0'
+vim.opt.statuscolumn = '%s%@v:lua.fold_click@%{%v:lua.fold_column()%}%X %=%l '
+
+-- Closed folds: first line + line count (the ▶ marker lives in the fold column)
+function _G.fold_text()
+   local first = vim.fn.getline(vim.v.foldstart):gsub('\t', string.rep(' ', vim.bo.tabstop))
+   local count = vim.v.foldend - vim.v.foldstart + 1
+   return string.format(' %s  (%d lines) ', first, count)
+end
+vim.opt.foldtext = 'v:lua.fold_text()'
+vim.opt.winborder = 'rounded'
+
+-- Use virtual text for diagnostics, with nicer gutter/inline glyphs
+vim.diagnostic.config({
+   virtual_text = { prefix = '●' },
+   signs = {
+      text = {
+         [vim.diagnostic.severity.ERROR] = '',
+         [vim.diagnostic.severity.WARN]  = '',
+         [vim.diagnostic.severity.INFO]  = '',
+         [vim.diagnostic.severity.HINT]  = '󰌵',
+      },
+   },
+})
 
 -- Keymaps
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
@@ -126,12 +173,30 @@ vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(
 require('mini.icons').setup()
 require('mini.tabline').setup()
 require('mini.snippets').setup()
-require('mini.pick').setup()
+require('mini.pick').setup({ window = { config = { border = 'rounded' } } })
 require('mini.extra').setup()
 require('mini.align').setup()
 require('mini.sessions').setup()
 require('mini.bufremove').setup()
 require('mini.trailspace').setup()
+require('mini.cursorword').setup()
+require('mini.indentscope').setup()
+require('mini.surround').setup()
+require('mini.starter').setup()
+require('mini.map').setup()
+
+local hipatterns = require('mini.hipatterns')
+hipatterns.setup({
+   highlighters = {
+      fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+      hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+      todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+      note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+
+      -- Render `#rrggbb` / `#rgb` literals with their actual color
+      hex_color = hipatterns.gen_highlighter.hex_color(),
+   },
+})
 
 local miniclue = require('mini.clue')
 miniclue.setup({
@@ -158,8 +223,8 @@ miniclue.setup({
    },
    clues = {
       { mode = 'n', keys = '<Leader>b', desc = 'Buffer' },
-      { mode = 'n', keys = '<Leader>c', desc = 'Code' },
-      { mode = 'x', keys = '<Leader>c', desc = 'Code' },
+      { mode = 'n', keys = '<Leader>c', desc = 'Claude/AI' },
+      { mode = 'x', keys = '<Leader>c', desc = 'Claude/AI' },
       { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
       { mode = 'n', keys = '<Leader>g', desc = 'Git' },
       miniclue.gen_clues.builtin_completion(),
@@ -182,10 +247,11 @@ vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() en
 vim.keymap.set('n', '<leader>bd', function() MiniBufremove.delete() end, { desc = 'Delete buffer' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
+vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
 
--- Modus
-vim.pack.add({'https://github.com/miikanissi/modus-themes.nvim'})
-vim.cmd.colorscheme('modus')
+-- Colorscheme
+vim.pack.add({'https://github.com/savq/melange-nvim'})
+vim.cmd.colorscheme('melange')
 
 -- Treesitter
 vim.pack.add({
@@ -243,6 +309,7 @@ vim.lsp.enable({
    'marksman',
    'ruff',
    'shopify_theme_ls',
+   'tailwindcss',
    'tinymist',
    'ts_ls',
    'ty',
@@ -274,7 +341,7 @@ vim.keymap.set('n', '<leader>nt', function() vim.cmd('ZkTags') end, { desc = 'Br
 vim.keymap.set('n', '<leader>nf', function() vim.cmd('ZkNotes { sort = { "modified" }, match = { vim.fn.input("Search: ") } }') end, { desc = 'Find notes' })
 
 -- Diffview (git diff and file history views)
-vim.pack.add({'https://github.com/sindrets/diffview.nvim'})
+vim.pack.add({'https://github.com/dlyongemallo/diffview-plus.nvim'})
 
 require('diffview').setup()
 
@@ -282,6 +349,16 @@ vim.keymap.set('n', '<leader>gv', '<cmd>DiffviewOpen<cr>', { desc = 'Diffview op
 vim.keymap.set('n', '<leader>gV', '<cmd>DiffviewClose<cr>', { desc = 'Diffview close' })
 vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<cr>', { desc = 'File history (repo)' })
 vim.keymap.set('n', '<leader>gH', '<cmd>DiffviewFileHistory %<cr>', { desc = 'File history (current)' })
+
+-- Open a Diffview against the commit sha reported by the `git last` alias
+vim.api.nvim_create_user_command('DiffLast', function()
+   local sha = vim.trim(vim.fn.system({ 'git', 'last' }))
+   if vim.v.shell_error ~= 0 or sha == '' then
+      vim.notify('git last failed: ' .. sha, vim.log.levels.ERROR)
+      return
+   end
+   vim.cmd('DiffviewOpen ' .. sha)
+end, { desc = 'Diffview of the commit from `git last`' })
 
 -- Snacks
 vim.pack.add({'https://github.com/folke/snacks.nvim'})
@@ -291,12 +368,14 @@ require('snacks').setup({
    gitbrowse = { enabled = true },
    image = { enabled = true },
    lazygit = { enabled = true },
+   terminal = { enabled = true },
 })
 
 vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File explorer' })
 vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git blame line' })
 vim.keymap.set({ 'n', 'x' }, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git browse' })
 vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Toggle lazygit' })
+vim.keymap.set({ 'n' }, '<leader>t', function() Snacks.terminal.toggle() end, { desc = 'Toggle terminal' })
 
 -- Trouble
 vim.pack.add({'https://github.com/folke/trouble.nvim'})
@@ -310,6 +389,32 @@ vim.pack.add({'https://github.com/folke/sidekick.nvim'})
 
 require('sidekick').setup()
 
-vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
 vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle pi' })
-vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
+
+-- Oil (buffer-based file explorer)
+vim.pack.add({'https://github.com/stevearc/oil.nvim'})
+
+require('oil').setup()
+
+vim.keymap.set('n', '<leader>o', '<cmd>Oil<cr>', { desc = 'Open Oil' })
+
+-- Taskwarrior
+vim.pack.add({'https://github.com/MattHandzel/taskwarrior.nvim'})
+
+require('taskwarrior').setup()
+
+-- Claude Code (native WebSocket/MCP integration; uses snacks.nvim for its terminal)
+vim.pack.add({'https://github.com/coder/claudecode.nvim'})
+
+require('claudecode').setup()
+
+vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<cr>', { desc = 'Toggle Claude' })
+vim.keymap.set('n', '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', { desc = 'Focus Claude' })
+vim.keymap.set('n', '<leader>cr', '<cmd>ClaudeCode --resume<cr>', { desc = 'Resume Claude' })
+vim.keymap.set('n', '<leader>cC', '<cmd>ClaudeCode --continue<cr>', { desc = 'Continue Claude' })
+vim.keymap.set('n', '<leader>cm', '<cmd>ClaudeCodeSelectModel<cr>', { desc = 'Select Claude model' })
+vim.keymap.set('n', '<leader>cb', '<cmd>ClaudeCodeAdd %<cr>', { desc = 'Add current buffer' })
+vim.keymap.set('x', '<leader>cv', '<cmd>ClaudeCodeSend<cr>', { desc = 'Send selection to Claude' })
+vim.keymap.set('n', '<leader>ct', '<cmd>ClaudeCodeTreeAdd<cr>', { desc = 'Add file from tree' })
+vim.keymap.set('n', '<leader>ca', '<cmd>ClaudeCodeDiffAccept<cr>', { desc = 'Accept diff' })
+vim.keymap.set('n', '<leader>cd', '<cmd>ClaudeCodeDiffDeny<cr>', { desc = 'Deny diff' })
