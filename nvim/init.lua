@@ -1,7 +1,7 @@
 -- Options
 vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
-vim.opt.fillchars = { diff = '╱', fold = '─' }
+vim.opt.fillchars = { diff = ' ', fold = ' ' }
 vim.opt.wildignorecase = true
 vim.opt.shell = 'fish'
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
@@ -251,7 +251,8 @@ vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Togg
 
 -- Colorscheme
 vim.pack.add({'https://github.com/savq/melange-nvim'})
-vim.cmd.colorscheme('melange')
+vim.pack.add({'https://github.com/vague-theme/vague.nvim'})
+vim.cmd.colorscheme('vague')
 
 -- Treesitter
 vim.pack.add({

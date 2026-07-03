@@ -1,12 +1,24 @@
 {
   "plugins": {
+    "arete.nvim": {
+      "rev": "f2162e49b527213d2e1cfc16e4e189ca8fc918e8",
+      "src": "https://github.com/szymonwilczek/arete.nvim"
+    },
     "claudecode.nvim": {
       "rev": "2390c6e45c4789072c293ac69de051d169668b29",
       "src": "https://github.com/coder/claudecode.nvim"
     },
+    "d2-vim": {
+      "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
+      "src": "https://github.com/terrastruct/d2-vim"
+    },
     "diffview-plus.nvim": {
       "rev": "bcf4b62b4acc36a7c3d19e423713a220c838a668",
       "src": "https://github.com/dlyongemallo/diffview-plus.nvim"
+    },
+    "mac-clear": {
+      "rev": "5068767863a8d11f91e956827c43118c189e639d",
+      "src": "https://github.com/boningmaple/mac-clear"
     },
     "mason-lspconfig.nvim": {
       "rev": "47059d71b42d74b0a1e9f61c1d99d301039c3b5b",
@@ -23,6 +35,10 @@
     "mini.nvim": {
       "rev": "c5cdbadeb423ff724e27a42ab2d1c504d1d6fc5a",
       "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "modus-themes.nvim": {
+      "rev": "17a64464c27c1be605adca13dbe48f2f402fe107",
+      "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nvim": {
       "rev": "7365b8dede43a82ed1df741275b75333422e5402",
@@ -44,6 +60,10 @@
       "rev": "b73018b75affd13fa38e2fc94ef753b465f770d7",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "orgmode": {
+      "rev": "f5485be9a4301ab535f99f2dc30601c47305dde7",
+      "src": "https://github.com/nvim-orgmode/orgmode"
+    },
     "sidekick.nvim": {
       "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
       "src": "https://github.com/folke/sidekick.nvim"
@@ -56,9 +76,29 @@
       "rev": "81e93d7ca72e859e54c11f6b292bc89a27f9b4c8",
       "src": "https://github.com/MattHandzel/taskwarrior.nvim"
     },
+    "token": {
+      "rev": "b2a009c35cb5d992495ce4818439d19964385f96",
+      "src": "https://github.com/ThorstenRhau/token"
+    },
     "trouble.nvim": {
       "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
       "src": "https://github.com/folke/trouble.nvim"
+    },
+    "vague.nvim": {
+      "rev": "49fe06ad33d8847b931ba4279197bda222374cd1",
+      "src": "https://github.com/vague-theme/vague.nvim"
+    },
+    "vim-dadbod": {
+      "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",
+      "src": "https://github.com/tpope/vim-dadbod"
+    },
+    "vim-dispatch": {
+      "rev": "a2ff28abdb2d89725192db5b8562977d392a4d3f",
+      "src": "https://github.com/tpope/vim-dispatch"
+    },
+    "vim-fugitive": {
+      "rev": "3b753cf8c6a4dcde6edee8827d464ba9b8c4a6f0",
+      "src": "https://github.com/tpope/vim-fugitive"
     },
     "zk-nvim": {
       "rev": "e6b32dfc220a73b4b6e2ca042f641d088784cb9f",
