@@ -89,6 +89,59 @@ vim.g.netrw_browse_split = 4
 -- New UI
 require('vim._core.ui2').enable({})
 
+-- Ex commands for the native plugin manager (vim.pack)
+local function pack_complete(arg_lead)
+   local names = vim.tbl_map(
+      function(p) return p.spec.name end,
+      vim.pack.get(nil, { info = false })
+   )
+   return vim.tbl_filter(function(name) return vim.startswith(name, arg_lead) end, names)
+end
+
+vim.api.nvim_create_user_command('PackUpdate', function(cmd)
+   vim.pack.update(#cmd.fargs > 0 and cmd.fargs or nil, { force = cmd.bang })
+end, {
+   nargs = '*',
+   bang = true,
+   complete = pack_complete,
+   desc = 'Update plugins (all if no names; ! applies without confirmation)',
+})
+
+vim.api.nvim_create_user_command('PackDel', function(cmd)
+   vim.pack.del(cmd.fargs, { force = cmd.bang })
+end, {
+   nargs = '+',
+   bang = true,
+   complete = pack_complete,
+   desc = 'Remove plugins from disk (! removes even active ones)',
+})
+
+vim.api.nvim_create_user_command('PackClean', function()
+   local inactive = vim.tbl_map(
+      function(p) return p.spec.name end,
+      vim.tbl_filter(function(p) return not p.active end, vim.pack.get(nil, { info = false }))
+   )
+   if #inactive == 0 then
+      vim.notify('No inactive plugins to clean', vim.log.levels.INFO)
+      return
+   end
+   local prompt = 'Remove inactive plugins?\n' .. table.concat(inactive, '\n')
+   if vim.fn.confirm(prompt, '&Yes\n&No', 2) == 1 then
+      vim.pack.del(inactive)
+   end
+end, { desc = 'Remove plugins on disk that are not active in this session' })
+
+vim.api.nvim_create_user_command('PackList', function()
+   for _, p in ipairs(vim.pack.get(nil, { info = false })) do
+      local hl = p.active and 'Normal' or 'Comment'
+      local line = string.format(
+         '%s %-28s %-8s %s',
+         p.active and '●' or '○', p.spec.name, p.rev:sub(1, 8), p.spec.src
+      )
+      vim.api.nvim_echo({ { line, hl } }, false, {})
+   end
+end, { desc = 'List plugins managed by vim.pack' })
+
 -- Mini
 vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
 
@@ -251,8 +304,7 @@ vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Togg
 
 -- Colorscheme
 vim.pack.add({'https://github.com/savq/melange-nvim'})
-vim.pack.add({'https://github.com/vague-theme/vague.nvim'})
-vim.cmd.colorscheme('vague')
+vim.cmd.colorscheme('melange')
 
 -- Treesitter
 vim.pack.add({
@@ -392,30 +444,7 @@ require('sidekick').setup()
 
 vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle pi' })
 
--- Oil (buffer-based file explorer)
-vim.pack.add({'https://github.com/stevearc/oil.nvim'})
-
-require('oil').setup()
-
-vim.keymap.set('n', '<leader>o', '<cmd>Oil<cr>', { desc = 'Open Oil' })
-
--- Taskwarrior
-vim.pack.add({'https://github.com/MattHandzel/taskwarrior.nvim'})
-
-require('taskwarrior').setup()
-
--- Claude Code (native WebSocket/MCP integration; uses snacks.nvim for its terminal)
-vim.pack.add({'https://github.com/coder/claudecode.nvim'})
-
-require('claudecode').setup()
-
-vim.keymap.set('n', '<leader>cc', '<cmd>ClaudeCode<cr>', { desc = 'Toggle Claude' })
-vim.keymap.set('n', '<leader>cf', '<cmd>ClaudeCodeFocus<cr>', { desc = 'Focus Claude' })
-vim.keymap.set('n', '<leader>cr', '<cmd>ClaudeCode --resume<cr>', { desc = 'Resume Claude' })
-vim.keymap.set('n', '<leader>cC', '<cmd>ClaudeCode --continue<cr>', { desc = 'Continue Claude' })
-vim.keymap.set('n', '<leader>cm', '<cmd>ClaudeCodeSelectModel<cr>', { desc = 'Select Claude model' })
-vim.keymap.set('n', '<leader>cb', '<cmd>ClaudeCodeAdd %<cr>', { desc = 'Add current buffer' })
-vim.keymap.set('x', '<leader>cv', '<cmd>ClaudeCodeSend<cr>', { desc = 'Send selection to Claude' })
-vim.keymap.set('n', '<leader>ct', '<cmd>ClaudeCodeTreeAdd<cr>', { desc = 'Add file from tree' })
-vim.keymap.set('n', '<leader>ca', '<cmd>ClaudeCodeDiffAccept<cr>', { desc = 'Accept diff' })
-vim.keymap.set('n', '<leader>cd', '<cmd>ClaudeCodeDiffDeny<cr>', { desc = 'Deny diff' })
+vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
+vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ name = 'claude', msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
+vim.keymap.set('n', '<leader>cb', function() require('sidekick.cli').send({ name = 'claude', msg = '{file}' }) end, { desc = 'Send current file to Claude' })
+vim.keymap.set({ 'n', 'x' }, '<leader>cP', function() require('sidekick.cli').prompt({ name = 'claude' }) end, { desc = 'Sidekick prompt picker' })
