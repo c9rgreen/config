@@ -32,22 +32,6 @@
       "rev": "b311b30818951d01f7b4bf650521b868b3fece16",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
-    "sidekick.nvim": {
-      "rev": "208e1c5b8170c01fd1d07df0139322a76479b235",
-      "src": "https://github.com/folke/sidekick.nvim"
-    },
-    "snacks.nvim": {
-      "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
-      "src": "https://github.com/folke/snacks.nvim"
-    },
-    "taskwarrior.nvim": {
-      "rev": "81e93d7ca72e859e54c11f6b292bc89a27f9b4c8",
-      "src": "https://github.com/MattHandzel/taskwarrior.nvim"
-    },
-    "trouble.nvim": {
-      "rev": "bd67efe408d4816e25e8491cc5ad4088e708a69a",
-      "src": "https://github.com/folke/trouble.nvim"
-    },
     "zk-nvim": {
       "rev": "e6b32dfc220a73b4b6e2ca042f641d088784cb9f",
       "src": "https://github.com/zk-org/zk-nvim"

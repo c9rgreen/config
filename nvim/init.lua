@@ -349,7 +349,8 @@ require('mason-lspconfig').setup({
    ensure_installed = vim.tbl_keys(vim.lsp._enabled_configs),
 })
 
--- Spell checking and line wrapping for prose
+-- Spell checking and line wrapping for prose (the `@` file-reference mapping
+-- lives in plugin/fileref.lua)
 vim.api.nvim_create_autocmd('FileType', {
    group = augroup,
    pattern = 'markdown',
@@ -390,39 +391,3 @@ vim.api.nvim_create_user_command('DiffLast', function()
    end
    vim.cmd('DiffviewOpen ' .. sha)
 end, { desc = 'Diffview of the commit from `git last`' })
-
--- Snacks
-vim.pack.add({'https://github.com/folke/snacks.nvim'})
-
-require('snacks').setup({
-   explorer = { enabled = true, replace_netrw = false },
-   gitbrowse = { enabled = true },
-   image = { enabled = true },
-   lazygit = { enabled = true },
-   terminal = { enabled = true },
-})
-
-vim.keymap.set('n', '<leader>e', function() Snacks.explorer() end, { desc = 'File explorer' })
-vim.keymap.set('n', '<leader>gb', function() Snacks.git.blame_line() end, { desc = 'Git blame line' })
-vim.keymap.set({ 'n', 'x' }, '<leader>gB', function() Snacks.gitbrowse() end, { desc = 'Git browse' })
-vim.keymap.set('n', '<leader>gg', function() Snacks.lazygit() end, { desc = 'Toggle lazygit' })
-vim.keymap.set({ 'n' }, '<leader>t', function() Snacks.terminal.toggle() end, { desc = 'Toggle terminal' })
-
--- Trouble
-vim.pack.add({'https://github.com/folke/trouble.nvim'})
-
-require('trouble').setup()
-
-vim.keymap.set('n', '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', { desc = 'Symbols overview' })
-
--- Sidekick (AI CLI)
-vim.pack.add({'https://github.com/folke/sidekick.nvim'})
-
-require('sidekick').setup()
-
-vim.keymap.set('n', '<leader>cp', function() require('sidekick.cli').toggle({ name = 'pi', focus = true }) end, { desc = 'Toggle pi' })
-
-vim.keymap.set('n', '<leader>cc', function() require('sidekick.cli').toggle({ name = 'claude', focus = true }) end, { desc = 'Toggle Claude' })
-vim.keymap.set('x', '<leader>cv', function() require('sidekick.cli').send({ name = 'claude', msg = '{selection}' }) end, { desc = 'Send selection to Claude' })
-vim.keymap.set('n', '<leader>cb', function() require('sidekick.cli').send({ name = 'claude', msg = '{file}' }) end, { desc = 'Send current file to Claude' })
-vim.keymap.set({ 'n', 'x' }, '<leader>cP', function() require('sidekick.cli').prompt({ name = 'claude' }) end, { desc = 'Sidekick prompt picker' })
