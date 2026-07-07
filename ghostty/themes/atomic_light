@@ -1,0 +1,59 @@
+# Atomic Light
+# From atomic.nvim
+
+background = #f2f0e8
+foreground = #2a2920
+
+cursor-color = #b84820
+cursor-text = #f2f0e8
+
+selection-background = #cbc8bc
+selection-foreground = #2a2920
+
+# Black (bg_border)
+palette = 0=#d4d1c7
+
+# Red (red)
+palette = 1=#b83a2e
+
+# Green (green)
+palette = 2=#3a7a4a
+
+# Yellow (yellow)
+palette = 3=#8a7520
+
+# Blue (blue)
+palette = 4=#3a6a90
+
+# Magenta (purple)
+palette = 5=#6a558a
+
+# Cyan (teal)
+palette = 6=#1a8580
+
+# White (fg)
+palette = 7=#2a2920
+
+# Bright Black (fg_dim)
+palette = 8=#4a4538
+
+# Bright Red (orange)
+palette = 9=#b84820
+
+# Bright Green (green)
+palette = 10=#3a7a4a
+
+# Bright Yellow (yellow)
+palette = 11=#8a7520
+
+# Bright Blue (blue)
+palette = 12=#3a6a90
+
+# Bright Magenta (pink)
+palette = 13=#a85878
+
+# Bright Cyan (teal)
+palette = 14=#1a8580
+
+# Bright White (fg)
+palette = 15=#2a2920

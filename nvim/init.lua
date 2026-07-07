@@ -261,10 +261,6 @@ vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
 
--- Colorscheme
-vim.pack.add({'https://github.com/savq/melange-nvim'})
-vim.cmd.colorscheme('melange')
-
 -- Treesitter
 vim.pack.add({
    'https://github.com/nvim-treesitter/nvim-treesitter',
@@ -391,3 +387,21 @@ vim.api.nvim_create_user_command('DiffLast', function()
    end
    vim.cmd('DiffviewOpen ' .. sha)
 end, { desc = 'Diffview of the commit from `git last`' })
+
+-- Colorscheme
+vim.pack.add({
+   'https://github.com/kurund/atomic.nvim'
+})
+
+-- mini.pick's current item defaults to CursorLine, which atomic paints with
+-- the same color as the picker float's background, hiding the selection.
+-- PmenuSel uses a distinct highlight background, so use it instead.
+vim.api.nvim_create_autocmd('ColorScheme', {
+   group = augroup,
+   callback = function()
+      vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel' })
+      vim.api.nvim_set_hl(0, 'MiniPickPreviewLine',  { link = 'PmenuSel' })
+   end,
+})
+
+vim.cmd.colorscheme('atomic')
