@@ -149,4 +149,4 @@ let &t_ti .= "\e[2 q"
 " The .= appends to any existing t_te setting.
 let &t_te .= "\e[2 q"
 
-colorscheme wildcharm
+colorscheme retrobox
