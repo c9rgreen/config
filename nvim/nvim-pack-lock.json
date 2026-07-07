@@ -5,7 +5,7 @@
       "src": "https://github.com/kurund/atomic.nvim"
     },
     "diffview-plus.nvim": {
-      "rev": "bcf4b62b4acc36a7c3d19e423713a220c838a668",
+      "rev": "b9f10d68116bd3f8d54197a067e11cebfb41b268",
       "src": "https://github.com/dlyongemallo/diffview-plus.nvim"
     },
     "mason-lspconfig.nvim": {
@@ -17,11 +17,11 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "c5cdbadeb423ff724e27a42ab2d1c504d1d6fc5a",
+      "rev": "928971c3cfe99ddf29659acc31214cfa836fabe4",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "292f44408498103c47996ff5c18fd366293840d8",
+      "rev": "d224a1920728ba129880efc700d4a0180ac4ecbb",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -33,7 +33,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "zk-nvim": {
-      "rev": "e6b32dfc220a73b4b6e2ca042f641d088784cb9f",
+      "rev": "bca7e4a119353f18f2a819385fb7ce10269ef747",
       "src": "https://github.com/zk-org/zk-nvim"
     }
   }
