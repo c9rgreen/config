@@ -3,7 +3,7 @@ vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
 vim.opt.fillchars = { diff = ' ', fold = ' ' }
 vim.opt.wildignorecase = true
-vim.opt.shell = 'fish'
+vim.opt.shell = 'fish' -- for :terminal, :!, and system()
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
@@ -61,17 +61,27 @@ vim.diagnostic.config({
    },
 })
 
+-- Autocmds in this file share one cleared group so re-sourcing doesn't stack
+-- duplicates.
+local augroup = vim.api.nvim_create_augroup('init', { clear = true })
+
 -- Keymaps
 vim.keymap.set('t', '<M-Esc>', '<C-\\><C-n>', { desc = 'Exit terminal' })
 
 -- Use ripgrep for :find
 if vim.fn.executable('rg') == 1 then
-   function _G.ripgrep(cmdarg)
-      local fnames = vim.fn.systemlist({ 'rg', '--files', '--follow' })
-      if cmdarg ~= '' then
-         return vim.fn.matchfuzzy(fnames, cmdarg)
+   -- The file list is cached across the keystrokes of one completion session
+   -- (cmdcomplete is true while the wildmenu is filtering).
+   local fnames
+   function _G.ripgrep(cmdarg, cmdcomplete)
+      if not fnames then
+         fnames = vim.fn.systemlist({ 'rg', '--files', '--follow' })
       end
-      return fnames
+      local result = cmdarg == '' and fnames or vim.fn.matchfuzzy(fnames, cmdarg)
+      if not cmdcomplete then
+         fnames = nil
+      end
+      return result
    end
 
    vim.opt.findfunc = 'v:lua.ripgrep'
@@ -221,7 +231,10 @@ local function set_timew_hl()
 end
 -- Deferred so it runs after the colorscheme is applied later in init.
 vim.schedule(set_timew_hl)
-vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(set_timew_hl) end })
+vim.api.nvim_create_autocmd('ColorScheme', {
+   group = augroup,
+   callback = function() vim.schedule(set_timew_hl) end,
+})
 
 require('mini.icons').setup()
 require('mini.tabline').setup()
@@ -256,7 +269,6 @@ miniclue.setup({
    triggers = {
       { mode = 'n', keys = '<Leader>' },
       { mode = 'x', keys = '<Leader>' },
-      { mode = 'n', keys = [[\]] },
       { mode = 'n', keys = '[' },
       { mode = 'n', keys = ']' },
       { mode = 'i', keys = '<C-x>' },
@@ -295,7 +307,7 @@ vim.keymap.set('n', '<leader>?', function() MiniPick.builtin.help() end, { desc 
 vim.keymap.set('n', '<leader>-', function() MiniPick.builtin.files() end, { desc = 'File picker' })
 vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
-vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File exlporer' })
+vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File explorer' })
 vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
 vim.keymap.set('n', '<leader>bd', function() MiniBufremove.delete() end, { desc = 'Delete buffer' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
@@ -318,12 +330,17 @@ local available = ts.get_available()
 
 local function start(buf, lang)
    vim.treesitter.start(buf, lang)
-   vim.wo[0][0].foldmethod = 'expr'
-   vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+   -- Window-local fold options go to the windows showing the buffer, not the
+   -- current window — the async install callback may fire after a switch.
+   for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+      vim.wo[win][0].foldmethod = 'expr'
+      vim.wo[win][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+   end
 end
 
 vim.api.nvim_create_autocmd('FileType', {
+   group = augroup,
    callback = function(args)
       local lang = vim.treesitter.language.get_lang(args.match) or args.match
       if not vim.list_contains(available, lang) then
@@ -351,6 +368,17 @@ vim.pack.add({
    'https://github.com/mason-org/mason-lspconfig.nvim',
 })
 
+-- Neovim embeds LuaJIT; without this lua_ls assumes Lua 5.4 and flags
+-- 5.1-isms like `unpack` as deprecated.
+vim.lsp.config('lua_ls', {
+   settings = {
+      Lua = {
+         runtime = { version = 'LuaJIT' },
+         workspace = { library = { vim.env.VIMRUNTIME } },
+      },
+   },
+})
+
 vim.lsp.enable({
    'cssls',
    'eslint',
@@ -376,6 +404,7 @@ require('mason-lspconfig').setup({
 
 -- Spell checking and line wrapping for prose
 vim.api.nvim_create_autocmd('FileType', {
+   group = augroup,
    pattern = 'markdown',
    callback = function()
       vim.opt_local.spell = true
@@ -405,9 +434,11 @@ vim.keymap.set('n', '<leader>gH', '<cmd>DiffviewFileHistory %<cr>', { desc = 'Fi
 
 -- Open a Diffview against the commit sha reported by the `git last` alias
 vim.api.nvim_create_user_command('DiffLast', function()
-   local sha = vim.trim(vim.fn.system({ 'git', 'last' }))
-   if vim.v.shell_error ~= 0 or sha == '' then
-      vim.notify('git last failed: ' .. sha, vim.log.levels.ERROR)
+   local res = vim.system({ 'git', 'last' }, { text = true }):wait()
+   local sha = vim.trim(res.stdout or '')
+   if res.code ~= 0 or sha == '' then
+      local err = vim.trim(res.stderr or '')
+      vim.notify('git last failed: ' .. (err ~= '' and err or 'no output'), vim.log.levels.ERROR)
       return
    end
    vim.cmd('DiffviewOpen ' .. sha)
