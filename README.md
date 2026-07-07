@@ -4,12 +4,13 @@
 
 ## Highlights
 
-| Tool                                          | Role               |
-| --------------------------------------------- | ------------------ |
-| [Ghostty](https://ghostty.org/)               | Terminal           |
-| [Homebrew](https://brew.sh)                   | Package Manager    |
-| [Fish](https://fishshell.com)                 | Shell              |
-| [Neovim](https://neovim.io)                   | Text Editor        |
-| [OrbStack](https://orbstack.dev)              | Virtual Machines   |
-| [SF Mono](https://developer.apple.com/fonts/) | Font               |
+| Tool                                                           | Role                |
+| -------------------------------------------------------------- | ------------------- |
+| [Ghostty](https://ghostty.org/)                                | Terminal            |
+| [Homebrew](https://brew.sh)                                    | Package Manager     |
+| [Fish](https://fishshell.com)                                  | Shell               |
+| [Neovim](https://neovim.io)                                    | Text Editor         |
+| [OrbStack](https://orbstack.dev)                               | Virtual Machines    |
+| [Berkeley Mono](https://usgraphics.com/products/berkeley-mono) | Font                |
+| Wallpaper                                                      | Medium Gray #69867D |
 
