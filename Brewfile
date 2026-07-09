@@ -45,6 +45,8 @@ brew "zk"
 
 # Casks
 cask "ghostty"
+cask "hammerspoon"
+cask "mater"
 cask "netnewswire"
 cask "orbstack"
 cask "orion"
