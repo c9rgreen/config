@@ -3,14 +3,14 @@
 # (2) System Settings > Users and Groups > Advanced Options - https://support.apple.com/en-us/102547
 
 # Binaries not managed by a package manager
-set -a PATH "$HOME/.local/bin"
+fish_add_path --path --append $HOME/.local/bin
 
 #
 # Vim keybindings
 #
 if status is-interactive
-    set -U fish_greeting # disable fish greeting
-    set -U fish_key_bindings fish_vi_key_bindings
+    set -g fish_greeting # disable fish greeting
+    set -g fish_key_bindings fish_vi_key_bindings
 
     # Emulates vim's cursor shape behavior
     # Set the normal and visual mode cursors to a block
@@ -65,28 +65,15 @@ if type -q npm
     # Location for global node modules. Avoids having to install with sudo.
     # https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
     set -gx NPM_CONFIG_PREFIX "$HOME/.npm-global"
-    set -a PATH "$HOME/.npm-global/bin"
+    fish_add_path --path --append $HOME/.npm-global/bin
 end
 
 #
 # Eza
 #
 if type -q eza
-    alias ls "eza --icons --git --git-repos"
+    alias ls "eza --icons --git"
 end
-
-#
-# Lazygit
-#
-if type -q lazygit
-    alias lgit "lazygit"
-end
-
-#
-# Launch Google Chrome with remote debug enabled
-# https://github.com/ChromeDevTools/chrome-devtools-mcp
-#
-alias chrome "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-profile-stable"
 
 #
 # Global ZK notebook location
