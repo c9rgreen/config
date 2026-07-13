@@ -197,6 +197,19 @@ require('mini.indentscope').setup()
 require('mini.surround').setup()
 require('mini.starter').setup()
 require('mini.map').setup()
+require('mini.move').setup({
+   mappings = {
+      left  = '<S-left>',
+      right = '<S-right>',
+      down  = '<S-down>',
+      up    = '<S-up>',
+
+      line_left  = '<S-left>',
+      line_right = '<S-right>',
+      line_down  = '<S-down>',
+      line_up    = '<S-up>',
+   },
+})
 
 local hipatterns = require('mini.hipatterns')
 hipatterns.setup({
@@ -234,9 +247,6 @@ miniclue.setup({
       { mode = 'x', keys = 'z' },
    },
    clues = {
-      { mode = 'n', keys = '<Leader>b', desc = 'Buffer' },
-      { mode = 'n', keys = '<Leader>c', desc = 'Claude/AI' },
-      { mode = 'x', keys = '<Leader>c', desc = 'Claude/AI' },
       { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
       { mode = 'n', keys = '<Leader>g', desc = 'Git' },
       miniclue.gen_clues.builtin_completion(),
@@ -256,7 +266,7 @@ vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'doc
 vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
 vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File explorer' })
 vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
-vim.keymap.set('n', '<leader>bd', function() MiniBufremove.delete() end, { desc = 'Delete buffer' })
+vim.keymap.set('n', '<leader><Del>', function() MiniBufremove.delete() end, { desc = 'Delete' })
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
