@@ -138,29 +138,89 @@ if vim.fn.executable('timew') == 1 then
    vim.fn.timer_start(60000, refresh_timew, { ['repeat'] = -1 })
 end
 
+-- Powerline glyphs used in the statusline. PL_LEFT/PL_RIGHT are the hard
+-- dividers between the mode cap and the neutral bar (their per-mode colors are
+-- built in set_pl_hl); the rest are inline markers within a segment.
+local PL_LEFT   = ''  -- U+E0B0, points right (hard divider, left half)
+local PL_RIGHT  = ''  -- U+E0B2, points left  (hard divider, right half)
+local PL_LOCK   = ''  -- U+E0A2, shown when the file is locked (readonly)
+local PL_LINE   = ''  -- U+E0A1, marks the line-number field
+local PL_COL    = ''  -- U+E0A3, marks the character-number field
+
+-- The mode segment's color changes per Vim mode, so every transition that
+-- touches it needs a per-mode highlight. These are precomputed once (and on
+-- ColorScheme) rather than per statusline redraw, which happens constantly.
+local PL_MODES = { 'Normal', 'Insert', 'Visual', 'Replace', 'Command', 'Other' }
+
+-- Highlight-group name for a hard-arrow transition in a given mode. Both the
+-- highlight definitions (set_pl_hl) and the statusline references (sep, below)
+-- build their names through here, so the two cannot drift out of sync.
+local function pl_hl(transition, mode)
+   return 'MiniStatuslinePL' .. transition .. mode
+end
+local function set_pl_hl()
+   local function bg(name, fallback)
+      return vim.api.nvim_get_hl(0, { name = name, link = false }).bg or fallback
+   end
+   local base = bg('StatusLine', bg('Normal'))
+   local dev  = bg('MiniStatuslineDevinfo', base)
+   local file = bg('MiniStatuslineFilename', base)
+   local info = bg('MiniStatuslineFileinfo', base)
+   -- Per-mode highlights for the hard divider arrows: foreground = the mode cap's
+   -- background, background = the adjacent segment's, so the triangle blends the
+   -- colored mode cap into the neutral bar.
+   for _, mode in ipairs(PL_MODES) do
+      local mbg = bg('MiniStatuslineMode' .. mode, base)
+      -- mode -> devinfo, and (when devinfo/fileinfo are absent) mode <-> filename.
+      vim.api.nvim_set_hl(0, pl_hl('ModeDev',  mode), { fg = mbg, bg = dev })
+      vim.api.nvim_set_hl(0, pl_hl('ModeFile', mode), { fg = mbg, bg = file })
+      -- fileinfo -> mode (right half).
+      vim.api.nvim_set_hl(0, pl_hl('InfoMode', mode), { fg = mbg, bg = info })
+   end
+end
+
 require('mini.statusline').setup({
    content = {
       active = function()
          local MiniStatusline = require('mini.statusline')
          local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-         local git           = MiniStatusline.section_git({ trunc_width = 40 })
+         local suffix        = mode_hl:gsub('MiniStatuslineMode', '')
+         local git           = MiniStatusline.section_git({ trunc_width = 40, icon = '' })
          local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
          local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
          local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
-         local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+         local filename      = (MiniStatusline.section_filename({ trunc_width = 140 }):gsub('%%r', ''))
+         if vim.bo.readonly then filename = filename .. ' ' .. PL_LOCK end
          local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-         local location      = MiniStatusline.section_location({ trunc_width = 75 })
+         local location      = PL_COL .. '%v ' .. PL_LINE .. '%l╱%L  %p%%'
          local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
-         return MiniStatusline.combine_groups({
-            { hl = mode_hl,                  strings = { mode } },
-            { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
-            '%<',
-            { hl = 'MiniStatuslineFilename', strings = { filename } },
-            '%=',
-            { hl = 'MiniStatuslineFileinfo', strings = { timew_tracked, fileinfo } },
-            { hl = mode_hl,                  strings = { search, location } },
-         })
+         local function sep(hl, glyph) return '%#' .. hl .. '#' .. glyph end
+
+         ---@type (table|string)[]
+         local groups = { { hl = mode_hl, strings = { mode } } }
+         -- Left half: mode -> devinfo -> filename, collapsing to mode -> filename
+         -- when there is no git/diff/diagnostic/lsp info to show.
+         if (git .. diff .. diagnostics .. lsp) ~= '' then
+            groups[#groups + 1] = sep(pl_hl('ModeDev', suffix), PL_LEFT)
+            groups[#groups + 1] = { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } }
+         else
+            groups[#groups + 1] = sep(pl_hl('ModeFile', suffix), PL_LEFT)
+         end
+         groups[#groups + 1] = '%<'
+         groups[#groups + 1] = { hl = 'MiniStatuslineFilename', strings = { filename } }
+         groups[#groups + 1] = '%='
+         -- Right half: filename -> fileinfo -> mode, collapsing to filename -> mode
+         -- for special buffers that have no fileinfo.
+         if (timew_tracked .. fileinfo) ~= '' then
+            groups[#groups + 1] = { hl = 'MiniStatuslineFileinfo', strings = { timew_tracked, fileinfo } }
+            groups[#groups + 1] = sep(pl_hl('InfoMode', suffix), PL_RIGHT)
+         else
+            groups[#groups + 1] = sep(pl_hl('ModeFile', suffix), PL_RIGHT)
+         end
+         groups[#groups + 1] = { hl = mode_hl, strings = { search, location } }
+
+         return MiniStatusline.combine_groups(groups)
       end,
    },
 })
@@ -178,9 +238,13 @@ local function set_timew_hl()
 end
 -- Deferred so it runs after the colorscheme is applied later in init.
 vim.schedule(set_timew_hl)
+vim.schedule(set_pl_hl)
 vim.api.nvim_create_autocmd('ColorScheme', {
    group = augroup,
-   callback = function() vim.schedule(set_timew_hl) end,
+   callback = function()
+      vim.schedule(set_timew_hl)
+      vim.schedule(set_pl_hl)
+   end,
 })
 
 require('mini.icons').setup()

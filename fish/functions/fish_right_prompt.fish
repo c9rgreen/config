@@ -1,30 +1,16 @@
-function fish_right_prompt --description 'Time tracked today (timewarrior)'
-    type -q timew; or return
+function fish_right_prompt --description 'Git branch'
+    # Branch from fish_git_prompt with its surrounding parens stripped. Use
+    # fish_git_prompt (not fish_vcs_prompt): in a colocated jj+git repo the latter
+    # runs fish_jj_prompt first, which succeeds silently and swallows the branch.
+    set -l branch (fish_git_prompt 2>/dev/null | string trim | string replace -r '^\(' '' | string replace -r '\)$' '')
+    test -n "$branch"; or return
 
-    # 1 when an interval is currently running, 0 otherwise
-    set -l active (timew get dom.active 2>/dev/null)
-
-    # `timew day` footer: "Tracked   8:10:04" (includes the running interval)
-    set -l tracked (timew day 2>/dev/null | string match -rg 'Tracked\s+([0-9:]+)')
-    set -l h 0
-    set -l m 0
-    if test -n "$tracked"
-        set -l parts (string split ':' -- $tracked)
-        # math strips leading zeros so printf doesn't read e.g. "08" as octal
-        set h (math $parts[1])
-        set m (math $parts[2])
-    end
-
-    # Filled green dot while tracking, dim hollow dot when stopped
-    if test "$active" = 1
-        set_color green
-        printf '●'
-    else
-        set_color brblack
-        printf '○'
-    end
-
-    set_color brblack
-    printf ' %dh%02dm' $h $m
+    # Powerline left cap (U+E0B2) in the block color, then the branch segment
+    # (U+E0A0 branch glyph + name) as white-on-black -- readable in every theme
+    # since ANSI 0/7 are the fg/bg pair. printf expands the \u escapes.
+    set_color black
+    printf '\ue0b2'
+    set_color white --background black
+    printf ' \ue0a0 %s ' "$branch"
     set_color normal
 end
