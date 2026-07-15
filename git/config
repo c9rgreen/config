@@ -10,6 +10,12 @@
 
     # Review branch
     rb = !git difftool --dir-diff $(git last)
+
+    # Shortcuts
+    s = status
+    c = commit
+    b = branch
+    d = difftool --dir-diff
 [github]
     # GitHub username used by the gh CLI
     user = c9rgreen
