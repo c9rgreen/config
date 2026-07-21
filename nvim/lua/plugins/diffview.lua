@@ -16,6 +16,6 @@ vim.api.nvim_create_user_command('DiffLast', function()
 end, { desc = 'Diffview of the commit from `git last`' })
 
 vim.keymap.set('n', '<leader>gg', '<cmd>DiffviewToggle<cr>', { desc = 'Toggle Diffview' })
-vim.keymap.set('n', '<leader>gr', '<cmd>DiffviewToggle<cr>', { desc = 'Review branch' })
+vim.keymap.set('n', '<leader>gr', '<cmd>DiffLast<cr>', { desc = 'Review branch' })
 vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<cr>', { desc = 'File history (repo)' })
 vim.keymap.set('n', '<leader>gH', '<cmd>DiffviewFileHistory %<cr>', { desc = 'File history (current)' })
