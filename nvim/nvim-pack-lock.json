@@ -8,6 +8,10 @@
       "rev": "424b724e7699730b818466532f0ca42930313273",
       "src": "https://github.com/dlyongemallo/diffview-plus.nvim"
     },
+    "gitlab.vim": {
+      "rev": "ca4971d02c3114d6f5e94b1d0bf460faccbf7f5e",
+      "src": "https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git"
+    },
     "mason-lspconfig.nvim": {
       "rev": "a4068c3ebd4cb335b25239e5ea35c22ee6007962",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
