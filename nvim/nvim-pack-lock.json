@@ -4,6 +4,10 @@
       "rev": "39803f8976915b64ff83643dc77b9554859d3960",
       "src": "https://github.com/kurund/atomic.nvim"
     },
+    "d2-vim": {
+      "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
+      "src": "https://github.com/terrastruct/d2-vim"
+    },
     "diffview-plus.nvim": {
       "rev": "424b724e7699730b818466532f0ca42930313273",
       "src": "https://github.com/dlyongemallo/diffview-plus.nvim"
