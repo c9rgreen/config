@@ -25,7 +25,8 @@ function fish_prompt --description 'Write out the prompt'
     set -l statusb_color (set_color $bold_flag $fish_color_status)
     set -l prompt_status (__fish_print_pipestatus "[" "]" "|" "$status_color" "$statusb_color" $last_pipestatus)
 
-    # One-line powerline left prompt. The hostname sits in its own darker segment
+    # Powerline left prompt; input goes on the line below it.
+    # The hostname sits in its own darker segment
     # (`black` on `white`, inverted from the main segment; on a mini theme `white`
     # is the dark color, so this reads darker). A hard divider (U+E0B0) transitions
     # from it into the pwd segment (`white` on `black`), which the suffix then caps.
@@ -39,19 +40,28 @@ function fish_prompt --description 'Write out the prompt'
     set -l dir (prompt_pwd | string replace -r -a -- '\x1b\[[0-9;]*m' '')
     set -l status_plain (string replace -r -a -- '\x1b\[[0-9;]*m' '' "$prompt_status")
 
-    # Git branch as part of the pwd segment, after a thin divider (U+E0B1) and
-    # the branch glyph (U+E0A0). The divider keeps the segment background but
-    # its foreground is the terminal's default background color \u2014 no SGR can
-    # name that directly, so reset to the default background, set `black` as
-    # the foreground, and let reverse video swap the two. Use fish_git_prompt
-    # (not fish_vcs_prompt): in a colocated jj+git repo the latter runs
-    # fish_jj_prompt first, which succeeds silently and swallows the branch.
-    # Strip the surrounding parens it emits.
+    # Git branch, right-aligned on the top line so it lines up with the powerline.
+    # fish's own right prompt renders on the input line (line 2 here), so for the
+    # branch to sit on line 1 it must live in fish_prompt, padded out to the
+    # terminal edge. Widths count each powerline glyph as one cell: the left side
+    # is 4 spaces + the divider + the suffix (6) plus the variable text; the right
+    # segment is the cap, the branch glyph with a space either side, and a trailing
+    # space (5) plus the branch name. Use fish_git_prompt (not fish_vcs_prompt) so
+    # a colocated jj+git repo doesn't swallow the branch; strip the parens.
     set -l branch (fish_git_prompt 2>/dev/null | string trim | string replace -r '^\(' '' | string replace -r '\)$' '')
-    set -l branch_seg ''
-    if test -n "$branch"
-        set branch_seg $normal(set_color --reverse black)(printf '\ue0b1')$normal$bg(printf ' \ue0a0 %s ' "$branch")
+    set -l right ''
+    if test -n "$branch"; and set -q COLUMNS; and test $COLUMNS -gt 0
+        set -l left_w (math 6 + (string length -- "$login") + (string length -- "$dir") + (string length -- "$status_plain"))
+        set -l branch_w (math 5 + (string length -- "$branch"))
+        set -l pad (math "$COLUMNS - $left_w - $branch_w")
+        if test $pad -ge 0
+            set right (string repeat -n $pad ' ')$cap(printf '')$bg(printf '  %s ' "$branch")$normal
+        end
     end
 
-    echo -n -s $host_bg ' '"$login"' ' $bg $div ' '"$dir"' '"$branch_seg""$status_plain" $normal $cap $suffix $normal ' '
+    # `echo` (no -n) ends line 1 with a newline; the `: ` suffix on line 2 keeps
+    # that newline from being a trailing one (fish strips trailing newlines from
+    # the prompt), so the cursor lands on the line below, after the colon.
+    echo -s $host_bg ' '"$login"' ' $bg $div ' '"$dir"' '"$status_plain" $normal $cap $suffix $normal"$right"
+    echo -n ':'
 end
