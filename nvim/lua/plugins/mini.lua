@@ -149,7 +149,7 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 require('mini.icons').setup()
 require('mini.tabline').setup()
 require('mini.snippets').setup()
-require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = '▶ ' } })
+require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
 require('mini.extra').setup()
 require('mini.align').setup()
 require('mini.sessions').setup()
