@@ -147,6 +147,10 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 require('mini.icons').setup()
+-- Plugins that still ask for `nvim-web-devicons` (nvim-tree) get mini.icons
+-- glyphs and highlight groups instead of a second icon plugin.
+MiniIcons.mock_nvim_web_devicons()
+
 require('mini.tabline').setup()
 require('mini.snippets').setup()
 require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
