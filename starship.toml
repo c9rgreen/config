@@ -1,0 +1,93 @@
+# Prompt configuration — https://starship.rs/config/
+#
+# A standard single-line prompt on the left, git status on the right, both built
+# from background-filled segments joined by powerline separators:
+#
+#   U+E0B0 ends a segment — against the next segment's fill, or against the
+#   terminal background at the end of the bar — U+E0B2 opens a segment from the
+#   left, and U+E0A0 is the git branch glyph.
+#
+# Those three live in the Private Use Area, so they show as boxes in an editor
+# without a powerline font — the codepoints are named here to keep them
+# identifiable. Ghostty draws them itself, no patched font needed.
+#
+# Backgrounds live in each module's own style, not in the format string around
+# it: a module renders with its own style, so wrapping `$directory` in a styled
+# bracket would leave a gap in the bar. The separators between segments are
+# literal text in the format string.
+#
+#
+# COLORS
+#
+# ghostty/config sets `theme = dark:atomic, light:atomic_light`, and those two
+# palettes are not a light/dark mirror of each other in the usual way:
+#
+#   palette 0 (black)        bg_border — a background tone in both themes
+#   palette 7 (white)        the foreground in both themes
+#   palette 8 (bright-black) fg_dim — a *foreground* tone, light in atomic
+#   palette 15 (bright-white) the foreground again
+#
+# So bright-black is not dark and bright-white is not light; they're both the
+# text color. Pairing them, as an ordinary powerline config does, puts foreground
+# on foreground — 1.34:1 in atomic, 1.53:1 in atomic_light, i.e. unreadable.
+#
+# Only the 0/7 pair is a real background/foreground pair, and it is the one
+# combination that holds up in both themes:
+#
+#   white on black         9.66:1 dark / 9.57:1 light   <- username, directory, git
+#   black on white         the same two colors swapped, so the same ratios, and
+#                          light-on-dark in atomic_light instead of the reverse
+#                          <- the hostname segment
+#
+# Hues can't be used as segment fills here: the palette keeps its hues at roughly
+# one lightness across both themes, so white-on-blue is 3.67:1 in atomic but
+# 2.54:1 in atomic_light, and white-on-purple 4.01:1 / 2.28:1. So the whole bar is
+# built from the 0/7 pair, and the hostname is set apart by inverting that pair
+# rather than by a hue — see [hostname] below.
+#
+# There is no [character] module: the prompt ends at the bar's closing separator
+# and the cursor sits in the space after it. Nothing in the prompt reflects the
+# last command's exit status as a result.
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = "$username[](fg:black bg:white)$hostname[](fg:white bg:black)$directory[](fg:black) "
+
+right_format = '$git_branch$git_status'
+
+[username]
+# starship hides both of these unless you're root or over SSH.
+show_always = true
+style_user = 'fg:white bg:black'
+# 3.07:1 dark / 3.45:1 light — under AA for body text, but this is a short bold
+# label that only appears as root, where standing out matters more.
+style_root = 'fg:bright-red bold bg:black'
+format = '[ $user ]($style)'
+
+[hostname]
+ssh_only = false
+# The neighbouring segments' colors, swapped. That keeps the hostname distinct
+# without introducing a hue or a fixed hex, and inherits the 0/7 pair's contrast
+# (9.66:1 dark / 9.57:1 light). It renders as a light block in atomic and a dark
+# one in atomic_light — the inverse of what the theme does elsewhere either way.
+style = 'fg:black bg:white'
+format = '[ $hostname ]($style)'
+
+[directory]
+style = 'fg:white bg:black'
+format = '[ $path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+truncate_to_repo = false
+
+# The right prompt is one segment opened by U+E0B2 and running to the terminal
+# edge, so it needs no closing separator. Both modules pad themselves on the
+# right; that way a clean repo still ends in background rather than in text.
+[git_branch]
+symbol = ""
+style = 'fg:white bg:black'
+format = "[](fg:black)[ $symbol $branch ]($style)"
+
+[git_status]
+style = 'fg:white bg:black'
+format = '([$all_status$ahead_behind ]($style))'
