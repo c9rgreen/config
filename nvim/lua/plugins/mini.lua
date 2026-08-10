@@ -5,6 +5,20 @@ require('mini.basics').setup()
 require('mini.completion').setup()
 require('mini.cmdline').setup()
 require('mini.files').setup({ options = { use_as_default_explorer = false }})
+
+-- mini.files has no mouse actions of its own, but its windows are ordinary
+-- focusable floats (clicking and scrolling already work via 'mouse'). Click
+-- actions have to be attached per buffer through the BufferCreate event. A
+-- double-click's first click has already placed the cursor, so go_in() acts
+-- on the clicked entry.
+vim.api.nvim_create_autocmd('User', {
+   pattern = 'MiniFilesBufferCreate',
+   callback = function(args)
+      local buf = args.data.buf_id
+      vim.keymap.set('n', '<2-LeftMouse>', function() MiniFiles.go_in() end, { buffer = buf, desc = 'Open entry' })
+      vim.keymap.set('n', '<RightMouse>', function() MiniFiles.go_out() end, { buffer = buf, desc = 'Go up' })
+   end,
+})
 require('mini.diff').setup()
 require('mini.git').setup()
 -- Time tracked today (timewarrior), refreshed asynchronously so the
