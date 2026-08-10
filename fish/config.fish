@@ -9,7 +9,8 @@ fish_add_path --path --append $HOME/.local/bin
 # Vim keybindings
 #
 if status is-interactive
-    set -g fish_greeting # disable fish greeting
+    # The greeting is defined in functions/fish_greeting.fish (runs fastfetch),
+    # which replaces the default function that echoes $fish_greeting.
     set -g fish_key_bindings fish_vi_key_bindings
 
     # Emulates vim's cursor shape behavior
@@ -51,6 +52,20 @@ if status is-interactive
 end
 
 #
+# Starship prompt
+# https://starship.rs
+#
+# Replaces functions/fish_prompt.fish — the init defines fish_prompt and
+# fish_right_prompt itself, and erases fish_mode_prompt so fish's default [N]/[I]
+# vi-mode tag stays hidden (starship's character module shows the mode instead).
+#
+# Config is ~/.config/starship.toml.
+#
+if status is-interactive; and type -q starship
+    starship init fish | source
+end
+
+#
 # Neovim
 #
 if type -q nvim
@@ -89,6 +104,27 @@ set -gx ZK_NOTEBOOK_DIR "$HOME/ZK"
 # Provides Ctrl-T (paste paths), Ctrl-R (history), Alt-C (cd into subdir).
 #
 if type -q fzf
+    # Colors: --color=16 drops fzf's built-in 256-color scheme so everything
+    # comes from the terminal's ANSI palette and follows the Ghostty theme.
+    #
+    # Only the chromatic slots are named. The neutrals (0/7/8/15) are assigned
+    # inconsistently across the themes in ghostty/themes — atomic treats 0 as a
+    # dark border and 7/8/15 as foregrounds, while the mini* themes invert that
+    # (0/8 foreground, 7/15 background) — so -1, the terminal's own fg/bg, is
+    # used wherever a neutral is wanted.
+    #
+    # For the same reason the current line gets no background: bold text and a
+    # red pointer mark it instead, which stays legible in light and dark alike.
+    set -gx FZF_DEFAULT_OPTS "--color=16
+        --color=fg:-1,bg:-1,gutter:-1,query:-1
+        --color=fg+:-1:bold,bg+:-1
+        --color=hl:yellow,hl+:yellow:bold
+        --color=pointer:red,marker:green
+        --color=prompt:blue:bold,info:blue,spinner:blue
+        --color=border:blue,separator:blue,scrollbar:blue,label:blue
+        --color=header:magenta
+        --color=preview-fg:-1,preview-bg:-1"
+
     # Use fd for file listing: fast, gitignore-aware, includes dotfiles.
     if type -q fd
         set -gx FZF_DEFAULT_COMMAND 'fd --type f --hidden --exclude .git'
@@ -128,4 +164,15 @@ set --erase _asdf_shims
 #
 if type -q direnv
     direnv hook fish | source
+end
+
+#
+# zoxide
+# https://github.com/ajeetdsouza/zoxide
+#
+# Defines `z` (jump to a frecent directory) and `zi` (interactive, via fzf).
+# Must come after the fzf integration above so `zi` picks up fzf.
+#
+if type -q zoxide
+    zoxide init fish | source
 end
