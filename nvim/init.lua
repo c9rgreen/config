@@ -48,15 +48,17 @@ end
 vim.opt.foldtext = 'v:lua.fold_text()'
 vim.opt.winborder = 'rounded'
 
--- Use virtual text for diagnostics, with nicer gutter/inline glyphs
+-- Use virtual text for diagnostics, with nicer gutter/inline glyphs. The signs
+-- are shaded cells (U+2588 full, U+2593 dark, U+2592 medium, U+2591 light) so
+-- severity reads as density in the gutter rather than as four separate symbols.
 vim.diagnostic.config({
    virtual_text = { prefix = '●' },
    signs = {
       text = {
-         [vim.diagnostic.severity.ERROR] = '',
-         [vim.diagnostic.severity.WARN]  = '',
-         [vim.diagnostic.severity.INFO]  = '',
-         [vim.diagnostic.severity.HINT]  = '󰌵',
+         [vim.diagnostic.severity.ERROR] = '█',
+         [vim.diagnostic.severity.WARN]  = '▓',
+         [vim.diagnostic.severity.INFO]  = '▒',
+         [vim.diagnostic.severity.HINT]  = '░',
       },
    },
 })

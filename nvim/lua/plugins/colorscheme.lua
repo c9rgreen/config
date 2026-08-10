@@ -11,6 +11,13 @@ vim.api.nvim_create_autocmd('ColorScheme', {
    callback = function()
       vim.api.nvim_set_hl(0, 'MiniPickMatchCurrent', { link = 'PmenuSel' })
       vim.api.nvim_set_hl(0, 'MiniPickPreviewLine',  { link = 'PmenuSel' })
+
+      -- The diagnostic signs are shaded cells (see init.lua): severity is carried
+      -- by density, so all four share one hue. Link to DiagnosticSignWarn rather
+      -- than hardcoding the yellow, so it follows whatever theme is active.
+      for _, severity in ipairs({ 'Error', 'Info', 'Hint' }) do
+         vim.api.nvim_set_hl(0, 'DiagnosticSign' .. severity, { link = 'DiagnosticSignWarn' })
+      end
    end,
 })
 
