@@ -4,13 +4,15 @@
     "Lua.diagnostics.globals": [
         // Suppress "undefined global warnings
         "vim",
-        "MiniDeps",
-        "MiniExtra",
-        "MiniPick",
         "MiniBufremove",
+        "MiniDeps",
         "MiniDiff",
-        "MiniMap",
+        "MiniExtra",
         "MiniFiles",
+        "MiniIcons",
+        "MiniMap",
+        "MiniPick",
+        "MiniStatusline",
         "Snacks"
     ],
     "Lua.format": {
