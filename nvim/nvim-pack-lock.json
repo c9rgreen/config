@@ -4,6 +4,10 @@
       "rev": "39803f8976915b64ff83643dc77b9554859d3960",
       "src": "https://github.com/kurund/atomic.nvim"
     },
+    "blink.download": {
+      "rev": "8b04d0e0acc8565cfa4dd291a89a9212b7262633",
+      "src": "https://github.com/saghen/blink.download"
+    },
     "d2-vim": {
       "rev": "cb3eb7fcb1a2d45c4304bf2e91077d787b724a39",
       "src": "https://github.com/terrastruct/d2-vim"
@@ -15,6 +19,11 @@
     "gitlab.vim": {
       "rev": "ca4971d02c3114d6f5e94b1d0bf460faccbf7f5e",
       "src": "https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git"
+    },
+    "kubectl.nvim": {
+      "rev": "dfd25c503f6ee4a769f53a0a8aab8e8fde0ff180",
+      "src": "https://github.com/ramilito/kubectl.nvim",
+      "version": "2.0.0 - 3.0.0"
     },
     "mason-lspconfig.nvim": {
       "rev": "7adc933dabcc7c86ae6b07aff7ee68eac398491f",
