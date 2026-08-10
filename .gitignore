@@ -56,3 +56,7 @@ uv
 
 # Jujitsu
 jj
+
+# broot: `broot --install` symlinks launchers into ~/Library. The fish `br`
+# function is kept as a real file in fish/functions instead.
+broot/launcher
