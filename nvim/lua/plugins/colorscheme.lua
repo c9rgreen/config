@@ -18,6 +18,18 @@ vim.api.nvim_create_autocmd('ColorScheme', {
       for _, severity in ipairs({ 'Error', 'Info', 'Hint' }) do
          vim.api.nvim_set_hl(0, 'DiagnosticSign' .. severity, { link = 'DiagnosticSignWarn' })
       end
+
+      -- The terminal paints the cursor in the same orange atomic gives the match
+      -- the cursor is sitting on, so it disappears on every jump. Recolor the
+      -- match rather than the cursor: teal is the far side of the wheel from the
+      -- cursor's orange, and still distinct from Search's yellow on the matches
+      -- the cursor isn't on. Directory is borrowed for its color, not its
+      -- meaning -- it carries the theme's teal, so this follows the theme.
+      local accent = vim.api.nvim_get_hl(0, { name = 'Directory', link = false })
+      local normal = vim.api.nvim_get_hl(0, { name = 'Normal', link = false })
+      for _, name in ipairs({ 'CurSearch', 'IncSearch', 'Substitute' }) do
+         vim.api.nvim_set_hl(0, name, { fg = normal.bg, bg = accent.fg })
+      end
    end,
 })
 
