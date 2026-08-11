@@ -39,16 +39,26 @@ if status is-interactive
     set fish_color_redirection magenta
     set fish_color_end green
     set fish_color_escape magenta
-    set fish_color_search_match --background=brblack
+    # brblack here was the same trap as the pager below — it is fg_dim (#d9cdb8)
+    # in atomic, so an uncolored token inside the match sat at 1.34:1 (1.53:1 in
+    # atomic_light). Reuse the invariant fg-over-bg pairing, which means naming a
+    # foreground too: syntax colors no longer show through the match, matching
+    # fish's own default (bryellow --background=brblack).
+    set fish_color_search_match white --background=black
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
-    # leaves the prefix/completion foregrounds dark on a dark reversed background
-    # (worsened by the Ghostty 0/7 palette swap). Set explicit high-contrast
-    # colors instead — bright white on blue (palette 15 on 4, neither swapped).
-    set fish_pager_color_selected_background --background=blue
-    set fish_pager_color_selected_completion brwhite
-    set fish_pager_color_selected_prefix brwhite --bold --underline
-    set fish_pager_color_selected_description brwhite --italics
+    # leaves the prefix/completion foregrounds dark on a dark reversed background.
+    # Set explicit colors instead — white on black. These colors have to stay
+    # readable under both atomic and atomic_light, and 7 (fg) over 0 (bg_border)
+    # is the only pairing that does: atomic tracks 7/8/15 to the theme's
+    # foreground and 0 to its background, so the two invert together and the
+    # contrast holds either way (~9.6:1). A colored background does not work
+    # here — every slot in 1..14 darkens in the light variant, so e.g. white on
+    # blue is legible in the dark theme but dark-on-dark in the light one.
+    set fish_pager_color_selected_background --background=black
+    set fish_pager_color_selected_completion white --bold
+    set fish_pager_color_selected_prefix white --bold --underline
+    set fish_pager_color_selected_description white --italics
 end
 
 #
