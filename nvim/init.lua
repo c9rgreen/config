@@ -37,7 +37,19 @@ function _G.fold_click()
    end
 end
 vim.opt.foldcolumn = '0'
-vim.opt.statuscolumn = '%s%@v:lua.fold_click@%{%v:lua.fold_column()%}%X %=%l '
+
+-- Gutter: sign column, fold marker, then a right-aligned line number. Terminal
+-- buffers have neither signs nor folds, so they get the line number alone. The
+-- choice lives in the expression rather than in a TermOpen autocmd because
+-- 'signcolumn' and 'statuscolumn' are window-local: values set for a terminal
+-- would outlive it once that window showed a file.
+function _G.status_column()
+   if vim.bo.buftype == 'terminal' then
+      return '%=%l '
+   end
+   return '%s%@v:lua.fold_click@' .. fold_column() .. '%X %=%l '
+end
+vim.opt.statuscolumn = '%{%v:lua.status_column()%}'
 
 -- Closed folds: first line + line count (the ▶ marker lives in the fold column)
 function _G.fold_text()
