@@ -64,3 +64,6 @@ broot/launcher
 # zellij: saving from the built-in configuration UI rewrites config.kdl and
 # copies the previous version alongside it.
 zellij/*.bak
+
+# 1Password
+1Password
