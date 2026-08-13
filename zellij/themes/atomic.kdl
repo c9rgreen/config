@@ -1,0 +1,278 @@
+// Atomic, matching the Ghostty themes in ../ghostty/themes and atomic.nvim.
+//
+// Colors are written as hex rather than as ANSI names because the Ghostty
+// atomic themes reassign the neutrals: 0 is bg_border, 8 is fg_dim, and 7/15
+// are both fg. Naming the slots would give zellij a different palette than
+// the one the terminal actually paints.
+
+themes {
+    atomic {
+        // fg on bg
+        text_unselected {
+            base "#f5ecd7"
+            background "#162830"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#f5ecd7"
+            background "#354a52"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        // The active mode / tab chip: bg knocked out of green
+        ribbon_selected {
+            base "#162830"
+            background "#4dcb8a"
+            emphasis_0 "#c9392b"
+            emphasis_1 "#162830"
+            emphasis_2 "#7b68b0"
+            emphasis_3 "#c47a98"
+        }
+
+        // Inactive chips sit on bg_border, the same shade as the pane frames
+        ribbon_unselected {
+            base "#f5ecd7"
+            background "#2a3d44"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#f5ecd7"
+            emphasis_2 "#4a7fa5"
+            emphasis_3 "#2fb8b0"
+        }
+
+        table_title {
+            base "#4dcb8a"
+            background "#162830"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        table_cell_selected {
+            base "#f5ecd7"
+            background "#354a52"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        table_cell_unselected {
+            base "#f5ecd7"
+            background "#162830"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        list_selected {
+            base "#f5ecd7"
+            background "#354a52"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        list_unselected {
+            base "#f5ecd7"
+            background "#162830"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#4dcb8a"
+            emphasis_3 "#c47a98"
+        }
+
+        // Teal marks the focused pane; orange is reserved for the transient
+        // states (search, rename) so it reads as the same accent as the cursor
+        frame_selected {
+            base "#2fb8b0"
+            background "#162830"
+            emphasis_0 "#e05a2d"
+            emphasis_1 "#2fb8b0"
+            emphasis_2 "#c47a98"
+            emphasis_3 "#7b68b0"
+        }
+
+        frame_highlight {
+            base "#e05a2d"
+            background "#162830"
+            emphasis_0 "#c47a98"
+            emphasis_1 "#e05a2d"
+            emphasis_2 "#e05a2d"
+            emphasis_3 "#e05a2d"
+        }
+
+        exit_code_success {
+            base "#4dcb8a"
+            background "#162830"
+            emphasis_0 "#2fb8b0"
+            emphasis_1 "#162830"
+            emphasis_2 "#7b68b0"
+            emphasis_3 "#c47a98"
+        }
+
+        exit_code_error {
+            base "#c9392b"
+            background "#162830"
+            emphasis_0 "#e8c547"
+            emphasis_1 "#162830"
+            emphasis_2 "#e05a2d"
+            emphasis_3 "#c47a98"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#7b68b0"
+            player_2 "#2fb8b0"
+            player_3 "#e05a2d"
+            player_4 "#c47a98"
+            player_5 "#4a7fa5"
+            player_6 "#4dcb8a"
+            player_7 "#c9392b"
+            player_8 "#e8c547"
+            player_9 "#d9cdb8"
+            player_10 "#2a3d44"
+        }
+    }
+
+    atomic-light {
+        text_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        text_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        ribbon_selected {
+            base "#f2f0e8"
+            background "#3a7a4a"
+            emphasis_0 "#b83a2e"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#6a558a"
+            emphasis_3 "#a85878"
+        }
+
+        ribbon_unselected {
+            base "#2a2920"
+            background "#d4d1c7"
+            emphasis_0 "#b84820"
+            emphasis_1 "#2a2920"
+            emphasis_2 "#3a6a90"
+            emphasis_3 "#1a8580"
+        }
+
+        table_title {
+            base "#3a7a4a"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        table_cell_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        table_cell_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        list_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        list_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#a85878"
+        }
+
+        frame_selected {
+            base "#1a8580"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#1a8580"
+            emphasis_2 "#a85878"
+            emphasis_3 "#6a558a"
+        }
+
+        frame_highlight {
+            base "#b84820"
+            background "#f2f0e8"
+            emphasis_0 "#a85878"
+            emphasis_1 "#b84820"
+            emphasis_2 "#b84820"
+            emphasis_3 "#b84820"
+        }
+
+        exit_code_success {
+            base "#3a7a4a"
+            background "#f2f0e8"
+            emphasis_0 "#1a8580"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#6a558a"
+            emphasis_3 "#a85878"
+        }
+
+        exit_code_error {
+            base "#b83a2e"
+            background "#f2f0e8"
+            emphasis_0 "#8a7520"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#b84820"
+            emphasis_3 "#a85878"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#6a558a"
+            player_2 "#1a8580"
+            player_3 "#b84820"
+            player_4 "#a85878"
+            player_5 "#3a6a90"
+            player_6 "#3a7a4a"
+            player_7 "#b83a2e"
+            player_8 "#8a7520"
+            player_9 "#4a4538"
+            player_10 "#d4d1c7"
+        }
+    }
+}

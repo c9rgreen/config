@@ -60,3 +60,7 @@ jj
 # broot: `broot --install` symlinks launchers into ~/Library. The fish `br`
 # function is kept as a real file in fish/functions instead.
 broot/launcher
+
+# zellij: saving from the built-in configuration UI rewrites config.kdl and
+# copies the previous version alongside it.
+zellij/*.bak
