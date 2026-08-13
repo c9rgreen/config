@@ -115,7 +115,13 @@ require('mini.cursorword').setup()
 require('mini.indentscope').setup()
 require('mini.surround').setup()
 require('mini.starter').setup()
-require('mini.map').setup()
+require('mini.map').setup({
+   window = {
+      width = 1,
+      winblend = 100,
+      show_integration_count = false,
+   },
+})
 require('mini.move').setup({
    mappings = {
       left  = '<S-left>',
