@@ -265,7 +265,14 @@ load_plugins {
 web_client {
     font "monospace"
 }
- 
+
+// Rounded pane frames. This one is nested rather than set at the root.
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
