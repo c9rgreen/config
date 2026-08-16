@@ -2,7 +2,6 @@
 
 # Command-line utilities
 brew "awscli"
-brew "basictex"
 brew "bat"
 brew "broot"
 brew "caddy"
