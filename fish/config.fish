@@ -191,3 +191,10 @@ end
 if type -q zoxide
     zoxide init fish | source
 end
+
+#
+# Lazygit
+#
+if type -q lazygit
+    alias lgit lazygit
+end
