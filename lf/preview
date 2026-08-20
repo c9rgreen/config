@@ -1,3 +1,14 @@
 #!/bin/sh
 
-bat --color=always --style=plain --paging=never --terminal-width="$2" "$1"
+# bat can't detect the terminal's luma here (its output is piped, and the
+# OSC query doesn't survive zellij anyway), so pick the atomic variant from
+# the macOS appearance — the same signal Ghostty resolves its theme pair
+# from, mirroring the fish bat/btop wrappers. `defaults` exits non-zero in
+# light mode, when AppleInterfaceStyle is unset.
+if defaults read -g AppleInterfaceStyle >/dev/null 2>&1; then
+    theme=atomic
+else
+    theme=atomic-light
+fi
+
+bat --color=always --style=plain --paging=never --terminal-width="$2" --theme="$theme" "$1"
