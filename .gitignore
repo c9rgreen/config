@@ -67,3 +67,13 @@ zellij/*.bak
 
 # 1Password
 1Password
+
+# lazygit: session state (window layout, recent repos)
+lazygit/state.yml
+
+# Python bytecode and lint caches from the cloud-init helpers
+__pycache__
+.ruff_cache
+
+# Generated user-data artifact (build with: just user-data)
+user-data.gz
