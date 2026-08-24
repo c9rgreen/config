@@ -23,80 +23,17 @@ vim.api.nvim_create_autocmd('User', {
 })
 require('mini.diff').setup()
 require('mini.git').setup()
--- Powerline field markers: branch (U+E0A0), line number (U+E0A1) and character
--- number (U+E0A3), plus the separator wedges (U+E0B0, U+E0B2). Declared ahead of
--- the statusline content that closes over them.
+-- Powerline branch glyph (U+E0A0), the git section icon set below.
 local PL_BRANCH = ''
-local PL_LINE   = ''
-local PL_COL    = ''
-local SEP_L     = ''
-local SEP_R     = ''
 
--- The content below is mini's own default apart from the two separator strings.
--- Only the mode section's edges get a wedge: Devinfo, Filename and Fileinfo all
--- resolve to StatusLine/StatusLineNC, which atomic paints identically, so a
--- wedge between them would have no two colors to sit between.
-require('mini.statusline').setup({
-   content = {
-      active = function()
-         local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-         local git         = MiniStatusline.section_git({ trunc_width = 40 })
-         local diff        = MiniStatusline.section_diff({ trunc_width = 75 })
-         local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-         local lsp         = MiniStatusline.section_lsp({ trunc_width = 75 })
-         local filename    = MiniStatusline.section_filename({ trunc_width = 140 })
-         local fileinfo    = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-         local location    = MiniStatusline.section_location({ trunc_width = 75 })
-         local search      = MiniStatusline.section_searchcount({ trunc_width = 75 })
+require('mini.statusline').setup()
 
-         -- combine_groups() passes plain strings through verbatim, so each
-         -- separator carries its own highlight and gets no padding of its own.
-         return MiniStatusline.combine_groups({
-            { hl = mode_hl,                  strings = { mode } },
-            '%#' .. mode_hl .. 'SepL#' .. SEP_L,
-            { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
-            '%<', -- Mark general truncate point
-            { hl = 'MiniStatuslineFilename', strings = { filename } },
-            '%=', -- End left alignment
-            { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-            '%#' .. mode_hl .. 'SepR#' .. SEP_R,
-            { hl = mode_hl,                  strings = { search, location } },
-         })
-      end,
-   },
-})
-
--- A wedge is the glyph painted in the left segment's background over the right
--- segment's. The mode groups swap per mode, so that's two extra groups each --
--- few enough to define up front instead of resolving them on every redraw.
-local function define_separators()
-   local bg = function(name) return vim.api.nvim_get_hl(0, { name = name, link = false }).bg end
-   for _, m in ipairs({ 'Normal', 'Insert', 'Visual', 'Replace', 'Command', 'Other' }) do
-      local hl = 'MiniStatuslineMode' .. m
-      vim.api.nvim_set_hl(0, hl .. 'SepL', { fg = bg(hl), bg = bg('MiniStatuslineDevinfo') })
-      vim.api.nvim_set_hl(0, hl .. 'SepR', { fg = bg(hl), bg = bg('MiniStatuslineFileinfo') })
-   end
-end
-
--- Deferred because the colorscheme recolors IncSearch, which ModeOther links to; scheduling
--- puts this after every other handler for the event regardless of which file registered first.
-vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(define_separators) end })
-define_separators()
-
--- The statusline content calls section_git() without an `icon` argument, and
--- section_location() takes none at all, so replacing the sections is the only
--- hook for changing their glyphs.
+-- The default content calls section_git() without an `icon` argument, so
+-- wrapping the section is the only hook for changing its glyph.
 local section_git = MiniStatusline.section_git
 MiniStatusline.section_git = function(args)
    -- 'keep' so an explicit `icon` argument still wins; this only fills the default.
    return section_git(vim.tbl_extend('keep', args or {}, { icon = PL_BRANCH }))
-end
-
--- Same fields as mini's own default (line/total, then virtual column/total), with
--- the markers standing in for the `|` and `│` separators it uses.
-MiniStatusline.section_location = function(args)
-   if MiniStatusline.is_truncated(args.trunc_width) then return PL_LINE .. '%l' end
-   return PL_LINE .. '%l/%L ' .. PL_COL .. '%2v/%-2{virtcol("$") - 1}'
 end
 
 require('mini.icons').setup()
