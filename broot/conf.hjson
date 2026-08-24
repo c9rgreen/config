@@ -90,11 +90,11 @@ show_selection_mark: true
 
 ###############################################################
 # Icons
-# If you want to display icons in broot, uncomment this line
-# (see https://dystroy.org/broot/icons for installation and
-# troubleshooting)
+# See https://dystroy.org/broot/icons for installation and
+# troubleshooting. The nerdfont theme renders through the
+# terminal's font, so it needs no extra font installed.
 #
-# icon_theme: vscode
+icon_theme: nerdfont
 
 ###############################################################
 # Special paths
@@ -282,7 +282,17 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # 16-color ANSI skin: follows the terminal's own palette,
-    # so it works for both dark and light themes.
-    skins/native-16.hjson
+    # atomic.nvim skins, following the terminal's background
+    # like the Ghostty dark:atomic/light:atomic_light pair.
+    {
+        luma: [
+            dark
+            unknown
+        ]
+        file: skins/atomic.hjson
+    }
+    {
+        luma: light
+        file: skins/atomic-light.hjson
+    }
 ]

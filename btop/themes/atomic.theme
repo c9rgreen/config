@@ -1,0 +1,90 @@
+# Theme based on the default (dark) variant of atomic.nvim
+# https://github.com/kurund/atomic.nvim
+#
+# btop themes are hex-only and can't follow the terminal's luma, so this
+# pairs with atomic-light.theme: switch color_theme in btop.conf (or from
+# btop's options menu, Esc > Options) when the Ghostty theme flips.
+#
+# The palette's red/orange/blue/purple/muted sit below 4.5:1 contrast on
+# the background, so they're blended toward the foreground until they
+# reach 4.5:1. Gradient endpoints reuse the same adjusted values.
+
+# Main background and foreground
+theme[main_bg]="#162830"
+theme[main_fg]="#f5ecd7"
+
+# Title color for boxes
+theme[title]="#f5ecd7"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#e2673c"
+
+# Selected item in processes box
+theme[selected_bg]="#354a52"
+theme[selected_fg]="#f5ecd7"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#978a78"
+
+# Color of text appearing on top of graphs
+theme[graph_text]="#d9cdb8"
+
+# Background color of the percentage meters
+theme[meter_bg]="#2a3d44"
+
+# Misc colors for processes box (tree branches, info text)
+theme[proc_misc]="#2fb8b0"
+
+# Box outline colors
+theme[cpu_box]="#2fb8b0"
+theme[mem_box]="#4dcb8a"
+theme[net_box]="#6792ae"
+theme[proc_box]="#e2673c"
+
+# Divider line between boxes
+theme[div_line]="#354a52"
+
+# CPU temperature graph: cool teal to hot red
+theme[temp_start]="#2fb8b0"
+theme[temp_mid]="#e8c547"
+theme[temp_end]="#d66f5f"
+
+# CPU load graph: calm green to loaded red
+theme[cpu_start]="#4dcb8a"
+theme[cpu_mid]="#e8c547"
+theme[cpu_end]="#d66f5f"
+
+# Memory free meter
+theme[free_start]="#4dcb8a"
+theme[free_mid]="#4dcb8a"
+theme[free_end]="#4dcb8a"
+
+# Memory cached meter
+theme[cached_start]="#2fb8b0"
+theme[cached_mid]="#2fb8b0"
+theme[cached_end]="#2fb8b0"
+
+# Memory available meter
+theme[available_start]="#6792ae"
+theme[available_mid]="#6792ae"
+theme[available_end]="#6792ae"
+
+# Memory used meter: fills toward red
+theme[used_start]="#e8c547"
+theme[used_mid]="#d4953a"
+theme[used_end]="#d66f5f"
+
+# Download graph
+theme[download_start]="#2fb8b0"
+theme[download_mid]="#2fb8b0"
+theme[download_end]="#4dcb8a"
+
+# Upload graph
+theme[upload_start]="#9584b8"
+theme[upload_mid]="#9584b8"
+theme[upload_end]="#c47a98"
+
+# Per-process CPU graph in the details pane
+theme[process_start]="#2fb8b0"
+theme[process_mid]="#e8c547"
+theme[process_end]="#e2673c"

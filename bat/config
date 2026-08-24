@@ -1,6 +1,9 @@
 # bat configuration
 # https://github.com/sharkdp/bat#configuration-file
 
-# Use the terminal's own 16-color ANSI palette instead of a built-in
-# truecolor theme, so bat matches the active terminal/colorscheme.
---theme="ansi"
+# atomic.nvim themes (bat/themes, registered via `bat cache --build`).
+# bat queries the terminal background's luma at startup and picks the
+# matching variant, so this follows the Ghostty dark:atomic /
+# light:atomic_light pair without a hardcoded choice.
+--theme-dark="atomic"
+--theme-light="atomic-light"

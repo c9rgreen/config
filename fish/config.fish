@@ -5,6 +5,11 @@
 # Binaries not managed by a package manager
 fish_add_path --path --append $HOME/.local/bin
 
+# macOS has no default for XDG_CONFIG_HOME, so tools that only fall back to
+# ~/Library/Application Support when it's unset (e.g. lazygit) would look
+# there instead of in this repo. Setting it pins everything to ~/.config.
+set -gx XDG_CONFIG_HOME "$HOME/.config"
+
 #
 # Vim keybindings
 #
@@ -185,4 +190,11 @@ end
 #
 if type -q zoxide
     zoxide init fish | source
+end
+
+#
+# Lazygit
+#
+if type -q lazygit
+    alias lgit lazygit
 end
