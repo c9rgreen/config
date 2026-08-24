@@ -4,8 +4,6 @@ vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
 require('mini.basics').setup()
 require('mini.completion').setup()
 require('mini.cmdline').setup()
--- Default explorer: nothing hijacks netrw since nvim-tree left, so let
--- mini.files take directory opens (`nvim .`) instead of stock netrw.
 require('mini.files').setup()
 
 -- mini.files has no mouse actions of its own, but its windows are ordinary
