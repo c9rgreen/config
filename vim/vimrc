@@ -149,4 +149,10 @@ let &t_ti .= "\e[2 q"
 " The .= appends to any existing t_te setting.
 let &t_te .= "\e[2 q"
 
-colorscheme retrobox
+" Atomic, following the macOS appearance the same way the fish task wrapper
+" does (fish/conf.d/taskwarrior.fish).
+if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~# 'Dark'
+  colorscheme atomic_dark
+else
+  colorscheme atomic_light
+endif
