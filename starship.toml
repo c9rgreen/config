@@ -30,11 +30,13 @@
 #   palette 8  (bright-black)  fg_dim — a *foreground* tone, light in atomic
 #   palette 15 (bright-white)  the foreground again
 #
-# So 0/7 is the only true background/foreground pair: white on black is
-# 9.66:1 in atomic and 9.57:1 in atomic_light. The [palettes.atomic] table
-# below binds that pair to `fill`/`on_fill` — the single place to change the
-# pill colors. Everything outside the fills rides the terminal's default
-# foreground so it tracks whichever theme is active.
+# So 0/7 is the only true background/foreground pair — 9.66:1 in atomic and
+# 9.57:1 in atomic_light, in either direction. Palette 7 is exactly base05
+# (the atomic foreground), so the path pill fills with it and reads as an
+# inverted block, while the git pill keeps the black fill; both track the
+# active theme because the pair is named in ANSI, not hex. The
+# [palettes.atomic] table binds the pair to `fill`/`on_fill`. Everything
+# outside the fills rides the terminal's default foreground.
 #
 # There is no [character] module: the prompt simply ends and the cursor sits
 # in the space after it. Nothing in the prompt reflects the last command's
@@ -74,8 +76,13 @@ ssh_only = false
 format = '@$hostname '
 
 [directory]
-style = 'fg:on_fill bg:fill'
-format = '[](fg:fill)[$path]($style)[](fg:fill) '
+# base05 fill with base00 text. base00 is only reachable as the terminal's
+# *default background* — no ANSI slot carries it — so instead of naming it,
+# set the foreground to on_fill, leave the background at the default, and let
+# `inverted` swap them: the fill becomes base05 and the text base00, in both
+# themes.
+style = 'fg:on_fill inverted'
+format = '[](fg:on_fill)[$path]($style)[](fg:on_fill) '
 truncation_length = 3
 truncation_symbol = '…/'
 truncate_to_repo = false
