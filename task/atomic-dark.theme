@@ -1,0 +1,93 @@
+# Atomic (navy-teal, dark), for Taskwarrior.
+# Palette from atomic.nvim via nvim/colors/atomic.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex:
+#
+#   bg        #162830 -> 235    red     #c9392b -> 167
+#   surface   #1e3038 -> 236    orange  #e05a2d -> 166
+#   border    #2a3d44 -> 237    amber   #d4953a -> 173
+#   fg        #f5ecd7 -> 255    yellow  #e8c547 -> 185
+#   fg_dim    #d9cdb8 -> 187    green   #4dcb8a -> 78
+#   fg_muted  #8a7d6b -> 101    blue    #4a7fa5 -> 67
+#                               teal    #2fb8b0 -> 37
+#                               pink    #c47a98 -> 175
+#
+# Atomic has a true red, so alarm states (error, overdue)
+# carry 167 while the orange accent (166) marks active/header moments. Due
+# urgency ramps yellow (due) -> amber (today) -> red (overdue).
+#
+# Enable from taskrc.dark:  include /Users/cgreen/.config/task/atomic-dark.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color236
+color.header=color166
+color.footnote=color187
+color.warning=bold color185
+color.error=color235 on color167
+color.debug=color67
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color235 on color166
+color.recurring=color37
+color.scheduled=on color236
+color.until=
+color.blocked=color255 on color237
+color.blocking=color235 on color187
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color255
+color.uda.priority.M=color187
+color.uda.priority.L=color101
+
+# Tags
+color.tag.next=color173
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=bold color173
+color.due=color185
+color.overdue=color167
+
+# Report: burndown
+color.burndown.done=on color78
+color.burndown.pending=on color167
+color.burndown.started=on color173
+
+# Report: history
+color.history.add=color235 on color173
+color.history.delete=color235 on color167
+color.history.done=color235 on color78
+
+# Report: summary
+color.summary.background=color255 on color235
+color.summary.bar=color235 on color166
+
+# Command: calendar
+color.calendar.due.today=color235 on color173
+color.calendar.due=color235 on color185
+color.calendar.holiday=color235 on color175
+color.calendar.scheduled=
+color.calendar.overdue=color235 on color167
+color.calendar.today=color235 on color37
+color.calendar.weekend=on color236
+color.calendar.weeknumber=color37
+
+# Command: sync
+color.sync.added=color78
+color.sync.changed=color173
+color.sync.rejected=color167
+
+# Command: undo
+color.undo.after=color78
+color.undo.before=color167
