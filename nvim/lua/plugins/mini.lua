@@ -4,7 +4,9 @@ vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
 require('mini.basics').setup()
 require('mini.completion').setup()
 require('mini.cmdline').setup()
-require('mini.files').setup({ options = { use_as_default_explorer = false }})
+-- Default explorer: nothing hijacks netrw since nvim-tree left, so let
+-- mini.files take directory opens (`nvim .`) instead of stock netrw.
+require('mini.files').setup()
 
 -- mini.files has no mouse actions of its own, but its windows are ordinary
 -- focusable floats (clicking and scrolling already work via 'mouse'). Click
@@ -76,9 +78,8 @@ local function define_separators()
    end
 end
 
--- Deferred because plugins/colorscheme.lua loads last and recolors IncSearch,
--- which ModeOther links to; scheduling puts this after every other handler for
--- the event regardless of which file registered first.
+-- Deferred because the colorscheme recolors IncSearch, which ModeOther links to; scheduling
+-- puts this after every other handler for the event regardless of which file registered first.
 vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(define_separators) end })
 define_separators()
 
@@ -99,10 +100,6 @@ MiniStatusline.section_location = function(args)
 end
 
 require('mini.icons').setup()
--- Plugins that still ask for `nvim-web-devicons` (nvim-tree) get mini.icons
--- glyphs and highlight groups instead of a second icon plugin.
-MiniIcons.mock_nvim_web_devicons()
-
 require('mini.tabline').setup()
 require('mini.snippets').setup()
 require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
@@ -195,3 +192,6 @@ vim.keymap.set('n', '<leader><Del>', function() MiniBufremove.delete() end, { de
 vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
+
+-- Colorscheme relies on mini.base16
+vim.cmd.colorscheme('atomic')

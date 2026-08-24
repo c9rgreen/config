@@ -101,11 +101,6 @@ end
 vim.cmd.packadd('nvim.difftool')
 vim.cmd.packadd('nvim.undotree')
 
--- Netrw
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-
 -- New UI
 require('vim._core.ui2').enable({})
 
@@ -115,10 +110,5 @@ require('plugins.treesitter')
 require('plugins.lsp')
 require('plugins.zk')
 require('plugins.orgmode')
-require('plugins.diffview')
 require('plugins.gitlab')
-require('plugins.classic')
 require('plugins.d2')
-require('plugins.kubectl')
-require('plugins.nvim-tree')
-require('plugins.colorscheme')
