@@ -1,9 +1,9 @@
 # Prompt configuration — https://starship.rs/config/
 #
-# A single-line powerline bar on the left, git status on the right:
+# A single-line two-tone bar on the left, git status on the right:
 #
-#   left     cgreen  Mac  ~/.config 
-#   right     main !1
+#   left     cgreen  Mac  ~/.config
+#   right     main !1
 #
 # where user@host carries an inverted fill and everything else the normal one.
 #
@@ -14,19 +14,10 @@
 # around it: wrapping `$directory` in a styled bracket would style the bracket
 # rather than the module, leaving a gap in the bar.
 #
-# The separators between modules are literal text in `format`, styled inline:
-#
-#   U+E0B0  ends a segment against whatever follows — the next fill, or the
-#           terminal background at the end of the bar. Its foreground is the
-#           *outgoing* fill.
-#   U+E0B1  the thin variant, for dividing two segments that share one fill,
-#           where U+E0B0 would be drawing that fill onto itself, invisibly.
-#   U+E0B2  opens a segment from the left. Only the right prompt needs one.
-#   U+E0A0  the git branch glyph.
-#
-# All four are Private Use Area codepoints, so they show as boxes in an editor
-# without a powerline font — the numbers are spelled out here to keep them
-# identifiable. Ghostty draws them itself, no patched font required.
+# Segments abut directly, with no separator glyphs between them — adjacent
+# fills meet edge to edge. The one Private Use Area codepoint left is U+E0A0,
+# the git branch glyph, which shows as a box in an editor without a powerline
+# font. Ghostty draws it itself, no patched font required.
 #
 #
 # COLORS
@@ -51,19 +42,19 @@
 # way:
 #
 #   white on black   directory, git
-#   black on white   username, hostname, and the U+E0B1 dividing them
+#   black on white   username, hostname
 #
 # user@host is therefore set apart by inverting the pair rather than by a hue. It
 # reads as a light block in atomic and a dark one in atomic_light — inverted
 # against the rest of the bar in both.
 #
-# There is no [character] module: the bar ends at its closing separator and the
-# cursor sits in the space after it. Nothing in the prompt reflects the last
-# command's exit status as a result.
+# There is no [character] module: the bar simply ends and the cursor sits in
+# the space after it. Nothing in the prompt reflects the last command's exit
+# status as a result.
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '$username[](fg:black bg:white)$hostname[](fg:white bg:black)$directory[](fg:black) '
+format = '$username$hostname$directory '
 
 right_format = '$git_branch$git_status'
 
@@ -100,15 +91,14 @@ truncate_to_repo = false
 #
 # RIGHT PROMPT
 #
-# One segment, opened by U+E0B2 and running to the terminal edge, so it needs no
-# closing separator. Both modules pad themselves on the right; that way a clean
-# repo still ends in background rather than in text.
+# One segment running to the terminal edge. Both modules pad themselves on the
+# right; that way a clean repo still ends in background rather than in text.
 #
 
 [git_branch]
 symbol = ''
 style = 'fg:white bg:black'
-format = '[](fg:black)[ $symbol $branch ]($style)'
+format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = 'fg:white bg:black'
