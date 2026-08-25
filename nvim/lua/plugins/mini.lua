@@ -21,18 +21,71 @@ vim.api.nvim_create_autocmd('User', {
 })
 require('mini.diff').setup()
 require('mini.git').setup()
--- Powerline branch glyph (U+E0A0), the git section icon set below.
-local PL_BRANCH = ''
+-- Powerline glyphs: U+E0A0 is the git branch, and U+E0B6/U+E0B4 are the
+-- half-circles that cap a pill. Written as escapes rather than literals
+-- because these are Private Use Area codepoints, and some editors strip them
+-- on save -- the pills would quietly lose their caps with nothing in the diff
+-- to explain why.
+local PL_BRANCH = '\u{e0a0}'
+local PILL_L, PILL_R = '\u{e0b6}', '\u{e0b4}'
 
-require('mini.statusline').setup()
-
--- The default content calls section_git() without an `icon` argument, so
--- wrapping the section is the only hook for changing its glyph.
-local section_git = MiniStatusline.section_git
-MiniStatusline.section_git = function(args)
-   -- 'keep' so an explicit `icon` argument still wins; this only fills the default.
-   return section_git(vim.tbl_extend('keep', args or {}, { icon = PL_BRANCH }))
+-- A pill is an ordinary highlighted section with a cap glyph on each side.
+-- Each cap is drawn as foreground in that section's own fill color over the
+-- bar's background, which makes the fill look like it rounds off. The cap
+-- groups live in colors/atomic.lua, one per fill tone.
+--
+-- The caps go into the group list as plain strings rather than tables:
+-- combine_groups() pads every table entry with a space on each side, and that
+-- padding is what gives the pill its body, while strings pass through
+-- untouched so a cap sits flush against the fill.
+local function pill(hl, cap, strings)
+   local content = vim.tbl_filter(function(s) return type(s) == 'string' and s ~= '' end, strings)
+   -- Every section came back empty: skip the pill instead of drawing two caps
+   -- around a space.
+   if #content == 0 then return {} end
+   return {
+      '%#' .. cap .. '#' .. PILL_L,
+      { hl = hl, strings = content },
+      '%#' .. cap .. '#' .. PILL_R .. ' ',
+   }
 end
+
+require('mini.statusline').setup({
+   content = {
+      active = function()
+         local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+         local mode_cap      = mode_hl:gsub('MiniStatuslineMode', 'MiniStatuslineCap')
+         -- The same sections and truncation widths as mini's default
+         -- content; only the assembly below differs. `icon` can be passed
+         -- straight to section_git() here, so the old wrapper around it is
+         -- gone.
+         local git           = MiniStatusline.section_git({ trunc_width = 40, icon = PL_BRANCH })
+         local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
+         local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+         local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
+         local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
+         local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+         local location      = MiniStatusline.section_location({ trunc_width = 75 })
+         local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+         local groups = { ' ' } -- left margin, so the first pill floats clear of the edge
+         local add = function(parts) vim.list_extend(groups, parts) end
+
+         add(pill(mode_hl, mode_cap, { mode }))
+         add(pill('MiniStatuslineDevinfo', 'MiniStatuslineCapDevinfo', { git, diff, diagnostics, lsp }))
+         -- The filename goes in uncapped, riding the bar itself:
+         -- MiniStatuslineFilename already carries the bar's background, which
+         -- leaves the pills as the only filled things on the line. '%<' marks
+         -- where to truncate and '%=' ends the left-aligned run; both inherit
+         -- that same bar-colored background from the group before them.
+         add({ '%<', { hl = 'MiniStatuslineFilename', strings = { filename } }, '%=' })
+         add(pill('MiniStatuslineFileinfo', 'MiniStatuslineCapDevinfo', { fileinfo }))
+         add(pill(mode_hl, mode_cap, { search, location }))
+
+         return MiniStatusline.combine_groups(groups)
+      end,
+   },
+})
 
 require('mini.icons').setup()
 require('mini.tabline').setup()
