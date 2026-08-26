@@ -1,0 +1,190 @@
+-- doric-fire -- a mini.base16 port of the arete.nvim theme:
+-- https://github.com/szymonwilczek/arete.nvim
+-- mini.base16 lays the base and covers the groups arete leaves
+-- undefined; every highlight the official theme defines is then
+-- applied verbatim on top, exactly as arete's own loader does.
+
+vim.o.background = 'dark'
+vim.cmd('highlight clear')
+
+require('mini.base16').setup({
+   palette = {
+      base00 = '#282420', -- bg
+      base01 = '#40332b', -- bg_dim
+      base02 = '#7c362c', -- selection
+      base03 = '#d6b577', -- comments
+      base04 = '#afa497', -- fg_dim
+      base05 = '#f5ceb0', -- fg
+      base06 = '#f5ceb0', -- fg
+      base07 = '#f5ceb0', -- fg
+      base08 = '#eca27f', -- error / red
+      base09 = '#f5ceb0', -- numbers / constants
+      base0A = '#afa497', -- types
+      base0B = '#afa497', -- strings
+      base0C = '#afa497', -- special
+      base0D = '#f3ac6f', -- functions
+      base0E = '#f3ac6f', -- keywords
+      base0F = '#f5ceb0', -- delimiters
+   },
+})
+vim.g.colors_name = 'doric-fire'
+
+local hi = function(name, spec) vim.api.nvim_set_hl(0, name, spec) end
+hi('@comment', { link = 'Comment' })
+hi('@constant', { link = 'Constant' })
+hi('@constant.builtin', { link = 'Special' })
+hi('@constant.macro', { link = 'Identifier' })
+hi('@constructor', { link = 'Special' })
+hi('@function', { link = 'Function' })
+hi('@function.builtin', { link = 'Special' })
+hi('@function.call', { link = 'FunctionCall' })
+hi('@function.macro', { link = 'Macro' })
+hi('@keyword', { link = 'Keyword' })
+hi('@keyword.conditional', { link = 'Conditional' })
+hi('@keyword.coroutine', { link = 'Keyword' })
+hi('@keyword.directive', { link = 'Keyword' })
+hi('@keyword.directive.define', { link = 'Keyword' })
+hi('@keyword.exception', { link = 'Exception' })
+hi('@keyword.function', { link = 'Keyword' })
+hi('@keyword.import', { link = 'Keyword' })
+hi('@keyword.repeat', { link = 'Repeat' })
+hi('@keyword.storage', { link = 'Keyword' })
+hi('@keyword.type', { link = 'Keyword' })
+hi('@label', { link = 'Label' })
+hi('@lsp.type.class', { link = 'Type' })
+hi('@lsp.type.comment', { link = 'Comment' })
+hi('@lsp.type.decorator', { link = 'Function' })
+hi('@lsp.type.enum', { link = 'Type' })
+hi('@lsp.type.enumMember', { link = 'Constant' })
+hi('@lsp.type.function', { link = 'Function' })
+hi('@lsp.type.interface', { link = 'Type' })
+hi('@lsp.type.keyword', { link = 'Keyword' })
+hi('@lsp.type.macro', { link = 'Macro' })
+hi('@lsp.type.method', { link = 'Function' })
+hi('@lsp.type.modifier', { link = 'Keyword' })
+hi('@lsp.type.namespace', { link = 'Include' })
+hi('@lsp.type.number', { link = 'Number' })
+hi('@lsp.type.operator', { link = 'Operator' })
+hi('@lsp.type.parameter', { link = 'Parameter' })
+hi('@lsp.type.property', { link = 'Property' })
+hi('@lsp.type.string', { link = 'String' })
+hi('@lsp.type.struct', { link = 'Type' })
+hi('@lsp.type.type', { link = 'Type' })
+hi('@lsp.type.type.defaultLibrary', { link = 'Special' })
+hi('@lsp.type.typeParameter', { link = 'Type' })
+hi('@lsp.type.variable', { link = 'Identifier' })
+hi('@lsp.typemod.function.declaration', { link = 'Function' })
+hi('@lsp.typemod.function.definition', { link = 'Function' })
+hi('@lsp.typemod.parameter.declaration', { link = 'Parameter' })
+hi('@lsp.typemod.property.declaration', { link = 'Property' })
+hi('@lsp.typemod.property.readonly', { link = 'Property' })
+hi('@lsp.typemod.type.declaration', { link = 'Type' })
+hi('@lsp.typemod.type.defaultLibrary', { link = 'Special' })
+hi('@lsp.typemod.type.definition', { link = 'Type' })
+hi('@lsp.typemod.variable.declaration', { link = 'Identifier' })
+hi('@lsp.typemod.variable.globalScope', { link = 'Identifier' })
+hi('@module', { link = 'Include' })
+hi('@number', { link = 'Number' })
+hi('@operator', { link = 'Operator' })
+hi('@property', { link = 'Identifier' })
+hi('@punctuation', { link = 'Delimiter' })
+hi('@punctuation.bracket', { link = 'Bracket' })
+hi('@punctuation.delimiter', { link = 'Delimiter' })
+hi('@string', { link = 'String' })
+hi('@structure', { link = 'Keyword' })
+hi('@tag', { link = 'Tag' })
+hi('@type', { link = 'Type' })
+hi('@type.builtin', { link = 'Special' })
+hi('@type.definition', { link = 'Type' })
+hi('@type.enum', { link = 'Type' })
+hi('@type.qualifier', { link = 'Keyword' })
+hi('@type.struct', { link = 'Type' })
+hi('@variable', { link = 'Identifier' })
+hi('@variable.builtin', { link = 'Special' })
+hi('@variable.member', { link = 'Property' })
+hi('@variable.parameter', { link = 'Parameter' })
+hi('Boolean', { fg = '#f5ceb0' })
+hi('Bracket', { fg = '#f5ceb0' })
+hi('Character', { fg = '#afa497' })
+hi('ColorColumn', { bg = '#7c362c' })
+hi('Comment', { fg = '#d6b577', italic = true })
+hi('Conditional', { fg = '#f3ac6f', bold = true })
+hi('Constant', { fg = '#f5ceb0' })
+hi('CurSearch', { fg = '#f5ceb0', bg = '#7c362c' })
+hi('Cursor', { bg = '#ef7839' })
+hi('CursorLine', { bg = '#56452f' })
+hi('CursorLineNr', { fg = '#f5ceb0', bold = true })
+hi('Debug', { fg = '#c5ba80', bold = true })
+hi('Define', { fg = '#f3ac6f', bold = true })
+hi('Delimiter', { fg = '#f5ceb0' })
+hi('DiagnosticError', { link = 'Error' })
+hi('DiagnosticHint', { link = 'Question' })
+hi('DiagnosticInfo', { link = 'MoreMsg' })
+hi('DiagnosticOk', { link = 'MoreMsg' })
+hi('DiagnosticWarn', { link = 'WarningMsg' })
+hi('Directory', { fg = '#d6b577' })
+hi('Error', { fg = '#eca27f', bold = true })
+hi('ErrorMsg', { fg = '#eca27f', bold = true })
+hi('Exception', { fg = '#f3ac6f', bold = true })
+hi('Float', { fg = '#f5ceb0' })
+hi('FloatBorder', { fg = '#706061' })
+hi('FoldColumn', { fg = '#d6b577' })
+hi('Folded', { fg = '#afa497' })
+hi('Function', { fg = '#f3ac6f' })
+hi('Identifier', { italic = true })
+hi('Ignore', { fg = '#afa497' })
+hi('IncSearch', { fg = '#f5ceb0', bg = '#7c362c' })
+hi('Include', { fg = '#f3ac6f', bold = true })
+hi('Keyword', { fg = '#f3ac6f', bold = true })
+hi('Label', { fg = '#f3ac6f', bold = true })
+hi('LineNr', { fg = '#afa497' })
+hi('Macro', { fg = '#afa497' })
+hi('MoreMsg', { fg = '#b9d08a', bold = true })
+hi('NonText', { fg = '#afa497' })
+hi('Normal', { fg = '#f5ceb0', bg = '#282420' })
+hi('NormalFloat', { fg = '#d6b577', bg = '#56452f' })
+hi('Number', { fg = '#f5ceb0' })
+hi('Operator', { fg = '#f3ac6f', bold = true })
+hi('Parameter', { italic = true })
+hi('Pmenu', { fg = '#afa497', italic = true })
+hi('PmenuSbar', { fg = '#706061', bg = '#282420' })
+hi('PmenuSel', { bg = '#56452f' })
+hi('PmenuThumb', { bg = '#56452f' })
+hi('PreCondit', { fg = '#f3ac6f', bold = true })
+hi('PreProc', { fg = '#afa497' })
+hi('Question', { fg = '#f3ac6f', bold = true })
+hi('Repeat', { fg = '#f3ac6f', bold = true })
+hi('Search', { fg = '#afa497', bg = '#40332b' })
+hi('SignColumn', { fg = '#d6b577' })
+hi('Special', { fg = '#afa497' })
+hi('SpecialChar', { fg = '#f5ceb0' })
+hi('SpecialComment', { fg = '#afa497', italic = true })
+hi('SpecialKey', { fg = '#d6b577' })
+hi('Statement', { fg = '#f3ac6f', bold = true })
+hi('StatusLine', { fg = '#f3ac6f', bg = '#7c362c', underline = true })
+hi('StatusLineNC', { fg = '#afa497', bg = '#40332b', underline = true })
+hi('StorageClass', { fg = '#f3ac6f', bold = true })
+hi('String', { fg = '#afa497' })
+hi('Structure', { fg = '#f3ac6f', bold = true })
+hi('TabLine', { fg = '#afa497', bg = '#40332b' })
+hi('TabLineFill', { fg = '#afa497', bg = '#40332b' })
+hi('TabLineSel', { fg = '#f5ceb0', bg = '#282420', bold = true })
+hi('Tag', { fg = '#afa497', italic = true })
+hi('Title', { fg = '#f3ac6f' })
+hi('Todo', { fg = '#c5ba80', bold = true })
+hi('Type', { fg = '#afa497' })
+hi('Typedef', { fg = '#f3ac6f', bold = true })
+hi('Underlined', { fg = '#d6b577' })
+hi('VertSplit', { fg = '#706061' })
+hi('Visual', { fg = '#f3ac6f', bg = '#7c362c' })
+hi('VisualNOS', { fg = '#afa497', bg = '#40332b' })
+hi('WarningMsg', { fg = '#c5ba80', bold = true })
+hi('WildMenu', { bg = '#56452f' })
+hi('WinSeparator', { fg = '#706061' })
+
+-- Terminal palette from the official theme.
+local term = {
+   '#000000', '#eca27f', '#b9d08a', '#c5ba80', '#9fbfe7', '#e9acbf', '#a0c0d0', '#ffffff',
+   '#000000', '#eca27f', '#b9d08a', '#c5ba80', '#9fbfe7', '#e9acbf', '#a0c0d0', '#ffffff',
+}
+for i, color in ipairs(term) do vim.g['terminal_color_' .. (i - 1)] = color end
