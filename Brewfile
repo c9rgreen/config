@@ -1,6 +1,7 @@
 # vim: ft=ruby
 
 # Command-line utilities
+brew "asciinema"
 brew "asdf"
 brew "awscli"
 brew "bat"
