@@ -63,3 +63,6 @@ selection-background = #535f4d
 
 # Selection Foreground (fg_mid2)
 selection-foreground = #92959b
+
+# Split divider (fg_mid2); the derived default sits too close to the background
+split-divider-color = #92959b

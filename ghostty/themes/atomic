@@ -56,3 +56,6 @@ palette = 14=#2fb8b0
 
 # Bright White (fg)
 palette = 15=#f5ecd7
+
+# Split divider (fg_muted); the derived default sits too close to the background
+split-divider-color = #8a7d6b
