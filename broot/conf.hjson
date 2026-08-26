@@ -282,17 +282,19 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # atomic.nvim skins, following the terminal's background
-    # like the Ghostty dark:atomic/light:atomic_light pair.
+    # Circadia skins, following the terminal's background like the
+    # Ghostty dark:circadia_dark/light:circadia_light pair. Swap the
+    # dark file for skins/circadia-forest.hjson for the pine variant;
+    # the atomic skins remain in skins/ as an alternative.
     {
         luma: [
             dark
             unknown
         ]
-        file: skins/atomic.hjson
+        file: skins/circadia.hjson
     }
     {
         luma: light
-        file: skins/atomic-light.hjson
+        file: skins/circadia-light.hjson
     }
 ]

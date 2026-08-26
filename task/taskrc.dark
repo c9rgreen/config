@@ -9,3 +9,5 @@ verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use dark colors
 include /Users/cgreen/.config/task/atomic-dark.theme
+# Circadia alternative:
+# include /Users/cgreen/.config/task/circadia-dark.theme  (or circadia-forest-dark.theme)
