@@ -53,17 +53,18 @@ if status is-interactive
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
     # leaves the prefix/completion foregrounds dark on a dark reversed background.
-    # Set explicit colors instead — white on black. These colors have to stay
-    # readable under both atomic and atomic_light, and 7 (fg) over 0 (bg_border)
-    # is the only pairing that does: atomic tracks 7/8/15 to the theme's
-    # foreground and 0 to its background, so the two invert together and the
-    # contrast holds either way (~9.6:1). A colored background does not work
-    # here — every slot in 1..14 darkens in the light variant, so e.g. white on
-    # blue is legible in the dark theme but dark-on-dark in the light one.
-    set fish_pager_color_selected_background --background=black
-    set fish_pager_color_selected_completion white --bold
-    set fish_pager_color_selected_prefix white --bold --underline
-    set fish_pager_color_selected_description white --italics
+    # Set explicit colors instead — knockout text on a yellow row, i.e. 0 (bg)
+    # over 3. Circadia tracks 0 to the theme's background, so the text always
+    # reads as the page punched through the highlight, and slot 3 is the one
+    # warm accent that stays mid-tone in both directions: black-on-yellow lands
+    # at 7.4:1 (forest), 7.1:1 (ember), 7.8:1 (plum) and 5.7:1 (light), and the
+    # row separates from the page at 7.0:1 or better everywhere. Note slot 3 is
+    # only literally yellow in the dark variants — circadia_light renders it
+    # teal, so the light theme gets a teal row with parchment knockout text.
+    set fish_pager_color_selected_background --background=yellow
+    set fish_pager_color_selected_completion black --bold
+    set fish_pager_color_selected_prefix black --bold --underline
+    set fish_pager_color_selected_description black --italics
 end
 
 #
