@@ -1,61 +1,81 @@
 # Prompt configuration — https://starship.rs/config/
 #
-# A single line, git status on the right:
+# A single-line powerline bar on the left, git status on the right:
 #
-#   left     cgreen@Mac ~/.config
-#   right     main !1
+#   left     cgreen  Mac  ~/.config 
+#   right      main !1
 #
-# The directory sits in a rounded pill, and git sits in a fill of its own —
-# rounded on the left, running flat to the terminal edge on the right.
+# where user@host sits on a green fill, git on a magenta one, and the path
+# on a full inverted fill, so the path is the segment that stands out.
 #
 #
 # MECHANICS
 #
-# Rounded ends are the powerline half-circle glyphs U+E0B6/U+E0B4, drawn as
-# *foreground* in the fill's background color so they cap it. Along with
-# U+E0A0, the git branch glyph, they are Private Use Area codepoints and show
-# as boxes in an editor, but Ghostty draws them itself — no patched font
-# required. (Editors without those glyphs may also *strip* them on save,
-# which silently flattens the pills — the example above keeps them so that
-# loss is visible.)
+# A fill is a background in a module's own style, never in the format string
+# around it: wrapping `$directory` in a styled bracket would style the
+# bracket rather than the module, leaving a gap in the bar.
+#
+# The separators between segments are literal text, styled inline:
+#
+#   U+E0B0  ends a segment against whatever follows — the next fill, or the
+#           terminal background at the end of the bar. Its foreground is the
+#           *outgoing* fill, its background the incoming one.
+#   U+E0B1  the thin variant, for dividing two segments that share one fill,
+#           where U+E0B0 would be drawing that fill onto itself, invisibly.
+#   U+E0B2  opens a segment from the left. Only the right prompt needs one.
+#   U+E0A0  the git branch glyph.
+#
+# All four are Private Use Area codepoints, so they show as boxes in an
+# editor without a powerline font — the numbers are spelled out here to keep
+# them identifiable. Terminals that draw box/powerline glyphs themselves
+# (Ghostty among them) need no patched font. (Editors without those glyphs
+# may also *strip* them on save, which silently breaks the bar — the example
+# above keeps them so that loss is visible.)
 #
 #
 # COLORS
 #
-# ghostty/config sets `theme = dark:atomic, light:atomic_light`, and that pair
-# is not a light/dark mirror of each other in the usual way:
+# The bar names two palette hues — green on the left, magenta on the
+# right — and otherwise leans on what ANSI itself promises. It uses
+# three fills:
 #
-#   palette 0  (black)         bg_border — a background tone in both themes
-#   palette 7  (white)         the foreground in both themes
-#   palette 8  (bright-black)  fg_dim — a *foreground* tone, light in atomic
-#   palette 15 (bright-white)  the foreground again
+#   the full fill   `inverted` alone — reverse video — swaps the terminal's
+#                   default foreground and background. That pair is, by
+#                   definition, the theme's own text-on-background contrast.
+#                   The path rides it.
 #
-# So 0/7 is the only true background/foreground pair — 9.66:1 in atomic and
-# 9.57:1 in atomic_light, in either direction. Palette 7 is exactly base05
-# (the atomic foreground), so the path pill fills with it and reads as an
-# inverted block, while the git pill keeps the black fill; both track the
-# active theme because the pair is named in ANSI, not hex. The
-# [palettes.atomic] table binds the pair to `fill`/`on_fill`. Everything
-# outside the fills rides the terminal's default foreground.
+#   the green fill  `fg:green inverted` — a green fill with the text
+#                   knocked out in the default background color. user@host
+#                   rides it.
 #
-# There is no [character] module: the prompt simply ends and the cursor sits
-# in the space after it. Nothing in the prompt reflects the last command's
-# exit status as a result.
+#   the magenta fill  `fg:purple inverted` (starship names ANSI magenta
+#                     `purple`) — the same knockout, background-colored
+#                     text on magenta. The git segments ride it.
+#
+# Neither end of the reverse-video trick is reachable directly: no `bg:`
+# value names the default foreground, and no `fg:` names the default
+# background. Both separators inside the bar therefore state themselves
+# backwards and let the terminal swap them: the thin divider is
+# `fg:green inverted` — a background-colored line on the green fill — and
+# the transition from the green fill into the full one is
+# `bg:green inverted`, a green arrow on a foreground-colored ground. The
+# separators at the bar's outer edges are simply *unstyled*: default
+# foreground on default background is already the closing shape.
+#
+# Bright-red is reserved for root — an alert distinct from both fills.
+#
+# There is no [character] module: the bar ends at its closing separator and
+# the cursor sits in the space after it. Nothing in the prompt reflects the
+# last command's exit status as a result.
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # The default, stated for the record: a blank line before each prompt.
 add_newline = true
 
-format = '$username$hostname$directory'
+format = '$username[](fg:green inverted)$hostname[](bg:green inverted)$directory '
 
-right_format = '($git_branch$git_commit$git_status[](fg:fill))'
-
-palette = 'atomic'
-
-[palettes.atomic]
-fill = 'black'
-on_fill = 'white'
+right_format = '$git_branch$git_commit$git_status'
 
 
 #
@@ -66,24 +86,21 @@ on_fill = 'white'
 # starship hides username and hostname unless you are root or over SSH; these
 # two keys are what keep both on screen locally.
 show_always = true
-# Empty on purpose — only root gets color.
-style_user = ''
-style_root = 'fg:bright-red'
-format = '[$user]($style)'
+style_user = 'fg:green inverted'
+# fg:bright-red inverted = a bright-red fill with background-colored text: a
+# red block in the bar. The thin divider after it stays on the green fill, so
+# the block simply abuts it — acceptable for a root-only edge case.
+style_root = 'fg:bright-red bold inverted'
+format = '[ $user ]($style)'
 
 [hostname]
 ssh_only = false
-format = '@$hostname '
+style = 'fg:green inverted'
+format = '[ $hostname ]($style)'
 
 [directory]
-# base05 fill with base00 text. base00 is only reachable as the terminal's
-# *default background* — no ANSI slot carries it — so instead of naming it,
-# set the foreground to on_fill, leave the background at the default, and let
-# `inverted` swap them: the fill becomes base05 and the text base00, in both
-# themes.
-style = 'fg:on_fill inverted'
-format = '[](fg:on_fill)[$path]($style)[](fg:on_fill) '
-truncation_length = 3
+style = 'inverted'
+format = '[ $path ]($style)'
 truncation_symbol = '…/'
 truncate_to_repo = false
 
@@ -91,25 +108,25 @@ truncate_to_repo = false
 #
 # RIGHT PROMPT
 #
-# One pill, rounded at both ends. The closing cap lives in right_format's
-# outer (...) group, so it renders after whichever git module comes last —
-# and not at all outside a repo, where the group is empty and vanishes.
-# Branch and commit are made mutually exclusive: `only_attached`
-# keeps git_branch from printing a literal "HEAD" on a detached HEAD, and
-# git_commit only renders there — so each carries its own cap. All modules
-# pad themselves on the right so a clean repo still ends in background rather
-# than in text.
+# One segment on the magenta fill, running to the terminal edge, so it needs no
+# closing separator. Branch and commit are made mutually exclusive:
+# `only_attached` keeps git_branch from printing a literal "HEAD" on a
+# detached HEAD, and git_commit only renders there — so each carries its
+# own U+E0B2 opener, drawn in the fill color on the terminal background.
+# Outside a repo every module renders empty, so the side vanishes on its
+# own. All modules pad themselves on the right so a clean repo still ends
+# in background rather than in text.
 #
 
 [git_branch]
 only_attached = true
-style = 'fg:on_fill bg:fill'
-format = '[](fg:fill)[ $branch ]($style)'
+style = 'fg:purple inverted'
+format = '[](fg:purple)[ $symbol$branch ]($style)'
 
 [git_commit]
-style = 'fg:on_fill bg:fill'
-format = '[](fg:fill)[$hash$tag ]($style)'
+style = 'fg:purple inverted'
+format = '[](fg:purple)[$hash ]($style)'
 
 [git_status]
-style = 'fg:on_fill bg:fill'
+style = 'fg:purple inverted'
 format = '([$all_status$ahead_behind ]($style))'
