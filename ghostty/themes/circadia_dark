@@ -1,0 +1,63 @@
+# Circadia Dark (Warm Ember)
+# From the Circadia palette spec: https://github.com/tanmaymanojgandhi/circadia
+# Converted from the upstream kitty port.
+
+background = #17130f
+foreground = #c9c0b1
+
+cursor-color = #e89a49
+cursor-text = #17130f
+
+selection-background = #29241e
+selection-foreground = #c9c0b1
+
+# Black
+palette = 0=#17130f
+
+# Red
+palette = 1=#d9a86e
+
+# Green
+palette = 2=#8cbb62
+
+# Yellow
+palette = 3=#d99148
+
+# Blue
+palette = 4=#66abc6
+
+# Magenta
+palette = 5=#b991db
+
+# Cyan
+palette = 6=#d99148
+
+# White
+palette = 7=#c9c0b1
+
+# Bright Black
+palette = 8=#91887d
+
+# Bright Red
+palette = 9=#ea9d49
+
+# Bright Green
+palette = 10=#8cbb62
+
+# Bright Yellow
+palette = 11=#f8c88f
+
+# Bright Blue
+palette = 12=#66abc6
+
+# Bright Magenta
+palette = 13=#de88a6
+
+# Bright Cyan
+palette = 14=#66abc6
+
+# Bright White
+palette = 15=#c9c0b1
+
+# Split divider (text_faint); the derived default sits too close to the background
+split-divider-color = #91887d

@@ -1,0 +1,454 @@
+// Circadia, matching the Ghostty themes in ../ghostty/themes and the
+// Circadia palette spec: https://github.com/tanmaymanojgandhi/circadia
+//
+// Colors are written as hex rather than as ANSI names because the Ghostty
+// circadia themes remap the slots: circadia ships no red (1 is the amber
+// type tone), 3 and 6 share the number tone, and 7/15 are both fg. Naming
+// the slots would give zellij a different palette than the one the terminal
+// actually paints.
+//
+// Circadia's ports paint the focused border with the accent (it is also the
+// cursor color), so frame_selected carries the accent and the transient
+// states (search, rename) get the brighter accent tint from the heading
+// scale.
+//
+// circadia has no red, so exit_code_error rides the amber type tone the
+// terminal ports assign to ANSI 1.
+
+themes {
+    // Warm Ember
+    circadia {
+        // fg on bg
+        text_unselected {
+            base "#c9c0b1"
+            background "#17130f"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#c9c0b1"
+            background "#29241e"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        // The active mode / tab chip: bg knocked out of the accent
+        ribbon_selected {
+            base "#17130f"
+            background "#e89a49"
+            emphasis_0 "#d9a86e"
+            emphasis_1 "#17130f"
+            emphasis_2 "#b991db"
+            emphasis_3 "#de88a6"
+        }
+
+        // Inactive chips sit on the border tone. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#c9c0b1"
+            background "#3b342b"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#3b342b"
+            emphasis_2 "#66abc6"
+            emphasis_3 "#d99148"
+        }
+
+        table_title {
+            base "#e89a49"
+            background "#17130f"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        table_cell_selected {
+            base "#c9c0b1"
+            background "#29241e"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        table_cell_unselected {
+            base "#c9c0b1"
+            background "#17130f"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        list_selected {
+            base "#c9c0b1"
+            background "#29241e"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        list_unselected {
+            base "#c9c0b1"
+            background "#17130f"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#8cbb62"
+            emphasis_3 "#de88a6"
+        }
+
+        // Unfocused frames fall back to the terminal default when this
+        // section is missing, so it must be set explicitly. The faint text
+        // tone is what the terminal paints for brightblack, matching the
+        // inactive tmux pane borders.
+        frame_unselected {
+            base "#91887d"
+            background "#17130f"
+            emphasis_0 "#e89a49"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#de88a6"
+            emphasis_3 "#b991db"
+        }
+
+        frame_selected {
+            base "#e89a49"
+            background "#17130f"
+            emphasis_0 "#f2b26c"
+            emphasis_1 "#66abc6"
+            emphasis_2 "#de88a6"
+            emphasis_3 "#b991db"
+        }
+
+        frame_highlight {
+            base "#f2b26c"
+            background "#17130f"
+            emphasis_0 "#de88a6"
+            emphasis_1 "#f2b26c"
+            emphasis_2 "#f2b26c"
+            emphasis_3 "#f2b26c"
+        }
+
+        exit_code_success {
+            base "#8cbb62"
+            background "#17130f"
+            emphasis_0 "#66abc6"
+            emphasis_1 "#17130f"
+            emphasis_2 "#b991db"
+            emphasis_3 "#de88a6"
+        }
+
+        exit_code_error {
+            base "#d9a86e"
+            background "#17130f"
+            emphasis_0 "#d99148"
+            emphasis_1 "#17130f"
+            emphasis_2 "#e89a49"
+            emphasis_3 "#de88a6"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#b991db"
+            player_2 "#66abc6"
+            player_3 "#e89a49"
+            player_4 "#de88a6"
+            player_5 "#8cbb62"
+            player_6 "#d99148"
+            player_7 "#d9a86e"
+            player_8 "#f8c88f"
+            player_9 "#aba195"
+            player_10 "#3b342b"
+        }
+    }
+
+    // Obsidian Pine
+    circadia-forest {
+        text_unselected {
+            base "#c4ccc5"
+            background "#131714"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        text_selected {
+            base "#c4ccc5"
+            background "#242a25"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        ribbon_selected {
+            base "#131714"
+            background "#83b384"
+            emphasis_0 "#d1aa73"
+            emphasis_1 "#131714"
+            emphasis_2 "#b29ace"
+            emphasis_3 "#d092a9"
+        }
+
+        ribbon_unselected {
+            base "#c4ccc5"
+            background "#353c36"
+            emphasis_0 "#83b384"
+            emphasis_1 "#353c36"
+            emphasis_2 "#6cb0c5"
+            emphasis_3 "#d19b66"
+        }
+
+        table_title {
+            base "#83b384"
+            background "#131714"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        table_cell_selected {
+            base "#c4ccc5"
+            background "#242a25"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        table_cell_unselected {
+            base "#c4ccc5"
+            background "#131714"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        list_selected {
+            base "#c4ccc5"
+            background "#242a25"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        list_unselected {
+            base "#c4ccc5"
+            background "#131714"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#92b87e"
+            emphasis_3 "#d092a9"
+        }
+
+        frame_unselected {
+            base "#838d85"
+            background "#131714"
+            emphasis_0 "#83b384"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#d092a9"
+            emphasis_3 "#b29ace"
+        }
+
+        frame_selected {
+            base "#83b384"
+            background "#131714"
+            emphasis_0 "#9ecfae"
+            emphasis_1 "#6cb0c5"
+            emphasis_2 "#d092a9"
+            emphasis_3 "#b29ace"
+        }
+
+        frame_highlight {
+            base "#9ecfae"
+            background "#131714"
+            emphasis_0 "#d092a9"
+            emphasis_1 "#9ecfae"
+            emphasis_2 "#9ecfae"
+            emphasis_3 "#9ecfae"
+        }
+
+        exit_code_success {
+            base "#92b87e"
+            background "#131714"
+            emphasis_0 "#6cb0c5"
+            emphasis_1 "#131714"
+            emphasis_2 "#b29ace"
+            emphasis_3 "#d092a9"
+        }
+
+        exit_code_error {
+            base "#d1aa73"
+            background "#131714"
+            emphasis_0 "#d19b66"
+            emphasis_1 "#131714"
+            emphasis_2 "#83b384"
+            emphasis_3 "#d092a9"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#b29ace"
+            player_2 "#6cb0c5"
+            player_3 "#83b384"
+            player_4 "#d092a9"
+            player_5 "#92b87e"
+            player_6 "#d19b66"
+            player_7 "#d1aa73"
+            player_8 "#b8e2c4"
+            player_9 "#9fa9a1"
+            player_10 "#353c36"
+        }
+    }
+
+    // Warm Parchment
+    circadia-light {
+        text_unselected {
+            base "#28323a"
+            background "#f7f2e6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        text_selected {
+            base "#28323a"
+            background "#e5dcc6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        ribbon_selected {
+            base "#f7f2e6"
+            background "#0048b3"
+            emphasis_0 "#843900"
+            emphasis_1 "#f7f2e6"
+            emphasis_2 "#7a1f7a"
+            emphasis_3 "#4b1fa3"
+        }
+
+        ribbon_unselected {
+            base "#28323a"
+            background "#d7cdb7"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#d7cdb7"
+            emphasis_2 "#095b62"
+            emphasis_3 "#843900"
+        }
+
+        table_title {
+            base "#0048b3"
+            background "#f7f2e6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        table_cell_selected {
+            base "#28323a"
+            background "#e5dcc6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        table_cell_unselected {
+            base "#28323a"
+            background "#f7f2e6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        list_selected {
+            base "#28323a"
+            background "#e5dcc6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        list_unselected {
+            base "#28323a"
+            background "#f7f2e6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#005f2f"
+            emphasis_3 "#4b1fa3"
+        }
+
+        frame_unselected {
+            base "#43505c"
+            background "#f7f2e6"
+            emphasis_0 "#0048b3"
+            emphasis_1 "#095b62"
+            emphasis_2 "#4b1fa3"
+            emphasis_3 "#7a1f7a"
+        }
+
+        frame_selected {
+            base "#0048b3"
+            background "#f7f2e6"
+            emphasis_0 "#2f75c6"
+            emphasis_1 "#095b62"
+            emphasis_2 "#4b1fa3"
+            emphasis_3 "#7a1f7a"
+        }
+
+        frame_highlight {
+            base "#2f75c6"
+            background "#f7f2e6"
+            emphasis_0 "#4b1fa3"
+            emphasis_1 "#2f75c6"
+            emphasis_2 "#2f75c6"
+            emphasis_3 "#2f75c6"
+        }
+
+        exit_code_success {
+            base "#005f2f"
+            background "#f7f2e6"
+            emphasis_0 "#095b62"
+            emphasis_1 "#f7f2e6"
+            emphasis_2 "#7a1f7a"
+            emphasis_3 "#4b1fa3"
+        }
+
+        exit_code_error {
+            base "#843900"
+            background "#f7f2e6"
+            emphasis_0 "#095b62"
+            emphasis_1 "#f7f2e6"
+            emphasis_2 "#0048b3"
+            emphasis_3 "#4b1fa3"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#4b1fa3"
+            player_2 "#095b62"
+            player_3 "#0048b3"
+            player_4 "#7a1f7a"
+            player_5 "#1c60a2"
+            player_6 "#005f2f"
+            player_7 "#843900"
+            player_8 "#1c4470"
+            player_9 "#46535f"
+            player_10 "#d7cdb7"
+        }
+    }
+}

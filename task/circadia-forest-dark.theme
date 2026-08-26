@@ -1,0 +1,92 @@
+# Circadia (Obsidian Pine forest, dark), for Taskwarrior.
+# Palette from the Circadia spec via nvim/colors/circadia-forest.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex:
+#
+#   bg        #131714 -> 233    accent  #83b384 -> 108
+#   surface   #1a1e1b -> 234    amber   #d1aa73 -> 179
+#   element   #242a25 -> 235    number  #d19b66 -> 173
+#   border    #353c36 -> 237    green   #92b87e -> 107
+#   fg        #c4ccc5 -> 251    blue    #6cb0c5 -> 74
+#   fg_muted  #9fa9a1 -> 247    purple  #b29ace -> 140
+#   fg_faint  #838d85 -> 102    pink    #d092a9 -> 175
+#
+# Circadia ships no red, so alarm states (error, overdue) carry the pink
+# property tone (175) while the pine accent (108) marks active/header
+# moments. Due urgency ramps amber (due) -> orange (today) -> pink (overdue).
+#
+# Enable from taskrc.dark:  include /Users/cgreen/.config/task/circadia-forest-dark.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color234
+color.header=color108
+color.footnote=color247
+color.warning=bold color179
+color.error=color233 on color175
+color.debug=color74
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color233 on color108
+color.recurring=color74
+color.scheduled=on color234
+color.until=
+color.blocked=color251 on color237
+color.blocking=color233 on color247
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color251
+color.uda.priority.M=color247
+color.uda.priority.L=color102
+
+# Tags
+color.tag.next=color173
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=bold color173
+color.due=color179
+color.overdue=color175
+
+# Report: burndown
+color.burndown.done=on color107
+color.burndown.pending=on color175
+color.burndown.started=on color173
+
+# Report: history
+color.history.add=color233 on color173
+color.history.delete=color233 on color175
+color.history.done=color233 on color107
+
+# Report: summary
+color.summary.background=color251 on color233
+color.summary.bar=color233 on color108
+
+# Command: calendar
+color.calendar.due.today=color233 on color173
+color.calendar.due=color233 on color179
+color.calendar.holiday=color233 on color140
+color.calendar.scheduled=
+color.calendar.overdue=color233 on color175
+color.calendar.today=color233 on color74
+color.calendar.weekend=on color234
+color.calendar.weeknumber=color74
+
+# Command: sync
+color.sync.added=color107
+color.sync.changed=color173
+color.sync.rejected=color175
+
+# Command: undo
+color.undo.after=color107
+color.undo.before=color175

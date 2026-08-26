@@ -1,0 +1,63 @@
+# Circadia Light (Warm Parchment)
+# From the Circadia palette spec: https://github.com/tanmaymanojgandhi/circadia
+# Converted from the upstream kitty port.
+
+background = #f7f2e6
+foreground = #28323a
+
+cursor-color = #0048b3
+cursor-text = #f7f2e6
+
+selection-background = #e5dcc6
+selection-foreground = #28323a
+
+# Black
+palette = 0=#e5dcc6
+
+# Red
+palette = 1=#843900
+
+# Green
+palette = 2=#005f2f
+
+# Yellow
+palette = 3=#095b62
+
+# Blue
+palette = 4=#0048b3
+
+# Magenta
+palette = 5=#7a1f7a
+
+# Cyan
+palette = 6=#095b62
+
+# White
+palette = 7=#28323a
+
+# Bright Black
+palette = 8=#43505c
+
+# Bright Red
+palette = 9=#1c60a2
+
+# Bright Green
+palette = 10=#005f2f
+
+# Bright Yellow
+palette = 11=#1c4470
+
+# Bright Blue
+palette = 12=#0048b3
+
+# Bright Magenta
+palette = 13=#4b1fa3
+
+# Bright Cyan
+palette = 14=#0048b3
+
+# Bright White
+palette = 15=#28323a
+
+# Split divider (text_faint); the derived default sits too close to the background
+split-divider-color = #43505c
