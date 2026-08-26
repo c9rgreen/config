@@ -1,0 +1,183 @@
+#cloud-config
+#
+# Bootstrap a Fedora 43 cloud instance for local development.
+# Converted from setup-fedora.sh, then extended to cover the full
+# command-line toolchain.
+#
+# If your cloud image's default user is not "fedora" (e.g. ec2-user,
+# cloud-user), replace it in the write_files path and owner and in the
+# usermod / sudo / createuser lines. Leave the "fedora" in the repository
+# URLs alone -- there it is the name of the distribution.
+#
+# Tool versions deliberately float: dnf packages track the release, and the
+# rest resolve GitHub's "latest" at boot, so two instances built weeks apart
+# will not match. To pin one, replace its @TAG@/@VER@ with a fixed tag in the
+# install-tools.py table.
+
+package_update: true
+package_upgrade: true
+
+# ---------------------------------------------------------------------------
+# Third-party repositories
+# ---------------------------------------------------------------------------
+yum_repos:
+  docker-ce-stable:
+    name: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://download.docker.com/linux/fedora/gpg
+    repo_gpgcheck: true
+
+  evilmartians-lefthook:
+    name: evilmartians/lefthook
+    baseurl: https://dl.cloudsmith.io/public/evilmartians/lefthook/rpm/fedora/$releasever/$basearch
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://dl.cloudsmith.io/public/evilmartians/lefthook/gpg.key
+    repo_gpgcheck: true
+
+  # NodeSource publishes no detached repomd.xml.asc, so repo_gpgcheck has to
+  # stay off here; package signatures are still checked via gpgcheck.
+  nodesource-nodejs:
+    name: Node.js Packages (NodeSource) - $basearch
+    baseurl: https://rpm.nodesource.com/pub_24.x/nodistro/nodejs/$basearch
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://rpm.nodesource.com/gpgkey/ns-operations-public.key
+
+  # Fedora retired kubernetes-client, so kubectl comes from upstream.
+  kubernetes:
+    name: Kubernetes
+    baseurl: "https://pkgs.k8s.io/core:/stable:/v1.36/rpm/"
+    enabled: true
+    gpgcheck: true
+    gpgkey: "https://pkgs.k8s.io/core:/stable:/v1.36/rpm/repodata/repomd.xml.key"
+    repo_gpgcheck: true
+
+# ---------------------------------------------------------------------------
+# System packages
+# ---------------------------------------------------------------------------
+packages:
+  # Shell and terminal
+  - fish
+  - tmux
+  - fastfetch
+  - chafa
+
+  # Editing, search, navigation
+  - git
+  - ripgrep
+  - fd-find
+  - fzf
+  - bat
+  - eza
+  - zoxide
+  - ctags            # Fedora's ctags is universal-ctags
+  - tree-sitter-cli
+  - just
+  - lefthook
+  - inotify-tools
+
+  # Task and time tracking
+  - task             # Taskwarrior
+  - timew            # Timewarrior
+
+  # Languages and runtimes
+  - elixir
+  - erlang
+  - nodejs
+  - composer
+
+  # Containers
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+  - skopeo
+
+  # Cloud and cluster tooling
+  - kubectl
+  - kustomize
+  - awscli2
+  - doctl
+
+  # Forges and web
+  - gh
+  - glab
+  - caddy
+  - hugo
+
+  # Documents and media
+  - pandoc
+  - ghostscript
+  - ImageMagick
+
+  # Database (the server pulls in the client tools: psql, createuser, ...)
+  - postgresql-server
+
+# ---------------------------------------------------------------------------
+# Files written before packages / runcmd execute
+# ---------------------------------------------------------------------------
+write_files:
+  # Append fish auto-exec stanza to the default user's .bashrc.
+  - path: /home/fedora/.bashrc
+    owner: fedora:fedora
+    append: true
+    content: |
+
+      # >>> setup: exec fish for interactive shells >>>
+      if [[ $- == *i* ]] && [[ -z "${FISH_LAUNCHED:-}" ]] && command -v fish >/dev/null 2>&1; then
+          export FISH_LAUNCHED=1
+          exec fish
+      fi
+      # <<< setup <<<
+
+  # asdf 0.16 and later is a plain binary that shims tool versions out of its
+  # data directory, so the shim path has to come before the rest of $PATH.
+  - path: /etc/fish/conf.d/asdf.fish
+    owner: root:root
+    permissions: '0644'
+    content: |
+      set -gx PATH $HOME/.asdf/shims $PATH
+
+# ---------------------------------------------------------------------------
+# One-time commands (run after packages are installed)
+# ---------------------------------------------------------------------------
+runcmd:
+  # --- Docker group + service ---
+  - getent group docker || groupadd docker
+  - id -nG fedora | tr ' ' '\n' | grep -qx docker || usermod -aG docker fedora
+  - systemctl enable --now docker.service
+
+  # --- Tools Fedora does not package ---
+  # Neovim and the twelve upstream binaries are installed by
+  # install-tools.py, delivered alongside this file as an
+  # x-shellscript-per-instance part. See the justfile.
+
+  # --- PostgreSQL cluster ---
+  - |
+    set -e
+    # Initialize on first boot only; the data directory survives reboots.
+    if [ ! -f /var/lib/pgsql/data/PG_VERSION ]; then
+      postgresql-setup --initdb
+    fi
+    systemctl enable --now postgresql.service
+    for _ in $(seq 30); do
+      if sudo -u postgres pg_isready -q; then break; fi
+      sleep 1
+    done
+    # Give the login user a superuser role, so `psql postgres` works over
+    # local peer auth with no password.
+    sudo -u postgres createuser -s fedora \
+      || echo "WARN could not create the fedora postgres role" >&2
+
+  # --- Claude Code CLI (installed as the default user) ---
+  - sudo -u fedora bash -c 'curl -fsSL https://claude.ai/install.sh | bash'
+  # Disable npm lifecycle scripts by default (supply-chain hardening). Nothing
+  # needs to opt back in now that tree-sitter-cli comes from dnf.
+  - sudo -u fedora bash -c 'npm config set ignore-scripts true'
+
+  # --- Elixir tooling ---
+  - sudo -u fedora bash -c 'mix local.hex --if-missing && mix local.rebar --if-missing'
