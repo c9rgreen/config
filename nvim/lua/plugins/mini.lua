@@ -21,71 +21,77 @@ vim.api.nvim_create_autocmd('User', {
 })
 require('mini.diff').setup()
 require('mini.git').setup()
--- Powerline glyphs: U+E0A0 is the git branch, and U+E0B6/U+E0B4 are the
--- half-circles that cap a pill. Written as escapes rather than literals
--- because these are Private Use Area codepoints, and some editors strip them
--- on save -- the pills would quietly lose their caps with nothing in the diff
--- to explain why.
+-- Powerline field markers: branch (U+E0A0), line number (U+E0A1) and
+-- character number (U+E0A3), plus the separator wedges (U+E0B0, U+E0B2).
+-- Written as escapes rather than literals because these are Private Use Area
+-- codepoints, and some editors strip them on save -- the wedges would
+-- quietly vanish with nothing in the diff to explain why.
 local PL_BRANCH = '\u{e0a0}'
-local PILL_L, PILL_R = '\u{e0b6}', '\u{e0b4}'
+local PL_LINE   = '\u{e0a1}'
+local PL_COL    = '\u{e0a3}'
+local SEP_L     = '\u{e0b0}'
+local SEP_R     = '\u{e0b2}'
 
--- A pill is an ordinary highlighted section with a cap glyph on each side.
--- Each cap is drawn as foreground in that section's own fill color over the
--- bar's background, which makes the fill look like it rounds off. The cap
--- groups live in colors/atomic.lua, one per fill tone.
---
--- The caps go into the group list as plain strings rather than tables:
--- combine_groups() pads every table entry with a space on each side, and that
--- padding is what gives the pill its body, while strings pass through
--- untouched so a cap sits flush against the fill.
-local function pill(hl, cap, strings)
-   local content = vim.tbl_filter(function(s) return type(s) == 'string' and s ~= '' end, strings)
-   -- Every section came back empty: skip the pill instead of drawing two caps
-   -- around a space.
-   if #content == 0 then return {} end
-   return {
-      '%#' .. cap .. '#' .. PILL_L,
-      { hl = hl, strings = content },
-      '%#' .. cap .. '#' .. PILL_R .. ' ',
-   }
-end
-
+-- The content below is mini's own default apart from the wedges at each
+-- color boundary and the powerline markers in the git and location sections.
+-- combine_groups() passes plain strings through verbatim, so each wedge
+-- carries its own highlight and gets none of the padding table entries get.
 require('mini.statusline').setup({
    content = {
       active = function()
          local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-         local mode_cap      = mode_hl:gsub('MiniStatuslineMode', 'MiniStatuslineCap')
-         -- The same sections and truncation widths as mini's default
-         -- content; only the assembly below differs. `icon` can be passed
-         -- straight to section_git() here, so the old wrapper around it is
-         -- gone.
          local git           = MiniStatusline.section_git({ trunc_width = 40, icon = PL_BRANCH })
          local diff          = MiniStatusline.section_diff({ trunc_width = 75 })
          local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
          local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
          local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
          local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-         local location      = MiniStatusline.section_location({ trunc_width = 75 })
          local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+         -- The same fields as mini's own section_location (line/total, then
+         -- virtual column/total; when truncated, just line and column), with
+         -- the powerline markers standing in for its `|` and `│` separators.
+         local location      = MiniStatusline.is_truncated(75)
+            and (PL_LINE .. '%l ' .. PL_COL .. '%2v')
+            or (PL_LINE .. '%l/%L ' .. PL_COL .. '%2v/%-2{virtcol("$") - 1}')
 
-         local groups = { ' ' } -- left margin, so the first pill floats clear of the edge
-         local add = function(parts) vim.list_extend(groups, parts) end
-
-         add(pill(mode_hl, mode_cap, { mode }))
-         add(pill('MiniStatuslineDevinfo', 'MiniStatuslineCapDevinfo', { git, diff, diagnostics, lsp }))
-         -- The filename goes in uncapped, riding the bar itself:
-         -- MiniStatuslineFilename already carries the bar's background, which
-         -- leaves the pills as the only filled things on the line. '%<' marks
-         -- where to truncate and '%=' ends the left-aligned run; both inherit
-         -- that same bar-colored background from the group before them.
-         add({ '%<', { hl = 'MiniStatuslineFilename', strings = { filename } }, '%=' })
-         add(pill('MiniStatuslineFileinfo', 'MiniStatuslineCapDevinfo', { fileinfo }))
-         add(pill(mode_hl, mode_cap, { search, location }))
-
-         return MiniStatusline.combine_groups(groups)
+         return MiniStatusline.combine_groups({
+            { hl = mode_hl,                  strings = { mode } },
+            '%#' .. mode_hl .. 'SepL#' .. SEP_L,
+            { hl = 'MiniStatuslineDevinfo',  strings = { git, diff, diagnostics, lsp } },
+            '%#MiniStatuslineDevinfoSep#' .. SEP_L,
+            '%<', -- Mark general truncate point
+            { hl = 'MiniStatuslineFilename', strings = { filename } },
+            '%=', -- End left alignment
+            '%#MiniStatuslineFileinfoSep#' .. SEP_R,
+            { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+            '%#' .. mode_hl .. 'SepR#' .. SEP_R,
+            { hl = mode_hl,                  strings = { search, location } },
+         })
       end,
    },
 })
+
+-- A wedge is the glyph painted in the nearer segment's background over the
+-- farther one's. The mode groups swap per mode, so those boundaries need two
+-- extra groups per mode -- few enough to define up front instead of
+-- resolving them on every redraw -- plus one static group per side for the
+-- Devinfo/Filename and Filename/Fileinfo boundaries.
+local function define_separators()
+   local bg = function(name) return vim.api.nvim_get_hl(0, { name = name, link = false }).bg end
+   for _, m in ipairs({ 'Normal', 'Insert', 'Visual', 'Replace', 'Command', 'Other' }) do
+      local hl = 'MiniStatuslineMode' .. m
+      vim.api.nvim_set_hl(0, hl .. 'SepL', { fg = bg(hl), bg = bg('MiniStatuslineDevinfo') })
+      vim.api.nvim_set_hl(0, hl .. 'SepR', { fg = bg(hl), bg = bg('MiniStatuslineFileinfo') })
+   end
+   vim.api.nvim_set_hl(0, 'MiniStatuslineDevinfoSep',  { fg = bg('MiniStatuslineDevinfo'),  bg = bg('MiniStatuslineFilename') })
+   vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfoSep', { fg = bg('MiniStatuslineFileinfo'), bg = bg('MiniStatuslineFilename') })
+end
+
+-- Deferred because the colors/*.lua schemes restyle statusline groups after
+-- their mini.base16 setup; scheduling puts this after every other handler
+-- for the event regardless of which file registered first.
+vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(define_separators) end })
+define_separators()
 
 require('mini.icons').setup()
 require('mini.tabline').setup()

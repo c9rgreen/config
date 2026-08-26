@@ -98,23 +98,6 @@ hi('Folded',       { fg = p.base04, bg = p.base01 })
 hi('PmenuSel',     { fg = p.base05, bg = p.base02 })
 hi('TabLineSel',   { fg = p.base05, bg = p.base00, bold = true })
 
--- Pill caps for the statusline, which is assembled in lua/plugins/mini.lua.
--- A cap is a half-circle glyph drawn as foreground in one section's fill
--- tone, sitting on the bar's own background -- so each fill tone needs a
--- group of its own. The fills come from `p`, the active variant's palette,
--- so the caps follow the light/dark switch like everything else here.
-for name, fill in pairs({
-   Normal  = p.base05, -- the fills mini.base16 gives the mode groups
-   Insert  = p.base0D,
-   Visual  = p.base0B,
-   Command = p.base08,
-   Replace = p.base0E,
-   Other   = p.base03,
-   Devinfo = p.base02, -- also caps Fileinfo, which links to Devinfo
-}) do
-   hi('MiniStatuslineCap' .. name, { fg = fill, bg = p.base01 })
-end
-
 -- Accent moments: atomic marks matches and titles with orange, and paints
 -- Search with the type yellow. Upstream gives the active search the orange
 -- accent too, but ghostty paints the cursor that exact orange (see
