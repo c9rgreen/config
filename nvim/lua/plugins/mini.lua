@@ -188,4 +188,4 @@ vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { de
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
 
 -- Colorscheme relies on mini.base16
-vim.cmd.colorscheme('circadia-forest')
+vim.cmd.colorscheme('circadia')
