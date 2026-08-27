@@ -19,8 +19,25 @@ function _G.fold_column()
    local lnum = vim.v.lnum
    if vim.fn.foldclosed(lnum) == lnum then
       return '▶'
-   elseif vim.fn.foldlevel(lnum) > vim.fn.foldlevel(lnum - 1) then
+   end
+   local level = vim.fn.foldlevel(lnum)
+   if level > vim.fn.foldlevel(lnum - 1) then
       return '▼'
+   end
+   -- A fold that starts on the same line the previous one ended -- two
+   -- functions with no blank line between them, say -- does not show up as a
+   -- deeper fold level: one fold over lines 5-10 and two over 5-7 and 8-10
+   -- report the same levels, so comparing levels can never tell them apart.
+   -- With 'foldmethod=expr' the fold expression can, since it returns '>N' on
+   -- a line that starts a fold, and v:lnum is already the line being drawn, so
+   -- it can be run as it stands. Expressions that describe folds the other way
+   -- ('a1'/'s1') just miss the arrow, as before, and hand-made folds
+   -- (neogit's) have nothing to ask.
+   if level > 0 and vim.wo.foldmethod == 'expr' and vim.wo.foldexpr ~= '' then
+      local ok, expr = pcall(vim.api.nvim_eval, vim.wo.foldexpr)
+      if ok and tostring(expr):sub(1, 1) == '>' then
+         return '▼'
+      end
    end
    return ' '
 end
@@ -39,15 +56,22 @@ end
 vim.opt.foldcolumn = '0'
 
 -- Gutter: sign column, fold marker, then a right-aligned line number. Terminal
--- buffers have neither signs nor folds, so they get the line number alone. The
--- choice lives in the expression rather than in a TermOpen autocmd because
--- 'signcolumn' and 'statuscolumn' are window-local: values set for a terminal
--- would outlive it once that window showed a file.
+-- buffers have neither signs nor folds, so they get the line number alone.
+-- Neogit's status buffer keeps its folds but drops the signs, because the only
+-- signs it places are its own fold arrows and fold_column() already draws
+-- those.
+--
+-- All of this is decided here rather than in an autocmd, because both
+-- 'signcolumn' and 'statuscolumn' belong to the window, not the buffer: a value
+-- set for a terminal would stick around once that window showed a file, and
+-- neogit sets its own signcolumn after the FileType event anyway. Leaving out
+-- %s is what hides the signs; 'signcolumn' only sets aside the space for them.
 function _G.status_column()
    if vim.bo.buftype == 'terminal' then
       return '%=%l '
    end
-   return '%s%@v:lua.fold_click@' .. fold_column() .. '%X %=%l '
+   local signs = vim.bo.filetype == 'NeogitStatus' and '' or '%s'
+   return signs .. '%@v:lua.fold_click@' .. fold_column() .. '%X %=%l '
 end
 vim.opt.statuscolumn = '%{%v:lua.status_column()%}'
 
@@ -111,5 +135,6 @@ require('plugins.lsp')
 require('plugins.zk')
 require('plugins.orgmode')
 require('plugins.gitlab')
-require('plugins.classic')
 require('plugins.d2')
+require('plugins.codediff')
+require('plugins.neogit')

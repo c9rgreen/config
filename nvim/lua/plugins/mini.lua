@@ -94,6 +94,10 @@ vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(
 define_separators()
 
 require('mini.icons').setup()
+-- Stand in for nvim-web-devicons, so plugins that ask for it get mini.icons.
+-- That way codediff.nvim's file icons use the same colors as everything else.
+MiniIcons.mock_nvim_web_devicons()
+
 require('mini.tabline').setup()
 require('mini.snippets').setup()
 require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
