@@ -94,12 +94,3 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-[delta "circadia"]
-    # Each of these pairs light or dark with the matching bat theme. delta
-    # cannot pick a theme per mode itself, so whoever runs delta has to name
-    # the right one -- see the pager in lazygit/config.yml.
-    light = true
-    syntax-theme = circadia
-[delta "circadia-dark"]
-    dark = true
-    syntax-theme = circadia-dark
