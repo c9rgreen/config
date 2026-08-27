@@ -2,10 +2,13 @@
 --
 -- Markdown buffers are scanned for image links (![alt](path), ![[path]]) and
 -- ```mermaid fences; each is rendered as a block of virtual lines below its
--- source via the kitty graphics protocol (see glimpse/kitty.lua). Opening an
+-- source: empty lines hold open the space and the image is drawn on top of
+-- them (see glimpse/kitty.lua). Opening an
 -- image file directly shows it in the buffer as well.
 --
 -- Commands: :Glimpse [toggle|enable|disable|refresh]
+-- Buffer variables: set b:glimpse_base_dir to say which folder relative image
+-- links start from, for buffers that are not backed by a real file.
 
 local kitty = require('glimpse.kitty')
 local mermaid = require('glimpse.mermaid')
@@ -27,12 +30,25 @@ M.config = {
 }
 
 local ns = vim.api.nvim_create_namespace('glimpse')
+local ns_paint = vim.api.nvim_create_namespace('glimpse.paint')
 local cache_dir = vim.fs.joinpath(vim.fn.stdpath('cache'), 'glimpse')
 
 local bufs = {}   -- buf -> { enabled, gen, timer, static }
-local images = {} -- key:size -> { id, sent } (per size, so windows of
-                  -- different widths don't retransmit back and forth)
+local images = {} -- item key -> { id, sent }; not tied to a size, so a window
+                  -- of a different width reuses the same image
+local marks = {}  -- buf -> mark -> { id, rows, cols, px_w, px_h }
 local next_id = 1
+
+-- Turn a buffer argument into a real buffer number. `bufs` and `marks` are
+-- keyed by real numbers, so the 0 that Neovim's own functions accept for "the
+-- current buffer" has to be swapped out here. `buf or ...` will not do it,
+-- because 0 counts as true in Lua.
+local function resolve_buf(buf)
+   if not buf or buf == 0 then
+      return vim.api.nvim_get_current_buf()
+   end
+   return buf
+end
 
 local IMG_EXT = {
    png = true, jpg = true, jpeg = true, gif = true, webp = true,
@@ -55,8 +71,14 @@ local function resolve_path(buf, raw)
    if raw:sub(1, 1) == '/' or raw:sub(1, 1) == '~' then
       candidates = { vim.fs.normalize(raw) }
    else
-      local name = vim.api.nvim_buf_get_name(buf)
-      local dir = name ~= '' and vim.fs.dirname(name) or vim.fn.getcwd()
+      -- Buffers that are not backed by a real file (an old git revision, say)
+      -- can set b:glimpse_base_dir to say which folder relative links start
+      -- from.
+      local dir = vim.b[buf].glimpse_base_dir
+      if not dir or dir == '' then
+         local name = vim.api.nvim_buf_get_name(buf)
+         dir = name ~= '' and vim.fs.dirname(name) or vim.fn.getcwd()
+      end
       candidates = { vim.fs.joinpath(dir, raw), vim.fs.joinpath(vim.fn.getcwd(), raw) }
    end
    for _, p in ipairs(candidates) do
@@ -197,14 +219,21 @@ local function resolve_png(item, cb)
    end
 end
 
+-- Every window showing the buffer shares one set of added lines, so a block
+-- can only be one size. Take the widest that fits the narrowest window, or it
+-- spills out of that one and over its neighbour.
 local function avail_cols(buf, max_width)
-   local width = vim.o.columns
-   local win = vim.fn.bufwinid(buf)
-   if win ~= -1 then
-      local info = vim.fn.getwininfo(win)[1]
-      width = info.width - info.textoff
+   local width
+   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      if vim.api.nvim_win_get_buf(win) == buf then
+         local info = vim.fn.getwininfo(win)[1]
+         if info then
+            local w = info.width - info.textoff
+            width = width and math.min(width, w) or w
+         end
+      end
    end
-   return math.max(1, math.min(max_width, width - 1, kitty.MAX_CELLS))
+   return math.max(1, math.min(max_width, (width or vim.o.columns) - 1))
 end
 
 -- Fit px_w×px_h pixels into a cell box, preserving aspect ratio.
@@ -216,11 +245,259 @@ local function fit(px_w, px_h, max_cols, max_rows)
       rows = max_rows
       cols = math.max(1, math.floor(rows * ch * px_w / px_h / cw))
    end
-   return cols, math.min(rows, kitty.MAX_CELLS)
+   return cols, rows
 end
 
 local function set_virt_lines(buf, mark, row, lines)
    vim.api.nvim_buf_set_extmark(buf, ns, row, 0, { id = mark, virt_lines = lines })
+end
+
+-- Empty lines that hold open the space an image is drawn over. The image
+-- covers them, so they only have to be the right shape.
+local function reserve_lines(rows, cols)
+   local blank = string.rep(' ', cols)
+   local lines = {}
+   for r = 1, rows do
+      lines[r] = { { blank, 'Normal' } }
+   end
+   return lines
+end
+
+-- ── painting ─────────────────────────────────────────────────────────────
+--
+-- The terminal draws an image at a fixed spot on the screen, so that spot has
+-- to be worked out again whenever anything moves it: scrolling, resizing a
+-- window, opening a fold, even an image higher up the buffer changing height.
+-- paint() walks every visible window, works out where each held-open space now
+-- sits, and sends only the commands needed to bring the terminal in line.
+
+local placed = {} -- pid -> where that image currently sits on screen
+local pids = {}   -- win .. ':' .. mark -> id of its on-screen copy
+local next_pid = 1
+
+local function pid_for(key)
+   if not pids[key] then
+      pids[key] = next_pid
+      next_pid = next_pid + 1
+   end
+   return pids[key]
+end
+
+-- The terminal throws away every image it is showing when it is reset or when
+-- Neovim is suspended, so drop our record of them and let the next paint send
+-- them again.
+local function forget_placements()
+   placed = {}
+end
+
+-- A line hidden inside a closed fold shows none of its added lines, because
+-- Neovim draws the single fold line in place of the whole range. The functions
+-- that report screen positions still answer for that fold line, though, so a
+-- block inside a fold has to be spotted and skipped, or it ends up drawn over
+-- whatever text comes after the fold.
+--
+-- Whether a fold is closed depends on the window, so reading it means stepping
+-- into that window. paint() asks about every line it cares about at once,
+-- since it runs after nearly every redraw and each lookup is slow.
+local function fold_probe(win, lnums)
+   local closed = {}
+   vim.api.nvim_win_call(win, function()
+      for _, lnum in ipairs(lnums) do
+         closed[lnum] = vim.fn.foldclosed(lnum) ~= -1
+      end
+   end)
+   return closed
+end
+
+-- Screen row where the block below buffer row `anchor` starts, or nil when
+-- none of it is visible. The answer can be above the top of the window, and
+-- the caller trims it: Neovim scrolls through a block one row at a time rather
+-- than skipping past it in one jump.
+--
+-- nvim_win_text_height counts added lines against the row *after* them, so the
+-- anchor's own height is all - fill, and screenpos() already points past any
+-- added lines above it.
+local function block_top(win, buf, anchor, closed, top, rows)
+   local lines = vim.api.nvim_buf_line_count(buf)
+   -- A mark can sit one row past the end of the buffer until the timer catches
+   -- up, which is what replacing a whole buffer (:e!, a formatter, a plugin
+   -- reloading its contents) leaves behind. Asking screenpos() about a line
+   -- that far out raises an error instead of returning a row.
+   if anchor >= lines or closed[anchor + 1] then
+      return nil
+   end
+   local sp = vim.fn.screenpos(win, anchor + 1, 1)
+   if sp.row > 0 then
+      local h = vim.api.nvim_win_text_height(win, { start_row = anchor, end_row = anchor })
+      return sp.row + (h.all - h.fill)
+   end
+   -- The anchor line has scrolled off the top, but part of its block can still
+   -- be visible; the next row's fill count says how much.
+   if anchor + 1 < lines then
+      if closed[anchor + 2] then
+         return nil
+      end
+      local nxt = vim.fn.screenpos(win, anchor + 2, 1)
+      if nxt.row > 0 then
+         local h = vim.api.nvim_win_text_height(win, { start_row = anchor + 1, end_row = anchor + 1 })
+         return nxt.row - h.fill
+      end
+      return nil
+   end
+   -- There is no line after the anchor to carry that count, which is what `zb`
+   -- on the last line of the buffer leaves behind: the block sits against the
+   -- top of the window, and 'topfill' -- how many of its rows Neovim put above
+   -- the first visible row -- is the only thing left to go on.
+   local fill = vim.api.nvim_win_call(win, function()
+      return vim.fn.winsaveview().topfill
+   end)
+   if fill and fill > 0 then
+      return top - (rows - fill)
+   end
+   return nil
+end
+
+-- Areas the images have to stay out of. Neovim draws floating windows and the
+-- completion menu as ordinary text, and images sit on top of text, so an image
+-- overlapping one would hide it until something moved. A window's border is
+-- not counted in the size it reports, hence the extra cell on each side.
+local function occluders()
+   local rects = {}
+   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      if vim.api.nvim_win_get_config(win).relative ~= '' then
+         local info = vim.fn.getwininfo(win)[1]
+         if info then
+            rects[#rects + 1] = {
+               top = info.winrow - 1, bot = info.winrow + info.height,
+               left = info.wincol - 1, right = info.wincol + info.width,
+            }
+         end
+      end
+   end
+   local pum = vim.fn.pum_getpos()
+   if pum and pum.row then
+      rects[#rects + 1] = {
+         top = pum.row + 1, bot = pum.row + pum.height,
+         left = pum.col + 1, right = pum.col + pum.width,
+      }
+   end
+   return rects
+end
+
+local function paint(force)
+   local live = {}
+   local rects = occluders()
+   -- Only windows in the current tab: a window's position is reported within
+   -- its own tab, so one sitting on another tab would otherwise draw its
+   -- images over whichever tab is on screen.
+   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      local b, mk = bufs[buf], marks[buf]
+      local info = (b and b.enabled and mk and next(mk)) and vim.fn.getwininfo(win)[1] or nil
+      if info then
+         local top = info.winrow + ((vim.wo[win].winbar or '') ~= '' and 1 or 0)
+         local bot = top + info.height - 1
+         local col = info.wincol + info.textoff
+         local text_cols = math.max(1, info.width - info.textoff)
+         local lines = vim.api.nvim_buf_line_count(buf)
+         -- Collect the anchor rows first, so the fold check below -- the slow
+         -- part -- can be done for all of them at once.
+         local anchors, lnums = {}, {}
+         for mark in pairs(mk) do
+            local pos = vim.api.nvim_buf_get_extmark_by_id(buf, ns, mark, {})
+            if #pos > 0 then
+               anchors[mark] = pos[1]
+               for _, lnum in ipairs({ pos[1] + 1, pos[1] + 2 }) do
+                  if lnum <= lines then
+                     lnums[#lnums + 1] = lnum
+                  end
+               end
+            end
+         end
+         local closed = fold_probe(win, lnums)
+         for mark, m in pairs(mk) do
+            local anchor = anchors[mark]
+            local row = anchor and block_top(win, buf, anchor, closed, top, m.rows) or nil
+            -- Trim to the window here, since the terminal knows nothing about
+            -- splits and would happily draw past the edge. The stored width
+            -- can also be out of date (a new split, or a second window
+            -- narrower than the one the block was sized for), so cap that too.
+            local cols = math.min(m.cols, text_cols)
+            local vis_top = row and math.max(row, top)
+            local vis_bot = row and math.min(row + m.rows - 1, bot)
+            if row then
+               for _, r in ipairs(rects) do
+                  if vis_bot >= vis_top
+                     and col <= r.right and col + cols - 1 >= r.left
+                     and r.bot >= vis_top and r.top <= vis_bot
+                  then
+                     if r.top <= vis_top and r.bot >= vis_bot then
+                        vis_bot = vis_top - 1        -- covered outright
+                     elseif r.top <= vis_top then
+                        vis_top = r.bot + 1          -- covered from above
+                     elseif r.bot >= vis_bot then
+                        vis_bot = r.top - 1          -- covered from below
+                     else
+                        vis_bot = vis_top - 1        -- covered in the middle
+                     end
+                  end
+               end
+            end
+            if row and vis_bot >= vis_top then
+               local rows = vis_bot - vis_top + 1
+               local src
+               if rows < m.rows or cols < m.cols then
+                  src = {
+                     y = math.floor((vis_top - row) * m.px_h / m.rows),
+                     h = math.max(1, math.floor(rows * m.px_h / m.rows)),
+                     w = math.max(1, math.floor(cols * m.px_w / m.cols)),
+                  }
+               end
+               local pid = pid_for(win .. ':' .. mark)
+               local cur, want = placed[pid], {
+                  id = m.id, row = vis_top, col = col, rows = rows, cols = cols,
+                  y = src and src.y or 0, h = src and src.h or 0, w = src and src.w or 0,
+               }
+               live[pid] = true
+               if force or not vim.deep_equal(cur, want) then
+                  if cur then
+                     kitty.unput(cur.id, pid)
+                  end
+                  kitty.put(m.id, pid, vis_top, col, rows, cols, src)
+                  placed[pid] = want
+               end
+            end
+         end
+      end
+   end
+   -- Whatever is left lost its window, its buffer or its mark.
+   for pid, p in pairs(placed) do
+      if not live[pid] then
+         kitty.unput(p.id, pid)
+         placed[pid] = nil
+      end
+   end
+   for key in pairs(pids) do
+      local win = tonumber(key:match('^(%d+):'))
+      if win and not vim.api.nvim_win_is_valid(win) then
+         pids[key] = nil
+      end
+   end
+end
+
+-- Fold the many redraws of one turn into a single paint.
+local paint_pending, paint_force = false, false
+local function schedule_paint(force)
+   paint_force = paint_force or force == true
+   if paint_pending then
+      return
+   end
+   paint_pending = true
+   vim.schedule(function()
+      local f = paint_force
+      paint_pending, paint_force = false, false
+      paint(f)
+   end)
 end
 
 local function place(buf, item, gen)
@@ -256,37 +533,43 @@ local function place(buf, item, gen)
             avail_cols(buf, is_mermaid and M.config.mermaid.max_width or M.config.max_width),
             is_mermaid and M.config.mermaid.max_height or M.config.max_height
          )
-         local size_key = item.key .. ':' .. cols .. 'x' .. rows
-         local img = images[size_key]
+         local img = images[item.key]
          if not img then
             img = { id = next_id }
             next_id = next_id + 1
-            images[size_key] = img
+            images[item.key] = img
          end
          if not img.sent then
-            if not kitty.transmit(img.id, png, rows, cols) then
+            if not kitty.transmit(img.id, png) then
                return set_virt_lines(buf, mark, pos[1], {
                   { { '⚠ cannot read ' .. png, 'DiagnosticVirtualTextError' } },
                })
             end
             img.sent = true
          end
-         set_virt_lines(buf, mark, pos[1], kitty.placeholder_lines(img.id, rows, cols))
+         marks[buf] = marks[buf] or {}
+         marks[buf][mark] = { id = img.id, rows = rows, cols = cols, px_w = px_w, px_h = px_h }
+         set_virt_lines(buf, mark, pos[1], reserve_lines(rows, cols))
+         schedule_paint(true)
       end)
    end)
 end
 
 function M.render(buf)
-   buf = buf or vim.api.nvim_get_current_buf()
+   buf = resolve_buf(buf)
    local b = bufs[buf]
    if not b or not b.enabled or not vim.api.nvim_buf_is_valid(buf) then
       return
    end
    b.gen = b.gen + 1
    vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+   -- Removed, not emptied: place() makes the table again when there is
+   -- something to track, and an empty one would keep triggering paints.
+   marks[buf] = nil
    for _, item in ipairs(b.static and { b.static } or scan(buf)) do
       place(buf, item, b.gen)
    end
+   schedule_paint(true)
 end
 
 local function render_all()
@@ -297,14 +580,17 @@ end
 
 -- ── attach / detach ───────────────────────────────────────────────────────
 
+-- Images now go straight to the terminal rather than being encoded in text
+-- colors, so 'termguicolors' is no longer needed.
 local warned
 local function terminal_ok()
-   if kitty.supported() and vim.o.termguicolors then
+   local ok, reason = kitty.supported()
+   if ok then
       return true
    end
    if not warned then
       warned = true
-      vim.notify('glimpse: needs a kitty-graphics terminal and termguicolors', vim.log.levels.WARN)
+      vim.notify('glimpse: ' .. (reason or 'terminal cannot display images'), vim.log.levels.WARN)
    end
    return false
 end
@@ -319,7 +605,7 @@ local function debounce(buf)
 end
 
 function M.attach(buf, static)
-   buf = buf or vim.api.nvim_get_current_buf()
+   buf = resolve_buf(buf)
    if bufs[buf] then
       bufs[buf].enabled = true
       return M.render(buf)
@@ -347,6 +633,8 @@ function M.attach(buf, static)
             bufs[buf].timer:close()
          end
          bufs[buf] = nil
+         marks[buf] = nil
+         schedule_paint(true)
          pcall(vim.api.nvim_del_augroup_by_id, group)
       end,
    })
@@ -354,17 +642,19 @@ function M.attach(buf, static)
 end
 
 function M.disable(buf)
-   buf = buf or vim.api.nvim_get_current_buf()
+   buf = resolve_buf(buf)
    local b = bufs[buf]
    if b then
       b.enabled = false
       b.gen = b.gen + 1
       vim.api.nvim_buf_clear_namespace(buf, ns, 0, -1)
+      marks[buf] = nil
+      schedule_paint(true)
    end
 end
 
 function M.toggle(buf)
-   buf = buf or vim.api.nvim_get_current_buf()
+   buf = resolve_buf(buf)
    if bufs[buf] and bufs[buf].enabled then
       M.disable(buf)
    else
@@ -376,8 +666,10 @@ end
 function M.refresh()
    mermaid.clear_failures()
    for _, img in pairs(images) do
+      kitty.delete(img.id)
       img.sent = false
    end
+   forget_placements()
    render_all()
 end
 
@@ -405,6 +697,17 @@ function M.setup(opts)
       vim.api.nvim_create_autocmd(event, o)
    end
 
+   -- There is no event for "the screen changed", and any redraw can move a
+   -- block, so hook the end of each redraw. Writing to the terminal from in
+   -- there is not allowed, so the paint is queued for just afterwards.
+   vim.api.nvim_set_decoration_provider(ns_paint, {
+      on_end = function()
+         if next(placed) ~= nil or next(marks) ~= nil then
+            schedule_paint(false)
+         end
+      end,
+   })
+
    au('FileType', {
       pattern = M.config.filetypes,
       callback = function(ev)
@@ -415,13 +718,6 @@ function M.setup(opts)
       pattern = { '*.png', '*.jpg', '*.jpeg', '*.gif', '*.webp', '*.bmp' },
       callback = function(ev)
          image_buffer(ev.buf, ev.match)
-      end,
-   })
-   -- Colorschemes wipe the id-encoding highlight groups; recreate them after
-   -- the new scheme has applied.
-   au('ColorScheme', {
-      callback = function()
-         vim.schedule(kitty.apply_highlights)
       end,
    })
    -- Mermaid's theme may flip with 'background'.
@@ -436,6 +732,7 @@ function M.setup(opts)
          for _, img in pairs(images) do
             img.sent = false
          end
+         forget_placements()
          render_all()
       end,
    })
@@ -443,6 +740,18 @@ function M.setup(opts)
       callback = function()
          kitty.cell_size(true)
          render_all()
+      end,
+   })
+   -- Splitting, closing or dragging a window changes the width a block has to
+   -- fit into, so the sizes have to be worked out again. The rendered images
+   -- are cached, so this is cheap.
+   au({ 'WinResized', 'WinNew', 'WinClosed' }, {
+      callback = function()
+         for buf, b in pairs(bufs) do
+            if b.enabled then
+               debounce(buf)
+            end
+         end
       end,
    })
    au('VimLeavePre', {
