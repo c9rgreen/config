@@ -1,6 +1,11 @@
 # bat configuration
 # https://github.com/sharkdp/bat#configuration-file
 
-# The built-in ansi theme renders through the terminal's ANSI palette, so it
-# follows whichever Ghostty theme is active with no luma detection needed.
---theme="ansi"
+# Circadia, to match the Ghostty themes. The theme files live in themes/;
+# run `bat cache --build` after editing them. delta reads the same cache.
+--theme-dark="circadia-dark"
+--theme-light="circadia"
+
+# Pick light or dark from the macOS setting instead of asking the terminal.
+# Asking does not work inside tmux or in an fzf preview.
+--theme="auto:system"
