@@ -2,7 +2,7 @@
 # https://github.com/sharkdp/bat#configuration-file
 
 # Circadia, to match the Ghostty themes. The theme files live in themes/;
-# run `bat cache --build` after editing them. delta reads the same cache.
+# run `bat cache --build` after editing them.
 --theme-dark="circadia-dark"
 --theme-light="circadia"
 
