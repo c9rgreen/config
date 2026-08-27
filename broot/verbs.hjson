@@ -123,6 +123,14 @@ verbs: [
         impacted_panel: right
     }
 
+    # An alternative to ctrl-g for :toggle_stage (stage/unstage the selection).
+    # alt-s is unbound in broot's defaults and reads as "stage"; ctrl-g keeps
+    # working too, since a custom key is added to the internal, not swapped in.
+    {
+        key: alt-s
+        internal: toggle_stage
+    }
+
 
     # Here's an example of a verb needing the shell capabilities.
     # It copies all children of the currently selected directory
