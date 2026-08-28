@@ -16,6 +16,16 @@ vim.lsp.config('lua_ls', {
    },
 })
 
+-- GitLab CI uses the custom `!reference` YAML tag; without this yamlls
+-- reports "unresolved tag" diagnostics in .gitlab-ci.yml.
+vim.lsp.config('yamlls', {
+   settings = {
+      yaml = {
+         customTags = { '!reference sequence' },
+      },
+   },
+})
+
 vim.lsp.enable({
    'cssls',
    'eslint',
