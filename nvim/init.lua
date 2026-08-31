@@ -1,5 +1,4 @@
 -- Options
-vim.opt.clipboard:append('unnamedplus')
 vim.opt.virtualedit = 'all'
 vim.opt.fillchars = { diff = ' ', fold = ' ' }
 vim.opt.wildignorecase = true
