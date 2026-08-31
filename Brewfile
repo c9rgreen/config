@@ -50,8 +50,10 @@ brew "zellij"
 brew "zk"
 brew "zoxide"
 
-# Casks
-cask "ghostty"
-cask "hammerspoon"
-cask "orbstack"
-cask "orion"
+# Casks (macOS only — Homebrew casks don't exist on Linux)
+if OS.mac?
+  cask "ghostty"
+  cask "hammerspoon"
+  cask "orbstack"
+  cask "orion"
+end
