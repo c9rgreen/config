@@ -93,6 +93,12 @@ end
 vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(define_separators) end })
 define_separators()
 
+-- Gutter, in mini's default order: right-aligned line number, fold marker,
+-- signs, then a separator against the text (dropped in inactive windows, whose
+-- gutter is also dimmed). The fold section is the native fold column, which
+-- 'foldcolumn' and 'fillchars' shape (see init.lua).
+require('mini.statuscolumn').setup()
+
 require('mini.icons').setup()
 -- Stand in for nvim-web-devicons, so plugins that ask for it get mini.icons.
 -- That way codediff.nvim's file icons use the same colors as everything else.

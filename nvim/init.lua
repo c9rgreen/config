@@ -6,73 +6,17 @@ vim.opt.shell = 'fish' -- for :terminal, :!, and system()
 vim.opt.diffopt:append('vertical,iwhiteall,algorithm:histogram')
 vim.opt.splitright = true
 vim.opt.number = false
-vim.opt.numberwidth = 4 -- reserve a stable gutter so statuscolumn's %=%l right-aligns
+vim.opt.numberwidth = 4 -- reserve a stable gutter so the line number does not shift
 vim.opt.path:append { '**' }
 vim.opt.wildoptions:append('fuzzy')
 vim.opt.foldlevel = 5
 
--- Fold column: down triangle at open-fold starts, right triangle at closed-fold
--- starts, blank otherwise. Rendered via statuscolumn so the native foldcolumn's
--- depth digits are never shown.
-function _G.fold_column()
-   local lnum = vim.v.lnum
-   if vim.fn.foldclosed(lnum) == lnum then
-      return '▶'
-   end
-   local level = vim.fn.foldlevel(lnum)
-   if level > vim.fn.foldlevel(lnum - 1) then
-      return '▼'
-   end
-   -- A fold that starts on the same line the previous one ended -- two
-   -- functions with no blank line between them, say -- does not show up as a
-   -- deeper fold level: one fold over lines 5-10 and two over 5-7 and 8-10
-   -- report the same levels, so comparing levels can never tell them apart.
-   -- With 'foldmethod=expr' the fold expression can, since it returns '>N' on
-   -- a line that starts a fold, and v:lnum is already the line being drawn, so
-   -- it can be run as it stands. Expressions that describe folds the other way
-   -- ('a1'/'s1') just miss the arrow, as before, and hand-made folds
-   -- (neogit's) have nothing to ask.
-   if level > 0 and vim.wo.foldmethod == 'expr' and vim.wo.foldexpr ~= '' then
-      local ok, expr = pcall(vim.api.nvim_eval, vim.wo.foldexpr)
-      if ok and tostring(expr):sub(1, 1) == '>' then
-         return '▼'
-      end
-   end
-   return ' '
-end
--- Click handler: toggle the fold that starts on the clicked line.
-function _G.fold_click()
-   local lnum = vim.fn.getmousepos().line
-   if lnum <= 0 or vim.fn.foldlevel(lnum) == 0 then
-      return
-   end
-   if vim.fn.foldclosed(lnum) == -1 then
-      vim.cmd(lnum .. 'foldclose')
-   else
-      vim.cmd(lnum .. 'foldopen')
-   end
-end
-vim.opt.foldcolumn = '0'
-
--- Gutter: sign column, fold marker, then a right-aligned line number. Terminal
--- buffers have neither signs nor folds, so they get the line number alone.
--- Neogit's status buffer keeps its folds but drops the signs, because the only
--- signs it places are its own fold arrows and fold_column() already draws
--- those.
---
--- All of this is decided here rather than in an autocmd, because both
--- 'signcolumn' and 'statuscolumn' belong to the window, not the buffer: a value
--- set for a terminal would stick around once that window showed a file, and
--- neogit sets its own signcolumn after the FileType event anyway. Leaving out
--- %s is what hides the signs; 'signcolumn' only sets aside the space for them.
-function _G.status_column()
-   if vim.bo.buftype == 'terminal' then
-      return '%=%l '
-   end
-   local signs = vim.bo.filetype == 'NeogitStatus' and '' or '%s'
-   return signs .. '%@v:lua.fold_click@' .. fold_column() .. '%X %=%l '
-end
-vim.opt.statuscolumn = '%{%v:lua.status_column()%}'
+-- Fold column: one cell of native fold markers, which is what mini.statuscolumn
+-- draws in its fold section. 'fillchars' keeps the markers to the triangles at
+-- fold starts and blanks the rest, so the column never widens into depth digits
+-- and folded lines get no vertical bar.
+vim.opt.foldcolumn = '1'
+vim.opt.fillchars:append('foldopen:▼,foldclose:▶,foldsep: ,foldinner: ')
 
 -- Closed folds: first line + line count (the ▶ marker lives in the fold column)
 function _G.fold_text()
