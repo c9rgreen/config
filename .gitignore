@@ -18,6 +18,8 @@ glab-cli/config.yml
 
 # Fish shell
 fish/fish_variables
+# Symlink to broot's generated launcher, whose path is per-machine
+fish/functions/br.fish
 
 # systemd
 systemd
