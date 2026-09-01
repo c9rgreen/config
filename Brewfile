@@ -1,6 +1,8 @@
 # vim: ft=ruby
 
 # Command-line utilities
+brew "podman"
+brew "podman-compose"
 brew "asciinema"
 brew "asdf"
 brew "awscli"
@@ -56,4 +58,5 @@ if OS.mac?
   cask "hammerspoon"
   cask "orbstack"
   cask "orion"
+  cask "podman-desktop"
 end
