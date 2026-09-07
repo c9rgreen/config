@@ -1,0 +1,67 @@
+# Chiroptera Dark (Soft contrast)
+# From Chiroptera, Dawid Kurek's LAB-space day/night color system:
+#   https://dawikur.dev/chiroptera/
+#   https://github.com/dawikur/chiroptera
+# Converted from the upstream Vim colorscheme (chiroptera_dark_soft).
+
+background = #424141
+foreground = #a4a29b
+
+# Cursor is reverse video upstream
+cursor-color = #a4a29b
+cursor-text = #424141
+
+# Visual is the dim blue with the text left as is
+selection-background = #004a4c
+selection-foreground = #a4a29b
+
+# Black (bg_dim)
+palette = 0=#373737
+
+# Red
+palette = 1=#fe7a65
+
+# Green
+palette = 2=#a9a72d
+
+# Yellow
+palette = 3=#e68d32
+
+# Blue
+palette = 4=#6dadaf
+
+# Magenta
+palette = 5=#dc89ad
+
+# Cyan
+palette = 6=#61b197
+
+# White (fg)
+palette = 7=#a4a29b
+
+# Bright Black (bg_bright)
+palette = 8=#575755
+
+# Bright Red
+palette = 9=#fea391
+
+# Bright Green
+palette = 10=#c3bf46
+
+# Bright Yellow
+palette = 11=#fea753
+
+# Bright Blue
+palette = 12=#85c6c9
+
+# Bright Magenta
+palette = 13=#f6a2c6
+
+# Bright Cyan
+palette = 14=#79caaf
+
+# Bright White (fg_bright)
+palette = 15=#bdbbb2
+
+# Split divider (VertSplit is the UI tier upstream)
+split-divider-color = #575755
