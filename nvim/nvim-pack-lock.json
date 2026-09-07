@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "arete.nvim": {
-      "rev": "e17ecc821311dd3354fefdd953082ad36b700e41",
-      "src": "https://github.com/szymonwilczek/arete.nvim"
-    },
     "codediff.nvim": {
       "rev": "0abad4aa022a34fab0deb90dd9379d5de1c9c329",
       "src": "https://github.com/esmuellert/codediff.nvim"
@@ -15,10 +11,6 @@
     "gitlab.vim": {
       "rev": "0cc64de832d79da7f2a53b111d7209a726fc33c8",
       "src": "https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git"
-    },
-    "mac-clear": {
-      "rev": "1bfd1c798233f5e4d29a1d104e2c419682679e32",
-      "src": "https://github.com/boningmaple/mac-clear"
     },
     "mason-lspconfig.nvim": {
       "rev": "40276c4df7e6bdce6801d6c035c6227f9115a855",
@@ -32,17 +24,9 @@
       "rev": "a311ed247d527db9592bb434356badc705363746",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "modus-themes.nvim": {
-      "rev": "56233f0986ef6c8d0eab97e924e87144e584d970",
-      "src": "https://github.com/miikanissi/modus-themes.nvim"
-    },
     "neogit": {
       "rev": "5adc81b26232954cd7a90f158aa7844c18fc3165",
       "src": "https://github.com/NeogitOrg/neogit"
-    },
-    "nvim": {
-      "rev": "6f8ca3d0f228fbd61e5aeeb5c68343c410720873",
-      "src": "https://github.com/ember-theme/nvim"
     },
     "nvim-lspconfig": {
       "rev": "16286347bdba1333c7d124d9de9fe6630731b2b2",
