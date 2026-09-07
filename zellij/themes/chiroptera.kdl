@@ -1,0 +1,312 @@
+// Chiroptera, matching the Ghostty themes in ../../ghostty/themes and
+// Chiroptera, Dawid Kurek's LAB-space day/night color system:
+//   https://dawikur.dev/chiroptera/
+//   https://github.com/dawikur/chiroptera
+//
+// Colors are written as hex rather than as ANSI names so the two themes
+// stay pinned to the normal-contrast palette whichever ghostty contrast
+// variant is active (hard/soft move the background tiers).
+//
+// Roles follow upstream's core.vim: the UI tier (bg_bright) carries chips,
+// frames and dividers; the dim blue is the selection (Visual); blue is the
+// "selected" hue, so the active chip and the focused frame ride it, with
+// the brighter blue for transient states (search, rename). Emphases are
+// the bright tier, which upstream reserves for syntax: blue, yellow, green,
+// magenta. Inside the selected chip the emphases are the dim tints, the
+// only tones that read on the blue.
+
+themes {
+    // Dark, normal contrast
+    chiroptera {
+        // fg on bg
+        text_unselected {
+            base "#a4a29b"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#a4a29b"
+            background "#003e41"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        // The active mode / tab chip: bg knocked out of the blue
+        ribbon_selected {
+            base "#373737"
+            background "#6dadaf"
+            emphasis_0 "#760004"
+            emphasis_1 "#373737"
+            emphasis_2 "#641b41"
+            emphasis_3 "#552d00"
+        }
+
+        // Inactive chips sit on the UI tier. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#a4a29b"
+            background "#4c4c4a"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#4c4c4a"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#fea753"
+        }
+
+        table_title {
+            base "#6dadaf"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        table_cell_selected {
+            base "#a4a29b"
+            background "#003e41"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        table_cell_unselected {
+            base "#a4a29b"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        list_selected {
+            base "#a4a29b"
+            background "#003e41"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        list_unselected {
+            base "#a4a29b"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#c3bf46"
+            emphasis_3 "#f6a2c6"
+        }
+
+        // Unfocused frames fall back to the terminal default when this
+        // section is missing, so it must be set explicitly. The UI tier is
+        // what ghostty paints the split divider with, matching the inactive
+        // tmux pane borders.
+        frame_unselected {
+            base "#4c4c4a"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#f6a2c6"
+            emphasis_3 "#c3bf46"
+        }
+
+        frame_selected {
+            base "#6dadaf"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#fea753"
+            emphasis_2 "#f6a2c6"
+            emphasis_3 "#c3bf46"
+        }
+
+        frame_highlight {
+            base "#85c6c9"
+            background "#373737"
+            emphasis_0 "#f6a2c6"
+            emphasis_1 "#85c6c9"
+            emphasis_2 "#85c6c9"
+            emphasis_3 "#85c6c9"
+        }
+
+        exit_code_success {
+            base "#a9a72d"
+            background "#373737"
+            emphasis_0 "#85c6c9"
+            emphasis_1 "#373737"
+            emphasis_2 "#f6a2c6"
+            emphasis_3 "#fea753"
+        }
+
+        exit_code_error {
+            base "#fe7a65"
+            background "#373737"
+            emphasis_0 "#fea753"
+            emphasis_1 "#373737"
+            emphasis_2 "#85c6c9"
+            emphasis_3 "#f6a2c6"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#6dadaf"
+            player_2 "#dc89ad"
+            player_3 "#e68d32"
+            player_4 "#61b197"
+            player_5 "#a9a72d"
+            player_6 "#fe7a65"
+            player_7 "#85c6c9"
+            player_8 "#f6a2c6"
+            player_9 "#8b8a84"
+            player_10 "#4c4c4a"
+        }
+    }
+
+    // Light, normal contrast
+    chiroptera-light {
+        text_unselected {
+            base "#5d5c5a"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        text_selected {
+            base "#5d5c5a"
+            background "#a5e6e9"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        ribbon_selected {
+            base "#dddacf"
+            background "#226569"
+            emphasis_0 "#fed0c6"
+            emphasis_1 "#dddacf"
+            emphasis_2 "#fecde1"
+            emphasis_3 "#fed2ae"
+        }
+
+        ribbon_unselected {
+            base "#5d5c5a"
+            background "#c3c1b8"
+            emphasis_0 "#004f52"
+            emphasis_1 "#c3c1b8"
+            emphasis_2 "#494900"
+            emphasis_3 "#6c3a00"
+        }
+
+        table_title {
+            base "#226569"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        table_cell_selected {
+            base "#5d5c5a"
+            background "#a5e6e9"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        table_cell_unselected {
+            base "#5d5c5a"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        list_selected {
+            base "#5d5c5a"
+            background "#a5e6e9"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        list_unselected {
+            base "#5d5c5a"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#494900"
+            emphasis_3 "#762c51"
+        }
+
+        frame_unselected {
+            base "#c3c1b8"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#762c51"
+            emphasis_3 "#494900"
+        }
+
+        frame_selected {
+            base "#226569"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#6c3a00"
+            emphasis_2 "#762c51"
+            emphasis_3 "#494900"
+        }
+
+        frame_highlight {
+            base "#004f52"
+            background "#dddacf"
+            emphasis_0 "#762c51"
+            emphasis_1 "#004f52"
+            emphasis_2 "#004f52"
+            emphasis_3 "#004f52"
+        }
+
+        exit_code_success {
+            base "#5f6000"
+            background "#dddacf"
+            emphasis_0 "#004f52"
+            emphasis_1 "#dddacf"
+            emphasis_2 "#762c51"
+            emphasis_3 "#6c3a00"
+        }
+
+        exit_code_error {
+            base "#b3201b"
+            background "#dddacf"
+            emphasis_0 "#6c3a00"
+            emphasis_1 "#dddacf"
+            emphasis_2 "#004f52"
+            emphasis_3 "#762c51"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#226569"
+            player_2 "#8f4367"
+            player_3 "#8b4c00"
+            player_4 "#0f6952"
+            player_5 "#5f6000"
+            player_6 "#b3201b"
+            player_7 "#004f52"
+            player_8 "#762c51"
+            player_9 "#74736f"
+            player_10 "#c3c1b8"
+        }
+    }
+}
