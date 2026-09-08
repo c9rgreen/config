@@ -149,10 +149,11 @@ let &t_ti .= "\e[2 q"
 " The .= appends to any existing t_te setting.
 let &t_te .= "\e[2 q"
 
-" Atomic, following the macOS appearance the same way the fish task wrapper
-" does (fish/conf.d/taskwarrior.fish).
+" Monokai Pro, following the macOS appearance the same way the fish task
+" wrapper does (fish/conf.d/taskwarrior.fish). Atomic, Chiroptera and
+" Circadia remain in colors/ as alternatives.
 if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~# 'Dark'
-  colorscheme atomic_dark
+  colorscheme monokai_pro_dark
 else
-  colorscheme atomic_light
+  colorscheme monokai_pro_light
 endif

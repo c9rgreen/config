@@ -1,0 +1,96 @@
+# Monokai Pro Light, for Taskwarrior.
+# From Monokai Pro (https://monokai.pro/), via loctvl842/monokai-pro.nvim:
+#   https://github.com/loctvl842/monokai-pro.nvim
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex (Ghostty's bundled
+# "Monokai Pro Light" theme):
+#
+#   bg       #faf4f2 -> 255    red     #e14775 -> 168
+#   dark1    #ede7e5 -> 254    orange  #e16032 -> 167
+#   dimmed5  #d3cdcc -> 252    yellow  #cc7a0a -> 172
+#   dimmed4  #bfb9ba -> 250    green   #269d69 -> 35
+#   dimmed3  #a59fa0 -> 247    cyan    #1c8ca8 -> 31
+#   dimmed2  #918c8e -> 245    purple  #7058be -> 61
+#   dimmed1  #706b6e -> 242
+#   text     #29242a -> 235
+#
+# Roles follow monokai-pro.nvim: red is deleted/error, orange modified/
+# warning, green added/active, yellow the accent (headers, bars), cyan
+# info and purple special. Due urgency ramps yellow (due) -> orange
+# (today) -> red (overdue).
+#
+# Enable from taskrc.light:  include /Users/cgreen/.config/task/monokai-pro-light.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color254
+color.header=color172
+color.footnote=color247
+color.warning=bold color167
+color.error=color255 on color168
+color.debug=color31
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color255 on color35
+color.recurring=color31
+color.scheduled=on color254
+color.until=
+color.blocked=color235 on color252
+color.blocking=color255 on color247
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color235
+color.uda.priority.M=color242
+color.uda.priority.L=color245
+
+# Tags
+color.tag.next=color167
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=bold color167
+color.due=color172
+color.overdue=color168
+
+# Report: burndown
+color.burndown.done=on color35
+color.burndown.pending=on color168
+color.burndown.started=on color172
+
+# Report: history
+color.history.add=color255 on color172
+color.history.delete=color255 on color168
+color.history.done=color255 on color35
+
+# Report: summary
+color.summary.background=color235 on color255
+color.summary.bar=color255 on color31
+
+# Command: calendar
+color.calendar.due.today=color255 on color167
+color.calendar.due=color255 on color172
+color.calendar.holiday=color255 on color61
+color.calendar.scheduled=
+color.calendar.overdue=color255 on color168
+color.calendar.today=color255 on color31
+color.calendar.weekend=on color254
+color.calendar.weeknumber=color31
+
+# Command: sync
+color.sync.added=color35
+color.sync.changed=color172
+color.sync.rejected=color168
+
+# Command: undo
+color.undo.after=color35
+color.undo.before=color168

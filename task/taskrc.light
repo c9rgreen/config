@@ -8,7 +8,8 @@ include /Users/cgreen/.config/task/bugwarrior-udas.rc
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use light colors
-include /Users/cgreen/.config/task/atomic-light.theme
-# Chiroptera and Circadia alternatives:
+include /Users/cgreen/.config/task/monokai-pro-light.theme
+# Atomic, Chiroptera and Circadia alternatives:
+# include /Users/cgreen/.config/task/atomic-light.theme
 # include /Users/cgreen/.config/task/chiroptera-light.theme
 # include /Users/cgreen/.config/task/circadia-light.theme
