@@ -282,19 +282,20 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # Monokai Pro skins, following the terminal's background like the
-    # Ghostty "dark:Monokai Pro, light:Monokai Pro Light" pair. The
-    # chiroptera, circadia and atomic skins remain in skins/ as
+    # Circadia skins, following the terminal's background like the
+    # Ghostty dark:circadia_dark/light:circadia_light pair. Swap the
+    # dark file for skins/circadia-forest.hjson for the pine variant;
+    # the monokai-pro, chiroptera and atomic skins remain in skins/ as
     # alternatives.
     {
         luma: [
             dark
             unknown
         ]
-        file: skins/monokai-pro.hjson
+        file: skins/circadia.hjson
     }
     {
         luma: light
-        file: skins/monokai-pro-light.hjson
+        file: skins/circadia-light.hjson
     }
 ]

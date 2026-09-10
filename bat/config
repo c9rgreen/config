@@ -1,11 +1,11 @@
 # bat configuration
 # https://github.com/sharkdp/bat#configuration-file
 
-# Monokai Pro, to match the Ghostty themes. The theme files live in themes/;
+# Circadia, to match the Ghostty themes. The theme files live in themes/;
 # run `bat cache --build` after editing them. (chiroptera{,-dark} and
-# circadia{,-dark} remain in themes/ as alternatives.)
---theme-dark="monokai-pro"
---theme-light="monokai-pro-light"
+# monokai-pro{,-light} remain in themes/ as alternatives.)
+--theme-dark="circadia-dark"
+--theme-light="circadia"
 
 # Pick light or dark from the macOS setting instead of asking the terminal.
 # Asking does not work inside tmux or in an fzf preview.
