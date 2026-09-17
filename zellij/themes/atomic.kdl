@@ -37,12 +37,16 @@ themes {
             emphasis_3 "#c47a98"
         }
 
-        // Inactive chips sit on bg_border, the same shade as the pane frames
+        // Inactive chips sit on bg_border, the same shade as the pane frames.
+        // emphasis_1 doubles as the hovered-chip (and alternate-chip)
+        // background, with base as its text, so it has to be a background
+        // tone rather than the fg the other emphases use: the selection
+        // shade lifts a hovered chip slightly off its neighbours.
         ribbon_unselected {
             base "#f5ecd7"
             background "#2a3d44"
             emphasis_0 "#e05a2d"
-            emphasis_1 "#f5ecd7"
+            emphasis_1 "#354a52"
             emphasis_2 "#4a7fa5"
             emphasis_3 "#2fb8b0"
         }
@@ -172,11 +176,12 @@ themes {
             emphasis_3 "#a85878"
         }
 
+        // emphasis_1 is the hovered/alternate chip background (see above)
         ribbon_unselected {
             base "#2a2920"
             background "#d4d1c7"
             emphasis_0 "#b84820"
-            emphasis_1 "#2a2920"
+            emphasis_1 "#cbc8bc"
             emphasis_2 "#3a6a90"
             emphasis_3 "#1a8580"
         }

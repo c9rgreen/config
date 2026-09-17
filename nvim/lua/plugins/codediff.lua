@@ -60,12 +60,16 @@ vim.keymap.set('n', '<leader>gr', function()
    vim.cmd('CodeDiff ' .. rev)
 end, { desc = 'Review branch (codediff vs git last)' })
 
--- Step through the files with Tab and Shift-Tab instead of ]f and [f.
+-- Step through the files with Tab and Shift-Tab instead of ]f and [f, and
+-- through the changes within a file with Shift-Down and Shift-Up instead of
+-- ]c and [c.
 require('codediff').setup({
    keymaps = {
       view = {
          next_file = '<Tab>',
          prev_file = '<S-Tab>',
+         next_hunk = '<S-Down>',
+         prev_hunk = '<S-Up>',
       },
    },
 })
