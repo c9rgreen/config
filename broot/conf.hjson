@@ -282,19 +282,18 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # Atomic skins, following the terminal's background like the
-    # Ghostty dark:atomic/light:atomic_light pair. The circadia,
-    # circadia-forest, monokai-pro and chiroptera skins remain in
-    # skins/ as alternatives.
+    # Circadia skins, following the terminal's background like the Ghostty
+    # dark:circadia_forest_dark/light:circadia_light pair. The circadia
+    # (Warm Ember) skin remains in skins/ as an alternative.
     {
         luma: [
             dark
             unknown
         ]
-        file: skins/atomic.hjson
+        file: skins/circadia-forest.hjson
     }
     {
         luma: light
-        file: skins/atomic-light.hjson
+        file: skins/circadia-light.hjson
     }
 ]

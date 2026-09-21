@@ -197,5 +197,6 @@ vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
 
--- Colorscheme relies on mini.base16
-vim.cmd.colorscheme('atomic')
+-- Colorscheme relies on mini.base16. circadia-forest picks its variant from
+-- 'background': dark_forest when dark, the shared light_parchment when light.
+vim.cmd.colorscheme('circadia-forest')

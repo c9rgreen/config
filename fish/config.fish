@@ -44,11 +44,11 @@ if status is-interactive
     set fish_color_redirection magenta
     set fish_color_end green
     set fish_color_escape magenta
-    # brblack here was the same trap as the pager below — it is fg_dim (#d9cdb8)
-    # in atomic, so an uncolored token inside the match sat at 1.34:1 (1.53:1 in
-    # atomic_light). Reuse the invariant fg-over-bg pairing, which means naming a
-    # foreground too: syntax colors no longer show through the match, matching
-    # fish's own default (bryellow --background=brblack).
+    # brblack here was the same trap as the pager below — in some themes it is
+    # a foreground tier rather than a dim background, which left an uncolored
+    # token inside the match at roughly 1.3:1. Reuse the invariant fg-over-bg
+    # pairing, which means naming a foreground too: syntax colors no longer show
+    # through the match, matching fish's own default (bryellow --background=brblack).
     set fish_color_search_match white --background=black
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
@@ -124,10 +124,10 @@ if type -q fzf
     # comes from the terminal's ANSI palette and follows the Ghostty theme.
     #
     # Only the chromatic slots are named. The neutrals (0/7/8/15) are assigned
-    # inconsistently across the themes in ghostty/themes — atomic treats 0 as a
-    # dark border and 7/8/15 as foregrounds, while the mini* themes invert that
-    # (0/8 foreground, 7/15 background) — so -1, the terminal's own fg/bg, is
-    # used wherever a neutral is wanted.
+    # inconsistently across the themes in ghostty/themes — circadia tracks 0 to
+    # the background and 7/8/15 to foreground tiers, while the mini* themes
+    # invert that (0/8 foreground, 7/15 background) — so -1, the terminal's own
+    # fg/bg, is used wherever a neutral is wanted.
     #
     # For the same reason the current line gets no background: bold text and a
     # red pointer mark it instead, which stays legible in light and dark alike.

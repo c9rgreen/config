@@ -8,9 +8,6 @@ include /Users/cgreen/.config/task/bugwarrior-udas.rc
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use dark colors
-include /Users/cgreen/.config/task/atomic-dark.theme
-# Circadia, Circadia Forest, Monokai Pro and Chiroptera alternatives:
+include /Users/cgreen/.config/task/circadia-forest-dark.theme
+# Circadia Dark (Warm Ember) alternative:
 # include /Users/cgreen/.config/task/circadia-dark.theme
-# include /Users/cgreen/.config/task/circadia-forest-dark.theme
-# include /Users/cgreen/.config/task/monokai-pro-dark.theme
-# include /Users/cgreen/.config/task/chiroptera-dark.theme
