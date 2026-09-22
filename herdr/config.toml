@@ -1,0 +1,72 @@
+onboarding = false
+
+# Circadia for Herdr, from the palette spec:
+# https://github.com/tanmaymanojgandhi/circadia
+#
+# dark  = dark_forest    (Obsidian Pine), matching ghostty/themes/circadia_forest_dark
+# light = light_parchment (Warm Parchment), matching ghostty/themes/circadia_light
+#
+# Herdr has no theme files: a theme is a built-in name plus token overrides,
+# so both variants live here. Catppuccin is the base only because Herdr's
+# token names are Catppuccin's; every token is overridden below, so nothing
+# of the base shows through.
+#
+# auto_switch follows the host terminal's appearance, which is what
+# ghostty/config already does with `theme = dark:..., light:...`, so Herdr
+# flips at the same moment the terminal does.
+[theme]
+name = "catppuccin"
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+# Obsidian Pine. Circadia ships no red, so the pink property tone carries the
+# alarm roles, the same mapping broot/skins/circadia-forest.hjson uses. red,
+# peach, yellow and green are the spec's good-to-bad ramp read backwards, so
+# severity steps stay distinct: green -> amber -> orange -> pink.
+[theme.custom.dark]
+accent        = "#83b384"   # accent (pine); also the cursor color in the ports
+panel_bg      = "#131714"   # bg_canvas
+sidebar_bg    = "#1a1e1b"   # bg_surface -- the sidebar sits a tier above panes
+active_row_bg = "#242a25"   # bg_element
+selection_bg  = "#353c36"   # border -- one step past active_row_bg so the
+                            # navigate cursor stays readable on the active row
+surface_dim   = "#1a1e1b"   # bg_surface
+surface0      = "#242a25"   # bg_element
+surface1      = "#353c36"   # border
+overlay0      = "#838d85"   # text_faint
+overlay1      = "#909890"   # comments
+text          = "#c4ccc5"   # text_primary
+subtext0      = "#9fa9a1"   # text_muted
+mauve         = "#b29ace"   # functions
+green         = "#92b87e"   # strings
+yellow        = "#d1aa73"   # types (the tone the terminal ports give ANSI 1)
+peach         = "#d19b66"   # numbers
+red           = "#d092a9"   # properties -- the alarm tone, circadia has no red
+blue          = "#6cb0c5"   # keywords
+teal          = "#83bc97"   # the ports' bright-green tone, the one teal-leaning
+                            # color in the variant
+
+# Warm Parchment. Same ramp: green -> teal -> brown -> magenta. yellow and teal
+# share the number tone, exactly as slots 3 and 6 do in
+# ghostty/themes/circadia_light -- the light variant has no separate yellow.
+[theme.custom.light]
+accent        = "#0048b3"   # accent (blue); also the cursor color in the ports
+panel_bg      = "#f7f2e6"   # bg_canvas
+sidebar_bg    = "#eee7d6"   # bg_surface
+active_row_bg = "#e5dcc6"   # bg_element
+selection_bg  = "#d7cdb7"   # border
+surface_dim   = "#eee7d6"   # bg_surface
+surface0      = "#e5dcc6"   # bg_element
+surface1      = "#d7cdb7"   # border
+overlay0      = "#43505c"   # text_faint
+overlay1      = "#524b42"   # comments
+text          = "#28323a"   # text_primary
+subtext0      = "#46535f"   # text_muted
+mauve         = "#4b1fa3"   # properties
+green         = "#005f2f"   # strings
+yellow        = "#095b62"   # numbers -- the light variant's caution tone
+peach         = "#843900"   # types -- the only warm tone, so it carries urgency
+red           = "#7a1f7a"   # functions -- the alarm tone, circadia has no red
+blue          = "#0048b3"   # keywords; the light accent is this same blue
+teal          = "#095b62"   # numbers, shared with yellow

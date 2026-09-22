@@ -77,5 +77,11 @@ lazygit/state.yml
 __pycache__
 .ruff_cache
 
+# herdr: only config.toml is hand-authored. Everything else is runtime state --
+# sockets, logs, live session layout, cached release notes, plugin locks -- plus
+# the config.toml.bak-keybind-v2-* that `herdr config reset-keys` leaves behind.
+herdr/*
+!herdr/config.toml
+
 # Generated user-data artifact (build with: just user-data)
 user-data.gz
