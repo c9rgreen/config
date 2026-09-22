@@ -12,5 +12,4 @@
 | [Neovim](https://neovim.io)                                    | Text Editor         |
 | [OrbStack](https://orbstack.dev)                               | Virtual Machines    |
 | [Berkeley Mono](https://usgraphics.com/products/berkeley-mono) | Font                |
-| Wallpaper                                                      | Medium Gray #69867D |
 
