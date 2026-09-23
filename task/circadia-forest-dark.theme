@@ -16,7 +16,7 @@
 # property tone (175) while the pine accent (108) marks active/header
 # moments. Due urgency ramps amber (due) -> orange (today) -> pink (overdue).
 #
-# Enable from taskrc.dark:  include /Users/cgreen/.config/task/circadia-forest-dark.theme
+# Enable from taskrc.dark:  include ~/.config/task/circadia-forest-dark.theme
 
 rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
 

@@ -2,12 +2,12 @@ data.location=~/.local/share/task
 hooks.location=~/.config/task/hooks
 
 # GitLab UDAs synced by bugwarrior (regenerate with `bugwarrior uda`)
-include /Users/cgreen/.config/task/bugwarrior-udas.rc
+include ~/.config/task/bugwarrior-udas.rc
 
 # https://unix.stackexchange.com/questions/367151/how-to-override-warning-in-taskwarrior
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use dark colors
-include /Users/cgreen/.config/task/circadia-forest-dark.theme
+include ~/.config/task/circadia-forest-dark.theme
 # Circadia Dark (Warm Ember) alternative:
-# include /Users/cgreen/.config/task/circadia-dark.theme
+# include ~/.config/task/circadia-dark.theme

@@ -17,7 +17,7 @@
 # Due urgency ramps teal (due) -> brown (today) -> magenta (overdue), the
 # same warm scale the terminal port maps ANSI 1 onto.
 #
-# Enable from taskrc.light:  include /Users/cgreen/.config/task/circadia-light.theme
+# Enable from taskrc.light:  include ~/.config/task/circadia-light.theme
 
 rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
 
