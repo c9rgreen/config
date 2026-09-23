@@ -33,7 +33,8 @@ local SEP_L     = '\u{e0b0}'
 local SEP_R     = '\u{e0b2}'
 
 -- The content below is mini's own default apart from the wedges at each
--- color boundary and the powerline markers in the git and location sections.
+-- color boundary, the powerline markers in the git and location sections,
+-- and the Timewarrior section beside the file info.
 -- combine_groups() passes plain strings through verbatim, so each wedge
 -- carries its own highlight and gets none of the padding table entries get.
 require('mini.statusline').setup({
@@ -47,6 +48,8 @@ require('mini.statusline').setup({
          local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
          local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
          local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+         -- The open Timewarrior interval (empty when nothing is tracked).
+         local timew         = require('timew.status').section({ trunc_width = 120, hl = 'MiniStatuslineFileinfo' })
          -- The same fields as mini's own section_location (line/total, then
          -- virtual column/total; when truncated, just line and column), with
          -- the powerline markers standing in for its `|` and `│` separators.
@@ -63,7 +66,7 @@ require('mini.statusline').setup({
             { hl = 'MiniStatuslineFilename', strings = { filename } },
             '%=', -- End left alignment
             '%#MiniStatuslineFileinfoSep#' .. SEP_R,
-            { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+            { hl = 'MiniStatuslineFileinfo', strings = { timew, fileinfo } },
             '%#' .. mode_hl .. 'SepR#' .. SEP_R,
             { hl = mode_hl,                  strings = { search, location } },
          })
