@@ -128,6 +128,39 @@ function M.due(tasks)
    end)
 end
 
+-- Add tags, or remove them with a leading -. Bare words are added, so
+-- "work urgent" and "+work +urgent" do the same. With one task the prompt
+-- names its current tags. Tab completes the tags in use.
+function M.tag(tasks)
+   local current = #tasks == 1 and tasks[1].tags
+   vim.ui.input({
+      prompt = 'Tag ' .. plural(tasks) .. (current and (' (now ' .. table.concat(current, ' ') .. ')') or '') .. ': ',
+      completion = "customlist,v:lua.require'task'.complete_tag",
+   }, function(line)
+      if not line then
+         return
+      end
+      local args, changed = {}, false
+      for _, word in ipairs(vim.split(line, '%s+', { trimempty = true })) do
+         local sign, name = word:match('^([+-]?)([^+-].*)$')
+         if name then
+            local remove = sign == '-'
+            args[#args + 1] = (remove and '-' or '+') .. name
+            changed = changed or vim.iter(tasks):any(function(t)
+               return vim.list_contains(t.tags or {}, name) == remove
+            end)
+         end
+      end
+      if #args == 0 then
+         return
+      end
+      if not changed then
+         return notify('No changes')
+      end
+      sequence({ cmd(tasks, 'modify', unpack(args)) })
+   end)
+end
+
 -- Choose a project from the ones in use, fuzzy-matched with mini.pick when
 -- it is there. The current project is named in the prompt rather than
 -- listed, so a query never lands back on it. "New project" asks for a name
@@ -482,6 +515,7 @@ function M.choose(tasks)
       { 'Lower priority', function(ts) M.priority(ts, -1) end },
       { 'Set due date', M.due },
       { 'Set project', M.project },
+      { 'Tag', M.tag },
       { 'Modify', M.modify },
       { 'Edit in $EDITOR', M.edit },
       { 'Annotate', M.annotate },

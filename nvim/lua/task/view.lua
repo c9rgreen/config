@@ -363,6 +363,7 @@ local KEYS = {
    { 'nx', 's', 'Start or stop' },
    { 'nx', 'D', 'Set or clear the due date' },
    { 'nx', 'P', 'Set the project' },
+   { 'nx', 't', 'Add tags (-tag removes)' },
    { 'nx', 'm', 'Modify' },
    { 'n', 'e', 'Edit in $EDITOR (task edit)' },
    { 'nx', 'A', 'Annotate' },
@@ -451,6 +452,7 @@ local function keymaps(buf)
    map('nx', 's', task(actions.toggle), 'Start or stop')
    map('nx', 'D', task(actions.due), 'Set due date')
    map('nx', 'P', task(actions.project), 'Set project')
+   map('nx', 't', task(actions.tag), 'Tag')
    map('nx', 'm', task(actions.modify), 'Modify')
    map('n', 'e', task(actions.edit), 'Edit in $EDITOR')
    map('nx', 'A', task(actions.annotate), 'Annotate')

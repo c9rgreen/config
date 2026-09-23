@@ -124,6 +124,23 @@ function M.complete_project(lead)
    return vim.tbl_filter(function(p) return vim.startswith(p, lead) end, cli.projects())
 end
 
+-- Completion for the tag prompt: the word under the cursor, keeping its
+-- + or - sign. input() may pass the whole line as the lead, in which case
+-- the words before this one go back in front of each match.
+function M.complete_tag(lead, line, pos)
+   local before = line:sub(1, pos)
+   local head, word = before:match('^(.-)(%S*)$')
+   local sign, name = word:match('^([+-]?)(.*)$')
+   local keep = lead == before and head or ''
+   local out = {}
+   for _, tag in ipairs(cli.tags()) do
+      if vim.startswith(tag, name) then
+         out[#out + 1] = keep .. sign .. tag
+      end
+   end
+   return out
+end
+
 function M.complete(lead, line, pos)
    local words = vim.split(line:sub(1, pos), '%s+', { trimempty = true })
    table.remove(words, 1)
