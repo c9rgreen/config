@@ -149,6 +149,10 @@ require('mini.map').setup({
 })
 vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
 
+-- Replaces vim.notify and shows LSP progress; rounded border to match mini.pick.
+require('mini.notify').setup({ window = { config = { border = 'rounded' } } })
+vim.keymap.set('n', '<leader>N', function() MiniNotify.show_history() end, { desc = 'Notification history' })
+
 require('mini.starter').setup()
 
 -- Defaults; 'foldcolumn' and 'fillchars' shape the fold section (see init.lua).
