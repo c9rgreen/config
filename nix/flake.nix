@@ -12,29 +12,58 @@
 
     # CLI tools available from nixpkgs.
     cliPackages = with pkgs; [
+      podman
+      podman-compose
+      asciinema
+      asdf-vm
       awscli2
+      bat
+      broot
       caddy
+      chafa
       php83Packages.composer
+      crane
       doctl
       elixir
+      eza
+      fastfetch
+      fd
       fish
       flyctl
+      fzf
+      gh
+      ghostscript
       git
       glab
+      herdr
       hugo
       hurl
+      imagemagick
+      jujutsu
       just
       kubectl
-      lazygit
+      kustomize
       lefthook
+      lf
       neovim
-      nodejs_22
-      postgresql_16
+      nodejs
+      pandoc
+      pnpm
+      postgresql_18
       ripgrep
+      shellcheck
       skopeo
+      starship
+      taskwarrior3
+      tectonic
+      timewarrior
       tmux
       tree-sitter
+      typst
       universal-ctags
+      zellij
+      zk
+      zoxide
     ];
   in {
     # `nix profile install .#default` — CLI bundle only.
