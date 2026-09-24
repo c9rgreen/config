@@ -1,16 +1,94 @@
--- Mini
+-- Mini, grouped as in https://nvim-mini.org/mini.nvim/#modules
 vim.pack.add({'https://github.com/nvim-mini/mini.nvim'})
 
-require('mini.basics').setup()
-require('mini.completion').setup()
-require('mini.cmdline').setup()
-require('mini.files').setup()
+--------------------------------------------------------------------------------
+-- Text editing
+--------------------------------------------------------------------------------
 
--- mini.files has no mouse actions of its own, but its windows are ordinary
--- focusable floats (clicking and scrolling already work via 'mouse'). Click
--- actions have to be attached per buffer through the BufferCreate event. A
--- double-click's first click has already placed the cursor, so go_in() acts
--- on the clicked entry.
+require('mini.align').setup()
+require('mini.comment').setup()
+require('mini.completion').setup()
+
+-- Shift+arrows move lines in Normal mode and selections in Visual mode.
+require('mini.move').setup({
+   mappings = {
+      left  = '<S-left>',
+      right = '<S-right>',
+      down  = '<S-down>',
+      up    = '<S-up>',
+
+      line_left  = '<S-left>',
+      line_right = '<S-right>',
+      line_down  = '<S-down>',
+      line_up    = '<S-up>',
+   },
+})
+
+require('mini.pairs').setup()
+
+-- Load snippets/global.json everywhere, plus snippets/<lang>.json per filetype.
+local gen_loader = require('mini.snippets').gen_loader
+require('mini.snippets').setup({
+   snippets = {
+      gen_loader.from_file(vim.fn.stdpath('config') .. '/snippets/global.json'),
+      gen_loader.from_lang(),
+   },
+})
+
+require('mini.surround').setup()
+
+--------------------------------------------------------------------------------
+-- General workflow
+--------------------------------------------------------------------------------
+
+require('mini.basics').setup()
+require('mini.bracketed').setup()
+
+require('mini.bufremove').setup()
+vim.keymap.set('n', '<leader><Del>', function() MiniBufremove.delete() end, { desc = 'Delete buffer' })
+
+local miniclue = require('mini.clue')
+miniclue.setup({
+   triggers = {
+      { mode = { 'n', 'x' }, keys = '<Leader>' },
+      { mode = 'n',          keys = '[' },
+      { mode = 'n',          keys = ']' },
+      { mode = 'i',          keys = '<C-x>' },
+      { mode = { 'n', 'x' }, keys = 'g' },
+      { mode = { 'n', 'x' }, keys = "'" },
+      { mode = { 'n', 'x' }, keys = '`' },
+      { mode = { 'n', 'x' }, keys = '"' },
+      { mode = { 'i', 'c' }, keys = '<C-r>' },
+      { mode = 'n',          keys = '<C-w>' },
+      { mode = { 'n', 'x' }, keys = 'z' },
+   },
+   clues = {
+      { mode = 'n', keys = '<Leader>g', desc = '+Git' },
+      { mode = 'n', keys = '<Leader>n', desc = '+Notes' },
+      miniclue.gen_clues.square_brackets(),
+      miniclue.gen_clues.builtin_completion(),
+      miniclue.gen_clues.g(),
+      miniclue.gen_clues.marks(),
+      miniclue.gen_clues.registers(),
+      miniclue.gen_clues.windows(),
+      miniclue.gen_clues.z(),
+   },
+})
+
+require('mini.cmdline').setup()
+
+require('mini.diff').setup()
+vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
+
+require('mini.extra').setup()
+vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = 'Document symbols' })
+vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
+vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File explorer' })
+
+require('mini.files').setup()
+vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
+
+-- Mouse support: double-click opens an entry, right-click goes up.
 vim.api.nvim_create_autocmd('User', {
    pattern = 'MiniFilesBufferCreate',
    callback = function(args)
@@ -19,24 +97,72 @@ vim.api.nvim_create_autocmd('User', {
       vim.keymap.set('n', '<RightMouse>', function() MiniFiles.go_out() end, { buffer = buf, desc = 'Go up' })
    end,
 })
-require('mini.diff').setup()
+
 require('mini.git').setup()
--- Powerline field markers: branch (U+E0A0), line number (U+E0A1) and
--- character number (U+E0A3), plus the separator wedges (U+E0B0, U+E0B2).
--- Written as escapes rather than literals because these are Private Use Area
--- codepoints, and some editors strip them on save -- the wedges would
--- quietly vanish with nothing in the diff to explain why.
+require('mini.jump').setup()
+require('mini.jump2d').setup()
+
+require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
+vim.keymap.set('n', '<leader>/', function() MiniPick.builtin.grep_live() end, { desc = 'Live grep' })
+vim.keymap.set('n', '<leader>?', function() MiniPick.builtin.help() end, { desc = 'Live help' })
+vim.keymap.set('n', '<leader>-', function() MiniPick.builtin.files() end, { desc = 'File picker' })
+vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
+
+require('mini.sessions').setup()
+require('mini.visits').setup()
+
+--------------------------------------------------------------------------------
+-- Appearance
+--------------------------------------------------------------------------------
+
+-- mini.base16 is set up by the colorschemes in colors/ (see the end of this file).
+
+require('mini.cursorword').setup()
+
+local hipatterns = require('mini.hipatterns')
+hipatterns.setup({
+   highlighters = {
+      fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+      hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+      todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+      note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
+
+      -- Show `#rrggbb` / `#rgb` in their own color.
+      hex_color = hipatterns.gen_highlighter.hex_color(),
+   },
+})
+
+require('mini.icons').setup()
+-- Serve mini.icons to plugins that expect nvim-web-devicons (e.g. codediff.nvim).
+MiniIcons.mock_nvim_web_devicons()
+-- Show kind icons in mini.completion's LSP items.
+MiniIcons.tweak_lsp_kind()
+
+require('mini.indentscope').setup()
+
+require('mini.map').setup({
+   window = {
+      width = 5,
+      winblend = 100,
+      show_integration_count = false,
+   },
+})
+vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
+
+require('mini.starter').setup()
+
+-- Defaults; 'foldcolumn' and 'fillchars' shape the fold section (see init.lua).
+require('mini.statuscolumn').setup()
+
+-- Powerline glyphs, escaped because editors can strip Private Use Area characters.
 local PL_BRANCH = '\u{e0a0}'
 local PL_LINE   = '\u{e0a1}'
 local PL_COL    = '\u{e0a3}'
 local SEP_L     = '\u{e0b0}'
 local SEP_R     = '\u{e0b2}'
 
--- The content below is mini's own default apart from the wedges at each
--- color boundary, the powerline markers in the git and location sections,
--- and the Timewarrior section beside the file info.
--- combine_groups() passes plain strings through verbatim, so each wedge
--- carries its own highlight and gets none of the padding table entries get.
+-- mini's default layout plus powerline wedges, markers and a Timewarrior section.
+-- Plain strings pass through combine_groups() as-is, so each wedge sets its own highlight.
 require('mini.statusline').setup({
    content = {
       active = function()
@@ -48,11 +174,9 @@ require('mini.statusline').setup({
          local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
          local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
          local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
-         -- The open Timewarrior interval (empty when nothing is tracked).
+         -- Current Timewarrior interval, empty when not tracking.
          local timew         = require('timew.status').section({ trunc_width = 120, hl = 'MiniStatuslineFileinfo' })
-         -- The same fields as mini's own section_location (line/total, then
-         -- virtual column/total; when truncated, just line and column), with
-         -- the powerline markers standing in for its `|` and `│` separators.
+         -- Like section_location, with powerline markers as separators.
          local location      = MiniStatusline.is_truncated(75)
             and (PL_LINE .. '%l ' .. PL_COL .. '%2v')
             or (PL_LINE .. '%l/%L ' .. PL_COL .. '%2v/%-2{virtcol("$") - 1}')
@@ -74,11 +198,8 @@ require('mini.statusline').setup({
    },
 })
 
--- A wedge is the glyph painted in the nearer segment's background over the
--- farther one's. The mode groups swap per mode, so those boundaries need two
--- extra groups per mode -- few enough to define up front instead of
--- resolving them on every redraw -- plus one static group per side for the
--- Devinfo/Filename and Filename/Fileinfo boundaries.
+-- Wedge highlights: the nearer segment's background as fg over the farther one's.
+-- Each mode gets a left and right group; the filename boundaries get one each.
 local function define_separators()
    local bg = function(name) return vim.api.nvim_get_hl(0, { name = name, link = false }).bg end
    for _, m in ipairs({ 'Normal', 'Insert', 'Visual', 'Replace', 'Command', 'Other' }) do
@@ -90,116 +211,16 @@ local function define_separators()
    vim.api.nvim_set_hl(0, 'MiniStatuslineFileinfoSep', { fg = bg('MiniStatuslineFileinfo'), bg = bg('MiniStatuslineFilename') })
 end
 
--- Deferred because the colors/*.lua schemes restyle statusline groups after
--- their mini.base16 setup; scheduling puts this after every other handler
--- for the event regardless of which file registered first.
+-- Scheduled so it runs after colorschemes restyle the statusline groups.
 vim.api.nvim_create_autocmd('ColorScheme', { callback = function() vim.schedule(define_separators) end })
 define_separators()
 
--- Gutter, in mini's default order: right-aligned line number, fold marker,
--- signs, then a separator against the text (dropped in inactive windows, whose
--- gutter is also dimmed). The fold section is the native fold column, which
--- 'foldcolumn' and 'fillchars' shape (see init.lua).
-require('mini.statuscolumn').setup()
-
-require('mini.icons').setup()
--- Stand in for nvim-web-devicons, so plugins that ask for it get mini.icons.
--- That way codediff.nvim's file icons use the same colors as everything else.
-MiniIcons.mock_nvim_web_devicons()
-
 require('mini.tabline').setup()
-require('mini.snippets').setup()
-require('mini.pick').setup({ window = { config = { border = 'rounded' }, prompt_prefix = ':' } })
-require('mini.extra').setup()
-require('mini.align').setup()
-require('mini.sessions').setup()
-require('mini.bufremove').setup()
 require('mini.trailspace').setup()
-require('mini.cursorword').setup()
-require('mini.indentscope').setup()
-require('mini.surround').setup()
-require('mini.starter').setup()
-require('mini.map').setup({
-   window = {
-      width = 1,
-      winblend = 100,
-      show_integration_count = false,
-   },
-})
-require('mini.move').setup({
-   mappings = {
-      left  = '<S-left>',
-      right = '<S-right>',
-      down  = '<S-down>',
-      up    = '<S-up>',
 
-      line_left  = '<S-left>',
-      line_right = '<S-right>',
-      line_down  = '<S-down>',
-      line_up    = '<S-up>',
-   },
-})
+--------------------------------------------------------------------------------
+-- Colorscheme
+--------------------------------------------------------------------------------
 
-local hipatterns = require('mini.hipatterns')
-hipatterns.setup({
-   highlighters = {
-      fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-      hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
-      todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
-      note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
-
-      -- Render `#rrggbb` / `#rgb` literals with their actual color
-      hex_color = hipatterns.gen_highlighter.hex_color(),
-   },
-})
-
-local miniclue = require('mini.clue')
-miniclue.setup({
-   triggers = {
-      { mode = 'n', keys = '<Leader>' },
-      { mode = 'x', keys = '<Leader>' },
-      { mode = 'n', keys = '[' },
-      { mode = 'n', keys = ']' },
-      { mode = 'i', keys = '<C-x>' },
-      { mode = 'n', keys = 'g' },
-      { mode = 'x', keys = 'g' },
-      { mode = 'n', keys = "'" },
-      { mode = 'n', keys = '`' },
-      { mode = 'x', keys = "'" },
-      { mode = 'x', keys = '`' },
-      { mode = 'n', keys = '"' },
-      { mode = 'x', keys = '"' },
-      { mode = 'i', keys = '<C-r>' },
-      { mode = 'c', keys = '<C-r>' },
-      { mode = 'n', keys = '<C-w>' },
-      { mode = 'n', keys = 'z' },
-      { mode = 'x', keys = 'z' },
-   },
-   clues = {
-      { mode = 'n', keys = '<Leader>n', desc = 'Notes' },
-      { mode = 'n', keys = '<Leader>g', desc = 'Git' },
-      miniclue.gen_clues.builtin_completion(),
-      miniclue.gen_clues.g(),
-      miniclue.gen_clues.square_brackets(),
-      miniclue.gen_clues.marks(),
-      miniclue.gen_clues.registers(),
-      miniclue.gen_clues.windows(),
-      miniclue.gen_clues.z(),
-   },
-})
-
-vim.keymap.set('n', '<leader>/', function() MiniPick.builtin.grep_live() end, { desc = 'Live grep' })
-vim.keymap.set('n', '<leader>?', function() MiniPick.builtin.help() end, { desc = 'Live help' })
-vim.keymap.set('n', '<leader>-', function() MiniPick.builtin.files() end, { desc = 'File picker' })
-vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = 'Document symbols' })
-vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
-vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File explorer' })
-vim.keymap.set('n', '<leader><leader>', function() MiniPick.builtin.buffers() end, { desc = 'Buffer picker' })
-vim.keymap.set('n', '<leader><Del>', function() MiniBufremove.delete() end, { desc = 'Delete' })
-vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File browser' })
-vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
-vim.keymap.set('n', '<leader>m', function() MiniMap.toggle() end, { desc = 'Toggle minimap' })
-
--- Colorscheme relies on mini.base16. circadia-forest picks its variant from
--- 'background': dark_forest when dark, the shared light_parchment when light.
+-- Built on mini.base16; the variant follows 'background' (dark_forest / light_parchment).
 vim.cmd.colorscheme('circadia-forest')
