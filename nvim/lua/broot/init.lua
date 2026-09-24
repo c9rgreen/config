@@ -1,6 +1,7 @@
 -- broot — explore directories with broot and open what you pick.
 --
--- Runs broot in a centered floating terminal. Enter on a file opens it in the
+-- Runs broot in a centered floating terminal, with the preview panel open
+-- and following the selection. Enter on a file opens it in the
 -- window you came from; ctrl-s, ctrl-v and ctrl-t open it in a split, a
 -- vertical split or a new tab (the same keys as mini.pick). Files staged with
 -- ctrl-g are all opened together when one of those keys is pressed in the
@@ -190,7 +191,11 @@ function M.open(opts)
    -- Ours goes first so its keys win over any of the user's on the same key.
    local confs = { nvim_conf() }
    confs[#confs + 1] = user_conf()
-   local cmd = { 'broot', '--conf', table.concat(confs, ';'), '--outcmd', outcmd, path }
+   -- --cmd opens the preview panel at startup; it then follows the selection.
+   local cmd = {
+      'broot', '--conf', table.concat(confs, ';'), '--outcmd', outcmd,
+      '--cmd', ':open_preview', path,
+   }
 
    local prev_win = vim.api.nvim_get_current_win()
    local buf = vim.api.nvim_create_buf(false, true)
