@@ -131,6 +131,13 @@ verbs: [
         internal: toggle_stage
     }
 
+    # One key to open or close the preview panel (:toggle_preview has no
+    # default key). alt-p reads as "preview", like alt-s for stage.
+    {
+        key: alt-p
+        internal: toggle_preview
+    }
+
 
     # Here's an example of a verb needing the shell capabilities.
     # It copies all children of the currently selected directory
