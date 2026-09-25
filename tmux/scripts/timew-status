@@ -1,0 +1,19 @@
+#!/bin/sh
+# Today's timewarrior total for the tmux status line.
+# Usage: timew-status ACTIVE_COLOR IDLE_COLOR
+# Prints a dot (filled while tracking) and the total as tmux styles, e.g.
+#   #[fg=green]●#[fg=brightblack] 1h17m
+# Prints nothing if timew is missing.
+on=${1:-green}
+off=${2:-brightblack}
+
+command -v timew >/dev/null 2>&1 || exit 0
+
+if [ "$(timew get dom.active 2>/dev/null)" = 1 ]; then
+    dot="#[fg=$on]●"
+else
+    dot="#[fg=$off]○"
+fi
+
+timew day 2>/dev/null | awk -v dot="$dot" -v dim="$off" \
+    '/Tracked/ { split($2, t, ":"); printf "%s#[fg=%s] %dh%02dm", dot, dim, t[1]+0, t[2]+0 }'
