@@ -1,8 +1,6 @@
 # vim: ft=ruby
 
 # Command-line utilities
-brew "podman"
-brew "podman-compose"
 brew "asciinema"
 brew "asdf"
 brew "awscli"
@@ -24,8 +22,6 @@ brew "gh"
 brew "ghostscript"
 brew "git"
 brew "glab"
-brew "herdr"
-brew "hugo"
 brew "hurl"
 brew "imagemagick"
 brew "jj"
@@ -50,15 +46,17 @@ brew "tmux"
 brew "tree-sitter-cli"
 brew "typst"
 brew "universal-ctags"
-brew "zellij"
 brew "zk"
 brew "zoxide"
 
 # Casks (macOS only — Homebrew casks don't exist on Linux)
 if OS.mac?
+  cask "claude"
+  cask "claude-code"
+  cask "cmux"
   cask "ghostty"
   cask "hammerspoon"
   cask "orbstack"
   cask "orion"
-  cask "podman-desktop"
+  cask "pgadmin4"
 end
