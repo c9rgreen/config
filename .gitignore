@@ -85,3 +85,9 @@ herdr/*
 
 # Generated user-data artifact (build with: just user-data)
 user-data.gz
+
+# cmux
+cmux
+
+# homebrew
+homebrew
