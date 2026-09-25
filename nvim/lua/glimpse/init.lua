@@ -274,6 +274,7 @@ end
 local placed = {} -- pid -> where that image currently sits on screen
 local pids = {}   -- win .. ':' .. mark -> id of its on-screen copy
 local next_pid = 1
+local hidden = false -- the tmux pane is off screen, so nothing is drawn
 
 local function pid_for(key)
    if not pids[key] then
@@ -385,6 +386,9 @@ local function occluders()
 end
 
 local function paint(force)
+   if hidden then
+      return
+   end
    local live = {}
    local rects = occluders()
    -- Only windows in the current tab: a window's position is reported within
@@ -739,9 +743,35 @@ function M.setup(opts)
    au('VimResized', {
       callback = function()
          kitty.cell_size(true)
+         kitty.offset(true)
          render_all()
       end,
    })
+   -- In tmux, images stay up when the pane goes off screen, so remove them
+   -- and draw them again when the pane comes back. The short delay lets tmux
+   -- finish switching before the pane is checked.
+   if kitty.in_tmux then
+      au('FocusLost', {
+         callback = function()
+            vim.defer_fn(function()
+               if not kitty.visible() then
+                  hidden = true
+                  for pid, p in pairs(placed) do
+                     kitty.unput(p.id, pid)
+                  end
+                  forget_placements()
+               end
+            end, 50)
+         end,
+      })
+      au('FocusGained', {
+         callback = function()
+            hidden = false
+            kitty.offset(true)
+            schedule_paint(true)
+         end,
+      })
+   end
    -- Splitting, closing or dragging a window changes the width a block has to
    -- fit into, so the sizes have to be worked out again. The rendered images
    -- are cached, so this is cheap.
@@ -759,6 +789,7 @@ function M.setup(opts)
          for _, img in pairs(images) do
             kitty.delete(img.id)
          end
+         kitty.release()
       end,
    })
 
