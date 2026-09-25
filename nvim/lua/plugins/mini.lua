@@ -65,6 +65,9 @@ miniclue.setup({
    clues = {
       { mode = 'n', keys = '<Leader>g', desc = '+Git' },
       { mode = 'n', keys = '<Leader>n', desc = '+Notes' },
+      -- d2-vim maps <Leader>yd2 without a description.
+      { mode = 'n', keys = '<Leader>y', desc = '+Yank' },
+      { mode = 'n', keys = '<Leader>yd2', desc = 'Copy D2 ASCII preview' },
       miniclue.gen_clues.square_brackets(),
       miniclue.gen_clues.builtin_completion(),
       miniclue.gen_clues.g(),
@@ -81,6 +84,7 @@ require('mini.diff').setup()
 vim.keymap.set('n', '<leader>gd', function() MiniDiff.toggle_overlay() end, { desc = 'Toggle diff overlay' })
 
 require('mini.extra').setup()
+vim.keymap.set('n', '<leader>c', function() MiniExtra.pickers.colorschemes() end, { desc = 'Colorscheme picker' })
 vim.keymap.set('n', '<leader>k', function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }) end, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>p', function() MiniExtra.pickers.commands() end, { desc = 'Command browser' })
 vim.keymap.set('n', '<leader><Right>', function() MiniExtra.pickers.explorer() end, { desc = 'File explorer' })
