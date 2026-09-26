@@ -12,8 +12,6 @@
 
     # CLI tools available from nixpkgs.
     cliPackages = with pkgs; [
-      podman
-      podman-compose
       asciinema
       asdf-vm
       awscli2
@@ -35,8 +33,6 @@
       ghostscript
       git
       glab
-      herdr
-      hugo
       hurl
       imagemagick
       jujutsu
@@ -61,7 +57,6 @@
       tree-sitter
       typst
       universal-ctags
-      zellij
       zk
       zoxide
     ];
