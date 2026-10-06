@@ -57,6 +57,7 @@
       tree-sitter
       typst
       universal-ctags
+      zellij
       zk
       zoxide
     ];

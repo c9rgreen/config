@@ -47,6 +47,7 @@ brew "tmux"
 brew "tree-sitter-cli"
 brew "typst"
 brew "universal-ctags"
+brew "zellij"
 brew "zk"
 brew "zoxide"
 

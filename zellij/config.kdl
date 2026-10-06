@@ -156,6 +156,7 @@ keybinds clear-defaults=true {
         }
     }
     shared_among "normal" "locked" {
+        bind "Alt a" { MessagePlugin "radar" { name "radar::toggle"; }; }
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
@@ -251,6 +252,8 @@ plugins {
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
+    // Claude Code session dashboard, built from ~/Developer/radar
+    radar location="file:~/.config/zellij/plugins/radar.wasm"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
@@ -261,6 +264,7 @@ plugins {
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
     zellij:link
+    radar
 }
 ui {
     pane_frames {
