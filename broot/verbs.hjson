@@ -132,9 +132,10 @@ verbs: [
     }
 
     # One key to open or close the preview panel (:toggle_preview has no
-    # default key). alt-p reads as "preview", like alt-s for stage.
+    # default key). alt-v reads as "view"; alt-p would be taken by zellij's
+    # TogglePaneInGroup before broot ever saw it.
     {
-        key: alt-p
+        key: alt-v
         internal: toggle_preview
     }
 
