@@ -97,3 +97,9 @@ homebrew
 
 # asciinema
 asciinema
+
+# intelephense (PHP LSP): per-workspace index cache
+intelephense
+
+# SwiftPM: symlinks into ~/Library for cache, configuration, and security
+swiftpm
