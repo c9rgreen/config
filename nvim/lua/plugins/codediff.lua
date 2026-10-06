@@ -62,10 +62,13 @@ end, { desc = 'Review branch (codediff vs git last)' })
 
 vim.keymap.set('n', '<leader>gD', '<Cmd>CodeDiff<CR>', { desc = 'Open CodeDiff' })
 
--- Step through the files with Tab and Shift-Tab instead of ]f and [f, and
--- through the changes within a file with Shift-Down and Shift-Up instead of
--- ]c and [c.
+-- Fold unchanged code by default (gc toggles it). Step through the files with
+-- Tab and Shift-Tab instead of ]f and [f, and through the changes within a
+-- file with Shift-Down and Shift-Up instead of ]c and [c.
 require('codediff').setup({
+   diff = {
+      compact = true,
+   },
    keymaps = {
       view = {
          next_file = '<Tab>',
