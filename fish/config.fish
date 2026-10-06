@@ -5,6 +5,11 @@
 # Binaries not managed by a package manager
 fish_add_path --path --append $HOME/.local/bin
 
+# rustup is keg-only in Homebrew, so its cargo/rustc proxies aren't linked
+if test -d /opt/homebrew/opt/rustup/bin
+    fish_add_path --path /opt/homebrew/opt/rustup/bin
+end
+
 # macOS has no default for XDG_CONFIG_HOME, so tools that only fall back to
 # ~/Library/Application Support when it's unset (e.g. lazygit) would look
 # there instead of in this repo. Setting it pins everything to ~/.config.
