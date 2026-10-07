@@ -106,11 +106,11 @@ themes {
         }
 
         // Unfocused frames fall back to the terminal default when this
-        // section is missing, so it must be set explicitly. The faint text
-        // tone is what the terminal paints for brightblack, matching the
-        // inactive tmux pane borders.
+        // section is missing, so it must be set explicitly. They take the
+        // border tone so they recede and the accent on the focused frame
+        // stands out.
         frame_unselected {
-            base "#91887d"
+            base "#3b342b"
             background "#17130f"
             emphasis_0 "#e89a49"
             emphasis_1 "#66abc6"
@@ -252,7 +252,7 @@ themes {
         }
 
         frame_unselected {
-            base "#838d85"
+            base "#353c36"
             background "#131714"
             emphasis_0 "#83b384"
             emphasis_1 "#6cb0c5"
@@ -394,7 +394,7 @@ themes {
         }
 
         frame_unselected {
-            base "#43505c"
+            base "#d7cdb7"
             background "#f7f2e6"
             emphasis_0 "#0048b3"
             emphasis_1 "#095b62"
