@@ -72,7 +72,8 @@ function M.section(opts)
    end
    local config = require('timew').config
    local elapsed = os.time() - iv.from
-   local text = config.icon .. ' ' .. cli.duration(elapsed)
+   local icon = type(config.icon) == 'function' and config.icon(elapsed) or config.icon
+   local text = icon .. ' ' .. cli.duration(elapsed)
    local narrow
    if opts.trunc_width then
       local width = vim.o.laststatus == 3 and vim.o.columns or vim.api.nvim_win_get_width(0)

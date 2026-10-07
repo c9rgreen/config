@@ -33,7 +33,13 @@ M.config = {
    taskwarrior = true,
    -- How far back the picker looks for tag sets.
    pick_days = 30,
-   icon = '\u{23f1}',
+   -- Statusline icon, or a function from seconds elapsed to one. The
+   -- default is a clock face whose hand moves every five minutes.
+   icon = function(elapsed)
+      local tick = math.floor(elapsed / 300) % 12
+      -- Nerd Font md-clock_time_one_outline..twelve, from twelve o'clock.
+      return vim.fn.nr2char(tick == 0 and 0xf1456 or 0xf144a + tick)
+   end,
 }
 
 function M.setup(opts)
