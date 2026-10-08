@@ -11,7 +11,7 @@ vim.api.nvim_create_user_command('Broot', function(cmd)
 end, {
    nargs = '?',
    complete = 'file',
-   desc = 'Explore with broot (a directory to root at, or a file to select; default cwd)',
+   desc = 'Explore with broot (a directory to root at, or a file to select; default: resume)',
 })
 
 vim.keymap.set('n', '<leader>b', function() require('broot').open() end, { desc = 'Broot' })

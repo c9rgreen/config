@@ -6,8 +6,12 @@
 -- ctrl-g are all opened together when one of those keys is pressed in the
 -- staging panel. After a content search (c/pattern) the cursor lands on the
 -- matching line. alt-Enter on a directory makes it Neovim's working
--- directory, like br does for the shell. Everything else is plain broot, with
--- your own broot configuration and skin loaded.
+-- directory, like br does for the shell. Opened without a path, broot picks up
+-- where the last one in the same working directory left off (its root and
+-- selection), provided that one ended by opening a file or with ctrl-c or
+-- ctrl-q.
+-- Everything else is plain broot, with your own broot configuration and skin
+-- loaded.
 --
 -- How it works: broot is started as br starts it, with an --outcmd file, plus
 -- an extra config file binding those keys to from_shell verbs. Like br's cd,
@@ -25,8 +29,12 @@ local VERBS = {
    { key = 'ctrl-t', action = 'tabedit' },
 }
 
--- First word of the command lines the verbs produce; `cd` is broot's own.
+-- First words of the command lines the verbs produce; `cd` is broot's own.
 local OPEN_CMD = 'nvim_open'
+local QUIT_CMD = 'nvim_quit'
+
+-- Where each working directory's last broot left off: { root, file }.
+local last = {}
 
 -- {file:space-separated} merges a staged selection into one command, where
 -- {file} alone would refuse to run over several files.
@@ -38,9 +46,16 @@ local function conf_verbs()
          key = v.key,
          apply_to = 'file',
          from_shell = true,
-         external = ('%s %s {line} {file:space-separated}'):format(OPEN_CMD, v.action),
+         external = ('%s %s {line} {root} {file:space-separated}'):format(OPEN_CMD, v.action),
       }
    end
+   -- Replaces broot's own quit keys so quitting reports where broot was.
+   verbs[#verbs + 1] = {
+      invocation = QUIT_CMD,
+      keys = { 'ctrl-c', 'ctrl-q' },
+      from_shell = true,
+      external = QUIT_CMD .. ' {root} {file}',
+   }
    return verbs
 end
 
@@ -126,16 +141,21 @@ local function read_lines(path)
 end
 
 -- Carry out the command lines broot wrote: `cd <dir>` from alt-Enter on a
--- directory, or `nvim_open <action> <line> <file>...` from the verbs above.
-local function run_outcmd(lines)
+-- directory, or `nvim_open <action> <line> <root> <file>...` and
+-- `nvim_quit <root> <file>` from the verbs above. The last two are
+-- remembered under cwd, the working directory broot was opened from.
+local function run_outcmd(lines, cwd)
    for _, line in ipairs(lines) do
       local words = shell_words(line)
-      if words[1] == 'cd' and words[2] and vim.fn.isdirectory(words[2]) == 1 then
+      if words[1] == QUIT_CMD then
+         last[cwd] = { root = words[2], file = words[3] }
+      elseif words[1] == 'cd' and words[2] and vim.fn.isdirectory(words[2]) == 1 then
          vim.cmd.cd(vim.fn.fnameescape(words[2]))
          vim.notify('broot: cd ' .. vim.fn.fnamemodify(words[2], ':~'))
       elseif words[1] == OPEN_CMD and words[2] and vim.fn.exists(':' .. words[2]) == 2 then
          local action, lnum = words[2], tonumber(words[3]) or 0
-         for i = 4, #words do
+         last[cwd] = { root = words[4], file = words[5] }
+         for i = 5, #words do
             -- Keep going when one file fails to open (swap prompt aborted,
             -- unreadable, 'nohidden' with a modified buffer).
             local ok, err = pcall(vim.cmd[action], vim.fn.fnameescape(words[i]))
@@ -169,16 +189,30 @@ local function float_config(title)
 end
 
 --- opts.path: a directory to root broot at, or a file to start selected
---- (broot roots at its parent). Defaults to the current working directory.
+--- (broot roots at its parent). Defaults to where the last broot opened from
+--- this working directory left off, else the working directory itself.
 function M.open(opts)
    opts = opts or {}
    if vim.fn.executable('broot') ~= 1 then
       return vim.notify('broot: executable not found', vim.log.levels.ERROR)
    end
 
-   local path = opts.path
+   local cwd = vim.fn.getcwd()
+   local path, selected = opts.path, nil
+   if not path or path == '' then
+      local prev = last[cwd]
+      if prev and prev.root and vim.fn.isdirectory(prev.root) == 1 then
+         path = prev.root
+         -- --cmd splits on semicolons, so such a path can't be selected.
+         if prev.file and prev.file ~= prev.root and not prev.file:find(';', 1, true)
+            and vim.uv.fs_stat(prev.file)
+         then
+            selected = prev.file
+         end
+      end
+   end
    if not path or path == '' or not vim.uv.fs_stat(path) then
-      path = vim.fn.getcwd()
+      path = cwd
    end
    path = vim.fn.fnamemodify(path, ':p'):gsub('(.)/$', '%1')
    local root = vim.fn.isdirectory(path) == 1 and path or vim.fs.dirname(path)
@@ -190,7 +224,11 @@ function M.open(opts)
    -- Ours goes first so its keys win over any of the user's on the same key.
    local confs = { nvim_conf() }
    confs[#confs + 1] = user_conf()
-   local cmd = { 'broot', '--conf', table.concat(confs, ';'), '--outcmd', outcmd, path }
+   local cmd = { 'broot', '--conf', table.concat(confs, ';'), '--outcmd', outcmd }
+   if selected then
+      vim.list_extend(cmd, { '--cmd', ':select ' .. selected })
+   end
+   cmd[#cmd + 1] = path
 
    local prev_win = vim.api.nvim_get_current_win()
    local buf = vim.api.nvim_create_buf(false, true)
@@ -216,7 +254,7 @@ function M.open(opts)
             if vim.api.nvim_win_is_valid(prev_win) then
                vim.api.nvim_set_current_win(prev_win)
             end
-            run_outcmd(lines)
+            run_outcmd(lines, cwd)
          end)
       end,
    })
