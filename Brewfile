@@ -60,6 +60,7 @@ if OS.mac?
   cask "cmux"
   cask "ghostty"
   cask "hammerspoon"
+  cask "homebrew-app"
   cask "orbstack"
   cask "orion"
   cask "pgadmin4"
