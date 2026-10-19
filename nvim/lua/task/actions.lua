@@ -214,7 +214,7 @@ function M.project(tasks)
    end)
 end
 
--- A float over most of the editor, sized as broot's is.
+-- A float over most of the editor.
 local function float_config(title)
    local cols, lines = vim.o.columns, vim.o.lines - vim.o.cmdheight
    local width = math.max(math.min(cols - 4, math.max(math.floor(cols * 0.9), 40)), 1)

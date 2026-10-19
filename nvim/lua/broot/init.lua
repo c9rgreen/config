@@ -1,8 +1,9 @@
 -- broot — explore directories with broot and open what you pick.
 --
--- Runs broot in a centered floating terminal. Enter on a file opens it in the
--- window you came from; ctrl-s, ctrl-v and ctrl-t open it in a split, a
--- vertical split or a new tab (the same keys as mini.pick). Files staged with
+-- Runs broot in a terminal that takes over the current window, which gets its
+-- buffer back when broot quits. Enter on a file opens it in that window;
+-- ctrl-s, ctrl-v and ctrl-t open it in a split, a vertical split or a new tab
+-- (the same keys as mini.pick). Files staged with
 -- ctrl-g are all opened together when one of those keys is pressed in the
 -- staging panel. After a content search (c/pattern) the cursor lands on the
 -- matching line. alt-Enter on a directory makes it Neovim's working
@@ -171,22 +172,20 @@ local function run_outcmd(lines, cwd)
    end
 end
 
-local function float_config(title)
-   local cols, lines = vim.o.columns, vim.o.lines - vim.o.cmdheight
-   local width = math.max(math.min(cols - 4, math.max(math.floor(cols * 0.9), 40)), 1)
-   local height = math.max(math.min(lines - 4, math.max(math.floor(lines * 0.85), 10)), 1)
-   return {
-      relative = 'editor',
-      width = width,
-      height = height,
-      col = math.max(math.floor((cols - width) / 2), 0),
-      row = math.max(math.floor((lines - height) / 2) - 1, 0),
-      style = 'minimal',
-      border = 'rounded',
-      title = title,
-      title_pos = 'center',
-   }
-end
+-- Window options for the terminal, as a float's minimal style sets them.
+-- Set locally, so the window's own buffer gets its options back afterwards.
+local TERM_WINOPTS = {
+   number = false,
+   relativenumber = false,
+   cursorline = false,
+   cursorcolumn = false,
+   spell = false,
+   list = false,
+   signcolumn = 'no',
+   foldcolumn = '0',
+   colorcolumn = '',
+   statuscolumn = '',
+}
 
 --- opts.path: a directory to root broot at, or a file to start selected
 --- (broot roots at its parent). Defaults to where the last broot opened from
@@ -230,11 +229,18 @@ function M.open(opts)
    end
    cmd[#cmd + 1] = path
 
-   local prev_win = vim.api.nvim_get_current_win()
+   local win = vim.api.nvim_get_current_win()
+   local prev_buf = vim.api.nvim_get_current_buf()
    local buf = vim.api.nvim_create_buf(false, true)
-   local title = ' broot: ' .. vim.fn.fnamemodify(root, ':~') .. ' '
-   local win = vim.api.nvim_open_win(buf, true, float_config(title))
-   vim.wo[win].winhighlight = 'NormalFloat:Normal'
+   -- keepalt: the window's buffer stays the alternate file, not broot's.
+   local ok, err = pcall(vim.cmd, 'keepalt buffer ' .. buf)
+   if not ok then
+      vim.api.nvim_buf_delete(buf, { force = true })
+      return vim.notify('broot: ' .. err, vim.log.levels.ERROR)
+   end
+   for name, value in pairs(TERM_WINOPTS) do
+      vim.api.nvim_set_option_value(name, value, { scope = 'local', win = win })
+   end
    local augroup = vim.api.nvim_create_augroup('broot.' .. buf, { clear = true })
 
    local job = vim.fn.jobstart(cmd, {
@@ -243,45 +249,40 @@ function M.open(opts)
       on_exit = function()
          vim.schedule(function()
             pcall(vim.api.nvim_del_augroup_by_id, augroup)
-            if vim.api.nvim_win_is_valid(win) then
-               vim.api.nvim_win_close(win, true)
+            -- Give the window its buffer back, unless broot's window was
+            -- closed or switched to another buffer in the meantime.
+            if vim.api.nvim_win_is_valid(win) and vim.api.nvim_win_get_buf(win) == buf then
+               vim.api.nvim_set_current_win(win)
+               if vim.api.nvim_buf_is_valid(prev_buf) then
+                  vim.cmd('keepalt buffer ' .. prev_buf)
+               else
+                  vim.cmd('keepalt enew')
+               end
             end
             if vim.api.nvim_buf_is_valid(buf) then
                vim.api.nvim_buf_delete(buf, { force = true })
             end
             local lines = read_lines(outcmd)
             os.remove(outcmd)
-            if vim.api.nvim_win_is_valid(prev_win) then
-               vim.api.nvim_set_current_win(prev_win)
-            end
             run_outcmd(lines, cwd)
          end)
       end,
    })
    if job <= 0 then
       vim.api.nvim_del_augroup_by_id(augroup)
-      vim.api.nvim_win_close(win, true)
+      vim.cmd('keepalt buffer ' .. prev_buf)
+      vim.api.nvim_buf_delete(buf, { force = true })
       return vim.notify('broot: failed to start', vim.log.levels.ERROR)
    end
 
-   -- Closing the float some other way (:q after leaving terminal mode) ends
-   -- broot too; on_exit then does the rest.
-   vim.api.nvim_create_autocmd('WinClosed', {
+   -- Leaving broot's buffer some other way (:q or :bnext after leaving
+   -- terminal mode) ends broot too; on_exit then does the rest.
+   vim.api.nvim_create_autocmd('BufHidden', {
       group = augroup,
-      pattern = tostring(win),
+      buffer = buf,
       once = true,
       callback = function()
          vim.fn.jobstop(job)
-      end,
-   })
-   -- Not buffer-local: that would only fire while the terminal buffer is the
-   -- current one, and the float should keep fitting after <C-w>p too.
-   vim.api.nvim_create_autocmd('VimResized', {
-      group = augroup,
-      callback = function()
-         if vim.api.nvim_win_is_valid(win) then
-            vim.api.nvim_win_set_config(win, float_config(title))
-         end
       end,
    })
 

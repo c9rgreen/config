@@ -1,5 +1,5 @@
--- broot: explore directories and open files with broot in a floating
--- terminal (implementation in lua/broot/)
+-- broot: explore directories and open files with broot in a terminal that
+-- takes over the current window (implementation in lua/broot/)
 if vim.g.loaded_broot then
    return
 end
