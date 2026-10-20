@@ -59,6 +59,7 @@ if OS.mac?
   cask "claude"
   cask "claude-code"
   cask "cmux"
+  cask "font-monaspace"
   cask "ghostty"
   cask "hammerspoon"
   cask "homebrew-app"
