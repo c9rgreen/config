@@ -103,3 +103,6 @@ intelephense
 
 # SwiftPM: symlinks into ~/Library for cache, configuration, and security
 swiftpm
+
+# Taskwarrior: sync server credentials, included by taskrc.dark and taskrc.light
+task/sync.rc
