@@ -1,6 +1,5 @@
--- task.detail — one task in a float, written as markdown: its attributes,
--- its GitLab fields when bugwarrior synced it, its annotations, and the
--- GitLab issue description. The same lines serve the picker's preview.
+-- task.detail — one task in a float, written as markdown: its attributes
+-- and its annotations. The same lines serve the picker's preview.
 
 local cli = require('task.cli')
 local actions = require('task.actions')
@@ -19,11 +18,6 @@ end
 local DATES = {
    { 'due', 'Due' }, { 'scheduled', 'Scheduled' }, { 'wait', 'Wait' }, { 'until', 'Until' },
    { 'start', 'Started' }, { 'entry', 'Entered' }, { 'modified', 'Modified' }, { 'end', 'Ended' },
-}
-
-local GITLAB = {
-   { 'gitlabtype', 'Type' }, { 'gitlabstate', 'State' }, { 'gitlabauthor', 'Author' },
-   { 'gitlabassignee', 'Assignee' }, { 'gitlabmilestone', 'Milestone' }, { 'gitlaburl', 'URL' },
 }
 
 function M.lines(t)
@@ -47,14 +41,6 @@ function M.lines(t)
    field('Urgency', t.urgency and ('%.2f'):format(t.urgency))
    field('UUID', '`' .. t.uuid .. '`')
 
-   if t.gitlabrepo or t.gitlaburl then
-      local title = vim.trim(('GitLab %s%s'):format(t.gitlabrepo or '', t.gitlabnumber and (' #' .. t.gitlabnumber) or ''))
-      vim.list_extend(lines, { '', '## ' .. title, '' })
-      for _, g in ipairs(GITLAB) do
-         field(g[2], t[g[1]])
-      end
-   end
-
    if t.annotations and #t.annotations > 0 then
       vim.list_extend(lines, { '', '## Annotations', '' })
       for _, a in ipairs(t.annotations) do
@@ -64,10 +50,6 @@ function M.lines(t)
       end
    end
 
-   if t.gitlabdescription and vim.trim(t.gitlabdescription) ~= '' then
-      vim.list_extend(lines, { '', '## Description', '' })
-      vim.list_extend(lines, vim.split(t.gitlabdescription:gsub('\r', ''), '\n'))
-   end
    return lines
 end
 

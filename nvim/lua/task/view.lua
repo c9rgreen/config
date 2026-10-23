@@ -13,10 +13,10 @@
 -- the same task and its closed folds closed.
 --
 -- The buffers refresh after every change made from Neovim, and when
--- anything else (bugwarrior, the shell) writes the task database. A read
--- creates and removes SQLite's -wal and -shm files, so the watcher compares
--- the database file's own mtime rather than trusting the directory events;
--- otherwise every refresh would trigger the next one.
+-- anything else (the shell, `task sync`) writes the task database. A
+-- read creates and removes SQLite's -wal and -shm files, so the watcher
+-- compares the database file's own mtime rather than trusting the directory
+-- events; otherwise every refresh would trigger the next one.
 
 local cli = require('task.cli')
 local actions = require('task.actions')
@@ -371,7 +371,7 @@ local KEYS = {
    { 'nx', '-', 'Lower priority' },
    { 'nx', 'x', 'Delete' },
    { 'n', 'u', 'Undo the last change' },
-   { 'n', 'gx', 'Open the GitLab issue or linked URL' },
+   { 'n', 'gx', 'Open the first link in its annotations' },
    { 'n', '/', 'Change the filter' },
    { 'n', 'r', 'Refresh' },
    { 'n', 'q', 'Close' },

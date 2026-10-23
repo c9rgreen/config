@@ -5,10 +5,10 @@
 -- require('task.pick').open()  picks from pending tasks with mini.pick
 --
 -- Taskwarrior stays the only store: every view is read from `task export`
--- and every change is a `task` command, so the shell, bugwarrior and this
--- plugin never disagree. The taskrc is the one the fish `task` wrapper
--- uses, chosen by 'background' here as the wrapper chooses it by the macOS
--- appearance, so UDAs, hooks and urgency coefficients all match.
+-- and every change is a `task` command, so the shell and this plugin never
+-- disagree. The taskrc is the one the fish `task` wrapper uses, chosen by
+-- 'background' here as the wrapper chooses it by the macOS appearance, so
+-- UDAs, hooks and urgency coefficients all match.
 
 local cli = require('task.cli')
 

@@ -485,11 +485,8 @@ function M.quick_add(project)
    end)
 end
 
--- The task's GitLab page, or else the first link in its annotations.
+-- The first link in the task's annotations.
 function M.url(t)
-   if t.gitlaburl and t.gitlaburl ~= '' then
-      return t.gitlaburl
-   end
    for _, a in ipairs(t.annotations or {}) do
       local url = a.description:match('https?://[^%s>)]+')
       if url then

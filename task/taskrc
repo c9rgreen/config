@@ -1,25 +1,6 @@
+# Fallback for anything that runs `task` without TASKRC set. The fish `task`
+# wrapper and Neovim pick taskrc.light or taskrc.dark by the macOS appearance;
+# this one uses the light settings so data, sync and verbosity still match.
 news.version=3.4.1
 
-data.location=~/.local/share/task
-hooks.location=~/.config/task/hooks
-
-# GitLab UDAs synced by bugwarrior (regenerate with `bugwarrior uda`)
-include ~/.config/task/bugwarrior-udas.rc
-
-# Color theme (uncomment one to use)
-#include light-16.theme
-# include light-256.theme
-#include bubblegum-256.theme
-#include dark-16.theme
-# include dark-256.theme
-#include dark-red-256.theme
-#include dark-green-256.theme
-#include dark-blue-256.theme
-#include dark-violets-256.theme
-#include dark-yellow-green.theme
-#include dark-gray-256.theme
-#include dark-gray-blue-256.theme
-#include solarized-dark-256.theme
-#include solarized-light-256.theme
-include no-color.theme
-
+include ~/.config/task/taskrc.light
