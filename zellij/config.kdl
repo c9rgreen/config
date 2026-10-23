@@ -252,8 +252,8 @@ plugins {
     status-bar location="zellij:status-bar"
     strider location="zellij:strider"
     tab-bar location="zellij:tab-bar"
-    // Claude Code session dashboard, built from ~/Developer/zellij-mission-control
-    mission-control location="file:~/.config/zellij/plugins/zellij-mission-control.wasm"
+    // Claude Code session dashboard, https://github.com/c9rgreen/zellij-mission-control
+    mission-control location="https://github.com/c9rgreen/zellij-mission-control/releases/download/v0.1.0/zellij-mission-control.wasm"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
