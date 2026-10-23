@@ -8,6 +8,10 @@ vim.pack.add({
 local ts = require('nvim-treesitter')
 local available = ts.get_available()
 
+-- Quarto is markdown with executable chunks; the markdown parser handles its
+-- ```{lang} fences
+vim.treesitter.language.register('markdown', 'quarto')
+
 local function start(buf, lang)
    vim.treesitter.start(buf, lang)
    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"

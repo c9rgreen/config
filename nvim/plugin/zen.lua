@@ -1,5 +1,5 @@
--- zen: distraction-free writing mode for markdown buffers (implementation in
--- lua/zen/)
+-- zen: distraction-free writing mode for markdown and quarto buffers
+-- (implementation in lua/zen/)
 if vim.g.loaded_zen then
    return
 end
@@ -11,7 +11,7 @@ end, { desc = 'Toggle distraction-free writing mode' })
 
 vim.api.nvim_create_autocmd('FileType', {
    group = vim.api.nvim_create_augroup('zen.ftplugin', { clear = true }),
-   pattern = 'markdown',
+   pattern = { 'markdown', 'quarto' },
    callback = function(ev)
       vim.keymap.set('n', '<leader>z', function() require('zen').toggle() end, {
          buffer = ev.buf,
