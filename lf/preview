@@ -1,6 +1,16 @@
 #!/bin/sh
+# lf passes: $1 file, $2 width, $3 height, $4 x, $5 y
 
-# The ansi theme from bat's config renders through the terminal's ANSI
-# palette, so it follows the active Ghostty theme even though bat's output
-# is piped here.
-bat --color=always --style=plain --paging=never --terminal-width="$2" "$1"
+case "$(file -Lb --mime-type "$1")" in
+    image/*)
+        # Symbols render as plain text, so they survive Zellij, which passes
+        # neither sixel nor the Kitty graphics protocol through.
+        chafa --format=symbols --size="${2}x${3}" --animate=off "$1"
+        ;;
+    *)
+        # The ansi theme from bat's config renders through the terminal's ANSI
+        # palette, so it follows the active Ghostty theme even though bat's output
+        # is piped here.
+        bat --color=always --style=plain --paging=never --terminal-width="$2" "$1"
+        ;;
+esac
