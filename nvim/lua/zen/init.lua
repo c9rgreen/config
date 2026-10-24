@@ -1,4 +1,4 @@
--- zen — distraction-free writing mode for markdown buffers.
+-- zen — distraction-free writing mode for markdown and quarto buffers.
 --
 -- Floats the current buffer in a centered column over a backdrop that hides
 -- the rest of the editor, drops the window chrome (numbers, signs, folds,
@@ -48,8 +48,8 @@ function M.open()
    if state then
       return
    end
-   if vim.bo.filetype ~= 'markdown' then
-      return vim.notify('zen: not a markdown buffer', vim.log.levels.ERROR)
+   if not vim.list_contains({ 'markdown', 'quarto' }, vim.bo.filetype) then
+      return vim.notify('zen: not a markdown or quarto buffer', vim.log.levels.ERROR)
    end
 
    local buf = vim.api.nvim_get_current_buf()

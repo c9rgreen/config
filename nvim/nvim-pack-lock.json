@@ -28,6 +28,10 @@
       "rev": "a6549816e62cec7037f1549d8f1659d45635370c",
       "src": "https://github.com/NeogitOrg/neogit"
     },
+    "nui.nvim": {
+      "rev": "10fc361835c856ba4233ef5ea135b919bf3dce97",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
     "nvim-lspconfig": {
       "rev": "45a3a444b710511c39abca3b60bb6e23a21e3de5",
       "src": "https://github.com/neovim/nvim-lspconfig"
@@ -43,6 +47,11 @@
     "orgmode": {
       "rev": "78c9928c151ff6ec07fd72da74bdf50a8034f0a5",
       "src": "https://github.com/nvim-orgmode/orgmode"
+    },
+    "review.nvim": {
+      "rev": "46fa59f63d71c883baf1f0f89cf52f91b42eaeb0",
+      "src": "https://github.com/georgeguimaraes/review.nvim",
+      "version": ">=0.0.0"
     },
     "zk-nvim": {
       "rev": "2093138f4fabce994cf19403fca89d629f312ac9",

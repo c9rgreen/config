@@ -1,10 +1,10 @@
 -- glimpse — inline images and mermaid diagrams for the terminal.
 --
--- Markdown buffers are scanned for image links (![alt](path), ![[path]]) and
--- ```mermaid fences; each is rendered as a block of virtual lines below its
--- source: empty lines hold open the space and the image is drawn on top of
--- them (see glimpse/kitty.lua). Opening an
--- image file directly shows it in the buffer as well.
+-- Markdown and quarto buffers are scanned for image links (![alt](path),
+-- ![[path]]) and ```mermaid (or quarto's ```{mermaid}) fences; each is
+-- rendered as a block of virtual lines below its source: empty lines hold open
+-- the space and the image is drawn on top of them (see glimpse/kitty.lua).
+-- Opening an image file directly shows it in the buffer as well.
 --
 -- Commands: :Glimpse [toggle|enable|disable|refresh]
 -- Buffer variables: set b:glimpse_base_dir to say which folder relative image
@@ -16,7 +16,7 @@ local mermaid = require('glimpse.mermaid')
 local M = {}
 
 M.config = {
-   filetypes = { 'markdown' },
+   filetypes = { 'markdown', 'quarto' },
    max_width = 80,  -- cells; also capped by the window's text width
    max_height = 24, -- cells
    mermaid = {
@@ -109,7 +109,7 @@ local function scan(buf)
    local theme = mermaid.theme(M.config.mermaid.theme)
    local i = 1
    while i <= #lines do
-      if lines[i]:match('^%s*```+%s*mermaid%s*$') then
+      if lines[i]:match('^%s*```+%s*{?mermaid}?%s*$') then
          local src, close = {}, nil
          for j = i + 1, #lines do
             if lines[j]:match('^%s*```') then
