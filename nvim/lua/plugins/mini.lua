@@ -230,5 +230,5 @@ require('mini.trailspace').setup()
 -- Colorscheme
 --------------------------------------------------------------------------------
 
--- Built on mini.base16; the variant follows 'background' (dark_forest / light_parchment).
-vim.cmd.colorscheme('circadia-forest')
+-- Built on mini.base16; the variant follows 'background' (Sonoran Dusk / Terracotta Noon).
+vim.cmd.colorscheme('rex-desert')
