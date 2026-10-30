@@ -49,27 +49,23 @@ if status is-interactive
     set fish_color_redirection magenta
     set fish_color_end green
     set fish_color_escape magenta
-    # brblack here was the same trap as the pager below — in some themes it is
-    # a foreground tier rather than a dim background, which left an uncolored
-    # token inside the match at roughly 1.3:1. Reuse the invariant fg-over-bg
-    # pairing, which means naming a foreground too: syntax colors no longer show
-    # through the match, matching fish's own default (bryellow --background=brblack).
-    set fish_color_search_match white --background=black
+    # Search matches and the selected pager row share one pairing: brwhite text
+    # on a brblack row, named in full so syntax colors don't show through.
+    # Rex's desert themes invert the dark neutrals — Sonoran Dusk tracks 0 to
+    # its background, Terracotta Noon to its foreground — so white-on-black
+    # turns into a row the same color as the page in one of them, and
+    # black-on-yellow drops to 2.9:1 on Terracotta Noon. 8 and 15 stay a mid
+    # tone and an extreme in both: the text lands at 4.9:1 (Sonoran Dusk) and
+    # 4.4:1 (Terracotta Noon), and the row separates from the page at 3.1:1
+    # and 4.0:1.
+    set fish_color_search_match brwhite --background=brblack
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
     # leaves the prefix/completion foregrounds dark on a dark reversed background.
-    # Set explicit colors instead — knockout text on a yellow row, i.e. 0 (bg)
-    # over 3. Circadia tracks 0 to the theme's background, so the text always
-    # reads as the page punched through the highlight, and slot 3 is the one
-    # warm accent that stays mid-tone in both directions: black-on-yellow lands
-    # at 7.4:1 (forest), 7.1:1 (ember), 7.8:1 (plum) and 5.7:1 (light), and the
-    # row separates from the page at 7.0:1 or better everywhere. Note slot 3 is
-    # only literally yellow in the dark variants — circadia_light renders it
-    # teal, so the light theme gets a teal row with parchment knockout text.
-    set fish_pager_color_selected_background --background=yellow
-    set fish_pager_color_selected_completion black --bold
-    set fish_pager_color_selected_prefix black --bold --underline
-    set fish_pager_color_selected_description black --italics
+    set fish_pager_color_selected_background --background=brblack
+    set fish_pager_color_selected_completion brwhite --bold
+    set fish_pager_color_selected_prefix brwhite --bold --underline
+    set fish_pager_color_selected_description brwhite --italics
 end
 
 #
@@ -126,13 +122,13 @@ set -gx ZK_NOTEBOOK_DIR "$HOME/ZK"
 #
 if type -q fzf
     # Colors: --color=16 drops fzf's built-in 256-color scheme so everything
-    # comes from the terminal's ANSI palette and follows the Ghostty theme.
+    # comes from the terminal's ANSI palette and follows the terminal theme.
     #
     # Only the chromatic slots are named. The neutrals (0/7/8/15) are assigned
-    # inconsistently across the themes in ghostty/themes — circadia tracks 0 to
-    # the background and 7/8/15 to foreground tiers, while the mini* themes
-    # invert that (0/8 foreground, 7/15 background) — so -1, the terminal's own
-    # fg/bg, is used wherever a neutral is wanted.
+    # inconsistently across themes — Sonoran Dusk and circadia track 0 to the
+    # background and 7/8/15 to foreground tiers, while Terracotta Noon and the
+    # mini* themes invert that (0/8 foreground, 7/15 background) — so -1, the
+    # terminal's own fg/bg, is used wherever a neutral is wanted.
     #
     # For the same reason the current line gets no background: bold text and a
     # red pointer mark it instead, which stays legible in light and dark alike.

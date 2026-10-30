@@ -149,11 +149,13 @@ let &t_ti .= "\e[2 q"
 " The .= appends to any existing t_te setting.
 let &t_te .= "\e[2 q"
 
-" Circadia Forest (dark) over Circadia Light, following the macOS appearance
-" the same way the fish task wrapper does (fish/conf.d/taskwarrior.fish).
-" Circadia Dark (Warm Ember) remains in colors/ as an alternative.
+" Rex's Sonoran Dusk (dark) over Terracotta Noon (light), following the macOS
+" appearance the same way the fish task wrapper does
+" (fish/conf.d/taskwarrior.fish). The circadia schemes remain in colors/ as
+" alternatives.
 if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~# 'Dark'
-  colorscheme circadia_forest_dark
+  set background=dark
 else
-  colorscheme circadia_light
+  set background=light
 endif
+colorscheme rex_desert

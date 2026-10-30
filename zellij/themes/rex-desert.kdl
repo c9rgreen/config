@@ -1,0 +1,311 @@
+// Rex's Terracotta Noon (light) and Sonoran Dusk (dark) themes. Hexes and
+// roles match nvim/colors/rex-desert.lua.
+//
+// Colors are written as hex rather than as ANSI names because Terracotta
+// Noon's ANSI red, yellow, green and blue are too faint on its cream canvas,
+// so this takes Rex's darker semantic tones there, as the nvim port does.
+//
+// The focused border carries the accent (it is also the cursor color), and
+// the transient states (search, rename) get the brighter accent tint.
+
+themes {
+    // Sonoran Dusk
+    sonoran-dusk {
+        // fg on bg
+        text_unselected {
+            base "#ddd0bf"
+            background "#171412"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#ddd0bf"
+            background "#2c2825"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        // The active mode / tab chip: knockout text on the solid accent. Every
+        // hue sits too close to the accent to read on it, so the emphases
+        // knock out too.
+        ribbon_selected {
+            base "#171412"
+            background "#e8a860"
+            emphasis_0 "#171412"
+            emphasis_1 "#171412"
+            emphasis_2 "#171412"
+            emphasis_3 "#171412"
+        }
+
+        // Inactive chips sit on the border tone. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#ddd0bf"
+            background "#4e4842"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#4e4842"
+            emphasis_2 "#8598b0"
+            emphasis_3 "#e88a72"
+        }
+
+        table_title {
+            base "#e8a860"
+            background "#171412"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        table_cell_selected {
+            base "#ddd0bf"
+            background "#2c2825"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        table_cell_unselected {
+            base "#ddd0bf"
+            background "#171412"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        list_selected {
+            base "#ddd0bf"
+            background "#2c2825"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        list_unselected {
+            base "#ddd0bf"
+            background "#171412"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#a0b06a"
+            emphasis_3 "#d96e56"
+        }
+
+        frame_unselected {
+            base "#4e4842"
+            background "#171412"
+            emphasis_0 "#e8a860"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#d96e56"
+            emphasis_3 "#bd8aa2"
+        }
+
+        frame_selected {
+            base "#e8a860"
+            background "#171412"
+            emphasis_0 "#efbc7c"
+            emphasis_1 "#8598b0"
+            emphasis_2 "#d96e56"
+            emphasis_3 "#bd8aa2"
+        }
+
+        frame_highlight {
+            base "#efbc7c"
+            background "#171412"
+            emphasis_0 "#d96e56"
+            emphasis_1 "#efbc7c"
+            emphasis_2 "#efbc7c"
+            emphasis_3 "#efbc7c"
+        }
+
+        exit_code_success {
+            base "#a0b06a"
+            background "#171412"
+            emphasis_0 "#8598b0"
+            emphasis_1 "#171412"
+            emphasis_2 "#bd8aa2"
+            emphasis_3 "#d96e56"
+        }
+
+        exit_code_error {
+            base "#d96e56"
+            background "#171412"
+            emphasis_0 "#e88a72"
+            emphasis_1 "#171412"
+            emphasis_2 "#e8a860"
+            emphasis_3 "#bd8aa2"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#bd8aa2"
+            player_2 "#8598b0"
+            player_3 "#e8a860"
+            player_4 "#d96e56"
+            player_5 "#a0b06a"
+            player_6 "#e88a72"
+            player_7 "#e0a45c"
+            player_8 "#92b39c"
+            player_9 "#938a7e"
+            player_10 "#4e4842"
+        }
+    }
+
+    // Terracotta Noon
+    terracotta-noon {
+        // fg on bg
+        text_unselected {
+            base "#4a382c"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#4a382c"
+            background "#dfd5ce"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        // The active mode / tab chip: knockout text on the solid accent. Every
+        // hue sits too close to the accent to read on it, so the emphases
+        // knock out too.
+        ribbon_selected {
+            base "#ffffff"
+            background "#be5834"
+            emphasis_0 "#ffffff"
+            emphasis_1 "#ffffff"
+            emphasis_2 "#ffffff"
+            emphasis_3 "#ffffff"
+        }
+
+        // Inactive chips sit on the border tone. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#4a382c"
+            background "#d6cac0"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#d6cac0"
+            emphasis_2 "#426a98"
+            emphasis_3 "#aa4a26"
+        }
+
+        table_title {
+            base "#aa4a26"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        table_cell_selected {
+            base "#4a382c"
+            background "#dfd5ce"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        table_cell_unselected {
+            base "#4a382c"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        list_selected {
+            base "#4a382c"
+            background "#dfd5ce"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        list_unselected {
+            base "#4a382c"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#497125"
+            emphasis_3 "#b24226"
+        }
+
+        frame_unselected {
+            base "#d6cac0"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#426a98"
+            emphasis_2 "#b24226"
+            emphasis_3 "#9d5680"
+        }
+
+        frame_selected {
+            base "#aa4a26"
+            background "#f9efe6"
+            emphasis_0 "#be5834"
+            emphasis_1 "#426a98"
+            emphasis_2 "#b24226"
+            emphasis_3 "#9d5680"
+        }
+
+        frame_highlight {
+            base "#be5834"
+            background "#f9efe6"
+            emphasis_0 "#b24226"
+            emphasis_1 "#be5834"
+            emphasis_2 "#be5834"
+            emphasis_3 "#be5834"
+        }
+
+        exit_code_success {
+            base "#497125"
+            background "#f9efe6"
+            emphasis_0 "#426a98"
+            emphasis_1 "#f9efe6"
+            emphasis_2 "#9d5680"
+            emphasis_3 "#b24226"
+        }
+
+        exit_code_error {
+            base "#b24226"
+            background "#f9efe6"
+            emphasis_0 "#aa4a26"
+            emphasis_1 "#f9efe6"
+            emphasis_2 "#aa4a26"
+            emphasis_3 "#9d5680"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#9d5680"
+            player_2 "#426a98"
+            player_3 "#aa4a26"
+            player_4 "#b24226"
+            player_5 "#497125"
+            player_6 "#aa4a26"
+            player_7 "#896000"
+            player_8 "#3e8570"
+            player_9 "#766559"
+            player_10 "#d6cac0"
+        }
+    }
+}

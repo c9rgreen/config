@@ -5,9 +5,9 @@ hooks.location=~/.config/task/hooks
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use dark colors
-include ~/.config/task/circadia-forest-dark.theme
-# Circadia Dark (Warm Ember) alternative:
-# include ~/.config/task/circadia-dark.theme
+include ~/.config/task/sonoran-dusk.theme
+# Circadia Forest alternative:
+# include ~/.config/task/circadia-forest-dark.theme
 
 # Sync server and encryption secret. Kept out of git; on a new machine create
 # sync.rc with the sync.server.url, sync.server.client_id and

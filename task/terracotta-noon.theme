@@ -1,0 +1,97 @@
+# Rex Terracotta Noon (light), for Taskwarrior.
+# Palette from nvim/colors/rex-desert.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex:
+#
+#   bg        #f9efe6 -> 255   accent  #aa4a26 -> 130
+#   surf      #eee5de -> 254   yellow  #896000 -> 94
+#   elem      #dfd5ce -> 188   number  #aa4a26 -> 130
+#   border    #d6cac0 -> 251   red     #b24226 -> 124
+#   fg        #4a382c -> 237   green   #497125 -> 58
+#   muted     #766559 -> 95    blue    #426a98 -> 60
+#   faint     #918276 -> 244   magenta #9d5680 -> 132
+#   cyan      #3e8570 -> 65
+#
+# The danger red's nearest index is 130, the same as the terracotta
+# accent and number tone, so it takes the next-nearest red, 124, to
+# keep overdue apart from due-today.
+#
+# Alarm states (error, overdue) carry the danger red and the accent marks
+# active/header moments. Due urgency ramps yellow (due) -> terracotta
+# (today) -> red (overdue).
+#
+# Enable from taskrc.light:  include ~/.config/task/terracotta-noon.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color254
+color.header=color130
+color.footnote=color95
+color.warning=bold color94
+color.error=color255 on color124
+color.debug=color60
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color255 on color131
+color.recurring=color60
+color.scheduled=on color254
+color.until=
+color.blocked=color237 on color251
+color.blocking=color255 on color95
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color237
+color.uda.priority.M=color95
+color.uda.priority.L=color244
+
+# Tags
+color.tag.next=color130
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=color130
+color.due=color94
+color.overdue=bold color124
+
+# Report: burndown
+color.burndown.done=on color58
+color.burndown.pending=on color124
+color.burndown.started=on color94
+
+# Report: history
+color.history.add=color255 on color60
+color.history.delete=color255 on color124
+color.history.done=color255 on color58
+
+# Report: summary
+color.summary.background=color237 on color255
+color.summary.bar=color255 on color131
+
+# Command: calendar
+color.calendar.due.today=color255 on color130
+color.calendar.due=color255 on color94
+color.calendar.holiday=color255 on color132
+color.calendar.scheduled=
+color.calendar.overdue=color255 on color124
+color.calendar.today=color255 on color60
+color.calendar.weekend=on color254
+color.calendar.weeknumber=color60
+
+# Command: sync
+color.sync.added=color58
+color.sync.changed=color94
+color.sync.rejected=color124
+
+# Command: undo
+color.undo.after=color58
+color.undo.before=color124

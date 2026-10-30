@@ -1,0 +1,63 @@
+# Terracotta Noon
+# Rex's built-in theme, from
+# /Applications/Rex Beta.app/Contents/Resources/SuperUI_SuperDesignTokens.bundle/Contents/Resources/themes.json
+
+background = #f9efe6
+foreground = #4a382c
+
+cursor-color = #c05a35
+cursor-text = #f9efe6
+
+selection-background = #f0d4b8
+selection-foreground = #4a382c
+
+# Black
+palette = 0=#4a382c
+
+# Red
+palette = 1=#bd4a2d
+
+# Green
+palette = 2=#5f8a3a
+
+# Yellow
+palette = 3=#a97a16
+
+# Blue
+palette = 4=#47709f
+
+# Magenta
+palette = 5=#9d5680
+
+# Cyan
+palette = 6=#3e8570
+
+# White
+palette = 7=#ead9c8
+
+# Bright Black
+palette = 8=#857262
+
+# Bright Red
+palette = 9=#d55c3c
+
+# Bright Green
+palette = 10=#72a248
+
+# Bright Yellow
+palette = 11=#c18f22
+
+# Bright Blue
+palette = 12=#5985b5
+
+# Bright Magenta
+palette = 13=#b36b95
+
+# Bright Cyan
+palette = 14=#4d9d86
+
+# Bright White
+palette = 15=#fefaf5
+
+# Split divider (contentTertiary); the derived default sits too close to the background
+split-divider-color = #918276

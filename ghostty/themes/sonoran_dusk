@@ -1,0 +1,63 @@
+# Sonoran Dusk
+# Rex's built-in theme, from
+# /Applications/Rex Beta.app/Contents/Resources/SuperUI_SuperDesignTokens.bundle/Contents/Resources/themes.json
+
+background = #171412
+foreground = #ddd0bf
+
+cursor-color = #e8a860
+cursor-text = #171412
+
+selection-background = #423528
+selection-foreground = #f2e9dc
+
+# Black
+palette = 0=#26201c
+
+# Red
+palette = 1=#d96e56
+
+# Green
+palette = 2=#a0b06a
+
+# Yellow
+palette = 3=#e0a45c
+
+# Blue
+palette = 4=#8598b0
+
+# Magenta
+palette = 5=#bd8aa2
+
+# Cyan
+palette = 6=#92b39c
+
+# White
+palette = 7=#c2b4a3
+
+# Bright Black
+palette = 8=#6e6355
+
+# Bright Red
+palette = 9=#e88a72
+
+# Bright Green
+palette = 10=#b8c786
+
+# Bright Yellow
+palette = 11=#efbc7c
+
+# Bright Blue
+palette = 12=#a0b2c8
+
+# Bright Magenta
+palette = 13=#d1a5b8
+
+# Bright Cyan
+palette = 14=#accab4
+
+# Bright White
+palette = 15=#f2e9dc
+
+# Split divider (contentTertiary); the derived default sits too close to the background
+split-divider-color = #746d64
