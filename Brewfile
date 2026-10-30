@@ -60,7 +60,6 @@ brew "zoxide"
 if OS.mac?
   cask "claude"
   cask "claude-code"
-  cask "cmux"
   cask "font-annotation-mono"
   cask "font-asap"
   cask "font-asap-condensed"
