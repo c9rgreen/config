@@ -97,3 +97,9 @@ swiftpm
 
 # Taskwarrior: sync server credentials, included by taskrc.dark and taskrc.light
 task/sync.rc
+
+# Fly.io: local secrets
+.fly-secrets.local
+
+# Wrangler (Cloudflare): local state and cache
+.wrangler
