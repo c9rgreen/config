@@ -48,11 +48,6 @@
       "rev": "78c9928c151ff6ec07fd72da74bdf50a8034f0a5",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
-    "review.nvim": {
-      "rev": "46fa59f63d71c883baf1f0f89cf52f91b42eaeb0",
-      "src": "https://github.com/georgeguimaraes/review.nvim",
-      "version": ">=0.0.0"
-    },
     "zk-nvim": {
       "rev": "2093138f4fabce994cf19403fca89d629f312ac9",
       "src": "https://github.com/zk-org/zk-nvim"
