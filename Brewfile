@@ -4,6 +4,7 @@
 brew "asciinema"
 brew "asdf"
 brew "awscli"
+brew "b2-tools"
 brew "bat"
 brew "broot"
 brew "caddy"
