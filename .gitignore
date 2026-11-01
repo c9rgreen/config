@@ -103,3 +103,12 @@ task/sync.rc
 
 # Wrangler (Cloudflare): local state and cache
 .wrangler
+
+# Backblaze B2 CLI
+b2
+
+# Cloudflare
+cloudflare
+
+# lazygit
+lazygit
