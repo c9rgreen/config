@@ -1,0 +1,63 @@
+# Merino Dark
+# Rex's built-in theme, from
+# /Applications/Rex Beta.app/Contents/Resources/SuperUI_SuperDesignTokens.bundle/Contents/Resources/themes.json
+
+background = #0d1117
+foreground = #e6edf3
+
+cursor-color = #2f81f7
+cursor-text = #eff8ff
+
+selection-background = #e6edf3
+selection-foreground = #0d1117
+
+# Black
+palette = 0=#484f58
+
+# Red
+palette = 1=#ff7b72
+
+# Green
+palette = 2=#3fb950
+
+# Yellow
+palette = 3=#d29922
+
+# Blue
+palette = 4=#58a6ff
+
+# Magenta
+palette = 5=#bc8cff
+
+# Cyan
+palette = 6=#39c5cf
+
+# White
+palette = 7=#b1bac4
+
+# Bright Black
+palette = 8=#6e7681
+
+# Bright Red
+palette = 9=#ffa198
+
+# Bright Green
+palette = 10=#56d364
+
+# Bright Yellow
+palette = 11=#e3b341
+
+# Bright Blue
+palette = 12=#79c0ff
+
+# Bright Magenta
+palette = 13=#d2a8ff
+
+# Bright Cyan
+palette = 14=#56d4dd
+
+# Bright White
+palette = 15=#ffffff
+
+# Split divider (contentTertiary); the derived default sits too close to the background
+split-divider-color = #666a6f

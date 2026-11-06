@@ -49,23 +49,22 @@ if status is-interactive
     set fish_color_redirection magenta
     set fish_color_end green
     set fish_color_escape magenta
-    # Search matches and the selected pager row share one pairing: brwhite text
-    # on a brblack row, named in full so syntax colors don't show through.
-    # Rex's desert themes invert the dark neutrals — Sonoran Dusk tracks 0 to
-    # its background, Terracotta Noon to its foreground — so white-on-black
-    # turns into a row the same color as the page in one of them, and
-    # black-on-yellow drops to 2.9:1 on Terracotta Noon. 8 and 15 stay a mid
-    # tone and an extreme in both: the text lands at 4.9:1 (Sonoran Dusk) and
-    # 4.4:1 (Terracotta Noon), and the row separates from the page at 3.1:1
-    # and 4.0:1.
-    set fish_color_search_match brwhite --background=brblack
+    # Search matches and the selected pager row share one pairing: black text
+    # on a brwhite row, named in full so syntax colors don't show through.
+    # Merino Light has no near-white ANSI slot — 7, 8 and 15 are all mid grays
+    # and 0 is its foreground — so brwhite-on-brblack drops to 2.1:1 there.
+    # Black on brwhite is the only pairing above 4.5:1 in both variants: the
+    # text lands at 8.3:1 (Merino Dark) and 4.8:1 (Merino Light), and the row
+    # separates from the page at 18.9:1 and 3.0:1. In Merino Dark it reads as
+    # an inverted row, like Rex's own selection.
+    set fish_color_search_match black --background=brwhite
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
     # leaves the prefix/completion foregrounds dark on a dark reversed background.
-    set fish_pager_color_selected_background --background=brblack
-    set fish_pager_color_selected_completion brwhite --bold
-    set fish_pager_color_selected_prefix brwhite --bold --underline
-    set fish_pager_color_selected_description brwhite --italics
+    set fish_pager_color_selected_background --background=brwhite
+    set fish_pager_color_selected_completion black --bold
+    set fish_pager_color_selected_prefix black --bold --underline
+    set fish_pager_color_selected_description black --italics
 end
 
 #
@@ -125,10 +124,10 @@ if type -q fzf
     # comes from the terminal's ANSI palette and follows the terminal theme.
     #
     # Only the chromatic slots are named. The neutrals (0/7/8/15) are assigned
-    # inconsistently across themes — Sonoran Dusk and circadia track 0 to the
-    # background and 7/8/15 to foreground tiers, while Terracotta Noon and the
-    # mini* themes invert that (0/8 foreground, 7/15 background) — so -1, the
-    # terminal's own fg/bg, is used wherever a neutral is wanted.
+    # inconsistently across themes — Merino Dark makes 0 a dim gray and 15
+    # white, Merino Light makes 0 its foreground and 7/8/15 mid grays, and the
+    # circadia and mini* themes differ again — so -1, the terminal's own
+    # fg/bg, is used wherever a neutral is wanted.
     #
     # For the same reason the current line gets no background: bold text and a
     # red pointer mark it instead, which stays legible in light and dark alike.

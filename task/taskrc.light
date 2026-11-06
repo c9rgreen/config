@@ -5,7 +5,9 @@ hooks.location=~/.config/task/hooks
 verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
 
 # Use light colors
-include ~/.config/task/terracotta-noon.theme
+include ~/.config/task/merino-light.theme
+# Terracotta Noon alternative:
+# include ~/.config/task/terracotta-noon.theme
 # Circadia Light alternative:
 # include ~/.config/task/circadia-light.theme
 
