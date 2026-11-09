@@ -282,18 +282,17 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # Rex's desert skins, following the terminal's background like the
-    # Ghostty dark:sonoran_dusk/light:terracotta_noon pair. The circadia
-    # skins remain in skins/ as alternatives.
+    # Rex's Merino skins, following the terminal's background like the
+    # Ghostty dark:merino_dark/light:merino_light pair.
     {
         luma: [
             dark
             unknown
         ]
-        file: skins/sonoran-dusk.hjson
+        file: skins/merino-dark.hjson
     }
     {
         luma: light
-        file: skins/terracotta-noon.hjson
+        file: skins/merino-light.hjson
     }
 ]

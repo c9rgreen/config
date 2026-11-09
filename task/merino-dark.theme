@@ -1,0 +1,93 @@
+# Rex Merino Dark, for Taskwarrior.
+# Palette from nvim/colors/merino.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex:
+#
+#   bg        #0d1117 -> 233   accent  #3485fa -> 69
+#   surf      #1e2023 -> 234   yellow  #d29922 -> 172
+#   elem      #2d2f32 -> 236   number  #ffa198 -> 216
+#   border    #424549 -> 238   red     #ff7b72 -> 209
+#   fg        #e6edf3 -> 255   green   #3fb950 -> 71
+#   muted     #82878c -> 102   blue    #58a6ff -> 75
+#   faint     #666a6f -> 242   magenta #bc8cff -> 141
+#   cyan      #39c5cf -> 80
+#
+# Alarm states (error, overdue) carry the danger red and the accent marks
+# active/header moments. Due urgency ramps yellow (due) -> bright red
+# (today) -> red (overdue).
+#
+# Enable from taskrc.dark:  include ~/.config/task/merino-dark.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color234
+color.header=color69
+color.footnote=color102
+color.warning=bold color172
+color.error=color233 on color209
+color.debug=color75
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color233 on color69
+color.recurring=color75
+color.scheduled=on color234
+color.until=
+color.blocked=color255 on color238
+color.blocking=color233 on color102
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color255
+color.uda.priority.M=color102
+color.uda.priority.L=color242
+
+# Tags
+color.tag.next=color216
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=color216
+color.due=color172
+color.overdue=bold color209
+
+# Report: burndown
+color.burndown.done=on color71
+color.burndown.pending=on color209
+color.burndown.started=on color172
+
+# Report: history
+color.history.add=color233 on color75
+color.history.delete=color233 on color209
+color.history.done=color233 on color71
+
+# Report: summary
+color.summary.background=color255 on color233
+color.summary.bar=color233 on color69
+
+# Command: calendar
+color.calendar.due.today=color233 on color216
+color.calendar.due=color233 on color172
+color.calendar.holiday=color233 on color141
+color.calendar.scheduled=
+color.calendar.overdue=color233 on color209
+color.calendar.today=color233 on color75
+color.calendar.weekend=on color234
+color.calendar.weeknumber=color75
+
+# Command: sync
+color.sync.added=color71
+color.sync.changed=color172
+color.sync.rejected=color209
+
+# Command: undo
+color.undo.after=color71
+color.undo.before=color209

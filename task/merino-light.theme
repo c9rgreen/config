@@ -1,0 +1,96 @@
+# Rex Merino Light, for Taskwarrior.
+# Palette from nvim/colors/merino.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex:
+#
+#   bg        #ffffff -> 231   accent  #0667d8 -> 26
+#   surf      #eceef2 -> 255   yellow  #9d5c00 -> 130
+#   elem      #dcdee2 -> 253   number  #a40e26 -> 124
+#   border    #d1d2d5 -> 252   red     #cf222e -> 160
+#   fg        #1f2328 -> 235   green   #116329 -> 22
+#   muted     #696d71 -> 242   blue    #0969da -> 26
+#   faint     #878a8e -> 245   magenta #8250df -> 98
+#   cyan      #1b7c83 -> 30
+#
+# The blue accent and ANSI blue share 26, so active tasks are marked by
+# their knockout chip rather than by hue.
+#
+# Alarm states (error, overdue) carry the danger red and the accent marks
+# active/header moments. Due urgency ramps yellow (due) -> bright red
+# (today) -> red (overdue).
+#
+# Enable from taskrc.light:  include ~/.config/task/merino-light.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color255
+color.header=color26
+color.footnote=color242
+color.warning=bold color130
+color.error=color231 on color160
+color.debug=color26
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color231 on color26
+color.recurring=color26
+color.scheduled=on color255
+color.until=
+color.blocked=color235 on color252
+color.blocking=color231 on color242
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color235
+color.uda.priority.M=color242
+color.uda.priority.L=color245
+
+# Tags
+color.tag.next=color124
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=color124
+color.due=color130
+color.overdue=bold color160
+
+# Report: burndown
+color.burndown.done=on color22
+color.burndown.pending=on color160
+color.burndown.started=on color130
+
+# Report: history
+color.history.add=color231 on color26
+color.history.delete=color231 on color160
+color.history.done=color231 on color22
+
+# Report: summary
+color.summary.background=color235 on color231
+color.summary.bar=color231 on color26
+
+# Command: calendar
+color.calendar.due.today=color231 on color124
+color.calendar.due=color231 on color130
+color.calendar.holiday=color231 on color98
+color.calendar.scheduled=
+color.calendar.overdue=color231 on color160
+color.calendar.today=color231 on color26
+color.calendar.weekend=on color255
+color.calendar.weeknumber=color26
+
+# Command: sync
+color.sync.added=color22
+color.sync.changed=color130
+color.sync.rejected=color160
+
+# Command: undo
+color.undo.after=color22
+color.undo.before=color160

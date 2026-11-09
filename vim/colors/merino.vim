@@ -1,7 +1,7 @@
-" rex_desert -- Rex's Terracotta Noon (light) and Sonoran Dusk (dark) themes.
-" Hexes and role choices match nvim/colors/rex-desert.lua: syntax hues from
-" Rex's ANSI colors, with Terracotta Noon swapping in the darker semantic
-" tones where the ANSI ones are too faint on its cream canvas.
+" merino -- Rex's Merino Light and Merino Dark themes.
+" Hexes and role choices match nvim/colors/merino.lua: surfaces and text tiers
+" from Rex's semantic tokens, syntax hues from its normal ANSI colors, and
+" numbers on ANSI 9 since Merino has no orange.
 " 'background' picks the variant, so set it before :colorscheme.
 
 hi clear
@@ -14,58 +14,58 @@ if has("termguicolors")
   set termguicolors
 endif
 
-let g:colors_name = "rex_desert"
+let g:colors_name = "merino"
 
 if &background ==# "light"
-  " Terracotta Noon
-  let s:bg           = "#f9efe6"
-  let s:bg_surf      = "#eee5de"
-  let s:bg_elem      = "#dfd5ce"
-  let s:border       = "#d6cac0"
-  let s:fg           = "#4a382c"
-  let s:muted        = "#766559"
-  let s:faint        = "#918276"
-  let s:accent       = "#aa4a26"
-  let s:accent_solid = "#be5834"
+  " Merino Light
+  let s:bg           = "#ffffff"
+  let s:bg_surf      = "#eceef2"
+  let s:bg_elem      = "#dcdee2"
+  let s:border       = "#d1d2d5"
+  let s:fg           = "#1f2328"
+  let s:muted        = "#696d71"
+  let s:faint        = "#878a8e"
+  let s:accent       = "#0667d8"
+  let s:accent_solid = "#0969da"
   let s:on_accent    = "#ffffff"
-  let s:selection    = "#f0d4b8"
-  let s:search       = "#f4e3d8"
+  let s:selection    = "#d2e4f8"
+  let s:search       = "#e6effc"
 
-  let s:keyword      = "#9d5680"
-  let s:type         = "#896000"
-  let s:func         = "#426a98"
-  let s:string       = "#497125"
-  let s:number       = "#aa4a26"
-  let s:special      = "#3e8570"
-  let s:comment      = "#766559"
-  let s:error        = "#b24226"
-  let s:ok           = "#497125"
-  let s:info         = "#426a98"
+  let s:keyword      = "#8250df"
+  let s:type         = "#9d5c00"
+  let s:func         = "#0969da"
+  let s:string       = "#116329"
+  let s:number       = "#a40e26"
+  let s:special      = "#1b7c83"
+  let s:comment      = "#696d71"
+  let s:error        = "#cf222e"
+  let s:ok           = "#116329"
+  let s:info         = "#0969da"
 else
-  " Sonoran Dusk
-  let s:bg           = "#171412"
-  let s:bg_surf      = "#1e1b19"
-  let s:bg_elem      = "#2c2825"
-  let s:border       = "#4e4842"
-  let s:fg           = "#ddd0bf"
-  let s:muted        = "#938a7e"
-  let s:faint        = "#746d64"
-  let s:accent       = "#e8a860"
-  let s:accent_solid = "#e8a860"
-  let s:on_accent    = "#171412"
-  let s:selection    = "#423528"
-  let s:search       = "#33281e"
+  " Merino Dark
+  let s:bg           = "#0d1117"
+  let s:bg_surf      = "#1e2023"
+  let s:bg_elem      = "#2d2f32"
+  let s:border       = "#424549"
+  let s:fg           = "#e6edf3"
+  let s:muted        = "#82878c"
+  let s:faint        = "#666a6f"
+  let s:accent       = "#3485fa"
+  let s:accent_solid = "#2f81f7"
+  let s:on_accent    = "#0d1117"
+  let s:selection    = "#152946"
+  let s:search       = "#142134"
 
-  let s:keyword      = "#bd8aa2"
-  let s:type         = "#e0a45c"
-  let s:func         = "#8598b0"
-  let s:string       = "#a0b06a"
-  let s:number       = "#e88a72"
-  let s:special      = "#92b39c"
-  let s:comment      = "#938a7e"
-  let s:error        = "#d96e56"
-  let s:ok           = "#a0b06a"
-  let s:info         = "#8598b0"
+  let s:keyword      = "#bc8cff"
+  let s:type         = "#d29922"
+  let s:func         = "#58a6ff"
+  let s:string       = "#3fb950"
+  let s:number       = "#ffa198"
+  let s:special      = "#39c5cf"
+  let s:comment      = "#82878c"
+  let s:error        = "#ff7b72"
+  let s:ok           = "#3fb950"
+  let s:info         = "#58a6ff"
 endif
 
 function! s:hi(group, guifg, guibg, attr)

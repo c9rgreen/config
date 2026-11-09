@@ -50,19 +50,17 @@ if status is-interactive
     set fish_color_end green
     set fish_color_escape magenta
     # Search matches and the selected pager row share one pairing: brwhite text
-    # on a brblack row, named in full so syntax colors don't show through.
-    # Rex's desert themes invert the dark neutrals — Sonoran Dusk tracks 0 to
-    # its background, Terracotta Noon to its foreground — so white-on-black
-    # turns into a row the same color as the page in one of them, and
-    # black-on-yellow drops to 2.9:1 on Terracotta Noon. 8 and 15 stay a mid
-    # tone and an extreme in both: the text lands at 4.9:1 (Sonoran Dusk) and
-    # 4.4:1 (Terracotta Noon), and the row separates from the page at 3.1:1
-    # and 4.0:1.
-    set fish_color_search_match brwhite --background=brblack
+    # on a black row, named in full so syntax colors don't show through.
+    # Merino's neutrals don't mirror between variants: Merino Dark keeps 0 a
+    # mid grey and 15 white, while Merino Light keeps 0 near its foreground
+    # and 15 a mid grey. brwhite-on-brblack falls to 2.1:1 in Merino Light;
+    # brwhite-on-black gives 8.3:1 (dark) and 4.8:1 (light), and the row
+    # separates from the page at 2.3:1 and 14.7:1.
+    set fish_color_search_match brwhite --background=black
 
     # Completion pager: the selected row defaults to reverse-video (-r), which
     # leaves the prefix/completion foregrounds dark on a dark reversed background.
-    set fish_pager_color_selected_background --background=brblack
+    set fish_pager_color_selected_background --background=black
     set fish_pager_color_selected_completion brwhite --bold
     set fish_pager_color_selected_prefix brwhite --bold --underline
     set fish_pager_color_selected_description brwhite --italics
@@ -124,11 +122,11 @@ if type -q fzf
     # Colors: --color=16 drops fzf's built-in 256-color scheme so everything
     # comes from the terminal's ANSI palette and follows the terminal theme.
     #
-    # Only the chromatic slots are named. The neutrals (0/7/8/15) are assigned
-    # inconsistently across themes — Sonoran Dusk and circadia track 0 to the
-    # background and 7/8/15 to foreground tiers, while Terracotta Noon and the
-    # mini* themes invert that (0/8 foreground, 7/15 background) — so -1, the
-    # terminal's own fg/bg, is used wherever a neutral is wanted.
+    # Only the chromatic slots are named. The neutrals (0/7/8/15) don't mirror
+    # between light and dark — Merino Dark runs them grey to white, Merino
+    # Light near-foreground to mid grey, so none of them is the background in
+    # either — so -1, the terminal's own fg/bg, is used wherever a neutral is
+    # wanted.
     #
     # For the same reason the current line gets no background: bold text and a
     # red pointer mark it instead, which stays legible in light and dark alike.
