@@ -73,6 +73,7 @@ function M.supported()
       or term:find('ghostty', 1, true) ~= nil
       or term:find('kitty', 1, true) ~= nil
       or program == 'ghostty'
+      or program == 'rex'
    then
       support = { true }
       -- `all` lets deletes through after the pane is hidden, so images
