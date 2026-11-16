@@ -2,9 +2,8 @@
 # https://github.com/sharkdp/bat#configuration-file
 
 # Rex's Merino Dark over Merino Light, to match the terminal and
-# nvim/colors/rex-merino.lua. The theme files live in themes/; run
-# `bat cache --build` after editing them. (The desert and circadia themes
-# remain in themes/ as alternatives.)
+# nvim/colors/merino.lua. The theme files live in themes/; run
+# `bat cache --build` after editing them.
 --theme-dark="merino-dark"
 --theme-light="merino-light"
 

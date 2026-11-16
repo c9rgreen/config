@@ -1,6 +1,6 @@
 ###############################################################
 # A skin for a terminal with a light background, based on Rex's
-# Merino Light theme. Colors match nvim/colors/rex-merino.lua.
+# Merino Light theme. Colors match nvim/colors/merino.lua.
 #
 # This skin uses RGB values so won't work for some terminals.
 #
@@ -59,7 +59,7 @@ skin: {
 
     # status bar
     status_error: rgb(255, 255, 255) rgb(207, 34, 46)
-    status_job: rgb(255, 255, 255) rgb(9, 105, 218)
+    status_job: rgb(255, 255, 255) rgb(6, 103, 216)
     status_normal: rgb(105, 109, 113) rgb(236, 238, 242) / None None
     status_italic: rgb(6, 103, 216) rgb(236, 238, 242) Italic / None None
     status_bold: rgb(6, 103, 216) rgb(236, 238, 242) Bold / None None
@@ -97,7 +97,7 @@ skin: {
 
     staging_area_title: rgb(31, 35, 40) rgb(236, 238, 242) / rgb(105, 109, 113) rgb(236, 238, 242)
 
-    mode_command_mark: rgb(255, 255, 255) rgb(9, 105, 218) Bold
+    mode_command_mark: rgb(255, 255, 255) rgb(6, 103, 216) Bold
 
     # file system occupation
     good_to_bad_0: rgb(17, 99, 41)

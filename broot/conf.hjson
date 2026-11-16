@@ -283,8 +283,7 @@ imports: [
     verbs.hjson
 
     # Rex's Merino skins, following the terminal's background like the
-    # Ghostty dark:merino_dark/light:merino_light pair. The desert and
-    # circadia skins remain in skins/ as alternatives.
+    # Ghostty dark:merino_dark/light:merino_light pair.
     {
         luma: [
             dark

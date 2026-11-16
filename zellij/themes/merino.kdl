@@ -1,12 +1,8 @@
-// Rex's Merino Light (light) and Merino Dark (dark) themes. Hexes and roles
-// match nvim/colors/rex-merino.lua.
-//
-// Colors are written as hex so the chrome uses Rex's surface and text tiers,
-// which the ANSI palette lacks, and the accent blue, which differs slightly
-// from ANSI blue.
+// Rex's Merino Dark and Merino Light themes. Hexes and roles match
+// nvim/colors/merino.lua.
 //
 // The focused border carries the accent (it is also the cursor color), and
-// the transient states (search, rename) get the brighter accent tint.
+// the transient states (search, rename) get the bright blue (ANSI 12).
 
 themes {
     // Merino Dark
@@ -24,7 +20,7 @@ themes {
         // fg on the selection background
         text_selected {
             base "#e6edf3"
-            background "#222529"
+            background "#2d2f32"
             emphasis_0 "#3485fa"
             emphasis_1 "#58a6ff"
             emphasis_2 "#3fb950"
@@ -36,7 +32,7 @@ themes {
         // knock out too.
         ribbon_selected {
             base "#0d1117"
-            background "#2f81f7"
+            background "#3485fa"
             emphasis_0 "#0d1117"
             emphasis_1 "#0d1117"
             emphasis_2 "#0d1117"
@@ -66,7 +62,7 @@ themes {
 
         table_cell_selected {
             base "#e6edf3"
-            background "#222529"
+            background "#2d2f32"
             emphasis_0 "#3485fa"
             emphasis_1 "#58a6ff"
             emphasis_2 "#3fb950"
@@ -84,7 +80,7 @@ themes {
 
         list_selected {
             base "#e6edf3"
-            background "#222529"
+            background "#2d2f32"
             emphasis_0 "#3485fa"
             emphasis_1 "#58a6ff"
             emphasis_2 "#3fb950"
@@ -186,7 +182,7 @@ themes {
         // knock out too.
         ribbon_selected {
             base "#ffffff"
-            background "#0969da"
+            background "#0667d8"
             emphasis_0 "#ffffff"
             emphasis_1 "#ffffff"
             emphasis_2 "#ffffff"

@@ -1,7 +1,7 @@
-" rex_merino -- Rex's Merino Light (light) and Merino Dark (dark) themes.
-" Hexes and role choices match nvim/colors/rex-merino.lua: syntax hues from
-" Rex's ANSI colors in both variants, over the terminal background. Visual is
-" Rex's inverted selection, so it sets a foreground too.
+" merino -- Rex's Merino Light and Merino Dark themes.
+" Hexes and role choices match nvim/colors/merino.lua: surfaces and text tiers
+" from Rex's semantic tokens, syntax hues from its normal ANSI colors, and
+" numbers on ANSI 9 since Merino has no orange.
 " 'background' picks the variant, so set it before :colorscheme.
 
 hi clear
@@ -14,7 +14,7 @@ if has("termguicolors")
   set termguicolors
 endif
 
-let g:colors_name = "rex_merino"
+let g:colors_name = "merino"
 
 if &background ==# "light"
   " Merino Light
@@ -28,10 +28,7 @@ if &background ==# "light"
   let s:accent       = "#0667d8"
   let s:accent_solid = "#0969da"
   let s:on_accent    = "#ffffff"
-  let s:cursor       = "#0969da"
-  let s:cursor_text  = "#b6d8ff"
-  let s:selection    = "#1f2328"
-  let s:selection_fg = "#ffffff"
+  let s:selection    = "#d2e4f8"
   let s:search       = "#e6effc"
 
   let s:keyword      = "#8250df"
@@ -47,8 +44,8 @@ if &background ==# "light"
 else
   " Merino Dark
   let s:bg           = "#0d1117"
-  let s:bg_surf      = "#131519"
-  let s:bg_elem      = "#222529"
+  let s:bg_surf      = "#1e2023"
+  let s:bg_elem      = "#2d2f32"
   let s:border       = "#424549"
   let s:fg           = "#e6edf3"
   let s:muted        = "#82878c"
@@ -56,10 +53,7 @@ else
   let s:accent       = "#3485fa"
   let s:accent_solid = "#2f81f7"
   let s:on_accent    = "#0d1117"
-  let s:cursor       = "#2f81f7"
-  let s:cursor_text  = "#eff8ff"
-  let s:selection    = "#e6edf3"
-  let s:selection_fg = "#0d1117"
+  let s:selection    = "#152946"
   let s:search       = "#142134"
 
   let s:keyword      = "#bc8cff"
@@ -89,7 +83,7 @@ function! s:hi(group, guifg, guibg, attr)
 endfunction
 
 call s:hi("Normal",        s:fg,        s:bg,           "")
-call s:hi("Cursor",        s:cursor_text, s:cursor,     "")
+call s:hi("Cursor",        s:bg,        s:accent,       "")
 call s:hi("CursorLine",    "",          s:bg_surf,      "")
 call s:hi("CursorColumn",  "",          s:bg_surf,      "")
 call s:hi("ColorColumn",   "",          s:bg_surf,      "")
@@ -112,7 +106,7 @@ call s:hi("PmenuSel",      s:fg,        s:bg_elem,      "")
 call s:hi("PmenuSbar",     "",          s:bg_surf,      "")
 call s:hi("PmenuThumb",    "",          s:border,       "")
 call s:hi("WildMenu",      s:on_accent, s:accent_solid, "")
-call s:hi("Visual",        s:selection_fg, s:selection, "")
+call s:hi("Visual",        "",          s:selection,    "")
 " Resting matches get the accent container, as Rex tints them; the active
 " match is solid accent.
 call s:hi("Search",        s:accent,    s:search,       "")

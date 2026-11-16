@@ -9,7 +9,7 @@
     <key>colorSpaceName</key>
     <string>sRGB</string>
     <key>author</key>
-    <string>Rex built-in themes; roles from nvim/colors/rex-merino.lua</string>
+    <string>Rex built-in themes; roles from nvim/colors/merino.lua</string>
     <key>comment</key>
     <string>Merino Dark</string>
     <key>settings</key>
@@ -24,11 +24,11 @@
             <key>caret</key>
             <string>#2f81f7</string>
             <key>lineHighlight</key>
-            <string>#131519</string>
+            <string>#1e2023</string>
             <key>selection</key>
-            <string>#e6edf3</string>
+            <string>#152946</string>
             <key>selectionForeground</key>
-            <string>#0d1117</string>
+            <string>#ffffff</string>
             <key>invisibles</key>
             <string>#666a6f</string>
             <key>gutter</key>

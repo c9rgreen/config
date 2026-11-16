@@ -1,23 +1,23 @@
-# Rex Merino Light (light), for Taskwarrior.
-# Palette from nvim/colors/rex-merino.lua.
+# Rex Merino Light, for Taskwarrior.
+# Palette from nvim/colors/merino.lua.
 #
 # Taskwarrior colors are 256-color, not truecolor, so each value is the
 # nearest xterm-256 index to the palette hex:
 #
 #   bg        #ffffff -> 231   accent  #0667d8 -> 26
-#   surf      #eceef2 -> 255   solid   #0969da -> 26
-#   elem      #dcdee2 -> 253   yellow  #9d5c00 -> 130
-#   border    #d1d2d5 -> 252   number  #a40e26 -> 124
-#   fg        #1f2328 -> 235   red     #cf222e -> 160
-#   muted     #696d71 -> 242   green   #116329 -> 22
-#   faint     #878a8e -> 245   blue    #0969da -> 26
-#   magenta   #8250df -> 98    cyan    #1b7c83 -> 30
+#   surf      #eceef2 -> 255   yellow  #9d5c00 -> 130
+#   elem      #dcdee2 -> 253   number  #a40e26 -> 124
+#   border    #d1d2d5 -> 252   red     #cf222e -> 160
+#   fg        #1f2328 -> 235   green   #116329 -> 22
+#   muted     #696d71 -> 242   blue    #0969da -> 26
+#   faint     #878a8e -> 245   magenta #8250df -> 98
+#   cyan      #1b7c83 -> 30
 #
-# Merino Light's accent, solid accent and info blue are near-identical,
-# so all three share 26.
+# The blue accent and ANSI blue share 26, so active tasks are marked by
+# their knockout chip rather than by hue.
 #
-# Alarm states (error, overdue) carry the danger red and the blue accent
-# marks active/header moments. Due urgency ramps yellow (due) -> dark red
+# Alarm states (error, overdue) carry the danger red and the accent marks
+# active/header moments. Due urgency ramps yellow (due) -> bright red
 # (today) -> red (overdue).
 #
 # Enable from taskrc.light:  include ~/.config/task/merino-light.theme

@@ -1,25 +1,23 @@
--- rex-merino -- a mini.base16 port of two Rex themes, from
+-- merino -- a mini.base16 port of Rex's Merino Dark and Merino Light, from
 -- /Applications/Rex Beta.app/Contents/Resources/SuperUI_SuperDesignTokens.bundle/Contents/Resources/themes.json
--- 'background' picks the variant: Merino Dark when dark, Merino Light when
--- light. The surface and text tiers come from Rex's semantic tokens, over the
--- terminal background rather than Rex's slightly different app canvas, so the
--- editor blends with the pane. Rex defines no syntax roles.
+-- 'background' picks the variant. The surface and text tiers come from Rex's
+-- semantic tokens and the syntax hues from its ANSI colors, whose normal
+-- tones clear 4.9:1 on both backgrounds. Rex defines no syntax roles, and
+-- Merino has no orange, so numbers take ANSI 9 (bright red).
 --
--- Both variants take their syntax hues from ANSI: Merino Light's are dark
--- enough to read on white, unlike the earlier Rex light themes. Numbers get
--- the bright red and types the yellow; the blue accent stays off syntax so
--- functions keep the ANSI blue to themselves.
+-- base00 is the terminal background rather than Rex's canvas, so the editor
+-- matches the pane it runs in. Merino Dark's subtle surface is 1.04:1 against
+-- that background, so its base01 is the raised surface instead.
 --
--- Merino selects by inversion: the selection is the foreground color, with
--- the background color as its text. Visual sets both, since syntax colors
--- would vanish on it.
+-- Visual is the accent at Rex's accent-ring alpha over the background: Rex's
+-- terminal selection is a full fg/bg inversion, which would hide syntax.
 
 local palettes = {
    dark = { -- Merino Dark
       base16 = {
-         base00 = '#0d1117', -- terminal background
-         base01 = '#131519', -- surfaceSubtle
-         base02 = '#222529', -- controlPressed over surfaceSubtle
+         base00 = '#0d1117', -- terminalBackground
+         base01 = '#1e2023', -- surfaceRaised
+         base02 = '#2d2f32', -- controlPressed over surfaceRaised
          base03 = '#666a6f', -- contentTertiary
          base04 = '#82878c', -- contentSecondary
          base05 = '#e6edf3', -- content
@@ -38,10 +36,10 @@ local palettes = {
       accent_solid = '#2f81f7',
       on_accent    = '#0d1117', -- accentOnSolid
       cursor       = { fg = '#eff8ff', bg = '#2f81f7' },
-      selection    = { fg = '#0d1117', bg = '#e6edf3' }, -- the terminal selection
+      selection    = '#152946', -- accent at accentRingOuter alpha over the background
       stroke       = '#424549',
       search       = '#142134', -- accentContainer
-      diff = { add = '#162822', change = '#182536', text = '#223a57', delete = '#2e2125' },
+      diff = { add = '#162822', change = '#182536', text = '#233955', delete = '#2e2125' },
       term = {
          '#484f58', '#ff7b72', '#3fb950', '#d29922', '#58a6ff', '#bc8cff', '#39c5cf', '#b1bac4',
          '#6e7681', '#ffa198', '#56d364', '#e3b341', '#79c0ff', '#d2a8ff', '#56d4dd', '#ffffff',
@@ -49,7 +47,7 @@ local palettes = {
    },
    light = { -- Merino Light
       base16 = {
-         base00 = '#ffffff', -- terminal background
+         base00 = '#ffffff', -- terminalBackground
          base01 = '#eceef2', -- surfaceSubtle
          base02 = '#dcdee2', -- controlPressed over surfaceSubtle
          base03 = '#878a8e', -- contentTertiary
@@ -62,7 +60,7 @@ local palettes = {
          base0A = '#9d5c00', -- ANSI 3 / warning
          base0B = '#116329', -- ANSI 2 / success
          base0C = '#1b7c83', -- ANSI 6
-         base0D = '#0969da', -- ANSI 4
+         base0D = '#0969da', -- ANSI 4 / accentSolid
          base0E = '#8250df', -- ANSI 5
          base0F = '#878a8e', -- contentTertiary (delimiters)
       },
@@ -70,10 +68,10 @@ local palettes = {
       accent_solid = '#0969da',
       on_accent    = '#ffffff', -- accentOnSolid
       cursor       = { fg = '#b6d8ff', bg = '#0969da' },
-      selection    = { fg = '#ffffff', bg = '#1f2328' }, -- the terminal selection
+      selection    = '#d2e4f8', -- accent at accentRingOuter alpha over the background
       stroke       = '#d1d2d5',
       search       = '#e6effc', -- accentContainer
-      diff = { add = '#e5ede6', change = '#e6effc', text = '#d0e2f8', delete = '#fee9e7' },
+      diff = { add = '#e5ede6', change = '#e6effc', text = '#cddff9', delete = '#fee9e7' },
       term = {
          '#24292f', '#cf222e', '#116329', '#9d5c00', '#0969da', '#8250df', '#1b7c83', '#6e7781',
          '#57606a', '#a40e26', '#1a7f37', '#c47a00', '#218bff', '#a475f9', '#3192aa', '#8c959f',
@@ -85,19 +83,18 @@ local c = palettes[vim.o.background] or palettes.dark
 local p = c.base16
 
 require('mini.base16').setup({ palette = p })
-vim.g.colors_name = 'rex-merino'
+vim.g.colors_name = 'merino'
 
 local hi = function(name, spec) vim.api.nvim_set_hl(0, name, spec) end
 
--- UI: floats sit on the subtle surface inside a stroke-colored frame, splits
--- are a stroke hairline, the cursor and its line number carry the accent, and
--- Visual is Rex's inverted selection.
+-- UI: floats sit on the base01 surface inside a stroke-colored frame, splits
+-- are a stroke hairline, and the cursor and its line number carry the accent.
 hi('NormalFloat',  { fg = p.base05, bg = p.base01 })
 hi('FloatBorder',  { fg = c.stroke, bg = p.base01 })
 hi('Cursor',       c.cursor)
 hi('CursorLineNr', { fg = c.accent, bg = p.base01, bold = true })
 hi('MatchParen',   { fg = c.accent, bold = true })
-hi('Visual',       c.selection)
+hi('Visual',       { bg = c.selection })
 hi('VertSplit',    { fg = c.stroke })
 hi('WinSeparator', { fg = c.stroke })
 hi('PmenuSel',     { fg = p.base05, bg = p.base02 })
