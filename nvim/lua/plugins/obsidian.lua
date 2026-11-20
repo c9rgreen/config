@@ -1,0 +1,12 @@
+-- obsidian.nvim (Obsidian vault tools)
+vim.pack.add({
+   { src = 'https://github.com/obsidian-nvim/obsidian.nvim', version = vim.version.range('*') },
+})
+
+require('obsidian').setup({
+   legacy_commands = false, -- removed in 4.0.0
+   workspaces = {
+      { name = 'pkm', path = '~/PKM' },
+   },
+   picker = { name = 'mini.pick' },
+})
