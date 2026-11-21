@@ -1,5 +1,34 @@
 "vim: foldmethod=marker foldlevel=0
 
+" Plugins {{{
+" vim-plug installs itself and any missing plugins on startup. Both live next
+" to this vimrc (autoload/plug.vim and plugged/), which git ignores.
+let s:vimdir = expand('<sfile>:p:h')
+if empty(glob(s:vimdir . '/autoload/plug.vim'))
+  silent execute '!curl -fsSLo ' . shellescape(s:vimdir . '/autoload/plug.vim')
+        \ . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+endif
+
+call plug#begin(s:vimdir . '/plugged')
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
+" fzf's Vim plugin ships with the binary; use Homebrew's copy when present.
+if isdirectory('/opt/homebrew/opt/fzf')
+  Plug '/opt/homebrew/opt/fzf'
+else
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+endif
+Plug 'junegunn/fzf.vim'
+call plug#end()
+
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+      \ | PlugInstall --sync | source $MYVIMRC
+      \ | endif
+" }}}
+
 filetype plugin indent on
 syntax enable
 packadd! editorconfig
@@ -33,26 +62,7 @@ set wildignore+=*.git,*venv/*,*node_modules/*,*vendor/*,*__pycache__/*,*.aux,*.c
 set wildignorecase
 set shell=fish
 
-" Reset status line
-set statusline=
-" Working directory
-set statusline+=\[%<%{fnamemodify(getcwd(),':t')}]
-" Filename
-set statusline+=\ %f
-" Modified flag
-set statusline+=%m
-" Everything after this right-aligned
-set statusline+=%=
-" Filetype
-set statusline+=\ %y
-" File encoding
-set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
-" Percentage through the file
-set statusline+=\ %p%%
-" Location
-set statusline+=\ %l:%c
-" Word count
-set statusline+=\ w%{wordcount().words}
+" Status line: plugin/statusline.vim
 
 set spelllang=en_us
 set tags^=./.git/tags
@@ -156,4 +166,17 @@ if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~# 'Dark'
 else
   set background=light
 endif
+
+" Curly, colored underlines for spelling. Vim only knows how to draw them
+" when told the escape codes; these are the modern (kitty/Ghostty) forms, so
+" only send them to terminals known to understand them.
+if $TERM_PROGRAM =~? '\v^(rex|ghostty|wezterm|kitty|iTerm\.app)$'
+  let &t_Cs = "\e[4:3m"
+  let &t_Ce = "\e[4:0m"
+  let &t_Us = "\e[4:2m"
+  let &t_ds = "\e[4:4m"
+  let &t_Ds = "\e[4:5m"
+  let &t_8u = "\e[58:2::%lu:%lu:%lum"
+endif
+
 colorscheme merino

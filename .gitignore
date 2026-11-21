@@ -112,3 +112,7 @@ cloudflare
 
 # lazygit
 lazygit
+
+# vim-plug and its plugins (vim/vimrc installs them)
+vim/autoload/plug.vim
+vim/plugged
