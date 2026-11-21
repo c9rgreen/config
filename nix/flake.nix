@@ -40,7 +40,6 @@
       kubectl
       kustomize
       lefthook
-      lf
       neovim
       nodejs
       pandoc
@@ -57,6 +56,7 @@
       tree-sitter
       typst
       universal-ctags
+      yazi
       zellij
       zk
       zoxide

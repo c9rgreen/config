@@ -1,0 +1,18 @@
+# merino-dark -- the status bar of the Neovim merino colorscheme with mini.statusline's
+# powerline wedges. Colors are mini.base16's statusline groups (see
+# nvim/colors/merino.lua), so the two bars match.
+
+# Mode segment like MiniStatuslineMode*, size segment like MiniStatuslineDevinfo.
+[mode]
+normal_main = { fg = "#0d1117", bg = "#e6edf3", bold = true } # Normal: base00 on base05
+normal_alt  = { fg = "#82878c", bg = "#2d2f32" }              # base04 on base02
+select_main = { fg = "#0d1117", bg = "#3fb950", bold = true } # Visual: base00 on base0B
+select_alt  = { fg = "#82878c", bg = "#2d2f32" }
+unset_main  = { fg = "#0d1117", bg = "#ff7b72", bold = true } # Command: base00 on base08
+unset_alt   = { fg = "#82878c", bg = "#2d2f32" }
+
+# The bar's middle is MiniStatuslineFilename. Flat outer edges, solid inner wedges.
+[status]
+overall   = { fg = "#666a6f", bg = "#1e2023" } # base03 on base01
+sep_left  = { open = "", close = "\ue0b0" }
+sep_right = { open = "\ue0b2", close = "" }
