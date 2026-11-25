@@ -69,6 +69,13 @@ require('codediff').setup({
    diff = {
       compact = true,
    },
+   -- Take the char-level tints from the colorscheme instead of brightening the
+   -- line tints. DiffTextDelete is Cyclotron's; under a scheme without it
+   -- codediff falls back to its own dark red.
+   highlights = {
+      char_insert = 'DiffTextAdd',
+      char_delete = 'DiffTextDelete',
+   },
    keymaps = {
       view = {
          next_file = '<Tab>',

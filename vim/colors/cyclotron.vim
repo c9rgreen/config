@@ -1,7 +1,7 @@
-" merino -- Rex's Merino Light and Merino Dark themes.
-" Hexes and role choices match nvim/colors/merino.lua: surfaces and text tiers
-" from Rex's semantic tokens, syntax hues from its normal ANSI colors, and
-" numbers on ANSI 9 since Merino has no orange.
+" cyclotron -- the Cyclotron Light and Cyclotron Dark themes.
+" Hexes and role choices match nvim/colors/cyclotron.lua: warm paper
+" neutrals, the orange accent on keywords and the cursor, teal functions,
+" amber numbers, and pink preprocessor with purple storage classes.
 " 'background' picks the variant, so set it before :colorscheme.
 
 hi clear
@@ -14,58 +14,62 @@ if has("termguicolors")
   set termguicolors
 endif
 
-let g:colors_name = "merino"
+let g:colors_name = "cyclotron"
 
 if &background ==# "light"
-  " Merino Light
-  let s:bg           = "#ffffff"
-  let s:bg_surf      = "#eceef2"
-  let s:bg_elem      = "#dcdee2"
-  let s:border       = "#d1d2d5"
-  let s:fg           = "#1f2328"
-  let s:muted        = "#696d71"
-  let s:faint        = "#878a8e"
-  let s:accent       = "#0667d8"
-  let s:accent_solid = "#0969da"
-  let s:on_accent    = "#ffffff"
-  let s:selection    = "#d2e4f8"
-  let s:search       = "#e6effc"
+  " Cyclotron Light
+  let s:bg           = "#f2f0e8"
+  let s:bg_surf      = "#e9e7df"
+  let s:bg_elem      = "#cbc8bc"
+  let s:border       = "#d4d1c7"
+  let s:fg           = "#2a2920"
+  let s:muted        = "#4a4538"
+  let s:faint        = "#8a8478"
+  let s:accent       = "#b84820"
+  let s:accent_solid = "#b84820"
+  let s:on_accent    = "#f2f0e8"
+  let s:selection    = "#cbc8bc"
+  let s:search       = "#8a7520"
 
-  let s:keyword      = "#8250df"
-  let s:type         = "#9d5c00"
-  let s:func         = "#0969da"
-  let s:string       = "#116329"
-  let s:number       = "#a40e26"
-  let s:special      = "#1b7c83"
-  let s:comment      = "#696d71"
-  let s:error        = "#cf222e"
-  let s:ok           = "#116329"
-  let s:info         = "#0969da"
+  let s:keyword      = "#b84820"
+  let s:type         = "#8a7520"
+  let s:func         = "#188580"
+  let s:string       = "#3a7a4a"
+  let s:number       = "#a07828"
+  let s:special      = "#3a6a90"
+  let s:comment      = "#8a8478"
+  let s:error        = "#b83a2e"
+  let s:ok           = "#3a7a4a"
+  let s:info         = "#3a6a90"
+  let s:purple       = "#6a558a"
+  let s:pink         = "#a85878"
 else
-  " Merino Dark
-  let s:bg           = "#0d1117"
-  let s:bg_surf      = "#1e2023"
-  let s:bg_elem      = "#2d2f32"
-  let s:border       = "#424549"
-  let s:fg           = "#e6edf3"
-  let s:muted        = "#82878c"
-  let s:faint        = "#666a6f"
-  let s:accent       = "#3485fa"
-  let s:accent_solid = "#2f81f7"
-  let s:on_accent    = "#0d1117"
-  let s:selection    = "#152946"
-  let s:search       = "#142134"
+  " Cyclotron Dark
+  let s:bg           = "#1a1813"
+  let s:bg_surf      = "#201f19"
+  let s:bg_elem      = "#3a382e"
+  let s:border       = "#323028"
+  let s:fg           = "#cfcec3"
+  let s:muted        = "#c4beaf"
+  let s:faint        = "#7c766a"
+  let s:accent       = "#fd8760"
+  let s:accent_solid = "#fd8760"
+  let s:on_accent    = "#1a1813"
+  let s:selection    = "#3a382e"
+  let s:search       = "#c8b362"
 
-  let s:keyword      = "#bc8cff"
-  let s:type         = "#d29922"
-  let s:func         = "#58a6ff"
-  let s:string       = "#3fb950"
-  let s:number       = "#ffa198"
-  let s:special      = "#39c5cf"
-  let s:comment      = "#82878c"
-  let s:error        = "#ff7b72"
-  let s:ok           = "#3fb950"
-  let s:info         = "#58a6ff"
+  let s:keyword      = "#fd8760"
+  let s:type         = "#c8b362"
+  let s:func         = "#64c3bd"
+  let s:string       = "#77b884"
+  let s:number       = "#e0b669"
+  let s:special      = "#75a6cf"
+  let s:comment      = "#7c766a"
+  let s:error        = "#fe7a6a"
+  let s:ok           = "#77b884"
+  let s:info         = "#75a6cf"
+  let s:purple       = "#a690c9"
+  let s:pink         = "#eb94b5"
 endif
 
 " s:hi(group, fg, bg, attr [, sp])
@@ -120,7 +124,7 @@ call s:hi("StatusLineTermNC",s:faint,   s:bg_surf,      "")
 " Powerline sections (plugin/statusline.vim), mapped as mini.base16 maps
 " mini.statusline's groups so Vim and Neovim match.
 call s:hi("StatusLineModeNormal",  s:bg, s:fg,      "bold")
-call s:hi("StatusLineModeInsert",  s:bg, s:info,    "bold")
+call s:hi("StatusLineModeInsert",  s:bg, s:func,    "bold")
 call s:hi("StatusLineModeVisual",  s:bg, s:string,  "bold")
 call s:hi("StatusLineModeReplace", s:bg, s:keyword, "bold")
 call s:hi("StatusLineModeCommand", s:bg, s:error,   "bold")
@@ -148,11 +152,12 @@ call s:hi("WildMenu",      s:on_accent, s:accent_solid, "")
 call s:hi("Visual",        "",          s:selection,    "")
 call s:hi("VisualNOS",     "",          s:selection,    "")
 call s:hi("QuickFixLine",  "",          s:selection,    "")
-" Resting matches get the accent container, as Rex tints them; the active
-" match is solid accent.
-call s:hi("Search",        s:accent,    s:search,       "")
-call s:hi("IncSearch",     s:on_accent, s:accent_solid, "")
-call s:hi("CurSearch",     s:on_accent, s:accent_solid, "")
+" Resting matches are knocked out on the type yellow. The active match is
+" teal, not the orange accent: the terminal cursor is that orange, and would
+" vanish on an orange match.
+call s:hi("Search",        s:bg,        s:search,       "")
+call s:hi("IncSearch",     s:bg,        s:func,         "")
+call s:hi("CurSearch",     s:bg,        s:func,         "")
 call s:hi("Directory",     s:func,      "",             "")
 call s:hi("Title",         s:accent,    "",             "bold")
 call s:hi("ErrorMsg",      s:error,     "",             "bold")
@@ -189,8 +194,9 @@ call s:hi("SpellLocal",    "",          "",             "underline", s:special)
 " }}}
 
 " Syntax {{{
-" Comments use the secondary text tier, so they stay readable while line
-" numbers keep the dimmer tertiary one.
+" Roles follow nvim/colors/cyclotron.lua: comments and line numbers share
+" the muted tier, operators and delimiters drop to the dim one, and the
+" preprocessor family is pink with purple storage classes.
 call s:hi("Comment",       s:comment,   "",             "italic")
 call s:hi("Constant",      s:number,    "",             "")
 call s:hi("String",        s:string,    "",             "")
@@ -201,14 +207,16 @@ call s:hi("Float",         s:number,    "",             "")
 call s:hi("Identifier",    s:fg,        "",             "")
 call s:hi("Function",      s:func,      "",             "")
 call s:hi("Statement",     s:keyword,   "",             "")
-call s:hi("PreProc",       s:type,      "",             "")
+call s:hi("Operator",      s:muted,     "",             "")
+call s:hi("PreProc",       s:pink,      "",             "")
 call s:hi("Type",          s:type,      "",             "")
-call s:hi("Special",       s:special,   "",             "")
-call s:hi("Delimiter",     s:faint,     "",             "")
+call s:hi("StorageClass",  s:purple,    "",             "")
+call s:hi("Special",       s:number,    "",             "")
+call s:hi("Delimiter",     s:muted,     "",             "")
 call s:hi("Underlined",    s:accent,    "",             "underline")
 call s:hi("Ignore",        s:faint,     "",             "")
 call s:hi("Error",         s:error,     "",             "bold")
-call s:hi("Todo",          s:accent,    s:bg_surf,      "bold")
+call s:hi("Todo",          s:bg,        s:search,       "bold")
 " }}}
 
 " Prose {{{
@@ -251,7 +259,7 @@ call s:link("markdownStrikeDelimiter",     "markdownDelimiter")
 call s:hi("markdownDelimiter",          s:faint,   "", "")
 
 " ==highlight== reads like a marker pen: the search tint behind body text.
-call s:hi("markdownHighlight",          s:fg,      s:search, "")
+call s:hi("markdownHighlight",          s:bg,      s:search, "")
 
 " Code is set apart by hue alone. A surface chip would look good inline, but
 " Vim uses the same group for unlabelled ``` blocks, where it gives every line

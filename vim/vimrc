@@ -159,7 +159,7 @@ let &t_ti .= "\e[2 q"
 " The .= appends to any existing t_te setting.
 let &t_te .= "\e[2 q"
 
-" Rex's Merino Dark over Merino Light, following the macOS appearance the same
+" Cyclotron Dark over Cyclotron Light, following the macOS appearance the same
 " way the fish task wrapper does (fish/conf.d/taskwarrior.fish).
 if system('defaults read -g AppleInterfaceStyle 2>/dev/null') =~# 'Dark'
   set background=dark
@@ -179,4 +179,4 @@ if $TERM_PROGRAM =~? '\v^(rex|ghostty|wezterm|kitty|iTerm\.app)$'
   let &t_8u = "\e[58:2::%lu:%lu:%lum"
 endif
 
-colorscheme merino
+colorscheme cyclotron

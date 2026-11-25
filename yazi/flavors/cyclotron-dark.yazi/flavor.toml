@@ -1,0 +1,18 @@
+# cyclotron-dark -- the status bar of the Neovim cyclotron colorscheme with mini.statusline's
+# powerline wedges. Colors are mini.base16's statusline groups (see
+# nvim/colors/cyclotron.lua), so the two bars match.
+
+# Mode segment like MiniStatuslineMode*, size segment like MiniStatuslineDevinfo.
+[mode]
+normal_main = { fg = "#1a1813", bg = "#cfcec3", bold = true } # Normal: base00 on base05
+normal_alt  = { fg = "#c4beaf", bg = "#3a382e" }              # base04 on base02
+select_main = { fg = "#1a1813", bg = "#77b884", bold = true } # Visual: base00 on base0B
+select_alt  = { fg = "#c4beaf", bg = "#3a382e" }
+unset_main  = { fg = "#1a1813", bg = "#fe7a6a", bold = true } # Command: base00 on base08
+unset_alt   = { fg = "#c4beaf", bg = "#3a382e" }
+
+# The bar's middle is MiniStatuslineFilename. Flat outer edges, solid inner wedges.
+[status]
+overall   = { fg = "#7c766a", bg = "#201f19" } # base03 on base01
+sep_left  = { open = "", close = "\ue0b0" }
+sep_right = { open = "\ue0b2", close = "" }

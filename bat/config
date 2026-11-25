@@ -1,11 +1,11 @@
 # bat configuration
 # https://github.com/sharkdp/bat#configuration-file
 
-# Rex's Merino Dark over Merino Light, to match the terminal and
-# nvim/colors/merino.lua. The theme files live in themes/; run
+# Cyclotron Dark over Cyclotron Light, to match the terminal and
+# nvim/colors/cyclotron.lua. The theme files live in themes/; run
 # `bat cache --build` after editing them.
---theme-dark="merino-dark"
---theme-light="merino-light"
+--theme-dark="cyclotron-dark"
+--theme-light="cyclotron-light"
 
 # Pick light or dark from the macOS setting instead of asking the terminal.
 # Asking does not work inside tmux or in an fzf preview.

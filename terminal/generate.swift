@@ -1,4 +1,4 @@
-// Generates the Merino Terminal.app profiles. Usage: swift generate.swift ~/.config/terminal
+// Generates the Cyclotron Terminal.app profiles; colors match ghostty/themes/cyclotron_*. Usage: swift generate.swift ~/.config/terminal
 import AppKit
 
 func c(_ hex: String) -> NSColor {
@@ -30,11 +30,11 @@ func write(_ name: String, bg: String, fg: String, cursor: String, sel: String, 
 }
 
 let dir = CommandLine.arguments[1]
-write("Merino Dark", bg: "#0d1117", fg: "#e6edf3", cursor: "#2f81f7", sel: "#1b3e71",
-      pal: ["#484f58", "#ff7b72", "#3fb950", "#d29922", "#58a6ff", "#bc8cff", "#39c5cf", "#b1bac4",
-            "#6e7681", "#ffa198", "#56d364", "#e3b341", "#79c0ff", "#d2a8ff", "#56d4dd", "#ffffff"],
-      out: dir + "/Merino Dark.terminal")
-write("Merino Light", bg: "#ffffff", fg: "#1f2328", cursor: "#0969da", sel: "#b6d8ff",
-      pal: ["#24292f", "#cf222e", "#116329", "#9d5c00", "#0969da", "#8250df", "#1b7c83", "#6e7781",
-            "#57606a", "#a40e26", "#1a7f37", "#c47a00", "#218bff", "#a475f9", "#3192aa", "#8c959f"],
-      out: dir + "/Merino Light.terminal")
+write("Cyclotron Dark", bg: "#1a1813", fg: "#cfcec3", cursor: "#fd8760", sel: "#3a382e",
+      pal: ["#323028", "#fe7a6a", "#77b884", "#c8b362", "#75a6cf", "#a690c9", "#64c3bd", "#cfcec3",
+            "#c4beaf", "#fd8760", "#77b884", "#c8b362", "#75a6cf", "#eb94b5", "#64c3bd", "#cfcec3"],
+      out: dir + "/Cyclotron Dark.terminal")
+write("Cyclotron Light", bg: "#f2f0e8", fg: "#2a2920", cursor: "#b84820", sel: "#cbc8bc",
+      pal: ["#d4d1c7", "#b83a2e", "#3a7a4a", "#8a7520", "#3a6a90", "#6a558a", "#188580", "#2a2920",
+            "#4a4538", "#b84820", "#3a7a4a", "#8a7520", "#3a6a90", "#a85878", "#188580", "#2a2920"],
+      out: dir + "/Cyclotron Light.terminal")

@@ -282,17 +282,17 @@ imports: [
     # can also add another files for your personal verbs
     verbs.hjson
 
-    # Rex's Merino skins, following the terminal's background like the
-    # Ghostty dark:merino_dark/light:merino_light pair.
+    # The Cyclotron skins, following the terminal's background like the
+    # Ghostty dark:cyclotron_dark/light:cyclotron_light pair.
     {
         luma: [
             dark
             unknown
         ]
-        file: skins/merino-dark.hjson
+        file: skins/cyclotron-dark.hjson
     }
     {
         luma: light
-        file: skins/merino-light.hjson
+        file: skins/cyclotron-light.hjson
     }
 ]

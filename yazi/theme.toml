@@ -1,4 +1,4 @@
 # Yazi picks a flavor from the terminal's reported background.
 [flavor]
-dark  = "merino-dark"
-light = "merino-light"
+dark  = "cyclotron-dark"
+light = "cyclotron-light"

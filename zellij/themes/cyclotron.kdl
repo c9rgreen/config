@@ -1,0 +1,307 @@
+// The Cyclotron Dark and Cyclotron Light themes. Hexes and roles match
+// nvim/colors/cyclotron.lua.
+//
+// The focused border carries the accent (it is also the cursor color), and
+// the transient states (search, rename) get the blue (ANSI 4 and 12).
+
+themes {
+    // Cyclotron Dark
+    cyclotron-dark {
+        // fg on bg
+        text_unselected {
+            base "#cfcec3"
+            background "#1a1813"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#cfcec3"
+            background "#3a382e"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        // The active mode / tab chip: knockout text on the solid accent. Every
+        // hue sits too close to the accent to read on it, so the emphases
+        // knock out too.
+        ribbon_selected {
+            base "#1a1813"
+            background "#fd8760"
+            emphasis_0 "#1a1813"
+            emphasis_1 "#1a1813"
+            emphasis_2 "#1a1813"
+            emphasis_3 "#1a1813"
+        }
+
+        // Inactive chips sit on the border tone. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#cfcec3"
+            background "#323028"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#323028"
+            emphasis_2 "#64c3bd"
+            emphasis_3 "#e0b669"
+        }
+
+        table_title {
+            base "#fd8760"
+            background "#1a1813"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        table_cell_selected {
+            base "#cfcec3"
+            background "#3a382e"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        table_cell_unselected {
+            base "#cfcec3"
+            background "#1a1813"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        list_selected {
+            base "#cfcec3"
+            background "#3a382e"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        list_unselected {
+            base "#cfcec3"
+            background "#1a1813"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#77b884"
+            emphasis_3 "#fe7a6a"
+        }
+
+        frame_unselected {
+            base "#323028"
+            background "#1a1813"
+            emphasis_0 "#fd8760"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#fe7a6a"
+            emphasis_3 "#a690c9"
+        }
+
+        frame_selected {
+            base "#fd8760"
+            background "#1a1813"
+            emphasis_0 "#75a6cf"
+            emphasis_1 "#64c3bd"
+            emphasis_2 "#fe7a6a"
+            emphasis_3 "#a690c9"
+        }
+
+        frame_highlight {
+            base "#75a6cf"
+            background "#1a1813"
+            emphasis_0 "#fe7a6a"
+            emphasis_1 "#75a6cf"
+            emphasis_2 "#75a6cf"
+            emphasis_3 "#75a6cf"
+        }
+
+        exit_code_success {
+            base "#77b884"
+            background "#1a1813"
+            emphasis_0 "#64c3bd"
+            emphasis_1 "#1a1813"
+            emphasis_2 "#a690c9"
+            emphasis_3 "#fe7a6a"
+        }
+
+        exit_code_error {
+            base "#fe7a6a"
+            background "#1a1813"
+            emphasis_0 "#e0b669"
+            emphasis_1 "#1a1813"
+            emphasis_2 "#fd8760"
+            emphasis_3 "#a690c9"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#a690c9"
+            player_2 "#64c3bd"
+            player_3 "#fd8760"
+            player_4 "#fe7a6a"
+            player_5 "#77b884"
+            player_6 "#e0b669"
+            player_7 "#c8b362"
+            player_8 "#75a6cf"
+            player_9 "#c4beaf"
+            player_10 "#323028"
+        }
+    }
+
+    // Cyclotron Light
+    cyclotron-light {
+        // fg on bg
+        text_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        // fg on the selection background
+        text_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        // The active mode / tab chip: knockout text on the solid accent. Every
+        // hue sits too close to the accent to read on it, so the emphases
+        // knock out too.
+        ribbon_selected {
+            base "#f2f0e8"
+            background "#b84820"
+            emphasis_0 "#f2f0e8"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#f2f0e8"
+            emphasis_3 "#f2f0e8"
+        }
+
+        // Inactive chips sit on the border tone. emphasis_1 doubles as the
+        // hovered-chip background (with base as its text), so it stays a
+        // background tone rather than the fg the other emphases use.
+        ribbon_unselected {
+            base "#2a2920"
+            background "#d4d1c7"
+            emphasis_0 "#b84820"
+            emphasis_1 "#d4d1c7"
+            emphasis_2 "#188580"
+            emphasis_3 "#a07828"
+        }
+
+        table_title {
+            base "#b84820"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        table_cell_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        table_cell_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        list_selected {
+            base "#2a2920"
+            background "#cbc8bc"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        list_unselected {
+            base "#2a2920"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#3a7a4a"
+            emphasis_3 "#b83a2e"
+        }
+
+        frame_unselected {
+            base "#d4d1c7"
+            background "#f2f0e8"
+            emphasis_0 "#b84820"
+            emphasis_1 "#188580"
+            emphasis_2 "#b83a2e"
+            emphasis_3 "#6a558a"
+        }
+
+        frame_selected {
+            base "#b84820"
+            background "#f2f0e8"
+            emphasis_0 "#3a6a90"
+            emphasis_1 "#188580"
+            emphasis_2 "#b83a2e"
+            emphasis_3 "#6a558a"
+        }
+
+        frame_highlight {
+            base "#3a6a90"
+            background "#f2f0e8"
+            emphasis_0 "#b83a2e"
+            emphasis_1 "#3a6a90"
+            emphasis_2 "#3a6a90"
+            emphasis_3 "#3a6a90"
+        }
+
+        exit_code_success {
+            base "#3a7a4a"
+            background "#f2f0e8"
+            emphasis_0 "#188580"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#6a558a"
+            emphasis_3 "#b83a2e"
+        }
+
+        exit_code_error {
+            base "#b83a2e"
+            background "#f2f0e8"
+            emphasis_0 "#a07828"
+            emphasis_1 "#f2f0e8"
+            emphasis_2 "#b84820"
+            emphasis_3 "#6a558a"
+        }
+
+        multiplayer_user_colors {
+            player_1 "#6a558a"
+            player_2 "#188580"
+            player_3 "#b84820"
+            player_4 "#b83a2e"
+            player_5 "#3a7a4a"
+            player_6 "#a07828"
+            player_7 "#8a7520"
+            player_8 "#3a6a90"
+            player_9 "#4a4538"
+            player_10 "#d4d1c7"
+        }
+    }
+}

@@ -1,0 +1,95 @@
+# Cyclotron Dark, for Taskwarrior.
+# Palette from nvim/colors/cyclotron.lua.
+#
+# Taskwarrior colors are 256-color, not truecolor, so each value is the
+# nearest xterm-256 index to the palette hex (by OKLab distance):
+#
+#   bg       #1a1813 -> 234   orange  #fd8760 -> 209
+#   surface  #201f19 -> 235   yellow  #c8b362 -> 143
+#   hl       #3a382e -> 237   amber   #e0b669 -> 179
+#   border   #323028 -> 236   red     #fe7a6a -> 203
+#   fg       #cfcec3 -> 252   green   #77b884 -> 108
+#   dim      #c4beaf -> 250   teal    #64c3bd -> 73
+#   muted    #7c766a -> 243   purple  #a690c9 -> 140
+#
+# Nudged off the nearest index where two colors would share one:
+# surface (234 is the bg's), red (209 is orange's), yellow (179 is amber's).
+#
+# Alarm states (error, overdue) carry the red and the orange accent marks
+# active/header moments. Due urgency ramps yellow (due) -> amber (today)
+# -> red (overdue).
+#
+# Enable from taskrc.dark:  include ~/.config/task/cyclotron-dark.theme
+
+rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+
+# General decoration
+color.label=
+color.label.sort=
+color.alternate=on color235
+color.header=color209
+color.footnote=color250
+color.warning=bold color143
+color.error=color234 on color203
+color.debug=color73
+
+# Task state
+color.completed=
+color.deleted=
+color.active=color234 on color209
+color.recurring=color73
+color.scheduled=on color235
+color.until=
+color.blocked=color252 on color236
+color.blocking=color234 on color250
+
+# Project
+color.project.none=
+
+# Priority
+color.uda.priority.H=color252
+color.uda.priority.M=color250
+color.uda.priority.L=color243
+
+# Tags
+color.tag.next=color179
+color.tag.none=
+color.tagged=
+
+# Due
+color.due.today=color179
+color.due=color143
+color.overdue=bold color203
+
+# Report: burndown
+color.burndown.done=on color108
+color.burndown.pending=on color203
+color.burndown.started=on color143
+
+# Report: history
+color.history.add=color234 on color73
+color.history.delete=color234 on color203
+color.history.done=color234 on color108
+
+# Report: summary
+color.summary.background=color252 on color234
+color.summary.bar=color234 on color209
+
+# Command: calendar
+color.calendar.due.today=color234 on color179
+color.calendar.due=color234 on color143
+color.calendar.holiday=color234 on color140
+color.calendar.scheduled=
+color.calendar.overdue=color234 on color203
+color.calendar.today=color234 on color73
+color.calendar.weekend=on color235
+color.calendar.weeknumber=color73
+
+# Command: sync
+color.sync.added=color108
+color.sync.changed=color143
+color.sync.rejected=color203
+
+# Command: undo
+color.undo.after=color108
+color.undo.before=color203

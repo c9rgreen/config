@@ -230,5 +230,5 @@ require('mini.trailspace').setup()
 -- Colorscheme
 --------------------------------------------------------------------------------
 
--- Built on mini.base16; the variant follows 'background' (Merino Dark / Merino Light).
-vim.cmd.colorscheme('merino')
+-- Built on mini.base16; the variant follows 'background' (Cyclotron Dark / Cyclotron Light).
+vim.cmd.colorscheme('cyclotron')
